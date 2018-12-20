@@ -10,27 +10,41 @@ import UIKit
 import QuartzCore
 import SceneKit
 
-class GameViewController: UIViewController {
+enum BodyType: Int {
+    case field = 1
+    case ship = 2
+}
+
+class GameViewController: UIViewController, SCNPhysicsContactDelegate {
+    var cameraNode: SCNNode!
+    var scene: SCNScene!
+    var cameraHeight: Float = 100
+    var startScale: CGFloat = 0
+    var lastScale: CGFloat = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        
+        scene = SCNScene(named: "art.scnassets/ship.scn")!
+        scene.physicsWorld.contactDelegate = self
+
         // create and add a camera to the scene
-        let cameraNode = SCNNode()
+        cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
         scene.rootNode.addChildNode(cameraNode)
         
         // place the camera
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: 15)
+        cameraNode.position = SCNVector3(x: 0, y: cameraHeight, z: 15)
+        cameraNode.eulerAngles = SCNVector3Make(Float.pi / -3, 0, 0)
+        cameraNode.camera!.zFar = 200
+        // cameraNode.look(at: SCNVector3(0, 0, 0))
         
         // create and add a light to the scene
         let lightNode = SCNNode()
         lightNode.light = SCNLight()
         lightNode.light!.type = .omni
-        lightNode.position = SCNVector3(x: 0, y: 10, z: 10)
+        lightNode.position = SCNVector3(x: 0, y: 20, z: 10)
         scene.rootNode.addChildNode(lightNode)
         
         // create and add an ambient light to the scene
@@ -42,9 +56,13 @@ class GameViewController: UIViewController {
         
         // retrieve the ship node
         let ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
+        ship.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+        ship.physicsBody?.categoryBitMask = BodyType.ship.rawValue
+        ship.physicsBody?.collisionBitMask = BodyType.field.rawValue
+        ship.physicsBody?.contactTestBitMask = BodyType.field.rawValue
         
         // animate the 3d object
-        ship.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 2, z: 0, duration: 1)))
+        // ship.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 2, z: 0, duration: 1)))
         
         // retrieve the SCNView
         let scnView = self.view as! SCNView
@@ -53,17 +71,78 @@ class GameViewController: UIViewController {
         scnView.scene = scene
         
         // allows the user to manipulate the camera
-        scnView.allowsCameraControl = true
+        // scnView.allowsCameraControl = true
+
+        createField(size: 9)
         
         // show statistics such as fps and timing information
         scnView.showsStatistics = true
         
         // configure the view
-        scnView.backgroundColor = UIColor.black
+        // scnView.backgroundColor = UIColor.black
         
         // add a tap gesture recognizer
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
+        
+        // add a pinch gesture recognizer
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
+        scnView.addGestureRecognizer(pinchGesture)
+
+        // add a pan gesture recognizer
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        view.addGestureRecognizer(pan)
+    }
+    
+    func createField(size: Int) {
+        let cellSize = 10
+        
+        for row in 0...size {
+            for column in 0...size {
+                let cellGeometry = SCNPlane(width: CGFloat(cellSize), height: CGFloat(cellSize))
+                // Make the plane visible from both sides
+                cellGeometry.firstMaterial?.isDoubleSided = true
+                cellGeometry.firstMaterial?.diffuse.contents = UIColor.white
+                cellGeometry.cornerRadius = 2
+
+                let cell = SCNNode(geometry: cellGeometry)
+                cell.position = SCNVector3(row * cellSize, 0, column * cellSize)
+                cell.eulerAngles = SCNVector3Make(Float.pi / 2, 0, 0)
+                
+                cell.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
+                cell.physicsBody?.categoryBitMask = BodyType.field.rawValue
+                cell.physicsBody?.collisionBitMask = BodyType.ship.rawValue
+                cell.physicsBody?.contactTestBitMask = BodyType.ship.rawValue
+                
+                scene.rootNode.addChildNode(cell)
+            }
+        }
+        
+        let fieldCenter = SCNVector3(Float((cellSize / 2) * (size + 1)), 0, Float((cellSize / 2) * (size + 1)))
+        createCharacter(width: 4, height: 10, length: 2, in: fieldCenter)
+        
+        let newCameraCenter = SCNVector3(Float((cellSize / 2) * (size + 1)), cameraHeight, Float((cellSize / 2) * (size + 1)))
+        let moveTo = SCNAction.move(to: newCameraCenter, duration: 0);
+      
+        cameraNode.runAction(moveTo) {
+            self.cameraNode.look(at: fieldCenter)
+            self.lastScale = 1 / (self.cameraNode.camera?.fieldOfView)!
+        }
+    }
+    
+    func createCharacter(width: Int, height: Int, length: Int, in position: SCNVector3) {
+        let box = SCNBox(width: CGFloat(width), height: CGFloat(height), length: CGFloat(length), chamferRadius: 0)
+        box.firstMaterial?.diffuse.contents = UIColor.blue
+        box.firstMaterial?.isDoubleSided = true
+
+        let node = SCNNode(geometry: box)
+        node.position = position
+        
+        scene.rootNode.addChildNode(node)
+    }
+    
+    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
+        print("contact!")
     }
     
     @objc
@@ -91,7 +170,7 @@ class GameViewController: UIViewController {
                 SCNTransaction.begin()
                 SCNTransaction.animationDuration = 0.5
                 
-                material.emission.contents = UIColor.black
+                material.emission.contents = UIColor.clear
                 
                 SCNTransaction.commit()
             }
@@ -102,12 +181,73 @@ class GameViewController: UIViewController {
         }
     }
     
+    @objc
+    func handlePinch(_ sender: UIPinchGestureRecognizer) {
+        if sender.numberOfTouches == 2 {
+            let zoom = sender.scale
+            print("startScale:", startScale, "lastScale", lastScale, "zoom", zoom)
+
+            if (sender.state == .began){
+                startScale = lastScale
+            } else if (sender.state == .changed){
+                let fov = 1 / (startScale * zoom)
+                print("fov:", fov)
+
+                cameraNode.camera?.fieldOfView = CGFloat(fov)
+                lastScale = startScale * zoom
+            }
+        }
+    }
+
+    var previousTranslateX:CGFloat = 0.0
+    var previousTranslateZ:CGFloat = 0.0
+
+    @objc
+    func handlePan(_ sender: UIPanGestureRecognizer) {
+        let currentTranslateX = sender.translation(in: view!).x
+        let currentTranslateZ = sender.translation(in: view!).y
+        
+        print(currentTranslateX, currentTranslateZ)
+
+        // calculate translation since last measurement
+        let translateX = (currentTranslateX - previousTranslateX) / 25
+        let translateZ = (currentTranslateZ - previousTranslateZ) / 25
+
+        let oldPosition = cameraNode.position
+        
+        let newCamPosition = SCNVector3(oldPosition.x - Float(translateX), oldPosition.y, oldPosition.z - Float(translateZ))
+        cameraNode.position = newCamPosition
+        
+        // (re-)set previous measurement
+        if sender.state == .ended {
+            previousTranslateX = 0
+            previousTranslateZ = 0
+        } else {
+            previousTranslateX = currentTranslateX
+            previousTranslateZ = currentTranslateZ
+        }
+    }
+
+    func updatePositionAndOrientationOf(_ node: SCNNode, withPosition position: SCNVector3, relativeTo referenceNode: SCNNode) {
+        let referenceNodeTransform = matrix_float4x4(referenceNode.transform)
+        
+        // Setup a translation matrix with the desired position
+        var translationMatrix = matrix_identity_float4x4
+        translationMatrix.columns.3.x = position.x
+        translationMatrix.columns.3.y = position.y
+        translationMatrix.columns.3.z = position.z
+        
+        // Combine the configured translation matrix with the referenceNode's transform to get the desired position AND orientation
+        let updatedTransform = matrix_multiply(referenceNodeTransform, translationMatrix)
+        node.transform = SCNMatrix4(updatedTransform)
+    }
+    
     override var shouldAutorotate: Bool {
         return true
     }
     
     override var prefersStatusBarHidden: Bool {
-        return true
+        return false
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -117,5 +257,4 @@ class GameViewController: UIViewController {
             return .all
         }
     }
-
 }
