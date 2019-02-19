@@ -21,6 +21,12 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
     var cameraHeight: Float = 100
     var startScale: CGFloat = 0
     var lastScale: CGFloat = 1
+    var currentCharacter: Character?
+    var currentField: Field! {
+        didSet {
+            scene.rootNode.addChildNode(currentField.node)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +40,9 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
         cameraNode.camera = SCNCamera()
         scene.rootNode.addChildNode(cameraNode)
         
+        currentField = createField()
+        currentCharacter = createCharacter(role: .dps, in: currentField.center)
+
         // place the camera
         cameraNode.position = SCNVector3(x: 0, y: cameraHeight, z: 15)
         cameraNode.eulerAngles = SCNVector3Make(Float.pi / -3, 0, 0)
@@ -72,12 +81,10 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
         
         // allows the user to manipulate the camera
         // scnView.allowsCameraControl = true
-
-        createField(size: 9)
         
         // show statistics such as fps and timing information
         scnView.showsStatistics = true
-        
+
         // configure the view
         // scnView.backgroundColor = UIColor.black
         
@@ -94,51 +101,25 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
         view.addGestureRecognizer(pan)
     }
     
-    func createField(size: Int) {
-        let cellSize = 10
+    func createField(in position: SCNVector3 = SCNVector3(0, 0, 0)) -> Field {
+        let newField = Field(in: position)
         
-        for row in 0...size {
-            for column in 0...size {
-                let cellGeometry = SCNPlane(width: CGFloat(cellSize), height: CGFloat(cellSize))
-                // Make the plane visible from both sides
-                cellGeometry.firstMaterial?.isDoubleSided = true
-                cellGeometry.firstMaterial?.diffuse.contents = UIColor.white
-                cellGeometry.cornerRadius = 2
-
-                let cell = SCNNode(geometry: cellGeometry)
-                cell.position = SCNVector3(row * cellSize, 0, column * cellSize)
-                cell.eulerAngles = SCNVector3Make(Float.pi / 2, 0, 0)
-                
-                cell.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
-                cell.physicsBody?.categoryBitMask = BodyType.field.rawValue
-                cell.physicsBody?.collisionBitMask = BodyType.ship.rawValue
-                cell.physicsBody?.contactTestBitMask = BodyType.ship.rawValue
-                
-                scene.rootNode.addChildNode(cell)
-            }
-        }
-        
-        let fieldCenter = SCNVector3(Float((cellSize / 2) * (size + 1)), 0, Float((cellSize / 2) * (size + 1)))
-        createCharacter(width: 4, height: 10, length: 2, in: fieldCenter)
-        
-        let newCameraCenter = SCNVector3(Float((cellSize / 2) * (size + 1)), cameraHeight, Float((cellSize / 2) * (size + 1)))
+        let newCameraCenter = SCNVector3(Float((newField.cellSize / 2) * (newField.size + 1)), cameraHeight, Float((newField.cellSize / 2) * (newField.size + 1)))
         let moveTo = SCNAction.move(to: newCameraCenter, duration: 0);
       
         cameraNode.runAction(moveTo) {
-            self.cameraNode.look(at: fieldCenter)
+            self.cameraNode.look(at: newField.center)
             self.lastScale = 1 / (self.cameraNode.camera?.fieldOfView)!
         }
+        
+        return newField
     }
     
-    func createCharacter(width: Int, height: Int, length: Int, in position: SCNVector3) {
-        let box = SCNBox(width: CGFloat(width), height: CGFloat(height), length: CGFloat(length), chamferRadius: 0)
-        box.firstMaterial?.diffuse.contents = UIColor.blue
-        box.firstMaterial?.isDoubleSided = true
-
-        let node = SCNNode(geometry: box)
-        node.position = position
+    func createCharacter(role: CharacterRole, in position: SCNVector3) -> Character {
+        let newCharacter = Character(role: role, in: position)
+        scene.rootNode.addChildNode(newCharacter.node)
         
-        scene.rootNode.addChildNode(node)
+        return newCharacter
     }
     
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {

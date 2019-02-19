@@ -9,21 +9,25 @@
 /* Begin PBXBuildFile section */
 		9706B66921A745C700967191 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9706B66821A745C700967191 /* AppDelegate.swift */; };
 		9706B66B21A745C700967191 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 9706B66A21A745C700967191 /* art.scnassets */; };
-		9706B66D21A745C700967191 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9706B66C21A745C700967191 /* GameViewController.swift */; };
+		9706B66D21A745C700967191 /* GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9706B66C21A745C700967191 /* GameVC.swift */; };
 		9706B67021A745C700967191 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9706B66E21A745C700967191 /* Main.storyboard */; };
 		9706B67221A745CA00967191 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9706B67121A745CA00967191 /* Assets.xcassets */; };
 		9706B67521A745CA00967191 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9706B67321A745CA00967191 /* LaunchScreen.storyboard */; };
+		97B391AB221B301E000655A4 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B391AA221B301E000655A4 /* Character.swift */; };
+		97B391AD221B377B000655A4 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B391AC221B377B000655A4 /* Field.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9706B66521A745C700967191 /* TBS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TBS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9706B66821A745C700967191 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9706B66A21A745C700967191 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
-		9706B66C21A745C700967191 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		9706B66C21A745C700967191 /* GameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameVC.swift; sourceTree = "<group>"; };
 		9706B66F21A745C700967191 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9706B67121A745CA00967191 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9706B67421A745CA00967191 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9706B67621A745CA00967191 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		97B391AA221B301E000655A4 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		97B391AC221B377B000655A4 /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +62,9 @@
 			children = (
 				9706B66821A745C700967191 /* AppDelegate.swift */,
 				9706B66A21A745C700967191 /* art.scnassets */,
-				9706B66C21A745C700967191 /* GameViewController.swift */,
+				9706B66C21A745C700967191 /* GameVC.swift */,
+				97B391AC221B377B000655A4 /* Field.swift */,
+				97B391AA221B301E000655A4 /* Character.swift */,
 				9706B66E21A745C700967191 /* Main.storyboard */,
 				9706B67121A745CA00967191 /* Assets.xcassets */,
 				9706B67321A745CA00967191 /* LaunchScreen.storyboard */,
@@ -139,7 +145,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9706B66D21A745C700967191 /* GameViewController.swift in Sources */,
+				97B391AB221B301E000655A4 /* Character.swift in Sources */,
+				9706B66D21A745C700967191 /* GameVC.swift in Sources */,
+				97B391AD221B377B000655A4 /* Field.swift in Sources */,
 				9706B66921A745C700967191 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
