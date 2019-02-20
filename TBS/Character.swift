@@ -22,16 +22,17 @@ class Character {
     init(role: CharacterRole, in position: SCNVector3) {
         let box: SCNBox
         let color: UIColor
+        let cellSize: CGFloat = 0.02
 
         switch role {
         case .tank:
-            box = SCNBox(width: 8, height: 20, length: 4, chamferRadius: 0)
+            box = SCNBox(width: cellSize * 0.8, height: cellSize * 2, length: cellSize * 0.4, chamferRadius: 0)
             color = .blue
         case .dps:
-            box = SCNBox(width: 4, height: 10, length: 4, chamferRadius: 0)
+            box = SCNBox(width: cellSize * 0.4, height: cellSize * 1, length: cellSize * 0.4, chamferRadius: 0)
             color = .red
         case .support:
-            box = SCNBox(width: 2, height: 8, length: 2, chamferRadius: 0)
+            box = SCNBox(width: cellSize * 0.2, height: cellSize * 0.8, length: cellSize * 0.2, chamferRadius: 0)
             color = .yellow
         }
         

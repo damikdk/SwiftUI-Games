@@ -12,10 +12,9 @@ import SceneKit
 class Field {
     let node: SCNNode!
     let size: Int!
-    let cellSize: Int!
-    let center: SCNVector3!
+    let cellSize: Float!
     
-    init(in position: SCNVector3, size: Int = 9, cellSize: Int = 10) {
+    init(in position: SCNVector3, size: Int = 9, cellSize: Float = 0.02) {
         node = SCNNode()
         node.position = position
         self.size = size
@@ -30,7 +29,7 @@ class Field {
                 cellGeometry.cornerRadius = 2
                 
                 let cell = SCNNode(geometry: cellGeometry)
-                cell.position = SCNVector3(row * cellSize, 0, column * cellSize)
+                cell.position = SCNVector3(Float(row) * cellSize, 0, Float(column) * cellSize)
                 cell.eulerAngles = SCNVector3Make(Float.pi / 2, 0, 0)
                 
                 cell.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
@@ -41,7 +40,5 @@ class Field {
                 node.addChildNode(cell)
             }
         }
-        
-        center = SCNVector3(Float((cellSize / 2) * size), 0, Float((cellSize / 2) * size))
     }
 }

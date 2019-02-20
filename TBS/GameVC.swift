@@ -9,131 +9,110 @@
 import UIKit
 import QuartzCore
 import SceneKit
+import ARKit
+
+enum GameRenderMode: Int {
+    case regular = 1
+    case ar = 2
+}
 
 enum BodyType: Int {
     case field = 1
     case ship = 2
 }
 
+var cameraHeight: Float = 100
+var startScale: CGFloat = 0
+var lastScale: CGFloat = 1
+
 class GameVC: UIViewController, SCNPhysicsContactDelegate {
+    var sceneView: ARSCNView!
     var cameraNode: SCNNode!
     var scene: SCNScene!
-    var cameraHeight: Float = 100
-    var startScale: CGFloat = 0
-    var lastScale: CGFloat = 1
     var currentCharacter: Character?
     var currentField: Field! {
         didSet {
-            scene.rootNode.addChildNode(currentField.node)
+//            scene.rootNode.addChildNode(currentField.node)
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // create a new scene
+        sceneView = ARSCNView()
+        self.view = sceneView
+        
+        // Set the view's delegate
+        sceneView.delegate = self
+        sceneView.autoenablesDefaultLighting = true
+        sceneView.automaticallyUpdatesLighting = true
+        sceneView.showsStatistics = true
+        
+        // Create a new scene
         scene = SCNScene(named: "art.scnassets/ship.scn")!
+        
+        // Set the scene to the view
+        sceneView.scene = scene
+
         scene.physicsWorld.contactDelegate = self
 
         // create and add a camera to the scene
-        cameraNode = SCNNode()
-        cameraNode.camera = SCNCamera()
-        scene.rootNode.addChildNode(cameraNode)
+//        cameraNode = SCNNode()
+//        cameraNode.camera = SCNCamera()
+//        scene.rootNode.addChildNode(cameraNode)
         
-        currentField = createField()
-        currentCharacter = createCharacter(role: .dps, in: currentField.center)
-
         // place the camera
-        cameraNode.position = SCNVector3(x: 0, y: cameraHeight, z: 15)
-        cameraNode.eulerAngles = SCNVector3Make(Float.pi / -3, 0, 0)
-        cameraNode.camera!.zFar = 200
+//        cameraNode.position = SCNVector3(x: 0, y: cameraHeight, z: 15)
+//        cameraNode.eulerAngles = SCNVector3Make(Float.pi / -3, 0, 0)
+//        cameraNode.camera!.zFar = 200
         // cameraNode.look(at: SCNVector3(0, 0, 0))
         
-        // create and add a light to the scene
-        let lightNode = SCNNode()
-        lightNode.light = SCNLight()
-        lightNode.light!.type = .omni
-        lightNode.position = SCNVector3(x: 0, y: 20, z: 10)
-        scene.rootNode.addChildNode(lightNode)
-        
-        // create and add an ambient light to the scene
-        let ambientLightNode = SCNNode()
-        ambientLightNode.light = SCNLight()
-        ambientLightNode.light!.type = .ambient
-        ambientLightNode.light!.color = UIColor.darkGray
-        scene.rootNode.addChildNode(ambientLightNode)
-        
         // retrieve the ship node
-        let ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
-        ship.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
-        ship.physicsBody?.categoryBitMask = BodyType.ship.rawValue
-        ship.physicsBody?.collisionBitMask = BodyType.field.rawValue
-        ship.physicsBody?.contactTestBitMask = BodyType.field.rawValue
+//        let ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
+//        ship.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+//        ship.physicsBody?.categoryBitMask = BodyType.ship.rawValue
+//        ship.physicsBody?.collisionBitMask = BodyType.field.rawValue
+//        ship.physicsBody?.contactTestBitMask = BodyType.field.rawValue
         
         // animate the 3d object
         // ship.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 2, z: 0, duration: 1)))
         
-        // retrieve the SCNView
-        let scnView = self.view as! SCNView
-        
-        // set the scene to the view
-        scnView.scene = scene
-        
-        // allows the user to manipulate the camera
-        // scnView.allowsCameraControl = true
-        
-        // show statistics such as fps and timing information
-        scnView.showsStatistics = true
-
-        // configure the view
-        // scnView.backgroundColor = UIColor.black
-        
         // add a tap gesture recognizer
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-        scnView.addGestureRecognizer(tapGesture)
+        sceneView.addGestureRecognizer(tapGesture)
         
         // add a pinch gesture recognizer
-        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
-        scnView.addGestureRecognizer(pinchGesture)
+//        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
+//        sceneView.addGestureRecognizer(pinchGesture)
 
         // add a pan gesture recognizer
-        let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
-        view.addGestureRecognizer(pan)
+//        let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+//        view.addGestureRecognizer(pan)
     }
     
     func createField(in position: SCNVector3 = SCNVector3(0, 0, 0)) -> Field {
         let newField = Field(in: position)
         
-        let newCameraCenter = SCNVector3(Float((newField.cellSize / 2) * (newField.size + 1)), cameraHeight, Float((newField.cellSize / 2) * (newField.size + 1)))
-        let moveTo = SCNAction.move(to: newCameraCenter, duration: 0);
-      
-        cameraNode.runAction(moveTo) {
-            self.cameraNode.look(at: newField.center)
-            self.lastScale = 1 / (self.cameraNode.camera?.fieldOfView)!
-        }
+//        let newCameraCenter = SCNVector3(Float((newField.cellSize / 2) * (newField.size + 1)), cameraHeight, Float((newField.cellSize / 2) * (newField.size + 1)))
+//        let moveTo = SCNAction.move(to: newCameraCenter, duration: 0);
+//
+//        cameraNode.runAction(moveTo) {
+//            self.cameraNode.look(at: newField.center)
+//            self.lastScale = 1 / (self.cameraNode.camera?.fieldOfView)!
+//        }
         
         return newField
-    }
-    
-    func createCharacter(role: CharacterRole, in position: SCNVector3) -> Character {
-        let newCharacter = Character(role: role, in: position)
-        scene.rootNode.addChildNode(newCharacter.node)
-        
-        return newCharacter
     }
     
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         print("contact!")
     }
     
-    @objc
-    func handleTap(_ gestureRecognize: UIGestureRecognizer) {
-        // retrieve the SCNView
-        let scnView = self.view as! SCNView
-        
+    @objc func handleTap(_ gestureRecognize: UIGestureRecognizer) {
         // check what nodes are tapped
-        let p = gestureRecognize.location(in: scnView)
-        let hitResults = scnView.hitTest(p, options: [:])
+        let p = gestureRecognize.location(in: sceneView)
+        let hitResults = sceneView.hitTest(p, options: [:])
+        
         // check that we clicked on at least one object
         if hitResults.count > 0 {
             // retrieved the first clicked object
@@ -157,13 +136,11 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
             }
             
             material.emission.contents = UIColor.red
-            
             SCNTransaction.commit()
         }
     }
     
-    @objc
-    func handlePinch(_ sender: UIPinchGestureRecognizer) {
+    @objc func handlePinch(_ sender: UIPinchGestureRecognizer) {
         if sender.numberOfTouches == 2 {
             let zoom = sender.scale
             print("startScale:", startScale, "lastScale", lastScale, "zoom", zoom)
@@ -174,7 +151,7 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
                 let fov = 1 / (startScale * zoom)
                 print("fov:", fov)
 
-                cameraNode.camera?.fieldOfView = CGFloat(fov)
+//                cameraNode.camera?.fieldOfView = CGFloat(fov)
                 lastScale = startScale * zoom
             }
         }
@@ -183,8 +160,7 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
     var previousTranslateX:CGFloat = 0.0
     var previousTranslateZ:CGFloat = 0.0
 
-    @objc
-    func handlePan(_ sender: UIPanGestureRecognizer) {
+    @objc func handlePan(_ sender: UIPanGestureRecognizer) {
         let currentTranslateX = sender.translation(in: view!).x
         let currentTranslateZ = sender.translation(in: view!).y
         
@@ -197,7 +173,7 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
         let oldPosition = cameraNode.position
         
         let newCamPosition = SCNVector3(oldPosition.x - Float(translateX), oldPosition.y, oldPosition.z - Float(translateZ))
-        cameraNode.position = newCamPosition
+//        cameraNode.position = newCamPosition
         
         // (re-)set previous measurement
         if sender.state == .ended {
@@ -237,5 +213,76 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
         } else {
             return .all
         }
+    }
+}
+
+// MARK: - ARSCNViewDelegate
+
+extension GameVC: ARSCNViewDelegate {
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
+    
+        let x = CGFloat(planeAnchor.center.x)
+        let y = CGFloat(planeAnchor.center.y)
+        let z = CGFloat(planeAnchor.center.z)
+        
+        currentField = createField(in: SCNVector3(x, y, z))
+        node.addChildNode(currentField.node)
+        
+        let newCharacter = Character(role: .dps, in: currentField.node.position)
+        node.addChildNode(newCharacter.node)
+
+        currentCharacter = newCharacter
+    }
+
+    
+    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+//        guard let planeAnchor = anchor as?  ARPlaneAnchor,
+//            let planeNode = node.childNodes.first,
+//            let plane = planeNode.geometry as? SCNPlane
+//            else { return }
+//
+//        let width = CGFloat(planeAnchor.extent.x)
+//        let height = CGFloat(planeAnchor.extent.z)
+//        plane.width = width
+//        plane.height = height
+//
+//        let x = CGFloat(planeAnchor.center.x)
+//        let y = CGFloat(planeAnchor.center.y)
+//        let z = CGFloat(planeAnchor.center.z)
+//        planeNode.position = SCNVector3(x, y, z)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Create a session configuration
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = .horizontal
+        
+        // Run the view's session
+        sceneView.session.run(configuration)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Pause the view's session
+        sceneView.session.pause()
+    }
+    
+    func session(_ session: ARSession, didFailWithError error: Error) {
+        // Present an error message to the user
+        
+    }
+    
+    func sessionWasInterrupted(_ session: ARSession) {
+        // Inform the user that the session has been interrupted, for example, by presenting an overlay
+        
+    }
+    
+    func sessionInterruptionEnded(_ session: ARSession) {
+        // Reset tracking and/or remove existing anchors if consistent tracking is required
+        
     }
 }
