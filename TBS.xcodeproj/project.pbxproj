@@ -13,6 +13,8 @@
 		9706B67021A745C700967191 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9706B66E21A745C700967191 /* Main.storyboard */; };
 		9706B67221A745CA00967191 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9706B67121A745CA00967191 /* Assets.xcassets */; };
 		9706B67521A745CA00967191 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9706B67321A745CA00967191 /* LaunchScreen.storyboard */; };
+		97973CA52276FA3E0001AF59 /* GraphicsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97973CA42276FA3E0001AF59 /* GraphicsHelper.swift */; };
+		97973CA72277A8160001AF59 /* SCNNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97973CA62277A8160001AF59 /* SCNNode.swift */; };
 		97B391AB221B301E000655A4 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B391AA221B301E000655A4 /* Character.swift */; };
 		97B391AD221B377B000655A4 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B391AC221B377B000655A4 /* Field.swift */; };
 		97EF8B9C2222A8FD00088510 /* SceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EF8B9B2222A8FD00088510 /* SceneView.swift */; };
@@ -29,6 +31,8 @@
 		9706B67121A745CA00967191 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9706B67421A745CA00967191 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9706B67621A745CA00967191 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		97973CA42276FA3E0001AF59 /* GraphicsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsHelper.swift; sourceTree = "<group>"; };
+		97973CA62277A8160001AF59 /* SCNNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNNode.swift; sourceTree = "<group>"; };
 		97B391AA221B301E000655A4 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		97B391AC221B377B000655A4 /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
 		97EF8B9B2222A8FD00088510 /* SceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneView.swift; sourceTree = "<group>"; };
@@ -51,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				9706B66721A745C700967191 /* TBS */,
+				9706B67121A745CA00967191 /* Assets.xcassets */,
 				9706B66621A745C700967191 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -66,18 +71,42 @@
 		9706B66721A745C700967191 /* TBS */ = {
 			isa = PBXGroup;
 			children = (
+				97973CA22276F95D0001AF59 /* Game */,
 				97EF8B9A2222A8BD00088510 /* Scene */,
-				9706B66821A745C700967191 /* AppDelegate.swift */,
+				97973CA12276F87E0001AF59 /* Helpers */,
+				97973CA32276F9CE0001AF59 /* Default stuff */,
 				9706B66A21A745C700967191 /* art.scnassets */,
+			);
+			path = TBS;
+			sourceTree = "<group>";
+		};
+		97973CA12276F87E0001AF59 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				97973CA42276FA3E0001AF59 /* GraphicsHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		97973CA22276F95D0001AF59 /* Game */ = {
+			isa = PBXGroup;
+			children = (
 				9706B66C21A745C700967191 /* GameVC.swift */,
 				97B391AC221B377B000655A4 /* Field.swift */,
 				97B391AA221B301E000655A4 /* Character.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		97973CA32276F9CE0001AF59 /* Default stuff */ = {
+			isa = PBXGroup;
+			children = (
+				9706B66821A745C700967191 /* AppDelegate.swift */,
 				9706B66E21A745C700967191 /* Main.storyboard */,
-				9706B67121A745CA00967191 /* Assets.xcassets */,
 				9706B67321A745CA00967191 /* LaunchScreen.storyboard */,
 				9706B67621A745CA00967191 /* Info.plist */,
 			);
-			path = TBS;
+			path = "Default stuff";
 			sourceTree = "<group>";
 		};
 		97EF8B9A2222A8BD00088510 /* Scene */ = {
@@ -86,6 +115,7 @@
 				97EF8BA12222B0A800088510 /* GameScene.swift */,
 				97EF8B9B2222A8FD00088510 /* SceneView.swift */,
 				97EF8B9F2222AA9300088510 /* ARSceneView.swift */,
+				97973CA62277A8160001AF59 /* SCNNode.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -162,9 +192,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97973CA52276FA3E0001AF59 /* GraphicsHelper.swift in Sources */,
 				97EF8B9C2222A8FD00088510 /* SceneView.swift in Sources */,
 				97B391AB221B301E000655A4 /* Character.swift in Sources */,
 				97EF8BA02222AA9300088510 /* ARSceneView.swift in Sources */,
+				97973CA72277A8160001AF59 /* SCNNode.swift in Sources */,
 				9706B66D21A745C700967191 /* GameVC.swift in Sources */,
 				97B391AD221B377B000655A4 /* Field.swift in Sources */,
 				97EF8BA22222B0A800088510 /* GameScene.swift in Sources */,
@@ -316,7 +348,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BZ82DRDZY8;
-				INFOPLIST_FILE = TBS/Info.plist;
+				INFOPLIST_FILE = "TBS/Default stuff/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -334,7 +366,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BZ82DRDZY8;
-				INFOPLIST_FILE = TBS/Info.plist;
+				INFOPLIST_FILE = "TBS/Default stuff/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

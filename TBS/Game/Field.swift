@@ -28,7 +28,8 @@ class Field {
                 cellGeometry.firstMaterial?.diffuse.contents = UIColor.white
                 cellGeometry.cornerRadius = 2
                 
-                let cell = SCNNode(geometry: cellGeometry)
+                let cell = MaterialNode(type: .field)
+                cell.geometry = cellGeometry
                 cell.position = SCNVector3(Float(row) * cellSize, 0, Float(column) * cellSize)
                 cell.eulerAngles = SCNVector3Make(Float.pi / 2, 0, 0)
                 

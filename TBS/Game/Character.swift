@@ -16,7 +16,7 @@ enum CharacterRole: Int {
 }
 
 class Character {
-    let node: SCNNode!
+    let node: MaterialNode!
     let role: CharacterRole!
     
     init(role: CharacterRole) {
@@ -39,7 +39,9 @@ class Character {
         box.firstMaterial?.diffuse.contents = color
         box.firstMaterial?.isDoubleSided = true
         
-        node = SCNNode(geometry: box)
+        node = MaterialNode(type: .material)
+        node.geometry = box
+
         self.role = role
         
         node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)

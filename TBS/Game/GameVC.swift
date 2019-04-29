@@ -28,7 +28,10 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
             
             let fieldCenter = currentField.centerOfCell(row: (currentField.size / 2),
                                                         column: (currentField.size / 2))
-            let cameraPosition = SCNVector3(x: fieldCenter.x, y: fieldCenter.y + cameraHeight, z: fieldCenter.z)
+            
+            let cameraPosition = SCNVector3(x: fieldCenter.x,
+                                            y: fieldCenter.y + cameraHeight,
+                                            z: fieldCenter.z)
             
             let moveTo = SCNAction.move(to: cameraPosition, duration: 0);
             
@@ -46,41 +49,20 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
         scene = SCNScene()
         scene.physicsWorld.contactDelegate = self
 
-//        scene = SCNScene(named: "art.scnassets/ship.scn")!
-//        // retrieve the ship node
-        
-//        enum BodyType: Int {
-//            case field = 1
-//            case ship = 2
-//        }
-
-//        let ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
-//        ship.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
-//        ship.physicsBody?.categoryBitMask = BodyType.ship.rawValue
-//        ship.physicsBody?.collisionBitMask = BodyType.field.rawValue
-//        ship.physicsBody?.contactTestBitMask = BodyType.field.rawValue
-//
-//        // animate the 3d object
-//        ship.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: 0,
-//                                                                  y: 2,
-//                                                                  z: 0,
-//                                                                  duration: 1)))
-
-        // create and add a camera to the scene
+        // set up the camera
         cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
-        scene.rootNode.addChildNode(cameraNode)
-        
-        currentField = createField()
-        currentCharacter = createCharacter(role: .dps, row: 1, column: 2)
-        currentCharacter = createCharacter(role: .tank, row: 2, column: 1)
-        currentCharacter = createCharacter(role: .support, row: 2, column: 2)
-
-        // place the camera
         cameraNode.position = SCNVector3(x: 0, y: cameraHeight, z: 15)
         cameraNode.eulerAngles = SCNVector3Make(Float.pi / -3, 0, 0)
         cameraNode.camera!.zFar = 200
-        // cameraNode.look(at: SCNVector3(0, 0, 0))
+
+        scene.rootNode.addChildNode(cameraNode)
+        
+        // set up field and characters
+        currentField = Field(in: SCNVector3(), cellSize: 10)
+        currentCharacter = createCharacter(role: .dps, row: 1, column: 2)
+        currentCharacter = createCharacter(role: .tank, row: 2, column: 1)
+        currentCharacter = createCharacter(role: .support, row: 2, column: 2)
         
         // create and add a light to the scene
         let lightNode = SCNNode()
@@ -96,20 +78,16 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
         ambientLightNode.light!.color = UIColor.darkGray
         scene.rootNode.addChildNode(ambientLightNode)
         
-        // retrieve the SCNView
-        let scnView = self.view as! SCNView
-        
         // set the scene to the view
+        let scnView = self.view as! SCNView
         scnView.scene = scene
+        scnView.backgroundColor = UIColor.white
         
         // allows the user to manipulate the camera
         // scnView.allowsCameraControl = true
         
         // show statistics such as fps and timing information
         scnView.showsStatistics = true
-
-        // configure the view
-        // scnView.backgroundColor = UIColor.black
         
         // add a tap gesture recognizer
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
@@ -122,12 +100,6 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
         // add a pan gesture recognizer
         let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         view.addGestureRecognizer(pan)
-    }
-    
-    func createField(in position: SCNVector3 = SCNVector3(0, 0, 0)) -> Field {
-        let newField = Field(in: position, cellSize: 10)
-        
-        return newField
     }
     
     func createCharacter(role: CharacterRole, row: Int, column: Int) -> Character {
@@ -149,45 +121,52 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
         // check what nodes are tapped
         let p = gestureRecognize.location(in: scnView)
         let hitResults = scnView.hitTest(p, options: [:])
-        // check that we clicked on at least one object
-        if hitResults.count > 0 {
-            // retrieved the first clicked object
-            let result = hitResults[0]
-            
-            // get its material
-            let material = result.node.geometry!.firstMaterial!
-            
-            // highlight it
+        
+        if hitResults.count == 0 {
+            // check that we clicked on at least one object
+            return;
+        }
+        
+        // retrieved the first clicked object
+        let result = hitResults[0]
+        
+        // check if it material object
+        let materialNode = result.node as? MaterialNode
+        
+        if materialNode == nil {
+            print("Touched node is not material")
+            return
+        }
+        
+        // get its material
+        let material = result.node.geometry!.firstMaterial!
+        
+        // highlight it
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 0.5
+        
+        // on completion - unhighlight
+        SCNTransaction.completionBlock = {
             SCNTransaction.begin()
             SCNTransaction.animationDuration = 0.5
             
-            // on completion - unhighlight
-            SCNTransaction.completionBlock = {
-                SCNTransaction.begin()
-                SCNTransaction.animationDuration = 0.5
-                
-                material.emission.contents = UIColor.clear
-                
-                SCNTransaction.commit()
-            }
-            
-            material.emission.contents = UIColor.red
-            
+            material.emission.contents = UIColor.clear
             SCNTransaction.commit()
         }
+        
+        material.emission.contents = UIColor.green
+        SCNTransaction.commit()
     }
     
     @objc
     func handlePinch(_ sender: UIPinchGestureRecognizer) {
         if sender.numberOfTouches == 2 {
             let zoom = sender.scale
-            print("startScale:", startScale, "lastScale", lastScale, "zoom", zoom)
+            let fov = 1 / (startScale * zoom)
 
-            if (sender.state == .began){
+            if (sender.state == .began) {
                 startScale = lastScale
-            } else if (sender.state == .changed){
-                let fov = 1 / (startScale * zoom)
-                print("fov:", fov)
+            } else if (sender.state == .changed && fov < 180) {
 
                 cameraNode.camera?.fieldOfView = CGFloat(fov)
                 lastScale = startScale * zoom
