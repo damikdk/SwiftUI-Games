@@ -19,10 +19,10 @@ class Character {
     let node: SCNNode!
     let role: CharacterRole!
     
-    init(role: CharacterRole, in position: SCNVector3) {
+    init(role: CharacterRole) {
         let box: SCNBox
         let color: UIColor
-        let cellSize: CGFloat = 0.02
+        let cellSize: CGFloat = 10
 
         switch role {
         case .tank:
@@ -40,17 +40,11 @@ class Character {
         box.firstMaterial?.isDoubleSided = true
         
         node = SCNNode(geometry: box)
-        node.position = position
         self.role = role
-    }
-
-    init(width: Int, height: Int, length: Int, in position: SCNVector3) {
-        let box = SCNBox(width: CGFloat(width), height: CGFloat(height), length: CGFloat(length), chamferRadius: 0)
-        box.firstMaterial?.diffuse.contents = UIColor.blue
-        box.firstMaterial?.isDoubleSided = true
         
-        node = SCNNode(geometry: box)
-        node.position = position
-        self.role = .tank
+        node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+        node.physicsBody?.categoryBitMask = BodyType.material.rawValue
+        node.physicsBody?.collisionBitMask = BodyType.field.rawValue
+        node.physicsBody?.contactTestBitMask = BodyType.field.rawValue
     }
 }

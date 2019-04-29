@@ -34,11 +34,30 @@ class Field {
                 
                 cell.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
                 cell.physicsBody?.categoryBitMask = BodyType.field.rawValue
-                cell.physicsBody?.collisionBitMask = BodyType.ship.rawValue
-                cell.physicsBody?.contactTestBitMask = BodyType.ship.rawValue
+                cell.physicsBody?.collisionBitMask = BodyType.material.rawValue
+                cell.physicsBody?.contactTestBitMask = BodyType.material.rawValue
                 
                 node.addChildNode(cell)
             }
         }
+    }
+    
+    func put(object: SCNNode, row: Int = 0, column: Int = 0) {
+        let x = cellSize * Float(row)
+        let y = cellSize * Float(column)
+        
+        let objectHeight = object.scale.y
+
+        let position = SCNVector3(x, 5 + objectHeight / 2, y)
+        
+        object.position = position
+        node.addChildNode(object)
+    }
+    
+    func centerOfCell(row: Int = 0, column: Int = 0) -> SCNVector3 {
+        let x = cellSize * Float(row)
+        let y = cellSize * Float(column)
+
+        return SCNVector3(x, 0, y)
     }
 }
