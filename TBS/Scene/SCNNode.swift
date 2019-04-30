@@ -11,9 +11,15 @@ import SceneKit
 
 class MaterialNode: SCNNode {
     var type: BodyType
+    var gameID: String?
 
-    init(type: BodyType) {
+    init(type: BodyType, id: String? = nil) {
         self.type = type
+        
+        if (id != nil) {
+            self.gameID = id
+        }
+        
         super.init()
     }
     

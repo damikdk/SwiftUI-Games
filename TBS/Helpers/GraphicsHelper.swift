@@ -11,3 +11,21 @@ import UIKit
 import QuartzCore
 import SceneKit
 
+func highlight(node: SCNNode) {
+    let material = node.geometry!.firstMaterial!
+
+    SCNTransaction.begin()
+    SCNTransaction.animationDuration = 0.3
+    
+    // on completion - unhighlight
+    SCNTransaction.completionBlock = {
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 0.3
+        
+        material.emission.contents = UIColor.clear
+        SCNTransaction.commit()
+    }
+    
+    material.emission.contents = UIColor.lightGray
+    SCNTransaction.commit()
+}

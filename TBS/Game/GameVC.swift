@@ -110,7 +110,6 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
     }
     
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
-        print("contact!")
     }
     
     @objc
@@ -130,6 +129,9 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
         // retrieved the first clicked object
         let result = hitResults[0]
         
+        // highlight node
+        highlight(node: result.node)
+        
         // check if it material object
         let materialNode = result.node as? MaterialNode
         
@@ -138,24 +140,15 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
             return
         }
         
-        // get its material
-        let material = result.node.geometry!.firstMaterial!
-        
-        // highlight it
-        SCNTransaction.begin()
-        SCNTransaction.animationDuration = 0.5
-        
-        // on completion - unhighlight
-        SCNTransaction.completionBlock = {
-            SCNTransaction.begin()
-            SCNTransaction.animationDuration = 0.5
+        if (materialNode!.type == .field && currentCharacter != nil) {
+            let fieldIndexes = materialNode?.gameID!
+                .components(separatedBy: FieldConstants.indexSeparator)
+                .map { Int($0)!}
             
-            material.emission.contents = UIColor.clear
-            SCNTransaction.commit()
+            currentField.move(node: currentCharacter!.node, toRow: fieldIndexes![0], column: fieldIndexes![1])
+        } else if (materialNode!.type == .material) {
+            
         }
-        
-        material.emission.contents = UIColor.green
-        SCNTransaction.commit()
     }
     
     @objc
@@ -202,6 +195,15 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
             previousTranslateZ = currentTranslateZ
         }
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     func updatePositionAndOrientationOf(_ node: SCNNode, withPosition position: SCNVector3, relativeTo referenceNode: SCNNode) {
         let referenceNodeTransform = matrix_float4x4(referenceNode.transform)
