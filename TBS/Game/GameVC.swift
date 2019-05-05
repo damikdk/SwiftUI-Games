@@ -21,7 +21,10 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
     var cameraHeight: Float = 30
     var startScale: CGFloat = 0
     var lastScale: CGFloat = 1
+    
     var currentCharacter: Character?
+    var characters: [Character] = []
+    
     var currentField: Field! {
         didSet {
             scene.rootNode.addChildNode(currentField.node)
@@ -106,6 +109,7 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
         let newCharacter = Character(role: role)
         currentField.put(object: newCharacter.node, row: row, column: column)
         
+        characters.append(newCharacter)
         return newCharacter
     }
     
@@ -141,13 +145,15 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
         }
         
         if (materialNode!.type == .field && currentCharacter != nil) {
-            let fieldIndexes = materialNode?.gameID!
+            let fieldIndexes = materialNode!.gameID!
                 .components(separatedBy: FieldConstants.indexSeparator)
                 .map { Int($0)!}
             
-            currentField.move(node: currentCharacter!.node, toRow: fieldIndexes![0], column: fieldIndexes![1])
+            currentField.move(node: currentCharacter!.node, toRow: fieldIndexes[0], column: fieldIndexes[1])
         } else if (materialNode!.type == .material) {
-            
+            if let tappedCharacter = findCharacter(by: materialNode!.gameID!) {
+                currentCharacter = tappedCharacter
+            }
         }
     }
     
@@ -196,29 +202,19 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-
-    func updatePositionAndOrientationOf(_ node: SCNNode, withPosition position: SCNVector3, relativeTo referenceNode: SCNNode) {
-        let referenceNodeTransform = matrix_float4x4(referenceNode.transform)
+    func findCharacter(by gameID: String!) -> Character? {
+        for character in characters {
+            if character.gameID == gameID {
+                return character
+            }
+        }
         
-        // Setup a translation matrix with the desired position
-        var translationMatrix = matrix_identity_float4x4
-        translationMatrix.columns.3.x = position.x
-        translationMatrix.columns.3.y = position.y
-        translationMatrix.columns.3.z = position.z
-        
-        // Combine the configured translation matrix with the referenceNode's transform to get the desired position AND orientation
-        let updatedTransform = matrix_multiply(referenceNodeTransform, translationMatrix)
-        node.transform = SCNMatrix4(updatedTransform)
+        return nil
     }
-    
+}
+
+
+extension GameVC {
     override var shouldAutorotate: Bool {
         return true
     }
