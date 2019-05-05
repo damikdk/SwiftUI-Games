@@ -12,6 +12,7 @@ import SceneKit
 struct FieldConstants {
     static let indexSeparator = ","
     static let defaultPlacementExtraHeight = 5
+    static let defaultCellSize = Float(5)
 }
 
 class Field {
@@ -19,7 +20,7 @@ class Field {
     let size: Int!
     let cellSize: Float!
     
-    init(in position: SCNVector3, size: Int = 9, cellSize: Float = 0.02) {
+    init(in position: SCNVector3, size: Int = 9, cellSize: Float = FieldConstants.defaultCellSize) {
         node = SCNNode()
         node.position = position
         self.size = size
@@ -33,7 +34,7 @@ class Field {
                 // Make the plane visible from both sides
                 cellGeometry.firstMaterial?.isDoubleSided = true
                 cellGeometry.firstMaterial?.diffuse.contents = UIColor.white
-                cellGeometry.cornerRadius = 2
+                cellGeometry.cornerRadius = CGFloat(FieldConstants.defaultCellSize / 10)
                 
                 let cell = MaterialNode(type: .field, id: stringIndex)
                 cell.geometry = cellGeometry
@@ -51,22 +52,37 @@ class Field {
     }
     
     func put(object: SCNNode, row: Int = 0, column: Int = 0) {
-        let x = cellSize * Float(row)
-        let y = cellSize * Float(column)
-        
+        let cellPosition = centerOfCell(row: row, column: column)
         let objectHeight = object.scale.y
 
-        let position = SCNVector3(x, Float(FieldConstants.defaultPlacementExtraHeight) + objectHeight / 2, y)
-        
+        let position = SCNVector3(cellPosition.x,
+                                  Float(FieldConstants.defaultPlacementExtraHeight) + objectHeight / 2,
+                                  cellPosition.z)
+
         object.position = position
         node.addChildNode(object)
     }
     
+    func put(object: SCNNode) {
+        let cellPosition = centerOfRandomCell()
+        let objectHeight = object.scale.y
+        
+        let position = SCNVector3(cellPosition.x,
+                                  Float(FieldConstants.defaultPlacementExtraHeight) + objectHeight / 2,
+                                  cellPosition.z)
+        
+        object.position = position
+        node.addChildNode(object)
+    }
+
+    
     func move(node: SCNNode, toRow: Int = 0, column: Int = 0) {
         let cellPosition = centerOfCell(row: toRow, column: column)
-        let objectHeight = node.scale.y
+        let objectHeight = node.boundingBox.max.y
         
-        let position = SCNVector3(cellPosition.x, Float(FieldConstants.defaultPlacementExtraHeight) + objectHeight / 2, cellPosition.z)
+        let position = SCNVector3(cellPosition.x,
+                                  Float(FieldConstants.defaultPlacementExtraHeight) + objectHeight / 2,
+                                  cellPosition.z)
         
         let moveAction = SCNAction.move(to: position, duration: 1)
         moveAction.timingMode = .easeInEaseOut;
@@ -79,6 +95,16 @@ class Field {
         let x = cellSize * Float(row)
         let y = cellSize * Float(column)
 
+        return SCNVector3(x, 0, y)
+    }
+    
+    func centerOfRandomCell() -> SCNVector3 {
+        let row = Int.random(in: 0 ..< size)
+        let column = Int.random(in: 0 ..< size)
+        
+        let x = cellSize * Float(row)
+        let y = cellSize * Float(column)
+        
         return SCNVector3(x, 0, y)
     }
 }

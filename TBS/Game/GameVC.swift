@@ -17,8 +17,9 @@ enum BodyType: Int {
 
 class GameVC: UIViewController, SCNPhysicsContactDelegate {
     var cameraNode: SCNNode!
+    var lightNode: SCNNode!
     var scene: SCNScene!
-    var cameraHeight: Float = 30
+    var cameraHeight: Float = FieldConstants.defaultCellSize * 7
     var startScale: CGFloat = 0
     var lastScale: CGFloat = 1
     
@@ -34,12 +35,16 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
             
             let cameraPosition = SCNVector3(x: fieldCenter.x,
                                             y: fieldCenter.y + cameraHeight,
-                                            z: fieldCenter.z)
+                                            z: fieldCenter.z + cameraHeight)
             
-            let moveTo = SCNAction.move(to: cameraPosition, duration: 0);
+            let moveCamera = SCNAction.move(to: cameraPosition, duration: 0);
             
-            cameraNode.runAction(moveTo) {
+            cameraNode.runAction(moveCamera) {
                 self.cameraNode.look(at: fieldCenter)
+                self.lightNode.position = SCNVector3(x: fieldCenter.x,
+                                                     y: fieldCenter.y + FieldConstants.defaultCellSize * 5,
+                                                     z: fieldCenter.z)
+                self.lightNode.look(at: fieldCenter)
                 self.lastScale = 1 / (self.cameraNode.camera?.fieldOfView)!
             }
         }
@@ -55,23 +60,45 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
         // set up the camera
         cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
-        cameraNode.position = SCNVector3(x: 0, y: cameraHeight, z: 15)
         cameraNode.eulerAngles = SCNVector3Make(Float.pi / -3, 0, 0)
         cameraNode.camera!.zFar = 200
 
         scene.rootNode.addChildNode(cameraNode)
         
         // set up field and characters
-        currentField = Field(in: SCNVector3(), cellSize: 10)
-        currentCharacter = createCharacter(role: .dps, row: 1, column: 2)
-        currentCharacter = createCharacter(role: .tank, row: 2, column: 1)
-        currentCharacter = createCharacter(role: .support, row: 2, column: 2)
+        currentField = Field(in: SCNVector3())
+        currentCharacter = createCharacter(role: .dps, row: 4, column: 5)
+        currentCharacter = createCharacter(role: .tank, row: 3, column: 6)
+        currentCharacter = createCharacter(role: .support, row: 5, column: 7)
+        
+        currentCharacter = createCharacter(role: .dps)
+        currentCharacter = createCharacter(role: .tank)
+        currentCharacter = createCharacter(role: .support)
+        
+        currentCharacter = createCharacter(role: .dps)
+        currentCharacter = createCharacter(role: .tank)
+        currentCharacter = createCharacter(role: .support)
+        
+        currentCharacter = createCharacter(role: .dps)
+        currentCharacter = createCharacter(role: .tank)
+        currentCharacter = createCharacter(role: .support)
+
+        currentCharacter = createCharacter(role: .dps)
+        currentCharacter = createCharacter(role: .tank)
+        currentCharacter = createCharacter(role: .support)
+
         
         // create and add a light to the scene
-        let lightNode = SCNNode()
-        lightNode.light = SCNLight()
-        lightNode.light!.type = .omni
-        lightNode.position = SCNVector3(x: 0, y: 20, z: 10)
+        let light = SCNLight()
+        lightNode = SCNNode()
+
+        light.type = .spot
+        light.castsShadow = true
+        light.spotOuterAngle = 100
+        light.shadowMode = .deferred
+        light.shadowSampleCount = 32
+
+        lightNode.light = light
         scene.rootNode.addChildNode(lightNode)
         
         // create and add an ambient light to the scene
@@ -84,7 +111,7 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
         // set the scene to the view
         let scnView = self.view as! SCNView
         scnView.scene = scene
-        scnView.backgroundColor = UIColor.white
+        scnView.backgroundColor = UIColor.black
         
         // allows the user to manipulate the camera
         // scnView.allowsCameraControl = true
@@ -109,6 +136,14 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
         let newCharacter = Character(role: role)
         currentField.put(object: newCharacter.node, row: row, column: column)
         
+        characters.append(newCharacter)
+        return newCharacter
+    }
+    
+    func createCharacter(role: CharacterRole) -> Character {
+        let newCharacter = Character(role: role)
+        currentField.put(object: newCharacter.node)
+
         characters.append(newCharacter)
         return newCharacter
     }

@@ -23,12 +23,12 @@ class Character {
     init(role: CharacterRole) {
         let box: SCNBox
         let color: UIColor
-        let cellSize: CGFloat = 10
+        let cellSize: CGFloat = CGFloat(FieldConstants.defaultCellSize)
         var uuid = UUID().uuidString
         
         switch role {
         case .tank:
-            box = SCNBox(width: cellSize * 0.8, height: cellSize * 2, length: cellSize * 0.4, chamferRadius: 0)
+            box = SCNBox(width: cellSize * 0.6, height: cellSize * 1.2, length: cellSize * 0.4, chamferRadius: 0)
             color = .blue
             uuid.append("-tank")
         case .dps:
@@ -51,6 +51,8 @@ class Character {
         self.gameID = uuid
         
         node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+        node.physicsBody?.mass = 4
+        node.physicsBody?.restitution = 0
         node.physicsBody?.categoryBitMask = BodyType.material.rawValue
         node.physicsBody?.collisionBitMask = BodyType.field.rawValue
         node.physicsBody?.contactTestBitMask = BodyType.field.rawValue
