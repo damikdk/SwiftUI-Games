@@ -27,3 +27,9 @@ class MaterialNode: SCNNode {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+extension SCNNode {
+    func height() -> Float {
+        return self.boundingBox.max.y - self.boundingBox.min.y
+    }
+}

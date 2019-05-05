@@ -11,7 +11,7 @@ import SceneKit
 
 struct FieldConstants {
     static let indexSeparator = ","
-    static let defaultPlacementExtraHeight = 5
+    static let defaultPlacementExtraHeight = 0
     static let defaultCellSize = Float(5)
 }
 
@@ -53,7 +53,7 @@ class Field {
     
     func put(object: SCNNode, row: Int = 0, column: Int = 0) {
         let cellPosition = centerOfCell(row: row, column: column)
-        let objectHeight = object.scale.y
+        let objectHeight = object.height()
 
         let position = SCNVector3(cellPosition.x,
                                   Float(FieldConstants.defaultPlacementExtraHeight) + objectHeight / 2,
@@ -75,16 +75,15 @@ class Field {
         node.addChildNode(object)
     }
 
-    
     func move(node: SCNNode, toRow: Int = 0, column: Int = 0) {
         let cellPosition = centerOfCell(row: toRow, column: column)
-        let objectHeight = node.boundingBox.max.y
+        let objectHeight = node.height()
         
         let position = SCNVector3(cellPosition.x,
                                   Float(FieldConstants.defaultPlacementExtraHeight) + objectHeight / 2,
                                   cellPosition.z)
         
-        let moveAction = SCNAction.move(to: position, duration: 1)
+        let moveAction = SCNAction.move(to: position, duration: 0.4)
         moveAction.timingMode = .easeInEaseOut;
         
         print("Move node to row \(toRow) and column \(column) (position: \(position)")
