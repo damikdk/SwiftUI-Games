@@ -67,26 +67,8 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
         
         // set up field and characters
         currentField = Field(in: SCNVector3())
-        currentCharacter = createCharacter(role: .dps, row: 4, column: 5)
-        currentCharacter = createCharacter(role: .tank, row: 3, column: 6)
-        currentCharacter = createCharacter(role: .support, row: 5, column: 7)
         
-        currentCharacter = createCharacter(role: .dps)
-        currentCharacter = createCharacter(role: .tank)
-        currentCharacter = createCharacter(role: .support)
-        
-        currentCharacter = createCharacter(role: .dps)
-        currentCharacter = createCharacter(role: .tank)
-        currentCharacter = createCharacter(role: .support)
-        
-        currentCharacter = createCharacter(role: .dps)
-        currentCharacter = createCharacter(role: .tank)
-        currentCharacter = createCharacter(role: .support)
-
-        currentCharacter = createCharacter(role: .dps)
-        currentCharacter = createCharacter(role: .tank)
-        currentCharacter = createCharacter(role: .support)
-
+        createCharacters(random: false)
         
         // create and add a light to the scene
         let light = SCNLight()
@@ -130,6 +112,34 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
         // add a pan gesture recognizer
         let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         view.addGestureRecognizer(pan)
+    }
+    
+    func createCharacters(random: Bool) {
+        if (random) {
+            var squadsCount = 7
+            
+            while squadsCount > 0 {
+                currentCharacter = createCharacter(role: .dps)
+                currentCharacter = createCharacter(role: .tank)
+                currentCharacter = createCharacter(role: .support)
+                
+                squadsCount -= 1
+            }
+
+            return
+        }
+        
+        for row in 2...(currentField.size - 2) {
+            currentCharacter = createCharacter(role: .tank, row: row, column: 1)
+            currentCharacter = createCharacter(role: .dps, row: row, column: 2)
+            currentCharacter = createCharacter(role: .support, row: row, column: 3)
+            
+            let rightSideColumn = currentField.size - 2
+            
+            currentCharacter = createCharacter(role: .tank, row: row, column: rightSideColumn)
+            currentCharacter = createCharacter(role: .dps, row: row, column: rightSideColumn - 1)
+            currentCharacter = createCharacter(role: .support, row: row, column: rightSideColumn - 2)
+        }
     }
     
     func createCharacter(role: CharacterRole, row: Int, column: Int) -> Character {
@@ -200,7 +210,7 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
 
             if (sender.state == .began) {
                 startScale = lastScale
-            } else if (sender.state == .changed && fov < 180) {
+            } else if (sender.state == .changed && fov < 95) {
 
                 cameraNode.camera?.fieldOfView = CGFloat(fov)
                 lastScale = startScale * zoom

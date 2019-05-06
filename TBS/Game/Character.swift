@@ -29,15 +29,15 @@ class Character {
         switch role {
         case .tank:
             box = SCNBox(width: cellSize * 0.6, height: cellSize * 1.2, length: cellSize * 0.4, chamferRadius: 0)
-            color = .blue
+            color = UIColor.DarkTheme.Violet.primary
             uuid.append("-tank")
         case .dps:
             box = SCNBox(width: cellSize * 0.4, height: cellSize * 1, length: cellSize * 0.4, chamferRadius: 0)
-            color = .red
+            color = UIColor.DarkTheme.Violet.accent
             uuid.append("-dps")
         case .support:
             box = SCNBox(width: cellSize * 0.2, height: cellSize * 0.8, length: cellSize * 0.2, chamferRadius: 0)
-            color = .yellow
+            color = UIColor.DarkTheme.Violet.minor
             uuid.append("-support")
         }
         
