@@ -42,7 +42,7 @@ class Field {
                 cell.eulerAngles = SCNVector3Make(Float.pi / 2, 0, 0)
                 
                 cell.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
-                cell.physicsBody?.categoryBitMask = BodyType.field.rawValue
+                cell.physicsBody?.categoryBitMask = BodyType.material.rawValue
                 cell.physicsBody?.collisionBitMask = BodyType.material.rawValue
                 cell.physicsBody?.contactTestBitMask = BodyType.material.rawValue
                 

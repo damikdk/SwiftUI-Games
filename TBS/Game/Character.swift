@@ -54,7 +54,7 @@ class Character {
         node.physicsBody?.mass = 4
         node.physicsBody?.restitution = 0
         node.physicsBody?.categoryBitMask = BodyType.material.rawValue
-        node.physicsBody?.collisionBitMask = BodyType.field.rawValue
-        node.physicsBody?.contactTestBitMask = BodyType.field.rawValue
+        node.physicsBody?.collisionBitMask = BodyType.material.rawValue
+        node.physicsBody?.contactTestBitMask = BodyType.material.rawValue
     }
 }
