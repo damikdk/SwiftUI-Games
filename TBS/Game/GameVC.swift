@@ -33,9 +33,13 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
     var previousTranslateX:CGFloat = 0.0
     var previousTranslateZ:CGFloat = 0.0
     
-    var currentCharacter: Character?
+    var overlay: OverlayHUD!
+    var currentCharacter: Character? {
+        didSet {
+            overlay.currentChaarcterLabel.text = currentCharacter?.gameID
+        }
+    }
     var characters: [Character] = []
-    
     var currentField: Field! {
         didSet {
             scene.rootNode.addChildNode(currentField.node)
@@ -82,6 +86,13 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
         let scnView = self.view as! SCNView
         scnView.scene = scene
         scnView.backgroundColor = UIColor.black
+        
+        // set up overlay
+        let overlayScene = OverlayHUD(size: view.frame.size)
+        overlayScene.backgroundColor = UIColor.lightBlue
+        overlayScene.scaleMode = .resizeFill
+        scnView.overlaySKScene = overlayScene
+        overlay = overlayScene
         
         // set up field and characters
         currentField = Field(in: SCNVector3())
