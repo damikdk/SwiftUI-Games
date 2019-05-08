@@ -51,42 +51,44 @@ class Field {
         }
     }
     
-    func put(object: SCNNode, row: Int = 0, column: Int = 0) {
-        let cellPosition = centerOfCell(row: row, column: column)
+    func put(object: SCNNode, row: Int? = nil, column: Int? = nil) {
         let objectHeight = object.height()
+        var cellPosition: SCNVector3
+        
+        if (row != nil && column != nil) {
+            cellPosition = centerOfCell(row: row!, column: column!)
+        } else {
+            cellPosition = centerOfRandomCell()
+        }
 
         let position = SCNVector3(cellPosition.x,
                                   Float(FieldConstants.defaultPlacementExtraHeight) + objectHeight / 2,
                                   cellPosition.z)
 
-        object.position = position
-        node.addChildNode(object)
-    }
-    
-    func put(object: SCNNode) {
-        let cellPosition = centerOfRandomCell()
-        let objectHeight = object.height()
-        
-        let position = SCNVector3(cellPosition.x,
-                                  Float(FieldConstants.defaultPlacementExtraHeight) + objectHeight / 2,
-                                  cellPosition.z)
+        print("Put node to row \(String(describing: row)) and column \(String(describing: column)) (position: \(position)")
         
         object.position = position
         node.addChildNode(object)
     }
 
-    func move(node: SCNNode, toRow: Int = 0, column: Int = 0) {
-        let cellPosition = centerOfCell(row: toRow, column: column)
+    func move(node: SCNNode, toRow: Int? = nil, column: Int? = nil) {
         let objectHeight = node.height()
+        var cellPosition: SCNVector3
+        
+        if (toRow != nil && column != nil) {
+            cellPosition = centerOfCell(row: toRow!, column: column!)
+        } else {
+            cellPosition = centerOfRandomCell()
+        }
         
         let position = SCNVector3(cellPosition.x,
                                   Float(FieldConstants.defaultPlacementExtraHeight) + objectHeight / 2,
                                   cellPosition.z)
         
         let moveAction = SCNAction.move(to: position, duration: 0.4)
-        moveAction.timingMode = .easeInEaseOut;
+        moveAction.timingMode = .easeInEaseOut
         
-        print("Move node to row \(toRow) and column \(column) (position: \(position)")
+        print("Move node to row \(String(describing: toRow)) and column \(String(describing: column)) (position: \(position)")
         node.runAction(moveAction)
     }
     

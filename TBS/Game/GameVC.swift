@@ -167,18 +167,15 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
         }
     }
     
-    func createCharacter(role: CharacterRole, row: Int, column: Int) -> Character {
+    func createCharacter(role: CharacterRole, row: Int? = nil, column: Int? = nil) -> Character {
         let newCharacter = Character(role: role)
-        currentField.put(object: newCharacter.node, row: row, column: column)
         
-        characters.append(newCharacter)
-        return newCharacter
-    }
-    
-    func createCharacter(role: CharacterRole) -> Character {
-        let newCharacter = Character(role: role)
-        currentField.put(object: newCharacter.node)
-
+        if (row != nil && column != nil) {
+            currentField.put(object: newCharacter.node, row: row!, column: column!)
+        } else {
+            currentField.put(object: newCharacter.node)
+        }
+        
         characters.append(newCharacter)
         return newCharacter
     }
