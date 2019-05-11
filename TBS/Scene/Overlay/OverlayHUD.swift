@@ -10,29 +10,18 @@ import Foundation
 import SpriteKit
 
 class OverlayHUD: SKScene {
-    var currentCharacterLabel: SKLabelNode!
+    var characterPanel: SKSpriteNode!
     var abilitiesPanel: SKSpriteNode!
     
     override init(size: CGSize) {
         super.init(size: size)
         
-        backgroundColor = UIColor.white
+        // set up character info node
+        characterPanel = SKSpriteNode()
         
-        // set up label node
-        let label = SKLabelNode(fontNamed: "Verdana-Bold")
-        label.name = "Current Player's Name"
-      
-        let message = "Current Player"
-        label.text = message
-        label.fontSize = 14
-        label.fontColor = UIColor.white
-        
-        label.verticalAlignmentMode = .top
-        label.horizontalAlignmentMode = .center
-        label.position = CGPoint(x: size.width / 2, y: size.height)
-
-        currentCharacterLabel = label
-        addChild(label)
+        characterPanel.anchorPoint = .init(x: 0.5, y: 1)
+        characterPanel.position = CGPoint(x: size.width / 2, y: size.height)
+        addChild(characterPanel)
         
         // set up abilities node
         abilitiesPanel = SKSpriteNode()
@@ -43,7 +32,22 @@ class OverlayHUD: SKScene {
     }
     
     func setupUI(character: Character) {
-        currentCharacterLabel.text = character.gameID
+        characterPanel.removeAllChildren()
+        abilitiesPanel.removeAllChildren()
+
+        // set up label node
+        let label = SKLabelNode(fontNamed: "Verdana-Bold")
+        label.name = "Current Player's Name"
+        
+        label.text = character.gameID! + " (\(character.HP!) HP)"
+        label.fontSize = 14
+        label.fontColor = UIColor.white
+        
+        label.verticalAlignmentMode = .top
+        label.horizontalAlignmentMode = .center
+        label.position = CGPoint(x: 0, y: 0)
+
+        characterPanel.addChild(label)
         
         let buttonWidth = 80
         
@@ -59,7 +63,7 @@ class OverlayHUD: SKScene {
                                   disabledTexture: buttonTexture)
            
             button.onPress = {
-                print("BUTTON PRESSED OMG")
+                ability.action(self.view?.window?.rootViewController as! GameVC, character)
             }
                         
             button.position = CGPoint(x: 0 + buttonWidth * index, y: 0)

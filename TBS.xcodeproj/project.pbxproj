@@ -113,15 +113,23 @@
 			path = "Default stuff";
 			sourceTree = "<group>";
 		};
+		97A32D94228748A700807521 /* Overlay */ = {
+			isa = PBXGroup;
+			children = (
+				973AA54822823A1D00A89C91 /* OverlayHUD.swift */,
+				97A32D922287279900807521 /* SKButton.swift */,
+			);
+			path = Overlay;
+			sourceTree = "<group>";
+		};
 		97EF8B9A2222A8BD00088510 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				97A32D94228748A700807521 /* Overlay */,
 				97EF8BA12222B0A800088510 /* GameScene.swift */,
 				97EF8B9B2222A8FD00088510 /* SceneView.swift */,
 				97EF8B9F2222AA9300088510 /* ARSceneView.swift */,
 				97973CA62277A8160001AF59 /* MaterialNode.swift */,
-				973AA54822823A1D00A89C91 /* OverlayHUD.swift */,
-				97A32D922287279900807521 /* SKButton.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";

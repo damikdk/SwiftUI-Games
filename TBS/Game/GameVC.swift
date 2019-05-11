@@ -126,7 +126,7 @@ class GameVC: UIViewController {
         // scnView.allowsCameraControl = true
         
         // show statistics such as fps and timing information
-//        scnView.showsStatistics = true
+        // scnView.showsStatistics = true
         
         // add a tap gesture recognizer
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
@@ -140,15 +140,15 @@ class GameVC: UIViewController {
         let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         view.addGestureRecognizer(pan)
     }
-    
+        
     func createCharacters(random: Bool) {
         if (random) {
             var squadsCount = 7
             
             while squadsCount > 0 {
-                currentCharacter = createCharacter(role: .dps)
-                currentCharacter = createCharacter(role: .tank)
-                currentCharacter = createCharacter(role: .support)
+                createCharacter(role: .dps)
+                createCharacter(role: .tank)
+                createCharacter(role: .support)
                 
                 squadsCount -= 1
             }
@@ -157,19 +157,19 @@ class GameVC: UIViewController {
         }
         
         for row in 2...(currentField.size - 2) {
-            currentCharacter = createCharacter(role: .tank, row: row, column: 3)
-            currentCharacter = createCharacter(role: .dps, row: row, column: 2)
-            currentCharacter = createCharacter(role: .support, row: row, column: 1)
+            createCharacter(role: .tank, row: row, column: 3)
+            createCharacter(role: .dps, row: row, column: 2)
+            createCharacter(role: .support, row: row, column: 1)
             
             let rightSideColumn = currentField.size - 2
             
-            currentCharacter = createCharacter(role: .tank, row: row, column: rightSideColumn - 2)
-            currentCharacter = createCharacter(role: .dps, row: row, column: rightSideColumn - 1)
-            currentCharacter = createCharacter(role: .support, row: row, column: rightSideColumn)
+            createCharacter(role: .tank, row: row, column: rightSideColumn - 2)
+            createCharacter(role: .dps, row: row, column: rightSideColumn - 1)
+            createCharacter(role: .support, row: row, column: rightSideColumn)
         }
     }
     
-    func createCharacter(role: CharacterRole, row: Int? = nil, column: Int? = nil) -> Character {
+    func createCharacter(role: CharacterRole, row: Int? = nil, column: Int? = nil) -> Void {
         let newCharacter = Character(role: role)
         
         if (row != nil && column != nil) {
@@ -179,7 +179,6 @@ class GameVC: UIViewController {
         }
         
         characters.append(newCharacter)
-        return newCharacter
     }
     
     func findCharacter(by gameID: String!) -> Character? {

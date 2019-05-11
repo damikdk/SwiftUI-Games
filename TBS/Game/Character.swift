@@ -15,13 +15,24 @@ enum CharacterRole: Int {
     case dps = 3
 }
 
+let defaultAbilityAction: ((GameVC, Character) -> Void) = { gameVC, charater in print("defaultAbilityAction") }
+
 struct Ability {
     let name: String!
     let icon: UIImage!
-    let iconName: String!
+    let action: ((GameVC, Character) -> Void)!
 }
 
 class Character {
+    var HP: Int! = 10 {
+        didSet {
+            if (HP <= 0) {
+                print("Character \(gameID!) died")
+                highlight(node: node)
+            }
+        }
+    }
+    
     let node: MaterialNode!
     let role: CharacterRole!
     var gameID: String!
@@ -38,15 +49,34 @@ class Character {
             box = SCNBox(width: cellSize * 0.6, height: cellSize * 1.2, length: cellSize * 0.4, chamferRadius: 0)
             color = UIColor.DarkTheme.Violet.primary
             uuid.append("-tank")
-            abilities.append(Ability(name: "Shield", icon: UIImage(named: "bolt-shield"), iconName: "bolt-shield"))
+            
+            HP = 12
+            abilities.append(Ability(name: "Shield",
+                                     icon: UIImage(named: "bolt-shield"),
+                                     action: defaultAbilityAction))
         case .dps:
             box = SCNBox(width: cellSize * 0.4, height: cellSize * 1, length: cellSize * 0.4, chamferRadius: 0)
             color = UIColor.DarkTheme.Violet.accent
             uuid.append("-dps")
+            
+            HP = 10
+            abilities.append(Ability(name: "Frozen Array",
+                                     icon: UIImage(named: "frozen-arrow"),
+                                     action: { gameVC, charater in
+                                        gameVC.onCharacterPress = { gameVC, charater in
+                                            charater.HP -= 2
+                                            gameVC.onCharacterPress = defaultOnCharacterPress
+                                        }
+                                    }))
         case .support:
             box = SCNBox(width: cellSize * 0.2, height: cellSize * 0.8, length: cellSize * 0.2, chamferRadius: 0)
             color = UIColor.DarkTheme.Violet.minor
             uuid.append("-support")
+            
+            HP = 8
+            abilities.append(Ability(name: "Heal AOE",
+                                     icon: UIImage(named: "christ-power"),
+                                     action: defaultAbilityAction))
         }
         
         box.firstMaterial?.diffuse.contents = color
