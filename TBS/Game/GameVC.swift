@@ -22,7 +22,7 @@ let defaultOnFieldPress: ((GameVC, MaterialNode, Int, Int) -> Void) = { gameVC, 
     gameVC.currentField.move(node: gameVC.currentCharacter!.node, toRow: row, column: column)
 }
 
-class GameVC: UIViewController, SCNPhysicsContactDelegate {
+class GameVC: UIViewController {
     var cameraNode: SCNNode!
     var lightNode: SCNNode!
     var scene: SCNScene!
@@ -36,7 +36,7 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
     var overlay: OverlayHUD!
     var currentCharacter: Character? {
         didSet {
-            overlay.currentChaarcterLabel.text = currentCharacter?.gameID
+            overlay.setupUI(character: currentCharacter!)
         }
     }
     var characters: [Character] = []
@@ -76,6 +76,7 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
 
         // set up the camera
         cameraNode = SCNNode()
+        cameraNode.name = "Camera"
         cameraNode.camera = SCNCamera()
         cameraNode.eulerAngles = SCNVector3Make(Float.pi / -3, 0, 0)
         cameraNode.camera!.zFar = 200
@@ -103,6 +104,7 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
         // create and add a light to the scene
         let light = SCNLight()
         lightNode = SCNNode()
+        lightNode.name = "Light"
 
         light.type = .spot
         light.castsShadow = true
@@ -124,7 +126,7 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
         // scnView.allowsCameraControl = true
         
         // show statistics such as fps and timing information
-        scnView.showsStatistics = true
+//        scnView.showsStatistics = true
         
         // add a tap gesture recognizer
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
@@ -155,15 +157,15 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
         }
         
         for row in 2...(currentField.size - 2) {
-            currentCharacter = createCharacter(role: .tank, row: row, column: 1)
+            currentCharacter = createCharacter(role: .tank, row: row, column: 3)
             currentCharacter = createCharacter(role: .dps, row: row, column: 2)
-            currentCharacter = createCharacter(role: .support, row: row, column: 3)
+            currentCharacter = createCharacter(role: .support, row: row, column: 1)
             
             let rightSideColumn = currentField.size - 2
             
-            currentCharacter = createCharacter(role: .tank, row: row, column: rightSideColumn)
+            currentCharacter = createCharacter(role: .tank, row: row, column: rightSideColumn - 2)
             currentCharacter = createCharacter(role: .dps, row: row, column: rightSideColumn - 1)
-            currentCharacter = createCharacter(role: .support, row: row, column: rightSideColumn - 2)
+            currentCharacter = createCharacter(role: .support, row: row, column: rightSideColumn)
         }
     }
     
@@ -180,9 +182,6 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
         return newCharacter
     }
     
-    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
-    }
-    
     func findCharacter(by gameID: String!) -> Character? {
         for character in characters {
             if character.gameID == gameID {
@@ -191,6 +190,12 @@ class GameVC: UIViewController, SCNPhysicsContactDelegate {
         }
         
         return nil
+    }
+}
+
+extension GameVC: SCNPhysicsContactDelegate {
+    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
+        print("contact")
     }
 }
 

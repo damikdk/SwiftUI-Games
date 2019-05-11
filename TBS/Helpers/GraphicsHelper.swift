@@ -75,3 +75,28 @@ extension String {
         return UIColor(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
     }
 }
+
+extension UIImage {
+    func tinted(with color: UIColor, backgroundColor: UIColor) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        let currentContext = UIGraphicsGetCurrentContext()
+        
+        // Set background color
+        backgroundColor.setFill()
+        // Fill context with it
+        currentContext?.fill(CGRect(origin: .zero, size: size))
+        
+        // Set tint color
+        color.set()
+        
+        // Make sure that renderingMode == alwaysTemplate (otherwise image always will be original)
+        // and draw image with current color
+        withRenderingMode(.alwaysTemplate)
+            .draw(in: CGRect(origin: .zero, size: size))
+        
+        let resultImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return resultImage
+    }
+}

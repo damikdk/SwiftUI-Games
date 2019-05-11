@@ -11,7 +11,7 @@ import SceneKit
 
 class MaterialNode: SCNNode {
     var type: BodyType
-    var gameID: String?
+    var gameID: String!
 
     init(type: BodyType, id: String? = nil) {
         self.type = type
@@ -21,6 +21,7 @@ class MaterialNode: SCNNode {
         }
         
         super.init()
+        name = "Material Node (\(type), \(gameID ?? ""))"
     }
     
     required init?(coder aDecoder: NSCoder) {

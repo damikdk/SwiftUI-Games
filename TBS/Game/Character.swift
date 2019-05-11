@@ -15,10 +15,17 @@ enum CharacterRole: Int {
     case dps = 3
 }
 
+struct Ability {
+    let name: String!
+    let icon: UIImage!
+    let iconName: String!
+}
+
 class Character {
     let node: MaterialNode!
     let role: CharacterRole!
     var gameID: String!
+    var abilities = [Ability]()
 
     init(role: CharacterRole) {
         let box: SCNBox
@@ -31,6 +38,7 @@ class Character {
             box = SCNBox(width: cellSize * 0.6, height: cellSize * 1.2, length: cellSize * 0.4, chamferRadius: 0)
             color = UIColor.DarkTheme.Violet.primary
             uuid.append("-tank")
+            abilities.append(Ability(name: "Shield", icon: UIImage(named: "bolt-shield"), iconName: "bolt-shield"))
         case .dps:
             box = SCNBox(width: cellSize * 0.4, height: cellSize * 1, length: cellSize * 0.4, chamferRadius: 0)
             color = UIColor.DarkTheme.Violet.accent
@@ -54,7 +62,7 @@ class Character {
         node.physicsBody?.mass = 4
         node.physicsBody?.restitution = 0
         node.physicsBody?.categoryBitMask = BodyType.material.rawValue
-        node.physicsBody?.collisionBitMask = BodyType.material.rawValue
+        node.physicsBody?.collisionBitMask = BodyType.material.rawValue | BodyType.field.rawValue
         node.physicsBody?.contactTestBitMask = BodyType.material.rawValue
     }
 }

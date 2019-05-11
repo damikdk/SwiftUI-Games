@@ -23,6 +23,8 @@ class Field {
     init(in position: SCNVector3, size: Int = 9, cellSize: Float = FieldConstants.defaultCellSize) {
         node = SCNNode()
         node.position = position
+        node.name = "Field (size: \(size))"
+        
         self.size = size
         self.cellSize = cellSize
         
@@ -31,6 +33,7 @@ class Field {
                 let stringIndex = String(row) + FieldConstants.indexSeparator + String(column)
                 
                 let cellGeometry = SCNPlane(width: CGFloat(cellSize), height: CGFloat(cellSize))
+                
                 // Make the plane visible from both sides
                 cellGeometry.firstMaterial?.isDoubleSided = true
                 cellGeometry.firstMaterial?.diffuse.contents = UIColor.DarkTheme.Violet.fieldColor
@@ -42,9 +45,8 @@ class Field {
                 cell.eulerAngles = SCNVector3Make(Float.pi / 2, 0, 0)
                 
                 cell.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
-                cell.physicsBody?.categoryBitMask = BodyType.material.rawValue
-                cell.physicsBody?.collisionBitMask = BodyType.material.rawValue
-                cell.physicsBody?.contactTestBitMask = BodyType.material.rawValue
+                cell.physicsBody?.categoryBitMask = BodyType.field.rawValue
+                cell.physicsBody?.collisionBitMask = BodyType.material.rawValue | BodyType.field.rawValue
                 
                 node.addChildNode(cell)
             }
