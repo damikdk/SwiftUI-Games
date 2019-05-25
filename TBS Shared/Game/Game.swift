@@ -45,15 +45,15 @@ class Game: NSObject, SCNSceneRendererDelegate {
                                                         column: (currentField.size / 2))
             
             let cameraPosition = SCNVector3(x: fieldCenter.x,
-                                            y: fieldCenter.y + cameraHeight,
-                                            z: fieldCenter.z + cameraHeight)
+                                            y: fieldCenter.y + cameraHeight.universal(),
+                                            z: fieldCenter.z + cameraHeight.universal())
             
             let moveCamera = SCNAction.move(to: cameraPosition, duration: 0);
             
             cameraNode.runAction(moveCamera) {
                 self.cameraNode.look(at: fieldCenter)
                 self.lightNode.position = SCNVector3(x: fieldCenter.x,
-                                                     y: fieldCenter.y + FieldConstants.defaultCellSize * 5,
+                                                     y: fieldCenter.y + FieldConstants.defaultCellSize.universal() * 5,
                                                      z: fieldCenter.z)
                 self.lightNode.look(at: fieldCenter)
                 self.lastScale = 1 / (self.cameraNode.camera?.fieldOfView)!
@@ -79,7 +79,7 @@ class Game: NSObject, SCNSceneRendererDelegate {
         cameraNode = SCNNode()
         cameraNode.name = "Camera"
         cameraNode.camera = SCNCamera()
-        cameraNode.eulerAngles = SCNVector3Make(CGFloat(Float.pi / -3), 0, 0)
+        cameraNode.eulerAngles = SCNVector3Make(Float.pi.universal() / -3, 0, 0)
         cameraNode.camera!.zFar = 200
         
         scene.rootNode.addChildNode(cameraNode)

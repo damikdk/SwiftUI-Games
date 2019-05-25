@@ -126,3 +126,28 @@ extension SCNImage {
         #endif
     }
 }
+
+extension Float {
+    #if os(macOS)
+    func universal() -> CGFloat {
+        return CGFloat(self)
+    }
+    #else
+    func universal() -> Float {
+        return self
+    }
+    #endif
+}
+
+extension CGFloat {
+    #if os(macOS)
+    func universal() -> CGFloat {
+        return self
+    }
+    #else
+    func universal() -> Float {
+        return Float(self)
+    }
+    #endif
+}
+

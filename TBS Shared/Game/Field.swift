@@ -42,7 +42,7 @@ class Field {
                 let cell = MaterialNode(type: .field, id: stringIndex)
                 cell.geometry = cellGeometry
                 cell.position = SCNVector3(CGFloat(column) * cellSize, 0, CGFloat(row) * cellSize)
-                cell.eulerAngles = SCNVector3Make(CGFloat.pi / 2, 0, 0)
+                cell.eulerAngles = SCNVector3Make(Float.pi.universal() / 2, 0, 0)
                 
                 cell.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
                 cell.physicsBody?.categoryBitMask = BodyType.field.rawValue
@@ -64,7 +64,7 @@ class Field {
         }
 
         let position = SCNVector3(cellPosition.x,
-                                  FieldConstants.defaultPlacementExtraHeight + objectHeight / 2,
+                                  FieldConstants.defaultPlacementExtraHeight.universal() + objectHeight.universal() / 2,
                                   cellPosition.z)
 
         print("Put node to row \(String(describing: row)) and column \(String(describing: column)) (position: \(position)")
@@ -84,7 +84,7 @@ class Field {
         }
         
         let position = SCNVector3(cellPosition.x,
-                                  FieldConstants.defaultPlacementExtraHeight + objectHeight / 2,
+                                  FieldConstants.defaultPlacementExtraHeight.universal() + objectHeight.universal() / 2,
                                   cellPosition.z)
         
         let moveAction = SCNAction.move(to: position, duration: 0.4)
