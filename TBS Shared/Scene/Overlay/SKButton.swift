@@ -35,7 +35,6 @@ class SKButton: SKSpriteNode {
     var label: SKLabelNode
     var onPress: (() -> Void)?
 
-    
     required init(coder: NSCoder) {
         fatalError("NSCoding not supported")
     }
@@ -108,7 +107,7 @@ class SKButton: SKSpriteNode {
         onPress?()
     }
     #else
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func mouseDown(with event: NSEvent) {
         if (!isEnabled) {
             return
         }
@@ -116,7 +115,17 @@ class SKButton: SKSpriteNode {
         isSelected = true
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func mouseUp(with event: NSEvent) {
+        if (!isEnabled) {
+            return
+        }
+        
+        isSelected = false
+        
+        onPress?()
+    }
+    
+    override func mouseMoved(with event: NSEvent) {
         if (!isEnabled) {
             return
         }
@@ -131,24 +140,16 @@ class SKButton: SKSpriteNode {
         }
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if (!isEnabled) {
-            return
-        }
-        
-        isSelected = false
-        
-        onPress?()
+    override func mouseEntered(with event: NSEvent) {
+        // Hover
     }
     
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if (!isEnabled) {
-            return
-        }
-        
+    override func mouseExited(with event: NSEvent) {
         isSelected = false
-        
-        onPress?()
+    }
+    
+    override var acceptsFirstResponder: Bool {
+        return true
     }
     #endif
 }

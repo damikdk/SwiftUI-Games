@@ -33,7 +33,7 @@ class Game: NSObject, SCNSceneRendererDelegate {
     var overlay: OverlayHUD!
     var currentCharacter: Character? {
         didSet {
-            overlay.setupUI(character: currentCharacter!)
+            overlay.setupUI(character: currentCharacter!, game: self)
         }
     }
     var characters: [Character] = []

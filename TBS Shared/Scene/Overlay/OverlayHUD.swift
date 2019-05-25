@@ -31,7 +31,7 @@ class OverlayHUD: SKScene {
         addChild(abilitiesPanel)
     }
     
-    func setupUI(character: Character) {
+    func setupUI(character: Character, game: Game) {
         characterPanel.removeAllChildren()
         abilitiesPanel.removeAllChildren()
 
@@ -63,7 +63,7 @@ class OverlayHUD: SKScene {
                                   disabledTexture: buttonTexture)
            
             button.onPress = {
-                ability.action(self.view?.window?.rootViewController as! GameVC, character)
+                ability.action(game, character)
             }
                         
             button.position = CGPoint(x: 0 + buttonWidth * index, y: 0)

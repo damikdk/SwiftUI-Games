@@ -78,11 +78,6 @@
 		975C2C652291F70E0005446D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		975C2C682291F70E0005446D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		975C2C6A2291F70E0005446D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		975C2C732291F70E0005446D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
-		975C2C752291F70E0005446D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		975C2C7F2291F70F0005446D /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
-		975C2C812291F70F0005446D /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
-		975C2C832291F70F0005446D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		975C2C882291F70F0005446D /* TBS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TBS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		975C2C8A2291F70F0005446D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		975C2C8C2291F70F0005446D /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -133,8 +128,6 @@
 			children = (
 				975C2C562291F70B0005446D /* TBS Shared */,
 				975C2C5F2291F70E0005446D /* TBS iOS */,
-				975C2C712291F70E0005446D /* TBS watchOS App */,
-				975C2C7E2291F70F0005446D /* TBS watchOS App Extension */,
 				975C2C892291F70F0005446D /* TBS tvOS */,
 				975C2C972291F70F0005446D /* TBS macOS */,
 				9706B66621A745C700967191 /* Products */,
@@ -173,25 +166,6 @@
 				975C2C6A2291F70E0005446D /* Info.plist */,
 			);
 			path = "TBS iOS";
-			sourceTree = "<group>";
-		};
-		975C2C712291F70E0005446D /* TBS watchOS App */ = {
-			isa = PBXGroup;
-			children = (
-				975C2C722291F70E0005446D /* Interface.storyboard */,
-				975C2C752291F70E0005446D /* Info.plist */,
-			);
-			path = "TBS watchOS App";
-			sourceTree = "<group>";
-		};
-		975C2C7E2291F70F0005446D /* TBS watchOS App Extension */ = {
-			isa = PBXGroup;
-			children = (
-				975C2C7F2291F70F0005446D /* InterfaceController.swift */,
-				975C2C812291F70F0005446D /* ExtensionDelegate.swift */,
-				975C2C832291F70F0005446D /* Info.plist */,
-			);
-			path = "TBS watchOS App Extension";
 			sourceTree = "<group>";
 		};
 		975C2C892291F70F0005446D /* TBS tvOS */ = {
@@ -459,14 +433,6 @@
 				975C2C682291F70E0005446D /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		975C2C722291F70E0005446D /* Interface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				975C2C732291F70E0005446D /* Base */,
-			);
-			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 		975C2C8E2291F70F0005446D /* Main.storyboard */ = {
