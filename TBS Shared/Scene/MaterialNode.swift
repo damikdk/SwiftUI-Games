@@ -30,7 +30,7 @@ class MaterialNode: SCNNode {
 }
 
 extension SCNNode {
-    func height() -> Float {
-        return self.boundingBox.max.y - self.boundingBox.min.y
+    func height() -> CGFloat {
+        return CGFloat(self.boundingBox.max.y - self.boundingBox.min.y)
     }
 }

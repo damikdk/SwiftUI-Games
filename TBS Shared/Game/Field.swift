@@ -11,16 +11,16 @@ import SceneKit
 
 struct FieldConstants {
     static let indexSeparator = ","
-    static let defaultPlacementExtraHeight = 0
-    static let defaultCellSize = Float(5)
+    static let defaultPlacementExtraHeight = CGFloat(0)
+    static let defaultCellSize = CGFloat(5)
 }
 
 class Field {
     let node: SCNNode!
     let size: Int!
-    let cellSize: Float!
+    let cellSize: CGFloat!
     
-    init(in position: SCNVector3, size: Int = 9, cellSize: Float = FieldConstants.defaultCellSize) {
+    init(in position: SCNVector3, size: Int = 9, cellSize: CGFloat = FieldConstants.defaultCellSize) {
         node = SCNNode()
         node.position = position
         node.name = "Field (size: \(size))"
@@ -36,13 +36,13 @@ class Field {
                 
                 // Make the plane visible from both sides
                 cellGeometry.firstMaterial?.isDoubleSided = true
-                cellGeometry.cornerRadius = CGFloat(FieldConstants.defaultCellSize / 10)
                 cellGeometry.firstMaterial?.diffuse.contents = SCNColor.DarkTheme.Violet.fieldColor
+                cellGeometry.cornerRadius = FieldConstants.defaultCellSize / 10
                 
                 let cell = MaterialNode(type: .field, id: stringIndex)
                 cell.geometry = cellGeometry
-                cell.position = SCNVector3(Float(column) * cellSize, 0, Float(row) * cellSize)
-                cell.eulerAngles = SCNVector3Make(Float.pi / 2, 0, 0)
+                cell.position = SCNVector3(CGFloat(column) * cellSize, 0, CGFloat(row) * cellSize)
+                cell.eulerAngles = SCNVector3Make(CGFloat.pi / 2, 0, 0)
                 
                 cell.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
                 cell.physicsBody?.categoryBitMask = BodyType.field.rawValue
@@ -64,7 +64,7 @@ class Field {
         }
 
         let position = SCNVector3(cellPosition.x,
-                                  Float(FieldConstants.defaultPlacementExtraHeight) + objectHeight / 2,
+                                  FieldConstants.defaultPlacementExtraHeight + objectHeight / 2,
                                   cellPosition.z)
 
         print("Put node to row \(String(describing: row)) and column \(String(describing: column)) (position: \(position)")
@@ -84,7 +84,7 @@ class Field {
         }
         
         let position = SCNVector3(cellPosition.x,
-                                  Float(FieldConstants.defaultPlacementExtraHeight) + objectHeight / 2,
+                                  FieldConstants.defaultPlacementExtraHeight + objectHeight / 2,
                                   cellPosition.z)
         
         let moveAction = SCNAction.move(to: position, duration: 0.4)
@@ -95,8 +95,8 @@ class Field {
     }
     
     func centerOfCell(row: Int = 0, column: Int = 0) -> SCNVector3 {
-        let x = cellSize * Float(column)
-        let z = cellSize * Float(row)
+        let x = cellSize * CGFloat(column)
+        let z = cellSize * CGFloat(row)
 
         return SCNVector3(x, 0, z)
     }
@@ -105,8 +105,8 @@ class Field {
         let row = Int.random(in: 0 ..< size)
         let column = Int.random(in: 0 ..< size)
         
-        let x = cellSize * Float(column)
-        let z = cellSize * Float(row)
+        let x = cellSize * CGFloat(column)
+        let z = cellSize * CGFloat(row)
         
         return SCNVector3(x, 0, z)
     }

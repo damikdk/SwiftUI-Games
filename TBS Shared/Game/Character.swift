@@ -40,8 +40,8 @@ class Character {
 
     init(role: CharacterRole) {
         let box: SCNBox
-        let cellSize: CGFloat = CGFloat(FieldConstants.defaultCellSize)
         let color: SCNColor
+        let cellSize: CGFloat = FieldConstants.defaultCellSize
         var uuid = UUID().uuidString
         
         switch role {
