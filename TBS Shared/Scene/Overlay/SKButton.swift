@@ -67,46 +67,6 @@ class SKButton: SKSpriteNode {
     }
     
     #if os(macOS)
-    override func touchesBegan(with event: NSEvent?) {
-        if (!isEnabled) {
-            return
-        }
-        
-        isSelected = true
-    }
-    
-    override func touchesMoved(with event: NSEvent?) {
-        if (!isEnabled) {
-            return
-        }
-        
-        if (frame.contains(event!.locationInWindow)) {
-            isSelected = true
-        } else {
-            isSelected = false
-        }
-    }
-    
-    override func touchesEnded(with event: NSEvent?) {
-        if (!isEnabled) {
-            return
-        }
-        
-        isSelected = false
-        
-        onPress?()
-    }
-    
-    override func touchesCancelled(with event: NSEvent?) {
-        if (!isEnabled) {
-            return
-        }
-        
-        isSelected = false
-        
-        onPress?()
-    }
-    #else
     override func mouseDown(with event: NSEvent) {
         if (!isEnabled) {
             return
@@ -130,14 +90,14 @@ class SKButton: SKSpriteNode {
             return
         }
         
-        let touch: AnyObject! = touches.first
-        let touchLocation = touch.location(in: parent!)
-        
-        if (frame.contains(touchLocation)) {
-            isSelected = true
-        } else {
-            isSelected = false
-        }
+//        let touch: AnyObject! = event.touches(for: self)
+//        let touchLocation = touch.location(in: parent!)
+//        
+//        if (frame.contains(touchLocation)) {
+//            isSelected = true
+//        } else {
+//            isSelected = false
+//        }
     }
     
     override func mouseEntered(with event: NSEvent) {
@@ -151,5 +111,51 @@ class SKButton: SKSpriteNode {
     override var acceptsFirstResponder: Bool {
         return true
     }
+
+    #else
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if (!isEnabled) {
+            return
+        }
+        
+        isSelected = true
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if (!isEnabled) {
+            return
+        }
+        
+        let touch: AnyObject! = touches.first
+        let touchLocation = touch.location(in: parent!)
+        
+        if (frame.contains(touchLocation)) {
+            isSelected = true
+        } else {
+            isSelected = false
+        }
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if (!isEnabled) {
+            return
+        }
+        
+        isSelected = false
+        
+        onPress?()
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if (!isEnabled) {
+            return
+        }
+        
+        isSelected = false
+        
+        onPress?()
+    }
+
     #endif
 }
