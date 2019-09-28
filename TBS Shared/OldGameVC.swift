@@ -27,11 +27,11 @@ class GameVC: UIViewController {
     var lightNode: SCNNode!
     var scene: SCNScene!
     var cameraHeight: Float = FieldConstants.defaultCellSize * 7
- 
+    
     var startScale: CGFloat = 0
     var lastScale: CGFloat = 1
-    var previousTranslateX:CGFloat = 0.0
-    var previousTranslateZ:CGFloat = 0.0
+    var previousTranslateX: CGFloat = 0.0
+    var previousTranslateZ: CGFloat = 0.0
     
     var overlay: OverlayHUD!
     var currentCharacter: Character? {
@@ -66,21 +66,21 @@ class GameVC: UIViewController {
     
     var onCharacterPress: ((GameVC, Character) -> Void)!
     var onFieldPress: ((GameVC, MaterialNode, Int, Int) -> Void)!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // create a new scene
         scene = SCNScene()
         scene.physicsWorld.contactDelegate = self
-
+        
         // set up the camera
         cameraNode = SCNNode()
         cameraNode.name = "Camera"
         cameraNode.camera = SCNCamera()
         cameraNode.eulerAngles = SCNVector3Make(Float.pi / -3, 0, 0)
         cameraNode.camera!.zFar = 200
-
+        
         scene.rootNode.addChildNode(cameraNode)
         
         // set the scene to the view
@@ -100,18 +100,18 @@ class GameVC: UIViewController {
         createCharacters(random: false)
         onCharacterPress = defaultOnCharacterPress
         onFieldPress = defaultOnFieldPress
-
+        
         // create and add a light to the scene
         let light = SCNLight()
         lightNode = SCNNode()
         lightNode.name = "Light"
-
+        
         light.type = .spot
         light.castsShadow = true
         light.spotOuterAngle = 100
         light.shadowMode = .deferred
         light.shadowSampleCount = 32
-
+        
         lightNode.light = light
         scene.rootNode.addChildNode(lightNode)
         
@@ -135,12 +135,12 @@ class GameVC: UIViewController {
         // add a pinch gesture recognizer
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
         scnView.addGestureRecognizer(pinchGesture)
-
+        
         // add a pan gesture recognizer
         let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         view.addGestureRecognizer(pan)
     }
-        
+    
     func createCharacters(random: Bool) {
         if (random) {
             var squadsCount = 7
@@ -152,7 +152,7 @@ class GameVC: UIViewController {
                 
                 squadsCount -= 1
             }
-
+            
             return
         }
         

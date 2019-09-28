@@ -27,8 +27,8 @@ class Game: NSObject, SCNSceneRendererDelegate {
     
     var startScale: CGFloat = 0
     var lastScale: CGFloat = 1
-    var previousTranslateX:CGFloat = 0.0
-    var previousTranslateZ:CGFloat = 0.0
+    var previousTranslateX: CGFloat = 0.0
+    var previousTranslateZ: CGFloat = 0.0
     
     var overlay: OverlayHUD!
     var currentCharacter: Character? {
@@ -89,6 +89,14 @@ class Game: NSObject, SCNSceneRendererDelegate {
         scnView.scene = scene
         scnView.backgroundColor = SCNColor.black
         
+        scnView.allowsCameraControl = true
+        scnView.defaultCameraController.interactionMode = .orbitTurntable
+        scnView.defaultCameraController.inertiaEnabled = true
+        scnView.defaultCameraController.inertiaFriction = 0.1
+        scnView.defaultCameraController.maximumVerticalAngle = 80
+        scnView.defaultCameraController.minimumVerticalAngle = 20
+        scnView.cameraControlConfiguration.rotationSensitivity = 0.5
+
         // set up overlay
         let overlayScene = OverlayHUD(size: scnView.bounds.size)
         overlayScene.backgroundColor = SCNColor.lightBlue
@@ -175,7 +183,13 @@ class Game: NSObject, SCNSceneRendererDelegate {
         
         return nil
     }
+    
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        // Called before each frame is rendered
+    }
+}
 
+extension Game {
     func tap(atPoint point: CGPoint) {
         let hitResults = self.sceneRenderer.hitTest(point, options: [:])
 
@@ -209,10 +223,6 @@ class Game: NSObject, SCNSceneRendererDelegate {
                 onCharacterPress(self, tappedCharacter)
             }
         }
-    }
-    
-    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        // Called before each frame is rendered
     }
 }
 

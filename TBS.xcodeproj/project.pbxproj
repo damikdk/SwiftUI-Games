@@ -67,7 +67,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9706B66C21A745C700967191 /* GameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameVC.swift; sourceTree = "<group>"; };
+		9706B66C21A745C700967191 /* OldGameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldGameVC.swift; sourceTree = "<group>"; };
 		973AA54822823A1D00A89C91 /* OverlayHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayHUD.swift; sourceTree = "<group>"; };
 		975C2C572291F70B0005446D /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		975C2C582291F70B0005446D /* Art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Art.scnassets; sourceTree = "<group>"; };
@@ -152,6 +152,7 @@
 				97973CA12276F87E0001AF59 /* Helpers */,
 				975C2C582291F70B0005446D /* Art.scnassets */,
 				975C2C592291F70E0005446D /* Assets.xcassets */,
+				9706B66C21A745C700967191 /* OldGameVC.swift */,
 			);
 			path = "TBS Shared";
 			sourceTree = "<group>";
@@ -202,7 +203,6 @@
 			isa = PBXGroup;
 			children = (
 				975C2C572291F70B0005446D /* Game.swift */,
-				9706B66C21A745C700967191 /* GameVC.swift */,
 				97B391AC221B377B000655A4 /* Field.swift */,
 				97B391AA221B301E000655A4 /* Character.swift */,
 			);
