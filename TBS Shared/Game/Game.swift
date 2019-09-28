@@ -75,7 +75,28 @@ class Game: NSObject, SCNSceneRendererDelegate {
         sceneRenderer.delegate = self
         scene.physicsWorld.contactDelegate = self
         
-        // set up the camera
+        setupCamera()
+        setupSceneView()
+        setupOverlay()
+        setupLight()
+        
+        defer {
+            // set up field and characters
+            currentField = Field(in: SCNVector3())
+            createCharacters(random: false)
+            onCharacterPress = defaultOnCharacterPress
+            onFieldPress = defaultOnFieldPress
+        }
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        // Called before each frame is rendered
+    }
+}
+
+// MARK: - Setup Game
+extension Game {
+    func setupCamera() {
         cameraNode = SCNNode()
         cameraNode.name = "Camera"
         cameraNode.camera = SCNCamera()
@@ -83,8 +104,9 @@ class Game: NSObject, SCNSceneRendererDelegate {
         cameraNode.camera!.zFar = 200
         
         scene.rootNode.addChildNode(cameraNode)
-        
-        // set the scene to the view
+    }
+            
+    func setupSceneView() {
         let scnView = sceneRenderer as! SCNView
         scnView.scene = scene
         scnView.backgroundColor = SCNColor.black
@@ -96,14 +118,19 @@ class Game: NSObject, SCNSceneRendererDelegate {
         scnView.defaultCameraController.maximumVerticalAngle = 80
         scnView.defaultCameraController.minimumVerticalAngle = 20
         scnView.cameraControlConfiguration.rotationSensitivity = 0.5
-
-        // set up overlay
+    }
+    
+    func setupOverlay() {
+        let scnView = sceneRenderer as! SCNView
         let overlayScene = OverlayHUD(size: scnView.bounds.size)
+        
         overlayScene.backgroundColor = SCNColor.lightBlue
         overlayScene.scaleMode = .resizeFill
         scnView.overlaySKScene = overlayScene
         overlay = overlayScene
-        
+    }
+
+    func setupLight() {
         // create and add a light to the scene
         let light = SCNLight()
         lightNode = SCNNode()
@@ -124,18 +151,6 @@ class Game: NSObject, SCNSceneRendererDelegate {
         ambientLightNode.light!.type = .ambient
         ambientLightNode.light!.color = SCNColor.darkGray
         scene.rootNode.addChildNode(ambientLightNode)
-        
-        defer {
-            // set up field and characters
-            currentField = Field(in: SCNVector3())
-            createCharacters(random: false)
-            onCharacterPress = defaultOnCharacterPress
-            onFieldPress = defaultOnFieldPress
-        }
-    }
-    
-    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        // Called before each frame is rendered
     }
 }
 
