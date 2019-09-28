@@ -52,7 +52,11 @@ class GameViewController: UIViewController {
     
     @objc
     func handleLongPress(_ gestureRecognizer: UIGestureRecognizer) {
-        if (gestureRecognizer.state == .ended) {
+        if (gestureRecognizer.state == .began) {
+            let impactFeedbackgenerator = UIImpactFeedbackGenerator(style: .medium)
+            impactFeedbackgenerator.prepare()
+            impactFeedbackgenerator.impactOccurred()
+
             let point = gestureRecognizer.location(in: gameView)
             gameController.longPress(atPoint: point)
         }
