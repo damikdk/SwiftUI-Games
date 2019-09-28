@@ -52,25 +52,6 @@ extension SCNColor {
     }
 }
 
-func highlight(node: SCNNode) {
-    let material = node.geometry!.firstMaterial!
-
-    SCNTransaction.begin()
-    SCNTransaction.animationDuration = 0.3
-    
-    // on completion - unhighlight
-    SCNTransaction.completionBlock = {
-        SCNTransaction.begin()
-        SCNTransaction.animationDuration = 0.3
-        
-        material.emission.contents = SCNColor.clear
-        SCNTransaction.commit()
-    }
-    
-    material.emission.contents = SCNColor.lightGray
-    SCNTransaction.commit()
-}
-
 extension String {
     var hexColor: SCNColor {
         let hex = trimmingCharacters(in: CharacterSet.alphanumerics.inverted)

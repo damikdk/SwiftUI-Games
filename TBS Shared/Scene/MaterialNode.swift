@@ -30,6 +30,25 @@ class MaterialNode: SCNNode {
 }
 
 extension SCNNode {
+    func highlight() {
+        let material = geometry!.firstMaterial!
+
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 0.3
+        
+        // on completion - unhighlight
+        SCNTransaction.completionBlock = {
+            SCNTransaction.begin()
+            SCNTransaction.animationDuration = 0.3
+            
+            material.emission.contents = SCNColor.clear
+            SCNTransaction.commit()
+        }
+        
+        material.emission.contents = SCNColor.lightGray
+        SCNTransaction.commit()
+    }
+
     func height() -> CGFloat {
         return CGFloat(self.boundingBox.max.y - self.boundingBox.min.y)
     }

@@ -134,6 +134,13 @@ class Game: NSObject, SCNSceneRendererDelegate {
         }
     }
     
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        // Called before each frame is rendered
+    }
+}
+
+// MARK: - Character methods
+extension Game {
     func createCharacters(random: Bool) {
         if (random) {
             var squadsCount = 7
@@ -183,49 +190,64 @@ class Game: NSObject, SCNSceneRendererDelegate {
         
         return nil
     }
-    
-    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        // Called before each frame is rendered
-    }
 }
 
+// MARK: - Node methods
 extension Game {
-    func tap(atPoint point: CGPoint) {
+    func findFirstNode(atPoint point: CGPoint) -> SCNNode? {
         let hitResults = self.sceneRenderer.hitTest(point, options: [:])
 
         if hitResults.count == 0 {
             // check that we clicked on at least one object
-            return;
+            return nil
         }
         
         // retrieved the first clicked object
-        let result = hitResults[0]
+        let hitResult = hitResults[0]
         
-        // highlight node
-        highlight(node: result.node)
+        return hitResult.node
+    }
+}
+
+// MARK: - Touch handlers
+extension Game {
+    func tap(atPoint point: CGPoint) {
+        print("Tap detected at point: \(point)")
+    }
+    
+    func doubleTap(atPoint point: CGPoint) {
+        print("Double tap detected at point: \(point)")
+    }
+    
+    func longPress(atPoint point: CGPoint) {
+        print("Long press detected at point: \(point)")
         
-        // check if it material object
-        let materialNode = result.node as? MaterialNode
-        
-        if materialNode == nil {
-            print("Touched node is not material")
-            return
-        }
-        
-        if (materialNode!.type == .field && currentCharacter != nil) {
-            let fieldIndexes = materialNode!.gameID!
-                .components(separatedBy: FieldConstants.indexSeparator)
-                .map { Int($0)!}
+        /// Find closest node
+        if let firstNode = findFirstNode(atPoint: point) {
+            /// highlight it
+            firstNode.highlight()
             
-            onFieldPress(self, materialNode!, fieldIndexes[0], fieldIndexes[1])
-        } else if (materialNode!.type == .material) {
-            if let tappedCharacter = findCharacter(by: materialNode!.gameID!) {
-                onCharacterPress(self, tappedCharacter)
+            if let materialNode = firstNode as? MaterialNode {
+                if (materialNode.type == .field && currentCharacter != nil) {
+                    let fieldIndexes = materialNode.gameID!
+                        .components(separatedBy: FieldConstants.indexSeparator)
+                        .map { Int($0)!}
+                    
+                    onFieldPress(self, materialNode, fieldIndexes[0], fieldIndexes[1])
+                } else if (materialNode.type == .material) {
+                    if let tappedCharacter = findCharacter(by: materialNode.gameID!) {
+                        onCharacterPress(self, tappedCharacter)
+                    }
+                }
+            } else {
+                print("Touched node is not material")
+                return
             }
         }
     }
 }
 
+// MARK: - Physics
 extension Game: SCNPhysicsContactDelegate {
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         print("contact")

@@ -28,7 +28,7 @@ class Character {
         didSet {
             if (HP <= 0) {
                 print("Character \(gameID!) died")
-                highlight(node: node)
+                node.highlight()
             }
         }
     }

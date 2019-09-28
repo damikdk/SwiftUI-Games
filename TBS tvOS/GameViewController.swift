@@ -35,8 +35,8 @@ class GameViewController: UIViewController {
     @objc
     func handleTap(_ gestureRecognizer: UIGestureRecognizer) {
         // Highlight the tapped nodes
-        let p = gestureRecognizer.location(in: gameView)
-        gameController.tap(atPoint: p)
+        let point = gestureRecognizer.location(in: gameView)
+        gameController.tap(atPoint: point)
     }
     
 }

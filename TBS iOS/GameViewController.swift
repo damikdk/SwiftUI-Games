@@ -21,19 +21,41 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         self.gameController = Game(sceneRenderer: gameView)
-        
-        // Add a tap gesture recognizer
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         var gestureRecognizers = gameView.gestureRecognizers ?? []
-        gestureRecognizers.insert(tapGesture, at: 0)
+
+        /// Add a tap gesture recognizer
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        gestureRecognizers.append(tapGesture)
+        
+        /// Add a double tap gesture recognizer
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
+        doubleTapGesture.numberOfTapsRequired = 2
+        
+        /// Add a long press gesture recognizer
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+        gestureRecognizers.append(longPressGesture)
+        
         self.gameView.gestureRecognizers = gestureRecognizers
     }
     
     @objc
     func handleTap(_ gestureRecognizer: UIGestureRecognizer) {
-        // Highlight the tapped nodes
-        let p = gestureRecognizer.location(in: gameView)
-        gameController.tap(atPoint: p)
+        let point = gestureRecognizer.location(in: gameView)
+        gameController.tap(atPoint: point)
+    }
+    
+    @objc
+    func handleDoubleTap(_ gestureRecognizer: UIGestureRecognizer) {
+        let point = gestureRecognizer.location(in: gameView)
+        gameController.doubleTap(atPoint: point)
+    }
+    
+    @objc
+    func handleLongPress(_ gestureRecognizer: UIGestureRecognizer) {
+        if (gestureRecognizer.state == .ended) {
+            let point = gestureRecognizer.location(in: gameView)
+            gameController.longPress(atPoint: point)
+        }
     }
     
     override var shouldAutorotate: Bool {
