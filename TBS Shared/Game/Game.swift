@@ -41,7 +41,7 @@ class Game: NSObject, SCNSceneRendererDelegate {
         didSet {
             scene.rootNode.addChildNode(currentField.node)
             
-            let fieldCenter = currentField.centerOfCell(row: (currentField.size / 2),
+            let fieldCenter = currentField.centerOfCell(row: (currentField.size / 2) + 2,
                                                         column: (currentField.size / 2))
             
             let cameraPosition = SCNVector3(x: fieldCenter.x,
@@ -54,7 +54,7 @@ class Game: NSObject, SCNSceneRendererDelegate {
                 self.cameraNode.look(at: fieldCenter)
                 self.lightNode.position = SCNVector3(x: fieldCenter.x,
                                                      y: fieldCenter.y + FieldConstants.defaultCellSize.universal() * 5,
-                                                     z: fieldCenter.z)
+                                                     z: fieldCenter.z + FieldConstants.defaultCellSize.universal() * 4)
                 self.lightNode.look(at: fieldCenter)
                 self.lastScale = 1 / (self.cameraNode.camera?.fieldOfView)!
             }
@@ -118,6 +118,7 @@ extension Game {
         scnView.defaultCameraController.maximumVerticalAngle = 80
         scnView.defaultCameraController.minimumVerticalAngle = 20
         scnView.cameraControlConfiguration.rotationSensitivity = 0.5
+//        scnView.showsStatistics = true
     }
     
     func setupOverlay() {
@@ -137,20 +138,14 @@ extension Game {
         lightNode.name = "Light"
         
         light.type = .spot
+        light.intensity = 1200
         light.castsShadow = true
-        light.spotOuterAngle = 100
+        light.spotOuterAngle = 120
         light.shadowMode = .deferred
         light.shadowSampleCount = 32
         
         lightNode.light = light
         scene.rootNode.addChildNode(lightNode)
-        
-        // create and add an ambient light to the scene
-        let ambientLightNode = SCNNode()
-        ambientLightNode.light = SCNLight()
-        ambientLightNode.light!.type = .ambient
-        ambientLightNode.light!.color = SCNColor.darkGray
-        scene.rootNode.addChildNode(ambientLightNode)
     }
 }
 

@@ -64,7 +64,7 @@ class Character {
                                      icon: SCNImage(named: "frozen-arrow"),
                                      action: { game, charater in
                                         game.onCharacterPress = { game, charater in
-                                            charater.HP -= 2
+                                            charater.damage(amount: 2)
                                             game.onCharacterPress = defaultOnCharacterPress
                                         }
                                     }))
@@ -76,7 +76,12 @@ class Character {
             HP = 8
             abilities.append(Ability(name: "Heal AOE",
                                      icon: SCNImage(named: "christ-power"),
-                                     action: defaultAbilityAction))
+                                      action: { game, charater in
+                                         game.onCharacterPress = { game, charater in
+                                             charater.heal(amount: 2)
+                                             game.onCharacterPress = defaultOnCharacterPress
+                                         }
+                                     }))
         }
         
         box.firstMaterial?.diffuse.contents = color
@@ -94,5 +99,15 @@ class Character {
         node.physicsBody?.categoryBitMask = BodyType.material.rawValue
         node.physicsBody?.collisionBitMask = BodyType.material.rawValue | BodyType.field.rawValue
         node.physicsBody?.contactTestBitMask = BodyType.material.rawValue
+    }
+}
+
+extension Character {
+    func heal(amount: Int) {
+        HP += amount
+    }
+    
+    func damage(amount: Int) {
+        HP -= amount
     }
 }
