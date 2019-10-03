@@ -51,6 +51,7 @@
 		975C2CDD2291F8A20005446D /* GraphicsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97973CA42276FA3E0001AF59 /* GraphicsHelper.swift */; };
 		975C2CDF2291F8A40005446D /* GraphicsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97973CA42276FA3E0001AF59 /* GraphicsHelper.swift */; };
 		975C2CE12291F8A50005446D /* GraphicsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97973CA42276FA3E0001AF59 /* GraphicsHelper.swift */; };
+		97BD650F2346408B00D8EF3B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 97BD650E2346408B00D8EF3B /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -93,6 +94,7 @@
 		97A32D922287279900807521 /* SKButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKButton.swift; sourceTree = "<group>"; };
 		97B391AA221B301E000655A4 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		97B391AC221B377B000655A4 /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
+		97BD650E2346408B00D8EF3B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		97EF8B9B2222A8FD00088510 /* SceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneView.swift; sourceTree = "<group>"; };
 		97EF8B9F2222AA9300088510 /* ARSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneView.swift; sourceTree = "<group>"; };
 		97EF8BA12222B0A800088510 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				975C2C892291F70F0005446D /* TBS tvOS */,
 				975C2C972291F70F0005446D /* TBS macOS */,
 				9706B66621A745C700967191 /* Products */,
+				97BD650E2346408B00D8EF3B /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -333,6 +336,7 @@
 			files = (
 				975C2C662291F70E0005446D /* Main.storyboard in Resources */,
 				975C2C692291F70E0005446D /* LaunchScreen.storyboard in Resources */,
+				97BD650F2346408B00D8EF3B /* README.md in Resources */,
 				975C2CA82291F70F0005446D /* Assets.xcassets in Resources */,
 				975C2CA42291F70F0005446D /* Art.scnassets in Resources */,
 			);
