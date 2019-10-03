@@ -24,11 +24,17 @@ class GameViewController: NSViewController {
         
         // Show statistics such as fps and timing information
         self.gameView.showsStatistics = true
-                
-        // Add a click gesture recognizer
-        let clickGesture = NSClickGestureRecognizer(target: self, action: #selector(handleClick(_:)))
+        
         var gestureRecognizers = gameView.gestureRecognizers
-        gestureRecognizers.insert(clickGesture, at: 0)
+
+        let clickGesture = NSClickGestureRecognizer(target: self, action: #selector(handleClick(_:)))
+        gestureRecognizers.append(clickGesture)
+        
+        let doubleClickGesture = NSClickGestureRecognizer(target: self, action: #selector(handleDoubleClick(_:)))
+        doubleClickGesture.numberOfClicksRequired = 2
+        gestureRecognizers.append(doubleClickGesture)
+
+                
         self.gameView.gestureRecognizers = gestureRecognizers
     }
     
@@ -36,7 +42,13 @@ class GameViewController: NSViewController {
     func handleClick(_ gestureRecognizer: NSGestureRecognizer) {
         // Highlight the clicked nodes
         let point = gestureRecognizer.location(in: gameView)
-        gameController.tap(atPoint: point)
+        gameController.preview(atPoint: point)
     }
     
+    @objc
+    func handleDoubleClick(_ gestureRecognizer: NSGestureRecognizer) {
+        // Highlight the clicked nodes
+        let point = gestureRecognizer.location(in: gameView)
+        gameController.pick(atPoint: point)
+    }
 }

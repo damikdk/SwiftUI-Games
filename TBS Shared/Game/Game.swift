@@ -221,17 +221,19 @@ extension Game {
 
 // MARK: - Touch handlers
 extension Game {
-    func tap(atPoint point: CGPoint) {
-        print("Tap detected at point: \(point)")
-    }
-    
-    func doubleTap(atPoint point: CGPoint) {
-        print("Double tap detected at point: \(point)")
-    }
-    
-    func longPress(atPoint point: CGPoint) {
-        print("Long press detected at point: \(point)")
+    func preview(atPoint point: CGPoint) {
+        print("Preview requested for point: \(point)")
         
+        /// Find closest node
+        if let firstNode = findFirstNode(atPoint: point) {
+            /// highlight it
+            firstNode.highlight()
+        }
+    }
+    
+    func pick(atPoint point: CGPoint) {
+        print("Pick requested for point: \(point)")
+
         /// Find closest node
         if let firstNode = findFirstNode(atPoint: point) {
             /// highlight it

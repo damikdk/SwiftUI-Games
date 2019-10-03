@@ -41,24 +41,27 @@ class GameViewController: UIViewController {
     @objc
     func handleTap(_ gestureRecognizer: UIGestureRecognizer) {
         let point = gestureRecognizer.location(in: gameView)
-        gameController.tap(atPoint: point)
+        print("Tap detected at point: \(point)")
+        gameController.preview(atPoint: point)
     }
     
     @objc
     func handleDoubleTap(_ gestureRecognizer: UIGestureRecognizer) {
         let point = gestureRecognizer.location(in: gameView)
-        gameController.doubleTap(atPoint: point)
+        print("Double tap detected at point: \(point)")
     }
     
     @objc
     func handleLongPress(_ gestureRecognizer: UIGestureRecognizer) {
         if (gestureRecognizer.state == .began) {
+            print("Long press detected")
+
             let impactFeedbackgenerator = UIImpactFeedbackGenerator(style: .medium)
             impactFeedbackgenerator.prepare()
             impactFeedbackgenerator.impactOccurred()
 
             let point = gestureRecognizer.location(in: gameView)
-            gameController.longPress(atPoint: point)
+            gameController.pick(atPoint: point)
         }
     }
     
