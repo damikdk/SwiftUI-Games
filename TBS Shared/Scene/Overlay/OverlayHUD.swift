@@ -73,6 +73,11 @@ class OverlayHUD: SKScene {
             button.size = .init(width: buttonWidth, height: buttonWidth)
             abilitiesPanel.addChild(button)
         }
+        
+        #if os(macOS)
+        view?.window?.acceptsMouseMovedEvents = true;
+        view?.window?.makeFirstResponder(self)
+        #endif
     }
     
     required init(coder aDecoder: NSCoder) {

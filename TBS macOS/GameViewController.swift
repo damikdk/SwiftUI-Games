@@ -34,7 +34,6 @@ class GameViewController: NSViewController {
         doubleClickGesture.numberOfClicksRequired = 2
         gestureRecognizers.append(doubleClickGesture)
 
-                
         self.gameView.gestureRecognizers = gestureRecognizers
     }
     
