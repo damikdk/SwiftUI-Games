@@ -31,7 +31,7 @@ class OverlayHUD: SKScene {
         addChild(abilitiesPanel)
     }
     
-    func setupUI(character: Character, game: Game) {
+    func setupUI(for character: Character, in game: Game) {
         characterPanel.removeAllChildren()
         abilitiesPanel.removeAllChildren()
 

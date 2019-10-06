@@ -46,7 +46,7 @@ class Field {
                 
                 cell.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
                 cell.physicsBody?.categoryBitMask = BodyType.field.rawValue
-                cell.physicsBody?.collisionBitMask = BodyType.material.rawValue | BodyType.field.rawValue
+                cell.physicsBody?.collisionBitMask = BodyType.character.rawValue | BodyType.field.rawValue
                 
                 node.addChildNode(cell)
             }

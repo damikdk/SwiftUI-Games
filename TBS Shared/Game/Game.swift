@@ -10,7 +10,9 @@ import SceneKit
 
 enum BodyType: Int {
     case field = 1
-    case material = 2
+    case character
+    case shield
+    case projectile
 }
 
 let defaultOnCharacterPress: ((Game, Character) -> Void) = { gameVC, charater in gameVC.currentCharacter = charater }
@@ -33,7 +35,7 @@ class Game: NSObject, SCNSceneRendererDelegate {
     var overlay: OverlayHUD!
     var currentCharacter: Character? {
         didSet {
-            overlay.setupUI(character: currentCharacter!, game: self)
+            overlay.setupUI(for: currentCharacter!, in: self)
         }
     }
     var characters: [Character] = []
@@ -246,7 +248,7 @@ extension Game {
                         .map { Int($0)!}
                     
                     onFieldPress(self, materialNode, fieldIndexes[0], fieldIndexes[1])
-                } else if (materialNode.type == .material) {
+                } else if (materialNode.type == .character) {
                     if let tappedCharacter = findCharacter(by: materialNode.gameID!) {
                         onCharacterPress(self, tappedCharacter)
                     }

@@ -52,6 +52,9 @@
 		975C2CDF2291F8A40005446D /* GraphicsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97973CA42276FA3E0001AF59 /* GraphicsHelper.swift */; };
 		975C2CE12291F8A50005446D /* GraphicsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97973CA42276FA3E0001AF59 /* GraphicsHelper.swift */; };
 		97BD650F2346408B00D8EF3B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 97BD650E2346408B00D8EF3B /* README.md */; };
+		97BD651523465E1C00D8EF3B /* Shield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BD651423465E1C00D8EF3B /* Shield.swift */; };
+		97BD651623465E1C00D8EF3B /* Shield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BD651423465E1C00D8EF3B /* Shield.swift */; };
+		97BD651723465E1C00D8EF3B /* Shield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BD651423465E1C00D8EF3B /* Shield.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -95,6 +98,7 @@
 		97B391AA221B301E000655A4 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		97B391AC221B377B000655A4 /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
 		97BD650E2346408B00D8EF3B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		97BD651423465E1C00D8EF3B /* Shield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shield.swift; sourceTree = "<group>"; };
 		97EF8B9B2222A8FD00088510 /* SceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneView.swift; sourceTree = "<group>"; };
 		97EF8B9F2222AA9300088510 /* ARSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneView.swift; sourceTree = "<group>"; };
 		97EF8BA12222B0A800088510 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -206,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				975C2C572291F70B0005446D /* Game.swift */,
+				97BD651423465E1C00D8EF3B /* Shield.swift */,
 				97B391AC221B377B000655A4 /* Field.swift */,
 				97B391AA221B301E000655A4 /* Character.swift */,
 			);
@@ -380,6 +385,7 @@
 				975C2CD92291F89C0005446D /* MaterialNode.swift in Sources */,
 				975C2CC42291F8750005446D /* Character.swift in Sources */,
 				975C2CC02291F86D0005446D /* Field.swift in Sources */,
+				97BD651523465E1C00D8EF3B /* Shield.swift in Sources */,
 				975C2C612291F70E0005446D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -389,6 +395,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				975C2CC62291F87B0005446D /* OverlayHUD.swift in Sources */,
+				97BD651623465E1C00D8EF3B /* Shield.swift in Sources */,
 				975C2CCA2291F8820005446D /* SKButton.swift in Sources */,
 				975C2CCE2291F8880005446D /* GameScene.swift in Sources */,
 				975C2C8D2291F70F0005446D /* GameViewController.swift in Sources */,
@@ -407,6 +414,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				975C2CC52291F87A0005446D /* OverlayHUD.swift in Sources */,
+				97BD651723465E1C00D8EF3B /* Shield.swift in Sources */,
 				975C2CC92291F8820005446D /* SKButton.swift in Sources */,
 				975C2CCD2291F8870005446D /* GameScene.swift in Sources */,
 				975C2C9B2291F70F0005446D /* GameViewController.swift in Sources */,

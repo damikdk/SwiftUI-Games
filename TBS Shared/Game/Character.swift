@@ -46,16 +46,22 @@ class Character {
         
         switch role {
             case .tank:
-                box = SCNBox(width: cellSize * 0.6, height: cellSize * 1.2, length: cellSize * 0.4, chamferRadius: 0)
+                box = SCNBox(width: cellSize * 0.4, height: cellSize, length: cellSize * 0.4, chamferRadius: 0)
                 color = SCNColor.DarkTheme.Violet.primary
                 uuid.append("-tank")
                 
                 HP = 12
                 abilities.append(Ability(name: "Shield",
                                          icon: SCNImage(named: "bolt-shield"),
-                                         action: defaultAbilityAction))
+                                         action: { game, charater in
+                                            print("Run action for Shield ability")
+                                            
+                                            let newShield = Shield(type: .regular, form: .sphere)
+                                            charater.node.addChildNode(newShield.node)
+
+                }))
             case .dps:
-                box = SCNBox(width: cellSize * 0.4, height: cellSize * 1, length: cellSize * 0.4, chamferRadius: 0)
+                box = SCNBox(width: cellSize * 0.4, height: cellSize * 0.9, length: cellSize * 0.4, chamferRadius: 0)
                 color = SCNColor.DarkTheme.Violet.accent
                 uuid.append("-dps")
                 
@@ -63,6 +69,8 @@ class Character {
                 abilities.append(Ability(name: "Frozen Array",
                                          icon: SCNImage(named: "frozen-arrow"),
                                          action: { game, charater in
+                                            print("Run action for Frozen Array ability")
+                                            
                                             game.onCharacterPress = { game, charater in
                                                 charater.damage(amount: 2)
                                                 game.onCharacterPress = defaultOnCharacterPress
@@ -74,9 +82,11 @@ class Character {
                 uuid.append("-support")
                 
                 HP = 8
-                abilities.append(Ability(name: "Heal AOE",
+                abilities.append(Ability(name: "Heal",
                                          icon: SCNImage(named: "christ-power"),
                                          action: { game, charater in
+                                            print("Run action for Heal ability")
+
                                             game.onCharacterPress = { game, charater in
                                                 charater.heal(amount: 2)
                                                 game.onCharacterPress = defaultOnCharacterPress
@@ -87,7 +97,7 @@ class Character {
         box.firstMaterial?.diffuse.contents = color
         box.firstMaterial?.isDoubleSided = true
         
-        node = MaterialNode(type: .material, id: uuid)
+        node = MaterialNode(type: .character, id: uuid)
         node.geometry = box
         
         self.role = role
@@ -96,9 +106,9 @@ class Character {
         node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
         node.physicsBody?.mass = 4
         node.physicsBody?.restitution = 0
-        node.physicsBody?.categoryBitMask = BodyType.material.rawValue
-        node.physicsBody?.collisionBitMask = BodyType.material.rawValue | BodyType.field.rawValue
-        node.physicsBody?.contactTestBitMask = BodyType.material.rawValue
+        node.physicsBody?.categoryBitMask = BodyType.character.rawValue
+        node.physicsBody?.collisionBitMask = BodyType.character.rawValue | BodyType.field.rawValue
+        node.physicsBody?.contactTestBitMask = BodyType.character.rawValue
     }
 }
 
