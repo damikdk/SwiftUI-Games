@@ -9,6 +9,8 @@
 import Foundation
 import SpriteKit
 
+let panelPadding: CGFloat = 50
+
 class OverlayHUD: SKScene {
     var characterPanel: SKSpriteNode!
     var abilitiesPanel: SKSpriteNode!
@@ -20,14 +22,14 @@ class OverlayHUD: SKScene {
         characterPanel = SKSpriteNode()
         
         characterPanel.anchorPoint = .init(x: 0.5, y: 1)
-        characterPanel.position = CGPoint(x: size.width / 2, y: size.height)
+        characterPanel.position = CGPoint(x: size.width / 2, y: size.height - panelPadding)
         addChild(characterPanel)
         
         // set up abilities node
         abilitiesPanel = SKSpriteNode()
         
         abilitiesPanel.anchorPoint = .init(x: 0.5, y: 0)
-        abilitiesPanel.position = CGPoint(x: size.width / 2, y: 0)
+        abilitiesPanel.position = CGPoint(x: size.width / 2, y: 0 + panelPadding)
         addChild(abilitiesPanel)
     }
     
@@ -39,7 +41,7 @@ class OverlayHUD: SKScene {
         let label = SKLabelNode(fontNamed: "Verdana-Bold")
         label.name = "Current Player's Name"
         
-        label.text = character.gameID! + " (\(character.HP!) HP)"
+      label.text = character.role.rawValue + " (\(character.HP!) HP)"
         label.fontSize = 14
         label.fontColor = SCNColor.white
         

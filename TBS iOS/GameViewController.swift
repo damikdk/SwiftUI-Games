@@ -42,7 +42,7 @@ class GameViewController: UIViewController {
     func handleTap(_ gestureRecognizer: UIGestureRecognizer) {
         let point = gestureRecognizer.location(in: gameView)
         print("Tap detected at point: \(point)")
-        gameController.preview(atPoint: point)
+        gameController.pick(atPoint: point)
     }
     
     @objc

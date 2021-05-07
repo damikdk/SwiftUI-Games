@@ -9,18 +9,10 @@
 import Foundation
 import SceneKit
 
-enum CharacterRole: Int {
-    case tank = 1
-    case support = 2
-    case dps = 3
-}
-
-let defaultAbilityAction: ((Game, Character) -> Void) = { gameVC, charater in print("defaultAbilityAction") }
-
-struct Ability {
-    let name: String!
-    let icon: SCNImage!
-    let action: ((Game, Character) -> Void)!
+enum CharacterRole: String {
+    case tank = "tank"
+    case support = "support"
+    case dps = "dps"
 }
 
 class Character {
@@ -42,7 +34,7 @@ class Character {
         let box: SCNBox
         let color: SCNColor
         let cellSize: CGFloat = FieldConstants.defaultCellSize
-        var uuid = UUID().uuidString
+      var uuid = UUID().uuidString
         
         switch role {
             case .tank:
@@ -51,47 +43,22 @@ class Character {
                 uuid.append("-tank")
                 
                 HP = 12
-                abilities.append(Ability(name: "Shield",
-                                         icon: SCNImage(named: "bolt-shield"),
-                                         action: { game, charater in
-                                            print("Run action for Shield ability")
-                                            
-                                            let newShield = Shield(type: .regular, form: .sphere)
-                                            charater.node.addChildNode(newShield.node)
-
-                }))
+              abilities.append(Abilities.ShieldUp)
             case .dps:
                 box = SCNBox(width: cellSize * 0.4, height: cellSize * 0.9, length: cellSize * 0.4, chamferRadius: 0)
                 color = SCNColor.DarkTheme.Violet.accent
                 uuid.append("-dps")
                 
                 HP = 10
-                abilities.append(Ability(name: "Frozen Array",
-                                         icon: SCNImage(named: "frozen-arrow"),
-                                         action: { game, charater in
-                                            print("Run action for Frozen Array ability")
-                                            
-                                            game.onCharacterPress = { game, charater in
-                                                charater.damage(amount: 2)
-                                                game.onCharacterPress = defaultOnCharacterPress
-                                            }
-                }))
+              abilities.append(Abilities.FrozenArrow)
             case .support:
                 box = SCNBox(width: cellSize * 0.2, height: cellSize * 0.8, length: cellSize * 0.2, chamferRadius: 0)
                 color = SCNColor.DarkTheme.Violet.minor
                 uuid.append("-support")
                 
                 HP = 8
-                abilities.append(Ability(name: "Heal",
-                                         icon: SCNImage(named: "christ-power"),
-                                         action: { game, charater in
-                                            print("Run action for Heal ability")
 
-                                            game.onCharacterPress = { game, charater in
-                                                charater.heal(amount: 2)
-                                                game.onCharacterPress = defaultOnCharacterPress
-                                            }
-                }))
+              abilities.append(Abilities.HealUp)
         }
         
         box.firstMaterial?.diffuse.contents = color

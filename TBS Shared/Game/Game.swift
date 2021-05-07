@@ -84,8 +84,8 @@ class Game: NSObject, SCNSceneRendererDelegate {
         
         defer {
             // set up field and characters
-            currentField = Field(in: SCNVector3())
-            createCharacters(random: false)
+            currentField = Field(in: SCNVector3(), size: 3)
+            createCharacters(random: true)
             onCharacterPress = defaultOnCharacterPress
             onFieldPress = defaultOnFieldPress
         }
@@ -155,7 +155,7 @@ extension Game {
 extension Game {
     func createCharacters(random: Bool) {
         if (random) {
-            var squadsCount = 7
+            var squadsCount = 1
             
             while squadsCount > 0 {
                 createCharacter(role: .dps)
@@ -168,7 +168,7 @@ extension Game {
             return
         }
         
-        for row in 2...(currentField.size - 2) {
+        for row in 1...(currentField.size - 2) {
             createCharacter(role: .tank, row: row, column: 3)
             createCharacter(role: .dps, row: row, column: 2)
             createCharacter(role: .support, row: row, column: 1)
@@ -236,6 +236,7 @@ extension Game {
     func pick(atPoint point: CGPoint) {
         print("Pick requested for point: \(point)")
 
+      // MARK: TODO: Fix touch through shields
         /// Find closest node
         if let firstNode = findFirstNode(atPoint: point) {
             /// highlight it

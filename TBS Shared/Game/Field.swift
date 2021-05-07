@@ -63,9 +63,10 @@ class Field {
             cellPosition = centerOfRandomCell()
         }
 
-        let position = SCNVector3(cellPosition.x,
-                                  FieldConstants.defaultPlacementExtraHeight.universal() + objectHeight.universal() / 2,
-                                  cellPosition.z)
+        let position = SCNVector3(
+          cellPosition.x,
+          FieldConstants.defaultPlacementExtraHeight.universal() + objectHeight.universal() / 2,
+          cellPosition.z)
 
         print("Put node to row \(String(describing: row)) and column \(String(describing: column)) (position: \(position)")
         

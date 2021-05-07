@@ -1,3 +1,4 @@
 *.xcexplist
 *.xcbkptlist
 
+.DS_Store

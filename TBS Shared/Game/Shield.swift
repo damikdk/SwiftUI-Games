@@ -37,7 +37,7 @@ class Shield {
         
         switch form {
             case .circle:
-                geometry = SCNCylinder(radius: cellSize / 2, height: 0.1)
+                geometry = SCNCylinder(radius: cellSize / 2, height: cellSize)
                 uuid.append("-circle")
             
             case .cube:
