@@ -21,7 +21,7 @@ struct Abilities {
                                 icon: SCNImage(named: "bolt-shield"),
                                 action: { game, charater in
                                   print("Run action for Shield ability")
-
+                                  
                                   let newShield = Shield(type: .regular, form: .sphere)
                                   charater.node.addChildNode(newShield.node)
                                 })
@@ -29,18 +29,18 @@ struct Abilities {
                                    icon: SCNImage(named: "frozen-arrow"),
                                    action: { game, charater in
                                     print("Run action for Frozen Array ability")
-
+                                    
                                     game.onCharacterPress = { game, charater in
                                       charater.damage(amount: 2)
                                       game.onCharacterPress = defaultOnCharacterPress
                                     }
                                    })
-
+  
   static let HealUp = Ability(name: "Heal",
                               icon: SCNImage(named: "christ-power"),
                               action: { game, charater in
                                 print("Run action for Heal ability")
-
+                                
                                 game.onCharacterPress = { game, charater in
                                   charater.heal(amount: 2)
                                   game.onCharacterPress = defaultOnCharacterPress
