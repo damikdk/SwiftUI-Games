@@ -33,9 +33,13 @@ class OverlayHUD: SKScene {
     addChild(abilitiesPanel)
   }
   
-  func setupUI(for character: Character, in game: Game) {
+  func setupUI(for game: Game) {
     characterPanel.removeAllChildren()
     abilitiesPanel.removeAllChildren()
+
+    guard let character = game.currentCharacter else {
+      return
+    }
     
     // set up label node
     let label = SKLabelNode(fontNamed: "Verdana-Bold")
@@ -74,12 +78,7 @@ class OverlayHUD: SKScene {
       button.anchorPoint = .init(x: 0.5, y: 0)
       button.size = .init(width: buttonWidth, height: buttonWidth)
       abilitiesPanel.addChild(button)
-    }
-    
-    #if os(macOS)
-    view?.window?.acceptsMouseMovedEvents = true;
-    view?.window?.makeFirstResponder(self)
-    #endif
+    }    
   }
   
   required init(coder aDecoder: NSCoder) {

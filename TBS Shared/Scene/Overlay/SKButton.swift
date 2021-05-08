@@ -65,55 +65,7 @@ class SKButton: SKSpriteNode {
     self.label.fontSize = fontSize
     self.label.fontName = font
   }
-  
-  #if os(macOS)
-  override func mouseDown(with event: NSEvent) {
-    if (!isEnabled) {
-      return
-    }
-    
-    isSelected = true
-  }
-  
-  override func mouseUp(with event: NSEvent) {
-    if (!isEnabled) {
-      return
-    }
-    
-    isSelected = false
-    
-    onPress?()
-  }
-  
-  override func mouseMoved(with event: NSEvent) {
-    if (!isEnabled) {
-      return
-    }
-    
-    //        let touch: AnyObject! = event.touches(for: self)
-    //        let touchLocation = touch.location(in: parent!)
-    //        
-    //        if (frame.contains(touchLocation)) {
-    //            isSelected = true
-    //        } else {
-    //            isSelected = false
-    //        }
-  }
-  
-  override func mouseEntered(with event: NSEvent) {
-    // Hover
-  }
-  
-  override func mouseExited(with event: NSEvent) {
-    isSelected = false
-  }
-  
-  override var acceptsFirstResponder: Bool {
-    return true
-  }
-  
-  #else
-  
+
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     if (!isEnabled) {
       return
@@ -156,6 +108,4 @@ class SKButton: SKSpriteNode {
     
     onPress?()
   }
-  
-  #endif
 }

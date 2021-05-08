@@ -72,7 +72,7 @@ class Shield {
     node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
     node.physicsBody?.restitution = 0
     node.physicsBody?.categoryBitMask = BodyType.shield.rawValue
-    node.physicsBody?.collisionBitMask = BodyType.projectile.rawValue
+    // node.physicsBody?.collisionBitMask = BodyType.projectile.rawValue
     node.physicsBody?.contactTestBitMask = BodyType.shield.rawValue
   }
 }

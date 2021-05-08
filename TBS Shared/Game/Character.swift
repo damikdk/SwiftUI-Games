@@ -82,9 +82,11 @@ class Character {
 extension Character {
   func heal(amount: Int) {
     HP += amount
+    node.highlight(with: SCNColor.yellow, for: 0.6)
   }
   
   func damage(amount: Int) {
     HP -= amount
+    node.highlight(with: SCNColor.red, for: 0.6)
   }
 }

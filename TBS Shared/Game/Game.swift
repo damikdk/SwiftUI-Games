@@ -8,16 +8,17 @@
 
 import SceneKit
 
-enum BodyType: Int {
-  case field = 1
-  case character
-  case shield
-  case projectile
+let defaultOnCharacterPress: ((Game, Character) -> Void) = { gameVC, character in
+  gameVC.currentCharacter = character
+  character.node.highlight()
 }
 
-let defaultOnCharacterPress: ((Game, Character) -> Void) = { gameVC, charater in gameVC.currentCharacter = charater }
 let defaultOnFieldPress: ((Game, MaterialNode, Int, Int) -> Void) = { game, cellNode, row, column in
-  game.currentField.move(node: game.currentCharacter!.node, toRow: row, column: column)
+  game.currentField.move(
+    node: game.currentCharacter!.node,
+    toRow: row,
+    column: column)
+  cellNode.highlight()
 }
 
 class Game: NSObject, SCNSceneRendererDelegate {
@@ -35,7 +36,7 @@ class Game: NSObject, SCNSceneRendererDelegate {
   var overlay: OverlayHUD!
   var currentCharacter: Character? {
     didSet {
-      overlay.setupUI(for: currentCharacter!, in: self)
+      overlay.setupUI(for: self)
     }
   }
   var characters: [Character] = []
@@ -84,8 +85,8 @@ class Game: NSObject, SCNSceneRendererDelegate {
 
     defer {
       // set up field and characters
-      currentField = Field(in: SCNVector3(), size: 3)
-      createCharacters(random: true)
+      currentField = Field(in: SCNVector3(), size: 7)
+      createCharacters(random: false)
       onCharacterPress = defaultOnCharacterPress
       onFieldPress = defaultOnFieldPress
     }
@@ -93,10 +94,13 @@ class Game: NSObject, SCNSceneRendererDelegate {
 
   func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
     // Called before each frame is rendered
+
+//    overlay.setupUI(for: self)
   }
 }
 
 // MARK: - Setup Game
+
 extension Game {
   func setupCamera() {
     cameraNode = SCNNode()
@@ -152,6 +156,7 @@ extension Game {
 }
 
 // MARK: - Character methods
+
 extension Game {
   func createCharacters(random: Bool) {
     if (random) {
@@ -205,6 +210,7 @@ extension Game {
 }
 
 // MARK: - Node methods
+
 extension Game {
   func findFirstNode(atPoint point: CGPoint) -> SCNNode? {
     let hitResults = self.sceneRenderer.hitTest(point, options: [:])
@@ -222,6 +228,7 @@ extension Game {
 }
 
 // MARK: - Touch handlers
+
 extension Game {
   func preview(atPoint point: CGPoint) {
     print("Preview requested for point: \(point)")
@@ -240,7 +247,7 @@ extension Game {
     /// Find closest node
     if let firstNode = findFirstNode(atPoint: point) {
       /// highlight it
-      firstNode.highlight()
+//      firstNode.highlight()
 
       if let materialNode = firstNode as? MaterialNode {
         if (materialNode.type == .field && currentCharacter != nil) {
@@ -263,6 +270,7 @@ extension Game {
 }
 
 // MARK: - Physics
+
 extension Game: SCNPhysicsContactDelegate {
   func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
     print("contact")

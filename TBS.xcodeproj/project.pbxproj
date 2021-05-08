@@ -42,6 +42,8 @@
 		97BD651623465E1C00D8EF3B /* Shield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BD651423465E1C00D8EF3B /* Shield.swift */; };
 		EDC4F08D2645D3E200A77F5E /* Ability.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4F08C2645D3E100A77F5E /* Ability.swift */; };
 		EDC4F08E2645D3E200A77F5E /* Ability.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4F08C2645D3E100A77F5E /* Ability.swift */; };
+		EDC4F1042646017500A77F5E /* Hitscan.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4F1032646017500A77F5E /* Hitscan.swift */; };
+		EDC4F1052646017500A77F5E /* Hitscan.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4F1032646017500A77F5E /* Hitscan.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -85,6 +87,7 @@
 		97EF8B9F2222AA9300088510 /* ARSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneView.swift; sourceTree = "<group>"; };
 		97EF8BA12222B0A800088510 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		EDC4F08C2645D3E100A77F5E /* Ability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ability.swift; sourceTree = "<group>"; };
+		EDC4F1032646017500A77F5E /* Hitscan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hitscan.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +200,7 @@
 				97EF8BA12222B0A800088510 /* GameScene.swift */,
 				97EF8B9B2222A8FD00088510 /* SceneView.swift */,
 				97EF8B9F2222AA9300088510 /* ARSceneView.swift */,
+				EDC4F1032646017500A77F5E /* Hitscan.swift */,
 				97973CA62277A8160001AF59 /* MaterialNode.swift */,
 			);
 			path = Scene;
@@ -308,6 +312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				975C2CDD2291F8A20005446D /* GraphicsHelper.swift in Sources */,
+				EDC4F1042646017500A77F5E /* Hitscan.swift in Sources */,
 				975C2CC82291F87C0005446D /* OverlayHUD.swift in Sources */,
 				975C2CCC2291F8840005446D /* SKButton.swift in Sources */,
 				975C2CD02291F8890005446D /* GameScene.swift in Sources */,
@@ -328,6 +333,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDC4F1052646017500A77F5E /* Hitscan.swift in Sources */,
 				975C2CC62291F87B0005446D /* OverlayHUD.swift in Sources */,
 				97BD651623465E1C00D8EF3B /* Shield.swift in Sources */,
 				975C2CCA2291F8820005446D /* SKButton.swift in Sources */,
