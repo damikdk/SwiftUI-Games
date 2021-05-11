@@ -13,7 +13,7 @@ extension SCNNode {
   func addDebugLine(
     from vector1: SCNVector3,
     to vector2: SCNVector3,
-    with color: SCNColor = .red
+    with color: SCNColor = .darkBlue
   ) -> SCNNode {
 
     let lineGeometry = SCNGeometry.line(from: vector1, to: vector2)

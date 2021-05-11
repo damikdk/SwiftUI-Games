@@ -37,6 +37,18 @@ class Game: NSObject, SCNSceneRendererDelegate {
   var currentCharacter: Character? {
     didSet {
       overlay.setupUI(for: self)
+
+      let textPopupGeometry = SCNText(string: "O", extrusionDepth: 0)
+      let textPopup = SCNNode(geometry: textPopupGeometry)
+      textPopup.scale = SCNVector3(0.1, 0.1, 0.1)
+
+      currentCharacter?.node.addChildNode(textPopup)
+
+      textPopup.runAction(
+        SCNAction.sequence([
+          SCNAction.moveBy(x: 0, y: 5, z: 0, duration: 1),
+          SCNAction.removeFromParentNode()
+      ]))
     }
   }
   var characters: [Character] = []
