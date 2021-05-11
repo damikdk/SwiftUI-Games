@@ -44,6 +44,8 @@
 		EDC4F08E2645D3E200A77F5E /* Ability.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4F08C2645D3E100A77F5E /* Ability.swift */; };
 		EDC4F1042646017500A77F5E /* Hitscan.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4F1032646017500A77F5E /* Hitscan.swift */; };
 		EDC4F1052646017500A77F5E /* Hitscan.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4F1032646017500A77F5E /* Hitscan.swift */; };
+		EDC4F12C264AB6D500A77F5E /* DebugHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4F12B264AB6D500A77F5E /* DebugHelpers.swift */; };
+		EDC4F12D264AB6D500A77F5E /* DebugHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4F12B264AB6D500A77F5E /* DebugHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -88,6 +90,7 @@
 		97EF8BA12222B0A800088510 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		EDC4F08C2645D3E100A77F5E /* Ability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ability.swift; sourceTree = "<group>"; };
 		EDC4F1032646017500A77F5E /* Hitscan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hitscan.swift; sourceTree = "<group>"; };
+		EDC4F12B264AB6D500A77F5E /* DebugHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				97973CA42276FA3E0001AF59 /* GraphicsHelper.swift */,
+				EDC4F12B264AB6D500A77F5E /* DebugHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -318,6 +322,7 @@
 				975C2CD02291F8890005446D /* GameScene.swift in Sources */,
 				975C2C632291F70E0005446D /* GameViewController.swift in Sources */,
 				975C2CA02291F70F0005446D /* Game.swift in Sources */,
+				EDC4F12C264AB6D500A77F5E /* DebugHelpers.swift in Sources */,
 				975C2CD42291F88D0005446D /* SceneView.swift in Sources */,
 				975C2CD82291F8980005446D /* ARSceneView.swift in Sources */,
 				975C2CD92291F89C0005446D /* MaterialNode.swift in Sources */,
@@ -334,6 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDC4F1052646017500A77F5E /* Hitscan.swift in Sources */,
+				EDC4F12D264AB6D500A77F5E /* DebugHelpers.swift in Sources */,
 				975C2CC62291F87B0005446D /* OverlayHUD.swift in Sources */,
 				97BD651623465E1C00D8EF3B /* Shield.swift in Sources */,
 				975C2CCA2291F8820005446D /* SKButton.swift in Sources */,

@@ -6,7 +6,7 @@
 //  Copyright © 2021 Damirka. All rights reserved.
 //
 
-import Foundation
+import SceneKit
 
 let defaultAbilityAction: ((Game, Character) -> Void) = { gameVC, charater in print("defaultAbilityAction") }
 
@@ -17,86 +17,101 @@ struct Ability {
 }
 
 struct Abilities {
-  static let ShieldUp = Ability(name: "Shield",
-                                icon: SCNImage(named: "bolt-shield"),
-                                action: { game, charater in
-                                  print("Run action for Shield ability")
-                                  
-                                  let newShield = Shield(type: .regular, form: .sphere)
-                                  charater.node.addChildNode(newShield.node)
-                                })
-  static let FrozenArrow = Ability(name: "Frozen Arrow",
-                                   icon: SCNImage(named: "frozen-arrow"),
-                                   action: { game, charater in
-                                    print("Run action for Frozen Array ability")
-                                    
-                                    game.onCharacterPress = { game, charater in
-                                      guard let hostCharacter = game.currentCharacter else {
-                                        print("Can't fire Frozen Arrow action because there is no game.currentCharacter")
-                                        game.onCharacterPress = defaultOnCharacterPress
-                                        return
-                                      }
+  static let ShieldUp = Ability(
+    name: "Shield",
+    icon: SCNImage(named: "bolt-shield"),
+    action: { game, charater in
+      print("Run action for Shield ability")
 
-                                      let materialNodes = hitscan(
-                                        from: hostCharacter.node.worldPosition,
-                                        to: charater.node.worldPosition,
-                                        in: game.scene,
-                                        with: [.character, .shield, .field])
+      let newShield = Shield(type: .regular, form: .sphere)
+      charater.node.addChildNode(newShield.node)
+    })
 
-                                      for body in materialNodes {
-                                        // Uncomment if you want shields breaks hitscan
-                                        // if body.type == .field || body.type == .shield {
-                                        //  break
-                                        // }
+  static let FrozenArrow = Ability(
+    name: "Frozen Arrow",
+    icon: SCNImage(named: "frozen-arrow"),
+    action: { game, charater in
+      print("Run action for Frozen Array ability")
 
-                                        if body.type == .character, let character = game.findCharacter(by: body.gameID) {
-                                          character.damage(amount: 2)
-                                        }
-                                      }
+      game.onCharacterPress = { game, charater in
+        guard let hostCharacter = game.currentCharacter else {
+          print("Can't fire Frozen Arrow action because there is no game.currentCharacter")
+          game.onCharacterPress = defaultOnCharacterPress
+          return
+        }
 
-                                      game.onFieldPress = defaultOnFieldPress
-                                      game.onCharacterPress = defaultOnCharacterPress
-                                    }
+        // Add debug line showing direction
+        game.scene.rootNode.addDebugLine(
+          from: hostCharacter.node.worldPosition,
+          to: charater.node.worldPosition)
 
-                                    game.onFieldPress = { game, cellNode, row, column  in
-                                      cellNode.highlight()
+        let materialNodes = hitscan(
+          from: hostCharacter.node.worldPosition,
+          to: charater.node.worldPosition,
+          in: game.scene,
+          with: [.character, .shield, .field])
 
-                                      guard let hostCharacter = game.currentCharacter else {
-                                        print("Can't fire Frozen Arrow action because there is no game.currentCharacter")
-                                        game.onCharacterPress = defaultOnCharacterPress
-                                        return
-                                      }
+        for body in materialNodes {
+          // Uncomment if you want shields breaks hitscan
+          // if body.type == .field || body.type == .shield {
+          //  break
+          // }
 
-                                      let materialNodes = hitscan(
-                                        from: hostCharacter.node.worldPosition,
-                                        to: cellNode.worldPosition,
-                                        in: game.scene,
-                                        with: [.character, .shield, .field])
-                                      
-                                      for body in materialNodes {
-                                        // Uncomment if you want shields breaks hitscan
-                                        // if body.type == .field || body.type == .shield {
-                                        //  break
-                                        // }
+          if body.type == .character, let character = game.findCharacter(by: body.gameID) {
+            character.damage(amount: 2)
+          }
+        }
 
-                                        if body.type == .character, let character = game.findCharacter(by: body.gameID) {
-                                          character.damage(amount: 2)
-                                        }
-                                      }
+        game.onFieldPress = defaultOnFieldPress
+        game.onCharacterPress = defaultOnCharacterPress
+      }
 
-                                      game.onFieldPress = defaultOnFieldPress
-                                      game.onCharacterPress = defaultOnCharacterPress
-                                    }
-                                   })
+      game.onFieldPress = { game, cellNode, row, column  in
+        cellNode.highlight()
+
+        guard let hostCharacter = game.currentCharacter else {
+          print("Can't fire Frozen Arrow action because there is no game.currentCharacter")
+          game.onCharacterPress = defaultOnCharacterPress
+          return
+        }
+
+        // Add debug line showing direction
+        game.scene.rootNode.addDebugLine(
+          from: hostCharacter.node.worldPosition,
+          to: cellNode.worldPosition)
+
+        let materialNodes = hitscan(
+          from: hostCharacter.node.worldPosition,
+          to: cellNode.worldPosition,
+          in: game.scene,
+          with: [.character, .shield, .field])
+
+        for body in materialNodes {
+          // Uncomment if you want shields breaks hitscan
+          // if body.type == .field || body.type == .shield {
+          //  break
+          // }
+
+          if body.type == .character, let character = game.findCharacter(by: body.gameID) {
+            character.damage(amount: 2)
+          }
+        }
+
+        game.onFieldPress = defaultOnFieldPress
+        game.onCharacterPress = defaultOnCharacterPress
+      }
+    })
   
-  static let HealUp = Ability(name: "Heal",
-                              icon: SCNImage(named: "christ-power"),
-                              action: { game, charater in
-                                print("Run action for Heal ability")
-                                
-                                game.onCharacterPress = { game, charater in
-                                  charater.heal(amount: 2)
-                                  game.onCharacterPress = defaultOnCharacterPress
-                                }
-                              })
+  static let HealUp = Ability(
+    name: "Heal",
+    icon: SCNImage(named: "christ-power"),
+    action: { game, charater in
+      print("Run action for Heal ability")
+
+      game.onCharacterPress = { game, charater in
+        charater.heal(amount: 2)
+        game.onCharacterPress = defaultOnCharacterPress
+      }
+    })
 }
+

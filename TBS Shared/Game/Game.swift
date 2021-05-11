@@ -262,7 +262,7 @@ extension Game {
           }
         }
       } else {
-        print("Touched node is not material")
+        print("Touched node is not material:", firstNode.name ?? "<NO NAME>")
         return
       }
     }
