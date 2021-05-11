@@ -15,12 +15,16 @@ func hitscan(
   with types: [BodyType] = []
 ) -> [MaterialNode] {
 
-  let hitResults = scene.physicsWorld.rayTestWithSegment(from: from, to: to)
+  let hitResults = scene.physicsWorld.rayTestWithSegment(
+    from: from,
+    to: to,
+    options: [
+      SCNPhysicsWorld.TestOption.searchMode: SCNPhysicsWorld.TestSearchMode.all,
+    ])
+
   var materialNodes: [MaterialNode] = []
 
   for hitResult in hitResults {
-//    print("Hit by Frozen Arrow: ", hitResult.node)
-
     if let materialNode = hitResult.node as? MaterialNode {
       materialNodes.append(materialNode)
     }

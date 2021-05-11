@@ -184,6 +184,7 @@
 				97B391AC221B377B000655A4 /* Field.swift */,
 				97B391AA221B301E000655A4 /* Character.swift */,
 				EDC4F08C2645D3E100A77F5E /* Ability.swift */,
+				EDC4F1032646017500A77F5E /* Hitscan.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -204,7 +205,6 @@
 				97EF8BA12222B0A800088510 /* GameScene.swift */,
 				97EF8B9B2222A8FD00088510 /* SceneView.swift */,
 				97EF8B9F2222AA9300088510 /* ARSceneView.swift */,
-				EDC4F1032646017500A77F5E /* Hitscan.swift */,
 				97973CA62277A8160001AF59 /* MaterialNode.swift */,
 			);
 			path = Scene;
