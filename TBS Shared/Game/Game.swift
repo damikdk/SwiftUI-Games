@@ -225,6 +225,21 @@ extension Game {
 
     return hitResult.node
   }
+
+  func findFirstTouchableNode(atPoint point: CGPoint) -> SCNNode? {
+    let options: [SCNHitTestOption : Any] = [SCNHitTestOption.searchMode: SCNHitTestSearchMode.all.rawValue]
+    let hitResults = self.sceneRenderer.hitTest(point, options: options)
+
+    if hitResults.count == 0 {
+      // check that we clicked on at least one object
+      return nil
+    }
+
+    // retrieved the first clicked object
+    let hitResult = hitResults.first { $0.node.physicsBody != nil }
+
+    return hitResult?.node
+  }
 }
 
 // MARK: - Touch handlers
@@ -245,7 +260,7 @@ extension Game {
 
     // MARK: TODO: Fix touch through shields
     /// Find closest node
-    if let firstNode = findFirstNode(atPoint: point) {
+    if let firstNode = findFirstTouchableNode(atPoint: point) {
       /// highlight it
 //      firstNode.highlight()
 
@@ -273,6 +288,6 @@ extension Game {
 
 extension Game: SCNPhysicsContactDelegate {
   func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
-    print("contact")
+//    print("contact")
   }
 }
