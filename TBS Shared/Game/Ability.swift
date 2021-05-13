@@ -22,60 +22,57 @@ struct Abilities {
     icon: SCNImage(named: "bolt-shield"),
     action: { game, charater in
       print("Run action for Shield ability")
-
+      
       let newShield = Shield(type: .regular, form: .sphere)
       charater.node.addChildNode(newShield.node)
     })
-
+  
   static let FrozenArrow = Ability(
     name: "Frozen Arrow",
     icon: SCNImage(named: "frozen-arrow"),
     action: { game, charater in
       print("Run action for Frozen Array ability")
-
+      
       game.onCharacterPress = { game, charater in
         guard let hostCharacter = game.currentCharacter else {
           print("Can't fire Frozen Arrow action because there is no game.currentCharacter")
           game.onCharacterPress = defaultOnCharacterPress
           return
         }
-
+        
         // Add debug line showing direction
         game.scene.rootNode.addDebugLine(
           from: hostCharacter.node.worldPosition,
           to: charater.node.worldPosition)
-
+        
         let materialNodes = hitscan(
           from: hostCharacter.node.worldPosition,
           to: charater.node.worldPosition,
           in: game.scene,
           with: [.character, .shield, .field])
-
+        
         for (index, body) in materialNodes.enumerated() {
           // Uncomment if you want shields breaks hitscan
           let breakingTypes: [BodyType] = [.shield, .field]
-
+          
           if breakingTypes.contains(body.type) {
             break
           }
-
+          
           if body.type == .character, let character = game.findCharacter(by: body.gameID) {
             let damage = 2
-
-            let damagePopupGeometry = SCNText(string: "\(damage)", extrusionDepth: 0)
-            let damagePopup = SCNNode(geometry: damagePopupGeometry)
-            damagePopup.scale = SCNVector3(0.1, 0.1, 0.1)
-            body.addChildNode(damagePopup)
-
-            damagePopup.runAction(
+            let damagePopUpNode = body.addPopup(with: "\(damage)", color: .red)
+            
+            damagePopUpNode.runAction(
               SCNAction.sequence([
-                SCNAction.moveBy(x: 0, y: 5, z: 0, duration: TimeInterval(index)),
+                SCNAction.moveBy(x: 0, y: 0.6, z: 0, duration: 3),
                 SCNAction.removeFromParentNode()
-            ]))
+              ]))
+            
             character.damage(amount: damage)
           }
         }
-
+        
         game.onFieldPress = defaultOnFieldPress
         game.onCharacterPress = defaultOnCharacterPress
       }
@@ -86,9 +83,18 @@ struct Abilities {
     icon: SCNImage(named: "christ-power"),
     action: { game, charater in
       print("Run action for Heal ability")
-
-      game.onCharacterPress = { game, charater in
-        charater.heal(amount: 2)
+      
+      game.onCharacterPress = { game, character in
+        let heal = 2
+        character.heal(amount: heal)
+        let healPopUpNode = character.node.addPopup(with: "\(heal)", color: .yellow)
+        
+        healPopUpNode.runAction(
+          SCNAction.sequence([
+            SCNAction.moveBy(x: 0, y: 0.6, z: 0, duration: 3),
+            SCNAction.removeFromParentNode()
+          ]))
+        
         game.onCharacterPress = defaultOnCharacterPress
       }
     })

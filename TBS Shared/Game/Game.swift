@@ -38,17 +38,13 @@ class Game: NSObject, SCNSceneRendererDelegate {
     didSet {
       overlay.setupUI(for: self)
 
-      let textPopupGeometry = SCNText(string: "O", extrusionDepth: 0)
-      let textPopup = SCNNode(geometry: textPopupGeometry)
-      textPopup.scale = SCNVector3(0.1, 0.1, 0.1)
+      let textPopup = currentCharacter?.node.addPopup(with: "GO")
 
-      currentCharacter?.node.addChildNode(textPopup)
-
-      textPopup.runAction(
+      textPopup!.runAction(
         SCNAction.sequence([
-          SCNAction.moveBy(x: 0, y: 5, z: 0, duration: 1),
+          SCNAction.moveBy(x: 0, y: 0.3, z: 0, duration: 0.4),
           SCNAction.removeFromParentNode()
-      ]))
+        ]))
     }
   }
   var characters: [Character] = []
@@ -107,7 +103,7 @@ class Game: NSObject, SCNSceneRendererDelegate {
   func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
     // Called before each frame is rendered
 
-//    overlay.setupUI(for: self)
+    //    overlay.setupUI(for: self)
   }
 }
 
@@ -274,7 +270,7 @@ extension Game {
     /// Find closest node
     if let firstNode = findFirstTouchableNode(atPoint: point) {
       /// highlight it
-//      firstNode.highlight()
+      //      firstNode.highlight()
 
       if let materialNode = firstNode as? MaterialNode {
         if (materialNode.type == .field && currentCharacter != nil) {
@@ -300,6 +296,6 @@ extension Game {
 
 extension Game: SCNPhysicsContactDelegate {
   func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
-//    print("contact")
+    //    print("contact")
   }
 }
