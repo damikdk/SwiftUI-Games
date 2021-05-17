@@ -15,11 +15,18 @@ func hitscan(
   with types: [BodyType] = []
 ) -> [MaterialNode] {
 
-  let hitResults = scene.physicsWorld.rayTestWithSegment(
+//  let hitResults = scene.physicsWorld.rayTestWithSegment(
+//    from: from,
+//    to: to,
+//    options: [
+//      SCNPhysicsWorld.TestOption.searchMode: SCNPhysicsWorld.TestSearchMode.all,
+//    ])
+
+  let hitResults = scene.rootNode.hitTestWithSegment(
     from: from,
     to: to,
     options: [
-      SCNPhysicsWorld.TestOption.searchMode: SCNPhysicsWorld.TestSearchMode.all,
+      SCNHitTestOption.searchMode.rawValue: SCNHitTestSearchMode.all.rawValue,
     ])
 
   var materialNodes: [MaterialNode] = []

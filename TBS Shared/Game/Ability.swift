@@ -52,6 +52,11 @@ struct Abilities {
           with: [.character, .shield, .field])
         
         for (index, body) in materialNodes.enumerated() {
+          if body == hostCharacter.node {
+            // Skip host damage
+            continue
+          }
+
           // Uncomment if you want shields breaks hitscan
           let breakingTypes: [BodyType] = [.shield, .field]
           
