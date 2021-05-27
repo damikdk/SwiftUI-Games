@@ -48,7 +48,7 @@ class SKButton: SKSpriteNode {
     super.init(texture: defaultTexture, color: SCNColor.white, size: defaultTexture.size())
     isUserInteractionEnabled = true
     
-    //Creating and adding a blank label, centered on the button
+    // Creating and adding a blank label, centered on the button
     self.label.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center;
     self.label.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center;
     addChild(self.label)
@@ -90,12 +90,11 @@ class SKButton: SKSpriteNode {
   }
   
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-    if (!isEnabled) {
+    if (!isEnabled || !isSelected) {
       return
     }
     
     isSelected = false
-    
     onPress?()
   }
   
@@ -105,7 +104,6 @@ class SKButton: SKSpriteNode {
     }
     
     isSelected = false
-    
     onPress?()
   }
 }
