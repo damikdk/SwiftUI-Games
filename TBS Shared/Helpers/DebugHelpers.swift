@@ -35,9 +35,9 @@ extension SCNNode {
     
     let popupGeometry = SCNText(string: "\(text)", extrusionDepth: 1.0)
     popupGeometry.firstMaterial?.emission.contents = color
-    
+
     let popupNode = SCNNode(geometry: popupGeometry)
-    
+
     popupNode.scale = SCNVector3(0.05, 0.05, 0.05)
     popupNode.position = SCNVector3(
       popupNode.position.x,
@@ -45,7 +45,15 @@ extension SCNNode {
       popupNode.position.z)
     
     popupNode.constraints = [SCNBillboardConstraint()]
-    
+
+    // Center text node in parent
+    // (https://stackoverflow.com/a/49860463/7996650)
+    let (min, max) = popupNode.boundingBox
+    let dx = min.x + 0.5 * (max.x - min.x)
+    let dy = min.y + 0.5 * (max.y - min.y)
+    let dz = min.z + 0.5 * (max.z - min.z)
+    popupNode.pivot = SCNMatrix4MakeTranslation(dx, dy, dz)
+
     self.addChildNode(popupNode)
     return popupNode
   }
