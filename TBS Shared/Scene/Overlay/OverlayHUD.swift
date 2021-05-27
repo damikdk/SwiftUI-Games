@@ -21,14 +21,14 @@ class OverlayHUD: SKScene {
     // set up character info node
     characterPanel = SKSpriteNode()
     
-    characterPanel.anchorPoint = .init(x: 0.5, y: 1)
+    characterPanel.anchorPoint = CGPoint(x: 0.5, y: 1)
     characterPanel.position = CGPoint(x: size.width / 2, y: size.height - panelPadding)
     addChild(characterPanel)
     
     // set up abilities node
     abilitiesPanel = SKSpriteNode()
     
-    abilitiesPanel.anchorPoint = .init(x: 0.5, y: 0)
+    abilitiesPanel.anchorPoint = CGPoint(x: 0.5, y: 0)
     abilitiesPanel.position = CGPoint(x: size.width / 2, y: 0 + panelPadding)
     addChild(abilitiesPanel)
   }
@@ -64,9 +64,10 @@ class OverlayHUD: SKScene {
       let buttonTexture = SKTexture(image: abilityIcon)
       let buttonTextureSelected = SKTexture(image: selectedAbilityIcon!)
       
-      let button = SKButton(normalTexture: buttonTexture,
-                            selectedTexture: buttonTextureSelected,
-                            disabledTexture: buttonTexture)
+      let button = SKButton(
+        normalTexture: buttonTexture,
+        selectedTexture: buttonTextureSelected,
+        disabledTexture: buttonTexture)
       
       button.onPress = {
         ability.action(game, character)
@@ -75,8 +76,9 @@ class OverlayHUD: SKScene {
       button.position = CGPoint(x: 0 + buttonWidth * index, y: 0)
       button.zPosition = 1
       button.name = "Ability Button (\(ability.name!))"
-      button.anchorPoint = .init(x: 0.5, y: 0)
-      button.size = .init(width: buttonWidth, height: buttonWidth)
+      button.anchorPoint = CGPoint(x: 0.5, y: 0)
+      button.size = CGSize(width: buttonWidth, height: buttonWidth)
+
       abilitiesPanel.addChild(button)
     }    
   }

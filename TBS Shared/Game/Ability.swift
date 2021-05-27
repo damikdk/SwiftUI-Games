@@ -17,13 +17,23 @@ struct Ability {
 }
 
 struct Abilities {
+  static let all = [
+    Abilities.ShieldUp,
+    Abilities.FrozenArrow,
+    Abilities.HealUp,
+  ]
+
   static let ShieldUp = Ability(
     name: "Shield",
     icon: SCNImage(named: "bolt-shield"),
     action: { game, charater in
       print("Run action for Shield ability")
       
-      let newShield = Shield(type: .regular, form: .sphere)
+      let newShield = Shield(
+        type: .regular,
+        form: .sphere,
+        for: charater)
+
       charater.node.addChildNode(newShield.node)
     })
   

@@ -267,10 +267,11 @@ extension Game {
     print("Pick requested for point: \(point)")
 
     // MARK: TODO: Fix touch through shields
-    /// Find closest node
+
+    // Find closest node
     if let firstNode = findFirstTouchableNode(atPoint: point) {
-      /// highlight it
-      //      firstNode.highlight()
+      // Highlight it
+      // firstNode.highlight()
 
       if let materialNode = firstNode as? MaterialNode {
         if (materialNode.type == .field && currentCharacter != nil) {
@@ -282,6 +283,14 @@ extension Game {
         } else if (materialNode.type == .character) {
           if let tappedCharacter = findCharacter(by: materialNode.gameID!) {
             onCharacterPress(self, tappedCharacter)
+          }
+
+        } else if materialNode.type == .shield {
+          if let host = materialNode.host {
+            // If shield have a host, pick it
+            onCharacterPress(self, host)
+          } else {
+            print("Shield without host was touched")
           }
         }
       } else {

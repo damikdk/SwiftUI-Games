@@ -25,8 +25,13 @@ class Shield {
   var type: ShieldType
   var form: ShieldForm
   var gameID: String!
+  var host: Character?
   
-  init(type: ShieldType = .regular, form: ShieldForm = .sphere) {
+  init(
+    type: ShieldType = .regular,
+    form: ShieldForm = .sphere,
+    for host: Character?
+  ) {
     self.type = type
     self.form = form
     
@@ -63,12 +68,14 @@ class Shield {
     }
     
     gameID = uuid.appending("-shield")
-    
+    self.host = host
+
     geometry.firstMaterial?.diffuse.contents = color.withAlphaComponent(0.4)
     
     node = MaterialNode(type: .shield, id: uuid)
     node.geometry = geometry
-    
+    node.host = host
+
     node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
     node.physicsBody?.restitution = 0
     node.physicsBody?.categoryBitMask = BodyType.shield.rawValue

@@ -43,14 +43,14 @@ class Character {
       uuid.append("-tank")
       
       HP = 12
-      abilities.append(Abilities.ShieldUp)
+    // abilities.append(Abilities.ShieldUp)
     case .dps:
       box = SCNBox(width: cellSize * 0.4, height: cellSize * 0.9, length: cellSize * 0.4, chamferRadius: 0)
       color = SCNColor.DarkTheme.Violet.accent
       uuid.append("-dps")
       
       HP = 10
-      abilities.append(Abilities.FrozenArrow)
+    // abilities.append(Abilities.FrozenArrow)
     case .support:
       box = SCNBox(width: cellSize * 0.2, height: cellSize * 0.8, length: cellSize * 0.2, chamferRadius: 0)
       color = SCNColor.DarkTheme.Violet.minor
@@ -58,8 +58,10 @@ class Character {
       
       HP = 8
       
-      abilities.append(Abilities.HealUp)
+    // abilities.append(Abilities.HealUp)
     }
+    
+    abilities = Abilities.all
     
     box.firstMaterial?.diffuse.contents = color
     box.firstMaterial?.isDoubleSided = true
@@ -69,7 +71,8 @@ class Character {
     
     self.role = role
     self.gameID = uuid
-    
+    node.host = self
+
     node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
     node.physicsBody?.mass = 4
     node.physicsBody?.restitution = 0

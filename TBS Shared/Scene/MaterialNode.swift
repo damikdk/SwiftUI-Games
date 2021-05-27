@@ -18,6 +18,7 @@ enum BodyType: Int {
 class MaterialNode: SCNNode {
   var type: BodyType
   var gameID: String!
+  var host: Character?
 
   init(type: BodyType, id: String? = nil) {
     self.type = type

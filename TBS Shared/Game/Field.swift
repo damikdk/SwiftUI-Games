@@ -37,7 +37,7 @@ class Field {
         // Make the plane visible from both sides
         cellGeometry.firstMaterial?.isDoubleSided = true
         cellGeometry.firstMaterial?.diffuse.contents = SCNColor.DarkTheme.Violet.fieldColor
-        cellGeometry.cornerRadius = FieldConstants.defaultCellSize / 10
+        cellGeometry.cornerRadius = FieldConstants.defaultCellSize / 40
         
         let cell = MaterialNode(type: .field, id: stringIndex)
         cell.geometry = cellGeometry
