@@ -81,7 +81,6 @@ extension SCNNode {
   }
 }
 
-
 extension SCNGeometry {
   class func line(from vector1: SCNVector3, to vector2: SCNVector3) -> SCNGeometry {
     let indices: [Int32] = [0, 1]

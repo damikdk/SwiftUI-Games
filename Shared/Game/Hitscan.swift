@@ -12,7 +12,7 @@ func hitscan(
   from: SCNVector3,
   to: SCNVector3,
   in scene: SCNScene,
-  with types: [BodyType] = []
+  with types: [EntityType] = []
 ) -> [MaterialNode] {
 
 //  let hitResults = scene.physicsWorld.rayTestWithSegment(

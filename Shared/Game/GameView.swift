@@ -12,9 +12,8 @@ let cameraHeight: Float = 40
 
 struct GameView: View {
   @Binding var showing: Bool
-  var game: Game
-
-  var scene = SCNScene()
+  var game: TBSGame
+  
   var sceneRendererDelegate = StupidDelegate()
 
   var cameraNode: SCNNode {
@@ -39,16 +38,16 @@ struct GameView: View {
         let translation = value.translation
 
         if abs(translation.height) < 20,
-           abs(translation.width) < 20,
-          let firstNode = findFirstNode(atPoint: value.location) {
-          /// highlight it
-          firstNode.highlight()
+           abs(translation.width) < 20 {
+
+          pick(atPoint: value.location)
         }
       }
 
     ZStack(alignment: .topLeading) {
       SceneView(
-        scene: scene,
+        scene: game.scene,
+        pointOfView: cameraNode,
         options: [
           .allowsCameraControl,
           .temporalAntialiasingEnabled
@@ -56,12 +55,12 @@ struct GameView: View {
         delegate: sceneRendererDelegate)
         .ignoresSafeArea()
         .onAppear() {
-          scene.rootNode.addChildNode(game.field.node)
-          scene.rootNode.addChildNode(cameraNode)
-          scene.background.contents = Color.DarkTheme.Violet.background.cgColor
+          game.prepare()
+          game.scene.background.contents = Color.DarkTheme.Violet.background.cgColor
         }
         .gesture(tap)
 
+      // HUD
       HStack() {
         Button {
           showing.toggle()
@@ -71,12 +70,30 @@ struct GameView: View {
         .buttonStyle(MaterialButtonStyle())
         .font(.largeTitle)
         .padding(.leading)
+        
+//        List(game.field.cells, id: \.gameID) { cell in
+//          Text("\(cell.gameID)")
+//        }
       }
     }
   }
 }
 
 extension GameView {
+  func pick(atPoint point: CGPoint) {
+    print("Pick requested for point: \(point)")
+
+    // Find closest node
+    if let firstNode = findFirstTouchableNode(atPoint: point) {
+      if let materialNode = firstNode as? MaterialNode {
+        game.pick(materialNode)
+      } else {
+        print("Touched node is not material:", firstNode.name ?? "<NO NAME>")
+        return
+      }
+    }
+  }
+
   func findFirstNode(atPoint point: CGPoint) -> SCNNode? {
     guard let sceneRenderer = sceneRendererDelegate.renderer else {
       print("There is no SceneRenderer!")
@@ -114,19 +131,5 @@ extension GameView {
     let hitResult = hitResults.first { $0.node.physicsBody != nil }
 
     return hitResult?.node
-  }
-}
-
-// Hackest hack ever. And stupidest one!
-// For handling touches in SceneView we need SCNSceneRenderer,
-// but SwiftUI's SceneView don't provide it.
-class StupidDelegate: NSObject, SCNSceneRendererDelegate {
-  var renderer: SCNSceneRenderer?
-
-  func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-    if self.renderer == nil {
-      self.renderer = renderer
-      print(renderer, "HAHA GOT 'EM STUPID MACHINE")
-    }
   }
 }

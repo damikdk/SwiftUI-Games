@@ -13,13 +13,15 @@ struct FieldConstants {
   static let indexSeparator = ","
   static let defaultPlacementExtraHeight = CGFloat(0)
   static let defaultCellSize = CGFloat(5)
-  static let maxFieldSize = 30
+  static let maxFieldSize = 15
 }
 
 class Field {
   let node: SCNNode!
   let size: Int!
   let cellSize: CGFloat!
+  
+  var cells: [FieldCell] = []
   
   init(size: Int = 9, cellSize: CGFloat = FieldConstants.defaultCellSize) {
     node = SCNNode()
@@ -32,7 +34,9 @@ class Field {
       for column in 0..<size {
         let stringIndex = String(row) + FieldConstants.indexSeparator + String(column)
         
-        let cellGeometry = SCNPlane(width: CGFloat(cellSize), height: CGFloat(cellSize))
+        let cellGeometry = SCNPlane(
+          width: CGFloat(cellSize),
+          height: CGFloat(cellSize))
         
         // Make the plane visible from both sides
         cellGeometry.firstMaterial?.isDoubleSided = true
@@ -45,49 +49,40 @@ class Field {
         cell.eulerAngles = SCNVector3Make(Float.pi / 2, 0, 0)
         
         cell.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
-        cell.physicsBody?.categoryBitMask = BodyType.field.rawValue
-        cell.physicsBody?.collisionBitMask = BodyType.character.rawValue | BodyType.field.rawValue
+        cell.physicsBody?.categoryBitMask = EntityType.field.rawValue
+        cell.physicsBody?.collisionBitMask = EntityType.hero.rawValue | EntityType.field.rawValue
         
+        cells.append(FieldCell(gameID: stringIndex, node: cell))
         node.addChildNode(cell)
       }
     }
   }
-
+  
   func center() -> SCNVector3 {
-    let centerIndex = size / 2
-    return centerOfCell(row: centerIndex, column: centerIndex)
+    let centerIndex = cells.count / 2
+    let centerCell = cells[centerIndex]
+    
+    return centerCell.node.position
   }
   
-  func put(object: SCNNode, row: Int? = nil, column: Int? = nil) {
+  func put(object: SCNNode, to cell: FieldCell) {
     let objectHeight = object.height()
-    var cellPosition: SCNVector3
-    
-    if (row != nil && column != nil) {
-      cellPosition = centerOfCell(row: row!, column: column!)
-    } else {
-      cellPosition = centerOfRandomCell()
-    }
-    
+    let cellPosition = cell.node.position
+
     let position = SCNVector3(
       cellPosition.x,
       FieldConstants.defaultPlacementExtraHeight.float() + objectHeight.float() / 2,
       cellPosition.z)
     
-    print("Put node to row \(String(describing: row)) and column \(String(describing: column)) (position: \(position)")
-    
+    print("Put node to FieldCell \(cell.gameID)")
+
     object.position = position
     node.addChildNode(object)
   }
   
-  func move(node: SCNNode, toRow: Int? = nil, column: Int? = nil) {
+  func move(node: SCNNode, to cell: FieldCell) {
     let objectHeight = node.height()
-    var cellPosition: SCNVector3
-    
-    if (toRow != nil && column != nil) {
-      cellPosition = centerOfCell(row: toRow!, column: column!)
-    } else {
-      cellPosition = centerOfRandomCell()
-    }
+    let cellPosition = cell.node.position
     
     let position = SCNVector3(
       cellPosition.x,
@@ -97,26 +92,14 @@ class Field {
     let moveAction = SCNAction.move(to: position, duration: 0.4)
     moveAction.timingMode = .easeInEaseOut
     
-    print("Move node to row \(String(describing: toRow)) and column \(String(describing: column)) (position: \(position)")
+    print("Move node to FieldCell \(cell.gameID)")
     node.runAction(moveAction)
   }
-  
-  func centerOfCell(row: Int = 0, column: Int = 0) -> SCNVector3 {
-    let x = cellSize * CGFloat(column)
-    let z = cellSize * CGFloat(row)
-    
-    return SCNVector3(x, 0, z)
-  }
-  
-  func centerOfRandomCell() -> SCNVector3 {
-    let row = Int.random(in: 0 ..< size)
-    let column = Int.random(in: 0 ..< size)
-    
-    let x = cellSize * CGFloat(column)
-    let z = cellSize * CGFloat(row)
-    
-    return SCNVector3(x, 0, z)
-  }
+}
+
+struct FieldCell: Entity {
+  var gameID: String
+  var node: MaterialNode
 }
 
 extension CGFloat {

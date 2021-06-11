@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		978C1026267379B100E23D85 /* StupidDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978C1025267379B100E23D85 /* StupidDelegate.swift */; };
+		978C102826737CA100E23D85 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978C102726737CA100E23D85 /* Entity.swift */; };
+		978C102B26737E3B00E23D85 /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978C102A26737E3B00E23D85 /* Hero.swift */; };
+		978C102D267383A000E23D85 /* Ability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978C102C267383A000E23D85 /* Ability.swift */; };
+		978C102F2673846800E23D85 /* Shield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978C102E2673846800E23D85 /* Shield.swift */; };
 		ED63086D2670C91C003FD347 /* MaterialButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED63086C2670C91C003FD347 /* MaterialButtonStyle.swift */; };
 		ED63086F2670CB73003FD347 /* ScaleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED63086E2670CB73003FD347 /* ScaleButtonStyle.swift */; };
 		EDD3DBCC26700EF1001E7373 /* SCNVector3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3DBCB26700EF1001E7373 /* SCNVector3+Extensions.swift */; };
@@ -19,12 +24,17 @@
 		EDE3A172266F83E300362308 /* DebugHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE3A167266F83E300362308 /* DebugHelpers.swift */; };
 		EDE3A173266F83E300362308 /* Samples.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE3A168266F83E300362308 /* Samples.swift */; };
 		EDE3A174266F83E300362308 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE3A16A266F83E300362308 /* GameView.swift */; };
-		EDE3A175266F83E300362308 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE3A16B266F83E300362308 /* Game.swift */; };
+		EDE3A175266F83E300362308 /* TBSGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE3A16B266F83E300362308 /* TBSGame.swift */; };
 		EDE3A176266F83E300362308 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE3A16D266F83E300362308 /* Field.swift */; };
 		EDE3A177266F83E300362308 /* MaterialNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE3A16E266F83E300362308 /* MaterialNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		978C1025267379B100E23D85 /* StupidDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StupidDelegate.swift; sourceTree = "<group>"; };
+		978C102726737CA100E23D85 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		978C102A26737E3B00E23D85 /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
+		978C102C267383A000E23D85 /* Ability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ability.swift; sourceTree = "<group>"; };
+		978C102E2673846800E23D85 /* Shield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shield.swift; sourceTree = "<group>"; };
 		ED63086C2670C91C003FD347 /* MaterialButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialButtonStyle.swift; sourceTree = "<group>"; };
 		ED63086E2670CB73003FD347 /* ScaleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleButtonStyle.swift; sourceTree = "<group>"; };
 		EDD3DBCB26700EF1001E7373 /* SCNVector3+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Extensions.swift"; sourceTree = "<group>"; };
@@ -38,7 +48,7 @@
 		EDE3A167266F83E300362308 /* DebugHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugHelpers.swift; sourceTree = "<group>"; };
 		EDE3A168266F83E300362308 /* Samples.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Samples.swift; sourceTree = "<group>"; };
 		EDE3A16A266F83E300362308 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
-		EDE3A16B266F83E300362308 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		EDE3A16B266F83E300362308 /* TBSGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBSGame.swift; sourceTree = "<group>"; };
 		EDE3A16D266F83E300362308 /* Field.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
 		EDE3A16E266F83E300362308 /* MaterialNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -54,6 +64,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		978C102926737CB100E23D85 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				978C102726737CA100E23D85 /* Entity.swift */,
+				978C102E2673846800E23D85 /* Shield.swift */,
+				978C102A26737E3B00E23D85 /* Hero.swift */,
+				EDE3A16D266F83E300362308 /* Field.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
 		ED63086B2670C8EB003FD347 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,7 +135,6 @@
 			children = (
 				EDE3A166266F83E300362308 /* Themes.swift */,
 				EDE3A167266F83E300362308 /* DebugHelpers.swift */,
-				EDD3DBCB26700EF1001E7373 /* SCNVector3+Extensions.swift */,
 				EDE3A168266F83E300362308 /* Samples.swift */,
 			);
 			path = Helpers;
@@ -123,8 +143,10 @@
 		EDE3A169266F83E300362308 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				978C102926737CB100E23D85 /* Entities */,
 				EDE3A16A266F83E300362308 /* GameView.swift */,
-				EDE3A16B266F83E300362308 /* Game.swift */,
+				978C102C267383A000E23D85 /* Ability.swift */,
+				EDE3A16B266F83E300362308 /* TBSGame.swift */,
 				EDD3DBCD26701B97001E7373 /* Hitscan.swift */,
 				EDE3A16C266F83E300362308 /* Scene */,
 			);
@@ -134,8 +156,9 @@
 		EDE3A16C266F83E300362308 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				EDE3A16D266F83E300362308 /* Field.swift */,
+				EDD3DBCB26700EF1001E7373 /* SCNVector3+Extensions.swift */,
 				EDE3A16E266F83E300362308 /* MaterialNode.swift */,
+				978C1025267379B100E23D85 /* StupidDelegate.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -209,14 +232,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				978C102B26737E3B00E23D85 /* Hero.swift in Sources */,
+				978C102F2673846800E23D85 /* Shield.swift in Sources */,
 				EDE3A176266F83E300362308 /* Field.swift in Sources */,
 				ED63086D2670C91C003FD347 /* MaterialButtonStyle.swift in Sources */,
-				EDE3A175266F83E300362308 /* Game.swift in Sources */,
+				EDE3A175266F83E300362308 /* TBSGame.swift in Sources */,
 				EDE3A173266F83E300362308 /* Samples.swift in Sources */,
+				978C102826737CA100E23D85 /* Entity.swift in Sources */,
 				EDE3A172266F83E300362308 /* DebugHelpers.swift in Sources */,
 				EDE3A170266F83E300362308 /* MenuView.swift in Sources */,
 				EDE3A16F266F83E300362308 /* CardView.swift in Sources */,
 				EDE3A177266F83E300362308 /* MaterialNode.swift in Sources */,
+				978C102D267383A000E23D85 /* Ability.swift in Sources */,
+				978C1026267379B100E23D85 /* StupidDelegate.swift in Sources */,
 				EDE3A171266F83E300362308 /* Themes.swift in Sources */,
 				EDE3A174266F83E300362308 /* GameView.swift in Sources */,
 				ED63086F2670CB73003FD347 /* ScaleButtonStyle.swift in Sources */,
@@ -286,6 +314,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -339,6 +368,7 @@
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -349,7 +379,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CQ9KZP4TXC;
+				DEVELOPMENT_TEAM = BZ82DRDZY8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleExecutable = TBS3;
@@ -383,7 +413,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CQ9KZP4TXC;
+				DEVELOPMENT_TEAM = BZ82DRDZY8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleExecutable = TBS3;
