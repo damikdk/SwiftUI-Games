@@ -58,34 +58,76 @@ extension SCNNode {
   }
 }
 
-//func materialBigBox() -> MaterialNode {
-//  let node = MaterialNode(type: .hero, id: id)
-//  node.geometry = bigBoxGeometry()
-//  
-//  node.gameID = id
-//  node.host = self
-//
-//  node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
-//  node.physicsBody?.mass = 4
-//  node.physicsBody?.restitution = 0
-//  node.physicsBody?.categoryBitMask = EntityType.hero.rawValue
-//  node.physicsBody?.collisionBitMask = EntityType.hero.rawValue | EntityType.field.rawValue
-//  node.physicsBody?.contactTestBitMask = EntityType.hero.rawValue
-//}
-//
-//func bigBoxGeometry() -> SCNGeometry {
-//  let box: SCNBox
-//  let cellSize: CGFloat = FieldConstants.defaultCellSize
-//
-//  box = SCNBox(
-//    width: cellSize * 0.4,
-//    height: cellSize,
-//    length: cellSize * 0.4,
-//    chamferRadius: 0)
-//    
-//  box.firstMaterial?.diffuse.contents = Color.DarkTheme.Violet.primary
-//  box.firstMaterial?.isDoubleSided = true
-//  
-//  return box
-//}
+let bigCubeNode = { () -> MaterialNode in
+  var box = SCNBox()
+  let color: Color
+  let cellSize: CGFloat = FieldConstants.defaultCellSize
+  var uuid = String(UUID().uuidString.prefix(6))
+
+  box = SCNBox(width: cellSize * 0.4, height: cellSize, length: cellSize * 0.4, chamferRadius: 0)
+  color = Color.DarkTheme.Violet.primary
+  uuid.append("-big")
+
+  box.firstMaterial?.diffuse.contents = color
+  box.firstMaterial?.isDoubleSided = true
+
+  let node = defaultHeroNode()
+  node.gameID = uuid
+  node.geometry = box
+
+  return node
+}
+
+let regularCubeNode = { () -> MaterialNode in
+  var box = SCNBox()
+  let color: Color
+  let cellSize: CGFloat = FieldConstants.defaultCellSize
+  var uuid = String(UUID().uuidString.prefix(6))
+
+  box = SCNBox(width: cellSize * 0.4, height: cellSize * 0.9, length: cellSize * 0.4, chamferRadius: 0)
+  color = Color.DarkTheme.Violet.accent
+  uuid.append("-regular")
+
+  box.firstMaterial?.diffuse.contents = color
+  box.firstMaterial?.isDoubleSided = true
+
+  let node = defaultHeroNode()
+  node.gameID = uuid
+  node.geometry = box
+
+  return node
+}
+
+let smallCubeNode = { () -> MaterialNode in
+  var box = SCNBox()
+  let color: Color
+  let cellSize: CGFloat = FieldConstants.defaultCellSize
+  var uuid = String(UUID().uuidString.prefix(6))
+
+  box = SCNBox(width: cellSize * 0.2, height: cellSize * 0.8, length: cellSize * 0.2, chamferRadius: 0)
+  color = Color.DarkTheme.Violet.minor
+  uuid.append("-small")
+
+  box.firstMaterial?.diffuse.contents = color
+  box.firstMaterial?.isDoubleSided = true
+
+  let node = defaultHeroNode()
+  node.gameID = uuid
+  node.geometry = box
+
+  return node
+}
+
+let defaultHeroNode = { () -> MaterialNode in
+  let node = MaterialNode(type: .hero)
+
+  node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+  node.physicsBody?.mass = 4
+  node.physicsBody?.restitution = 0
+  node.physicsBody?.categoryBitMask = EntityType.hero.rawValue
+  node.physicsBody?.collisionBitMask = EntityType.hero.rawValue | EntityType.field.rawValue
+  node.physicsBody?.contactTestBitMask = EntityType.hero.rawValue
+
+  return node
+}
 

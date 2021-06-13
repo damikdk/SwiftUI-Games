@@ -38,12 +38,27 @@ struct Hero: Entity {
   }
 }
 
-//static let Heroes = [
-//  
-//]
-//
-//let Lexa = Hero(
-//  gameID: "hero-Lexa",
-//  node: <#T##MaterialNode#>,
-//  name: "Lexa")
-//
+
+struct Hero: Equatable {
+  let name: String
+  let abilities: [Ability]
+
+  static func == (lhs: Hero, rhs: Hero) -> Bool {
+    return lhs.name == rhs.name
+  }
+}
+
+struct Heroes {
+  static let all = [
+    Heroes.Muhammad,
+    Heroes.Lexa,
+    Heroes.Arina,
+  ]
+
+  static let Muhammad = Hero(name: "Muhammad", abilities: [Abilities.HealUp])
+
+  static let Lexa = Hero(name: "Lexa", abilities: [Abilities.ShieldUp])
+
+  static let Arina = Hero(name: "Arina", abilities: [Abilities.HealUp])
+}
+
