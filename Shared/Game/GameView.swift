@@ -12,10 +12,10 @@ let cameraHeight: Float = 40
 
 struct GameView: View {
   @Binding var showing: Bool
-  var game: TBSGame
+  @ObservedObject var game: TBSGame
   
   var sceneRendererDelegate = StupidDelegate()
-
+  
   var cameraNode: SCNNode {
     let cameraNode = SCNNode()
     cameraNode.name = "Camera"
@@ -23,28 +23,28 @@ struct GameView: View {
     //cameraNode.eulerAngles = SCNVector3Make(Float.pi / -3, 0, 0)
     cameraNode.camera!.zFar = 200
     cameraNode.position = SCNVector3(x: 0, y: cameraHeight, z: cameraHeight)
-
+    
     let fieldCenter = game.field.center()
     cameraNode.look(at: fieldCenter)
-
+    
     return cameraNode
   }
-
+  
   var body: some View {
     // We can't get touch location with TapGesture, so hack:
     // (https://stackoverflow.com/a/56567649/7996650)
     let tap = DragGesture(minimumDistance: 0, coordinateSpace: .global)
       .onEnded { value in
         let translation = value.translation
-
+        
         if abs(translation.height) < 20,
            abs(translation.width) < 20 {
-
+          
           pick(atPoint: value.location)
         }
       }
-
-    ZStack(alignment: .topLeading) {
+    
+    ZStack {
       SceneView(
         scene: game.scene,
         pointOfView: cameraNode,
@@ -59,41 +59,115 @@ struct GameView: View {
           game.scene.background.contents = Color.DarkTheme.Violet.background.cgColor
         }
         .gesture(tap)
-
-      // HUD
-      HStack() {
-        Button {
-          showing.toggle()
-        } label: {
-          Image(systemName: "xmark")
-        }
-        .buttonStyle(MaterialButtonStyle())
-
-        Spacer()
-
-        Menu(content: {
-          ForEach(Heroes.all) { hero in
-            Button {
-              print(hero.name)
-            } label: {
-              Label {
-                Text(hero.name)
-              } icon: {
-                hero.image
-              }
-            }
-          }
-        }, label: {
+      
+      VStack {
+        // Top HUD
+        
+        HStack() {
+          // Top left botton
           Button {
-            
+            showing.toggle()
           } label: {
-            Image(systemName: "plus")
+            Image(systemName: "xmark")
           }
           .buttonStyle(MaterialButtonStyle())
-        })
+          
+          Spacer()
+          
+          // Top Right button
+          if let currentCell = game.currentFieldCell {
+            // Menu for adding new heroes
+            // if we have choosen field cell
+            
+            Menu(content: {
+              ForEach(Heroes.all) { hero in
+                Button {
+                  game.entities?.append(hero)
+                  game.field.put(
+                    object: hero.node,
+                    to: currentCell)
+                } label: {
+                  Label {
+                    Text(hero.name)
+                  } icon: {
+                    hero.image
+                  }
+                }
+              }
+            }, label: {
+              Button {} label: {
+                Image(systemName: "plus")
+              }
+              .buttonStyle(MaterialButtonStyle())
+            })
+          }
+        }
+        .font(.largeTitle)
+        .padding(.horizontal)
+        
+        
+        Spacer()
+        
+        // Bottom HUD
+        HStack(alignment: .bottom) {
+          // Bottom Left buttons
+          
+          if let currentHero = game.currentHero {
+            Button {
+              currentHero.node.highlight(for: 0.5)
+            } label: {
+              List {
+                Text("Name")
+                  .badge(currentHero.name)
+                  .listRowBackground(Color.clear)
+                
+                Text("HP")
+                  .badge(String(currentHero.HP))
+                  .listRowBackground(Color.clear)
+                
+                currentHero.image
+                  .resizable()
+                  .aspectRatio(contentMode: .fit)
+                  .padding()
+                  .frame(
+                    width: 170,
+                    height: 170)
+                  .listRowBackground(Color.clear)
+              }
+              .listStyle(PlainListStyle())
+              .font(.body)
+              .frame(
+                width: 200,
+                height: 250,
+                alignment: .center)
+            }
+            .buttonStyle(MaterialButtonStyle())
+          }
+          
+          Spacer()
+          
+          // Bottom Right buttons
+          if let currentHero = game.currentHero {
+            // Abilities of current Hero
+            ForEach(currentHero.abilities, id: \.name) { ability in
+              Button {
+                ability.action(game, currentHero)
+              } label: {
+                ability.icon
+                  .resizable()
+                  .aspectRatio(contentMode: .fit)
+                  .frame(
+                    minWidth: 70,
+                    maxWidth: 100,
+                    maxHeight: 100)
+              }
+              .buttonStyle(MaterialButtonStyle())
+            }
+          }
+        }
+        .font(.largeTitle)
+        .padding(20)
       }
-      .font(.largeTitle)
-      .padding(.horizontal)
     }
   }
 }
@@ -101,7 +175,7 @@ struct GameView: View {
 extension GameView {
   func pick(atPoint point: CGPoint) {
     print("Pick requested for point: \(point)")
-
+    
     // Find closest node
     if let firstNode = findFirstTouchableNode(atPoint: point) {
       if let materialNode = firstNode as? MaterialNode {
@@ -112,43 +186,43 @@ extension GameView {
       }
     }
   }
-
+  
   func findFirstNode(atPoint point: CGPoint) -> SCNNode? {
     guard let sceneRenderer = sceneRendererDelegate.renderer else {
       print("There is no SceneRenderer!")
       return nil
     }
-
+    
     let hitResults = sceneRenderer.hitTest(point, options: [:])
-
+    
     if hitResults.count == 0 {
       // check that we clicked on at least one object
       return nil
     }
-
+    
     // retrieved the first clicked object
     let hitResult = hitResults[0]
-
+    
     return hitResult.node
   }
-
+  
   func findFirstTouchableNode(atPoint point: CGPoint) -> SCNNode? {
     guard let sceneRenderer = sceneRendererDelegate.renderer else {
       print("There is no SceneRenderer!")
       return nil
     }
-
+    
     let options: [SCNHitTestOption : Any] = [SCNHitTestOption.searchMode: SCNHitTestSearchMode.all.rawValue]
     let hitResults = sceneRenderer.hitTest(point, options: options)
-
+    
     if hitResults.count == 0 {
       // check that we clicked on at least one object
       return nil
     }
-
+    
     // retrieved the first clicked object
     let hitResult = hitResults.first { $0.node.physicsBody != nil }
-
+    
     return hitResult?.node
   }
 }

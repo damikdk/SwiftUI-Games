@@ -32,28 +32,28 @@ extension SCNNode {
   func addPopup(
     with text: String,
     color: Color = .white,
-    scale: Double = 0.05,
-    time: Double = 0
+    scale: Double = 0.15,
+    time: Double = 2
   ) -> SCNNode {
     let textGeometry = SCNText(string: text, extrusionDepth: 0)
     textGeometry.flatness = 0.2
-
+    
     // Color text (it't not working!)
     for material in textGeometry.materials {
       material.emission.contents = color.cgColor
       material.diffuse.contents = color.cgColor
     }
-
+    
     let popupNode = SCNNode(geometry: textGeometry)
-
+    
     popupNode.scale = SCNVector3(scale, scale, scale)
     popupNode.position = SCNVector3(
       popupNode.position.x,
-      popupNode.position.y + 1.5,
+      popupNode.position.y + 3,
       popupNode.position.z)
     
     popupNode.constraints = [SCNBillboardConstraint()]
-
+    
     // Center text node in parent
     // (https://stackoverflow.com/a/49860463/7996650)
     let (min, max) = popupNode.boundingBox
@@ -61,22 +61,22 @@ extension SCNNode {
     let dy = min.y + 0.5 * (max.y - min.y)
     let dz = min.z + 0.5 * (max.z - min.z)
     popupNode.pivot = SCNMatrix4MakeTranslation(dx, dy, dz)
-
+    
     self.addChildNode(popupNode)
-
+    
     if time > 0 {
       popupNode.runAction(
         SCNAction.sequence([
           SCNAction.moveBy(x: 0, y: 2, z: 0, duration: 1),
         ]))
-
+      
       popupNode.runAction(
         SCNAction.sequence([
           SCNAction.wait(duration: time),
           SCNAction.removeFromParentNode()
         ]))
     }
-
+    
     return popupNode
   }
 }

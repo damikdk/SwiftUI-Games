@@ -42,8 +42,8 @@ struct Abilities {
   
   static let FrozenArrow = Ability(
     name: "Frozen Arrow",
-    icon: Image(systemName: "arrow"),
-    action: { game, charater in
+    icon: Image(systemName: "thermometer.snowflake"),
+    action: { game, hero in
     
     print("Run action for Frozen Array ability")
     
@@ -61,11 +61,11 @@ struct Abilities {
       // Add debug line showing direction
       game.scene.rootNode.addDebugLine(
         from: hostCharacter.node.worldPosition,
-        to: charater.node.worldPosition)
+        to: hero.node.worldPosition)
       
       let materialNodes = hitscan(
         from: hostCharacter.node.worldPosition,
-        to: charater.node.worldPosition,
+        to: hero.node.worldPosition,
         in: game.scene,
         with: [.hero, .shield, .field])
       
@@ -82,8 +82,7 @@ struct Abilities {
           break
         }
         
-        if body.type == .hero,
-           var hero = game.findEntity(by: body.gameID) as? Hero {
+        if body.type == .hero {
           let damage = 2
           let damagePopUpNode = body.addPopup(with: "\(damage)", color: .red)
           
@@ -93,6 +92,7 @@ struct Abilities {
               SCNAction.removeFromParentNode()
             ]))
           
+          var hero = hero
           hero.damage(amount: damage)
         }
       }

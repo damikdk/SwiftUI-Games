@@ -25,17 +25,6 @@ class MaterialNode: SCNNode {
     name = "Material Node (\(type), \(gameID ?? ""))"
   }
 
-  init(hero: Hero, id: String? = nil) {
-    self.type = .hero
-
-    if (id != nil) {
-      self.gameID = id
-    }
-
-    super.init()
-    name = "Material Node (\(type), \(gameID ?? ""))"
-  }
-
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -79,7 +68,7 @@ let bigCubeNode = { () -> MaterialNode in
   color = Color.DarkTheme.Violet.primary
   uuid.append("-big")
 
-  box.firstMaterial?.diffuse.contents = color
+  box.firstMaterial?.diffuse.contents = color.cgColor
   box.firstMaterial?.isDoubleSided = true
 
   let node = defaultHeroNode()
@@ -99,7 +88,7 @@ let regularCubeNode = { () -> MaterialNode in
   color = Color.DarkTheme.Violet.accent
   uuid.append("-regular")
 
-  box.firstMaterial?.diffuse.contents = color
+  box.firstMaterial?.diffuse.contents = color.cgColor
   box.firstMaterial?.isDoubleSided = true
 
   let node = defaultHeroNode()
@@ -119,7 +108,7 @@ let smallCubeNode = { () -> MaterialNode in
   color = Color.DarkTheme.Violet.minor
   uuid.append("-small")
 
-  box.firstMaterial?.diffuse.contents = color
+  box.firstMaterial?.diffuse.contents = color.cgColor
   box.firstMaterial?.isDoubleSided = true
 
   let node = defaultHeroNode()

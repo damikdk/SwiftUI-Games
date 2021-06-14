@@ -56,13 +56,15 @@ struct Heroes {
 
   static let Muhammad = { () -> Hero in
     var uuid = UUID.short() + "-Hero-Muhammad"
-
+      
     let hero = Hero(
       gameID: uuid,
       node: regularCubeNode(),
       name: "Muhammad",
       abilities: [Abilities.HealUp],
       image: Image(systemName: "hand.point.up"))
+    
+    hero.node.host = hero
 
     return hero
   }
@@ -77,6 +79,8 @@ struct Heroes {
       abilities: [Abilities.ShieldUp],
       image: Image(systemName: "person"))
 
+    hero.node.host = hero
+
     return hero
   }
 
@@ -90,6 +94,8 @@ struct Heroes {
       abilities: [Abilities.HealUp],
       image: Image(systemName: "person.3"))
 
+    hero.node.host = hero
+
     return hero
   }
 
@@ -102,6 +108,8 @@ struct Heroes {
       name: "Sofia",
       abilities: [Abilities.FrozenArrow],
       image: Image(systemName: "snow"))
+
+    hero.node.host = hero
 
     return hero
   }
