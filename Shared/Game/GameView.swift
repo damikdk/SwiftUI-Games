@@ -68,13 +68,32 @@ struct GameView: View {
           Image(systemName: "xmark")
         }
         .buttonStyle(MaterialButtonStyle())
-        .font(.largeTitle)
-        .padding(.leading)
-        
-//        List(game.field.cells, id: \.gameID) { cell in
-//          Text("\(cell.gameID)")
-//        }
+
+        Spacer()
+
+        Menu(content: {
+          ForEach(Heroes.all) { hero in
+            Button {
+              print(hero.name)
+            } label: {
+              Label {
+                Text(hero.name)
+              } icon: {
+                hero.image
+              }
+            }
+          }
+        }, label: {
+          Button {
+            
+          } label: {
+            Image(systemName: "plus")
+          }
+          .buttonStyle(MaterialButtonStyle())
+        })
       }
+      .font(.largeTitle)
+      .padding(.horizontal)
     }
   }
 }

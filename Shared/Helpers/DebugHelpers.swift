@@ -91,3 +91,9 @@ extension SCNGeometry {
     return SCNGeometry(sources: [source], elements: [element])
   }
 }
+
+extension UUID {
+  static func short() -> String{
+    return String(UUID().uuidString.prefix(6))
+  }
+}

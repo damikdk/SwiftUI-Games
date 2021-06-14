@@ -41,8 +41,8 @@ class Shield: Entity {
     let geometry: SCNGeometry
     let color: Color
     let cellSize: CGFloat = FieldConstants.defaultCellSize
-    var uuid = UUID().uuidString
-    
+    var uuid = UUID.short()
+
     switch form {
     case .circle:
       geometry = SCNCylinder(radius: cellSize / 2, height: cellSize)

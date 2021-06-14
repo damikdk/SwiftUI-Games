@@ -25,6 +25,17 @@ class MaterialNode: SCNNode {
     name = "Material Node (\(type), \(gameID ?? ""))"
   }
 
+  init(hero: Hero, id: String? = nil) {
+    self.type = .hero
+
+    if (id != nil) {
+      self.gameID = id
+    }
+
+    super.init()
+    name = "Material Node (\(type), \(gameID ?? ""))"
+  }
+
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -62,7 +73,7 @@ let bigCubeNode = { () -> MaterialNode in
   var box = SCNBox()
   let color: Color
   let cellSize: CGFloat = FieldConstants.defaultCellSize
-  var uuid = String(UUID().uuidString.prefix(6))
+  var uuid = UUID.short()
 
   box = SCNBox(width: cellSize * 0.4, height: cellSize, length: cellSize * 0.4, chamferRadius: 0)
   color = Color.DarkTheme.Violet.primary
@@ -82,7 +93,7 @@ let regularCubeNode = { () -> MaterialNode in
   var box = SCNBox()
   let color: Color
   let cellSize: CGFloat = FieldConstants.defaultCellSize
-  var uuid = String(UUID().uuidString.prefix(6))
+  var uuid = UUID.short()
 
   box = SCNBox(width: cellSize * 0.4, height: cellSize * 0.9, length: cellSize * 0.4, chamferRadius: 0)
   color = Color.DarkTheme.Violet.accent
@@ -102,7 +113,7 @@ let smallCubeNode = { () -> MaterialNode in
   var box = SCNBox()
   let color: Color
   let cellSize: CGFloat = FieldConstants.defaultCellSize
-  var uuid = String(UUID().uuidString.prefix(6))
+  var uuid = UUID.short()
 
   box = SCNBox(width: cellSize * 0.2, height: cellSize * 0.8, length: cellSize * 0.2, chamferRadius: 0)
   color = Color.DarkTheme.Violet.minor
