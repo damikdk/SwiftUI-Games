@@ -103,47 +103,55 @@ struct GameView: View {
           }
         }
         .font(.largeTitle)
-        .padding(.horizontal)
-        
+        .padding(.horizontal, 5)
         
         Spacer()
         
         // Bottom HUD
         HStack(alignment: .bottom) {
+
           // Bottom Left buttons
-          
+
           if let currentHero = game.currentHero {
             Button {
-              currentHero.node.highlight(for: 0.5)
+              currentHero.node.highlight(for: 0.2)
             } label: {
-              List {
-                Text("Name")
-                  .badge(currentHero.name)
+              List() {
+                // TODO: Fix centered image
+                HStack {
+                  Spacer()
+
+                  currentHero.image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(
+                      width: 70,
+                      height: 70)
+
+                  Spacer()
+                }
+                .padding(5)
+                .listRowBackground(Color.clear)
+
+                Text(currentHero.name)
+                  .font(.headline)
                   .listRowBackground(Color.clear)
                 
                 Text("HP")
                   .badge(String(currentHero.HP))
                   .listRowBackground(Color.clear)
-                
-                currentHero.image
-                  .resizable()
-                  .aspectRatio(contentMode: .fit)
-                  .padding()
-                  .frame(
-                    width: 170,
-                    height: 170)
-                  .listRowBackground(Color.clear)
               }
               .listStyle(PlainListStyle())
               .font(.body)
+              .padding(.horizontal, -12)
               .frame(
-                width: 200,
-                height: 250,
+                maxWidth: 120,
+                maxHeight: 180,
                 alignment: .center)
             }
             .buttonStyle(MaterialButtonStyle())
           }
-          
+
           Spacer()
           
           // Bottom Right buttons
@@ -157,16 +165,16 @@ struct GameView: View {
                   .resizable()
                   .aspectRatio(contentMode: .fit)
                   .frame(
-                    minWidth: 70,
-                    maxWidth: 100,
-                    maxHeight: 100)
+                    minWidth: 50,
+                    maxWidth: 70,
+                    maxHeight: 70)
               }
               .buttonStyle(MaterialButtonStyle())
             }
           }
         }
         .font(.largeTitle)
-        .padding(20)
+        .padding(5)
       }
     }
   }

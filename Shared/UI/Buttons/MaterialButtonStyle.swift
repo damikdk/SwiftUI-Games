@@ -11,9 +11,9 @@ struct MaterialButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
         .foregroundColor(.primary)
-        .padding()
+        .padding(12)
         .background(.ultraThinMaterial)
-        .cornerRadius(30)
+        .cornerRadius(20)
         .scaleEffect(configuration.isPressed ? 0.9 : 1)
     }
 }
