@@ -8,6 +8,7 @@
 import SwiftUI
 import SceneKit
 
+// TODO: Make it class, ObservableObject to avoid all of this 'mutating' things
 struct Hero: Entity, Identifiable {
   let id = UUID()
 
@@ -27,6 +28,8 @@ struct Hero: Entity, Identifiable {
 
   mutating func damage(amount: Int) {
     self.HP = self.HP - amount
+
+    print("Damage \(amount) dealed to \(self.name). Current HP: \(self.HP)")
     
     if self.HP <= 0 {
       print("DEATH of \(self)")
@@ -47,19 +50,21 @@ struct Hero: Entity, Identifiable {
 }
 
 struct Heroes {
-  static let all = [
-    Heroes.Muhammad(),
-    Heroes.Lexa(),
-    Heroes.Arina(),
-    Heroes.Sofia()
-  ]
+  static func all() -> [Hero] {
+    return  [
+      Heroes.Muhammad(),
+      Heroes.Lexa(),
+      Heroes.Arina(),
+      Heroes.Sofia()
+    ]
+  }
 
   static let Muhammad = { () -> Hero in
     var uuid = UUID.short() + "-Hero-Muhammad"
       
     let hero = Hero(
       gameID: uuid,
-      node: regularCubeNode(),
+      node: regularCubeNode(.lightGrayFancy),
       name: "Muhammad",
       abilities: [Abilities.HealUp],
       image: Image(systemName: "hand.point.up"))
@@ -74,7 +79,7 @@ struct Heroes {
 
     let hero = Hero(
       gameID: uuid,
-      node: bigCubeNode(),
+      node: bigCubeNode(.darkRed),
       name: "Lexa",
       abilities: [Abilities.ShieldUp],
       image: Image(systemName: "person"))
@@ -89,9 +94,9 @@ struct Heroes {
 
     let hero = Hero(
       gameID: uuid,
-      node: smallCubeNode(),
+      node: smallCubeNode(.plum),
       name: "Arina",
-      abilities: [Abilities.HealUp],
+      abilities: Abilities.all,
       image: Image(systemName: "person.3"))
 
     hero.node.host = hero
@@ -104,7 +109,7 @@ struct Heroes {
 
     let hero = Hero(
       gameID: uuid,
-      node: regularCubeNode(),
+      node: regularCubeNode(.darkDeepBlue),
       name: "Sofia",
       abilities: [Abilities.FrozenArrow],
       image: Image(systemName: "snow"))

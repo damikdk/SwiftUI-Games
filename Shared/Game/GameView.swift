@@ -59,7 +59,7 @@ struct GameView: View {
           game.scene.background.contents = Color.DarkTheme.Violet.background.cgColor
         }
         .gesture(tap)
-      
+
       VStack {
         // Top HUD
         
@@ -80,7 +80,7 @@ struct GameView: View {
             // if we have choosen field cell
             
             Menu(content: {
-              ForEach(Heroes.all) { hero in
+              ForEach(Heroes.all()) { hero in
                 Button {
                   game.entities?.append(hero)
                   game.field.put(
@@ -103,55 +103,70 @@ struct GameView: View {
           }
         }
         .font(.largeTitle)
-        .padding(.horizontal, 5)
+        .padding(.horizontal)
         
         Spacer()
         
         // Bottom HUD
         HStack(alignment: .bottom) {
-
           // Bottom Left buttons
-
-          if let currentHero = game.currentHero {
-            Button {
-              currentHero.node.highlight(for: 0.2)
-            } label: {
-              List() {
-                // TODO: Fix centered image
-                HStack {
-                  Spacer()
-
-                  currentHero.image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(
-                      width: 70,
-                      height: 70)
-
-                  Spacer()
-                }
-                .padding(5)
-                .listRowBackground(Color.clear)
-
-                Text(currentHero.name)
-                  .font(.headline)
-                  .listRowBackground(Color.clear)
-                
-                Text("HP")
-                  .badge(String(currentHero.HP))
-                  .listRowBackground(Color.clear)
+          VStack(alignment: .leading) {
+            
+            if let currentHero = game.currentHero {
+              // Deselect Hero button
+              // TODO: Make it above (zIndex kind of) the Hero panel
+              Button {
+                game.currentHero = nil
+              } label: {
+                Image(systemName: "xmark")
               }
-              .listStyle(PlainListStyle())
-              .font(.body)
-              .padding(.horizontal, -12)
-              .frame(
-                maxWidth: 120,
-                maxHeight: 180,
-                alignment: .center)
+              .font(.title3)
+              .buttonStyle(MaterialButtonStyle())
+              .offset(y: 5)
+              
+              // Current Hero panel
+              Button {
+                currentHero.node.highlight(for: 0.2)
+              } label: {
+                List() {
+                  // TODO: Fix centered image
+                  HStack {
+                    Spacer()
+                    
+                    currentHero.image
+                      .resizable()
+                      .aspectRatio(contentMode: .fit)
+                      .frame(
+                        width: 70,
+                        height: 70)
+                    
+                    Spacer()
+                  }
+                  .padding(5)
+                  .listRowBackground(Color.clear)
+                  
+                  Text(currentHero.name)
+                    .font(.headline)
+                    .listRowBackground(Color.clear)
+                  
+                  Text("HP")
+                    .badge(String(currentHero.HP))
+                    .listRowBackground(Color.clear)
+                }
+                .listStyle(PlainListStyle())
+                .font(.body)
+                // Hack for stupid ListRow paddings
+                .padding(.horizontal, -12)
+                .frame(
+                  minWidth: 90,
+                  maxWidth: 120,
+                  maxHeight: 180,
+                  alignment: .center)
+              }
+              .buttonStyle(MaterialButtonStyle())
             }
-            .buttonStyle(MaterialButtonStyle())
           }
-
+          
           Spacer()
           
           // Bottom Right buttons
@@ -165,7 +180,7 @@ struct GameView: View {
                   .resizable()
                   .aspectRatio(contentMode: .fit)
                   .frame(
-                    minWidth: 50,
+                    minWidth: 30,
                     maxWidth: 70,
                     maxHeight: 70)
               }
