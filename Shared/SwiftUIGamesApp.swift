@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct TBS3App: App {
+struct SwiftUIGamesApp: App {
     var body: some Scene {
         WindowGroup {
             MenuView()

@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "EDE3A14C266F803A00362308"
                BuildableName = "TBS3.app"
-               BlueprintName = "TBS3 (iOS)"
-               ReferencedContainer = "container:TBS3.xcodeproj">
+               BlueprintName = "SwiftUI-Games (iOS)"
+               ReferencedContainer = "container:SwiftUI-Games.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,8 +46,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "EDE3A14C266F803A00362308"
             BuildableName = "TBS3.app"
-            BlueprintName = "TBS3 (iOS)"
-            ReferencedContainer = "container:TBS3.xcodeproj">
+            BlueprintName = "SwiftUI-Games (iOS)"
+            ReferencedContainer = "container:SwiftUI-Games.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -63,8 +63,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "EDE3A14C266F803A00362308"
             BuildableName = "TBS3.app"
-            BlueprintName = "TBS3 (iOS)"
-            ReferencedContainer = "container:TBS3.xcodeproj">
+            BlueprintName = "SwiftUI-Games (iOS)"
+            ReferencedContainer = "container:SwiftUI-Games.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

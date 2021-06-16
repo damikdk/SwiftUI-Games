@@ -15,7 +15,7 @@ struct GameView: View {
   @ObservedObject var game: TBSGame
   
   var sceneRendererDelegate = StupidDelegate()
-  
+
   var cameraNode: SCNNode {
     let cameraNode = SCNNode()
     cameraNode.name = "Camera"

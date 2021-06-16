@@ -16,7 +16,7 @@
 		ED63086F2670CB73003FD347 /* ScaleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED63086E2670CB73003FD347 /* ScaleButtonStyle.swift */; };
 		EDD3DBCC26700EF1001E7373 /* SCNVector3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3DBCB26700EF1001E7373 /* SCNVector3+Extensions.swift */; };
 		EDD3DBCE26701B97001E7373 /* Hitscan.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3DBCD26701B97001E7373 /* Hitscan.swift */; };
-		EDE3A154266F803A00362308 /* TBS3App.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE3A146266F803900362308 /* TBS3App.swift */; };
+		EDE3A154266F803A00362308 /* SwiftUIGamesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE3A146266F803900362308 /* SwiftUIGamesApp.swift */; };
 		EDE3A158266F803A00362308 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDE3A148266F803A00362308 /* Assets.xcassets */; };
 		EDE3A16F266F83E300362308 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE3A163266F83E300362308 /* CardView.swift */; };
 		EDE3A170266F83E300362308 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE3A164266F83E300362308 /* MenuView.swift */; };
@@ -39,9 +39,9 @@
 		ED63086E2670CB73003FD347 /* ScaleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleButtonStyle.swift; sourceTree = "<group>"; };
 		EDD3DBCB26700EF1001E7373 /* SCNVector3+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Extensions.swift"; sourceTree = "<group>"; };
 		EDD3DBCD26701B97001E7373 /* Hitscan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hitscan.swift; sourceTree = "<group>"; };
-		EDE3A146266F803900362308 /* TBS3App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TBS3App.swift; sourceTree = "<group>"; };
+		EDE3A146266F803900362308 /* SwiftUIGamesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIGamesApp.swift; sourceTree = "<group>"; };
 		EDE3A148266F803A00362308 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		EDE3A14D266F803A00362308 /* TBS3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TBS3.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDE3A14D266F803A00362308 /* SwiftUI-Games.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUI-Games.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDE3A163266F83E300362308 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		EDE3A164266F83E300362308 /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		EDE3A166266F83E300362308 /* Themes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 				ED63086B2670C8EB003FD347 /* UI */,
 				EDE3A169266F83E300362308 /* Game */,
 				EDE3A165266F83E300362308 /* Helpers */,
-				EDE3A146266F803900362308 /* TBS3App.swift */,
+				EDE3A146266F803900362308 /* SwiftUIGamesApp.swift */,
 				EDE3A148266F803A00362308 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -116,7 +116,7 @@
 		EDE3A14E266F803A00362308 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EDE3A14D266F803A00362308 /* TBS3.app */,
+				EDE3A14D266F803A00362308 /* SwiftUI-Games.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -166,9 +166,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		EDE3A14C266F803A00362308 /* TBS3 (iOS) */ = {
+		EDE3A14C266F803A00362308 /* SwiftUI-Games (iOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EDE3A15C266F803A00362308 /* Build configuration list for PBXNativeTarget "TBS3 (iOS)" */;
+			buildConfigurationList = EDE3A15C266F803A00362308 /* Build configuration list for PBXNativeTarget "SwiftUI-Games (iOS)" */;
 			buildPhases = (
 				EDE3A149266F803A00362308 /* Sources */,
 				EDE3A14A266F803A00362308 /* Frameworks */,
@@ -178,9 +178,9 @@
 			);
 			dependencies = (
 			);
-			name = "TBS3 (iOS)";
+			name = "SwiftUI-Games (iOS)";
 			productName = "TBS3 (iOS)";
-			productReference = EDE3A14D266F803A00362308 /* TBS3.app */;
+			productReference = EDE3A14D266F803A00362308 /* SwiftUI-Games.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -198,7 +198,7 @@
 					};
 				};
 			};
-			buildConfigurationList = EDE3A144266F803800362308 /* Build configuration list for PBXProject "TBS3" */;
+			buildConfigurationList = EDE3A144266F803800362308 /* Build configuration list for PBXProject "SwiftUI-Games" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -211,7 +211,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				EDE3A14C266F803A00362308 /* TBS3 (iOS) */,
+				EDE3A14C266F803A00362308 /* SwiftUI-Games (iOS) */,
 			);
 		};
 /* End PBXProject section */
@@ -248,7 +248,7 @@
 				EDE3A171266F83E300362308 /* Themes.swift in Sources */,
 				EDE3A174266F83E300362308 /* GameView.swift in Sources */,
 				ED63086F2670CB73003FD347 /* ScaleButtonStyle.swift in Sources */,
-				EDE3A154266F803A00362308 /* TBS3App.swift in Sources */,
+				EDE3A154266F803A00362308 /* SwiftUIGamesApp.swift in Sources */,
 				EDD3DBCE26701B97001E7373 /* Hitscan.swift in Sources */,
 				EDD3DBCC26700EF1001E7373 /* SCNVector3+Extensions.swift in Sources */,
 			);
@@ -379,11 +379,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BZ82DRDZY8;
+				DEVELOPMENT_TEAM = CQ9KZP4TXC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleExecutable = TBS3;
-				INFOPLIST_KEY_CFBundleName = TBS3;
+				INFOPLIST_KEY_CFBundleExecutable = "SwiftUI-Games";
+				INFOPLIST_KEY_CFBundleName = "SwiftUI-Games";
 				INFOPLIST_KEY_CFBundleVersion = 1;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -397,8 +397,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.damirka.TBS3;
-				PRODUCT_NAME = TBS3;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.damirka.SwiftUI-Games";
+				PRODUCT_NAME = "SwiftUI-Games";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -413,11 +413,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BZ82DRDZY8;
+				DEVELOPMENT_TEAM = CQ9KZP4TXC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleExecutable = TBS3;
-				INFOPLIST_KEY_CFBundleName = TBS3;
+				INFOPLIST_KEY_CFBundleExecutable = "SwiftUI-Games";
+				INFOPLIST_KEY_CFBundleName = "SwiftUI-Games";
 				INFOPLIST_KEY_CFBundleVersion = 1;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -431,8 +431,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.damirka.TBS3;
-				PRODUCT_NAME = TBS3;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.damirka.SwiftUI-Games";
+				PRODUCT_NAME = "SwiftUI-Games";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -444,7 +444,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		EDE3A144266F803800362308 /* Build configuration list for PBXProject "TBS3" */ = {
+		EDE3A144266F803800362308 /* Build configuration list for PBXProject "SwiftUI-Games" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EDE3A15A266F803A00362308 /* Debug */,
@@ -453,7 +453,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EDE3A15C266F803A00362308 /* Build configuration list for PBXNativeTarget "TBS3 (iOS)" */ = {
+		EDE3A15C266F803A00362308 /* Build configuration list for PBXNativeTarget "SwiftUI-Games (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EDE3A15D266F803A00362308 /* Debug */,
