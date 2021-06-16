@@ -11,8 +11,8 @@ import SwiftUI
 
 struct MenuView: View {
   @State private var showingGame = false
-  @State private var currentGame: TBSGame?
-    
+  @State private var currentGame: Game?
+  
   var body: some View {
     // Hack since iOS 14 can't update State
     // (https://developer.apple.com/forums/thread/652080)
@@ -20,7 +20,7 @@ struct MenuView: View {
       .frame(width: 0, height: 0)
       .hidden()
     
-    List(tbsGames, id: \.name) { game in
+    List(Games, id: \.name) { game in
       let cardInfo = CardInfo(
         title: game.name,
         details: game.description)
@@ -36,21 +36,12 @@ struct MenuView: View {
     .listStyle(.plain)
     .fullScreenCover(isPresented: $showingGame) {
       if let game = currentGame {
-        GameView(showing: $showingGame, game: game)
+        if let tbsGame = game as? TBSGame {
+          TBSGameView(showing: $showingGame, game: tbsGame)
+        } else if let minimalGame = game as? MinimalDemo {
+          MinimalDemoView(showing: $showingGame, game: minimalGame)
+        }
       }
     }
-  }
-}
-
-struct MenuView_Previews: PreviewProvider {
-  static var previews: some View {
-    MenuView()
-      .previewLayout(.fixed(width: 400, height: 600))
-    
-    MenuView()
-      .previewLayout(.fixed(width: 300, height: 500))
-    
-    MenuView()
-      .previewLayout(.fixed(width: 800, height: 300))
   }
 }

@@ -10,7 +10,7 @@ import SceneKit
 
 let cameraHeight: Float = 40
 
-struct GameView: View {
+struct TBSGameView: GameView {
   @Binding var showing: Bool
   @ObservedObject var game: TBSGame
   
@@ -22,11 +22,11 @@ struct GameView: View {
     cameraNode.camera = SCNCamera()
     //cameraNode.eulerAngles = SCNVector3Make(Float.pi / -3, 0, 0)
     cameraNode.camera!.zFar = 200
-    cameraNode.position = SCNVector3(x: 0, y: cameraHeight, z: cameraHeight)
     
     let fieldCenter = game.field.center()
+    cameraNode.position = fieldCenter + SCNVector3(0, cameraHeight, cameraHeight)
     cameraNode.look(at: fieldCenter)
-    
+
     return cameraNode
   }
   
@@ -195,7 +195,7 @@ struct GameView: View {
   }
 }
 
-extension GameView {
+extension TBSGameView {
   func pick(atPoint point: CGPoint) {
     print("Pick requested for point: \(point)")
     

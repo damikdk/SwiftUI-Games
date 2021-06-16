@@ -7,10 +7,10 @@
 
 import SceneKit
 
-class TBSGame: ObservableObject {
+class TBSGame: Game, ObservableObject {
   let name: String
   let description: String
-  
+
   var scene: SCNScene = SCNScene()
   var field: Field
   var entities: [Entity]?
@@ -94,7 +94,7 @@ let defaultOnFieldPress: ((TBSGame, FieldCell) -> Void) = { game, cell in
   }
 }
 
-let tbsGames = [
+let tbsGames: [Game] = [
   TBSGame(
     name: "Default",
     description: "7x7 field with default set of Heroes",

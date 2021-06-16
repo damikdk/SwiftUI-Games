@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "EDE3A14C266F803A00362308"
-               BuildableName = "TBS3.app"
+               BuildableName = "SwiftUI-Games.app"
                BlueprintName = "SwiftUI-Games (iOS)"
                ReferencedContainer = "container:SwiftUI-Games.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "EDE3A14C266F803A00362308"
-            BuildableName = "TBS3.app"
+            BuildableName = "SwiftUI-Games.app"
             BlueprintName = "SwiftUI-Games (iOS)"
             ReferencedContainer = "container:SwiftUI-Games.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "EDE3A14C266F803A00362308"
-            BuildableName = "TBS3.app"
+            BuildableName = "SwiftUI-Games.app"
             BlueprintName = "SwiftUI-Games (iOS)"
             ReferencedContainer = "container:SwiftUI-Games.xcodeproj">
          </BuildableReference>
