@@ -8,12 +8,12 @@
 import SwiftUI
 import SceneKit
 
-let cameraHeight: Float = 40
 
 struct TBSGameView: GameView {
   @Binding var showing: Bool
   @ObservedObject var game: TBSGame
-  
+  let cameraHeight: Float = 40
+
   var sceneRendererDelegate = StupidDelegate()
 
   var cameraNode: SCNNode {
