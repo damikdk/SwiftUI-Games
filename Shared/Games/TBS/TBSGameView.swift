@@ -12,24 +12,9 @@ import SceneKit
 struct TBSGameView: GameView {
   @Binding var showing: Bool
   @ObservedObject var game: TBSGame
-  let cameraHeight: Float = 40
-
-  var sceneRendererDelegate = StupidDelegate()
-
-  var cameraNode: SCNNode {
-    let cameraNode = SCNNode()
-    cameraNode.name = "Camera"
-    cameraNode.camera = SCNCamera()
-    //cameraNode.eulerAngles = SCNVector3Make(Float.pi / -3, 0, 0)
-    cameraNode.camera!.zFar = 200
-    
-    let fieldCenter = game.field.center()
-    cameraNode.position = fieldCenter + SCNVector3(0, cameraHeight, cameraHeight)
-    cameraNode.look(at: fieldCenter)
-
-    return cameraNode
-  }
   
+  var sceneRendererDelegate = StupidDelegate()
+    
   var body: some View {
     // We can't get touch location with TapGesture, so hack:
     // (https://stackoverflow.com/a/56567649/7996650)
@@ -43,23 +28,18 @@ struct TBSGameView: GameView {
           pick(atPoint: value.location)
         }
       }
-    
+        
     ZStack {
       SceneView(
         scene: game.scene,
-        pointOfView: cameraNode,
         options: [
           .allowsCameraControl,
           .temporalAntialiasingEnabled
         ],
         delegate: sceneRendererDelegate)
         .ignoresSafeArea()
-        .onAppear() {
-          game.prepare()
-          game.scene.background.contents = Color.DarkTheme.Violet.background.cgColor
-        }
         .gesture(tap)
-
+      
       VStack {
         // Top HUD
         
@@ -82,7 +62,6 @@ struct TBSGameView: GameView {
             Menu(content: {
               ForEach(Heroes.all()) { hero in
                 Button {
-                  game.entities?.append(hero)
                   game.field.put(
                     object: hero.node,
                     to: currentCell)

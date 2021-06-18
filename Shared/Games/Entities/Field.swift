@@ -18,7 +18,7 @@ struct FieldConstants {
 
 class Field {
   let node: SCNNode!
-  let size: Int!
+  let size: Int
   let cellSize: CGFloat!
   
   var cells: [FieldCell] = []
@@ -52,17 +52,23 @@ class Field {
         cell.physicsBody?.categoryBitMask = EntityType.field.rawValue
         cell.physicsBody?.collisionBitMask = EntityType.hero.rawValue | EntityType.field.rawValue
         
+        node.pivot = SCNMatrix4MakeTranslation(0, 0, 0);
+
         cells.append(FieldCell(gameID: stringIndex, node: cell))
         node.addChildNode(cell)
       }
     }
   }
   
-  func center() -> SCNVector3 {
+  func centerCell() -> FieldCell {
     let centerIndex = cells.count / 2
     let centerCell = cells[centerIndex]
     
-    return centerCell.node.position
+    return centerCell
+  }
+  
+  func center() -> SCNVector3 {
+    return centerCell().node.position
   }
   
   func put(object: SCNNode, to cell: FieldCell) {

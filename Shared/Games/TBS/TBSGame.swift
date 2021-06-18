@@ -6,6 +6,7 @@
 //
 
 import SceneKit
+import SwiftUI
 
 class TBSGame: Game, ObservableObject {
   let name: String
@@ -13,18 +14,19 @@ class TBSGame: Game, ObservableObject {
 
   var scene: SCNScene = SCNScene()
   var field: Field
-  var entities: [Entity]?
+  
+  private let cameraHeight: Float = 35
   
   init(
     name: String,
     description: String,
-    field: Field,
-    entities: [Entity]? = []
+    field: Field
   ) {
     self.name = name
     self.description = description
     self.field = field
-    self.entities = entities
+    
+    prepare()
   }
   
   @Published var currentHero: Hero?
@@ -39,14 +41,41 @@ class TBSGame: Game, ObservableObject {
   
   func prepare() {
     scene.rootNode.addChildNode(field.node)
+    scene.background.contents = Color.DarkTheme.Violet.background.cgColor
+            
+    let cameraNode = SCNNode()
+    cameraNode.name = "Camera"
+    cameraNode.camera = SCNCamera()
+    cameraNode.eulerAngles = SCNVector3Make(Float.pi / -3, 0, 0)
+    cameraNode.camera?.fieldOfView = 50
+    
+    let fieldCenter = field.center()
+    cameraNode.position = fieldCenter + SCNVector3(0, cameraHeight, cameraHeight)
+    cameraNode.look(at: fieldCenter)
+    
+    let centerConstraint = SCNLookAtConstraint(target: field.centerCell().node)
+    cameraNode.constraints = [centerConstraint]
+    
+    // Debug sphere
+    let sphereGeometry = SCNSphere(radius: 1)
+    sphereGeometry.firstMaterial?.diffuse.contents = Color.darkRed.cgColor
+    sphereGeometry.segmentCount = 20
+    let sphereNode = SCNNode(geometry: sphereGeometry)
+    sphereNode.position = fieldCenter
+
+    scene.rootNode.addChildNode(sphereNode)
+    scene.rootNode.addChildNode(cameraNode)
+    
+    // Left side heroes
+    for row in 1..<(field.size - 1) {
+      for column in 1..<(field.size - 1) {
+        let hero = Heroes.all().randomElement()!
+        let fieldCell = field.cells[row + field.size * column]
+        field.put(object: hero.node, to: fieldCell)
+      }
+    }
   }
-  
-  func findEntity(by gameID: String) -> Entity? {
-    return entities?.first(where: { entity in
-      return entity.gameID == gameID
-    })
-  }
-  
+    
   func pick(_ materialNode: MaterialNode) {
     switch materialNode.type {
     case .field:
@@ -93,25 +122,3 @@ let defaultOnFieldPress: ((TBSGame, FieldCell) -> Void) = { game, cell in
     game.field.move(node: hero.node, to: cell)
   }
 }
-
-let tbsGames: [Game] = [
-  TBSGame(
-    name: "Default",
-    description: "7x7 field with default set of Heroes",
-    field: Field(size: 7)),
-  
-  TBSGame(
-    name: "Small field",
-    description: "3x3 field with a couple of Heroes",
-    field: Field(size: 3)),
-  
-  TBSGame(
-    name: "Big field",
-    description: "\(FieldConstants.maxFieldSize)x\(FieldConstants.maxFieldSize) field with random set of Heroes",
-    field: Field(size: FieldConstants.maxFieldSize)),
-  
-  TBSGame(
-    name: "Random",
-    description: "Random field size (3x3 to \(FieldConstants.maxFieldSize)x\(FieldConstants.maxFieldSize)) with random set of Heroes",
-    field: Field(size: Int.random(in: 3..<FieldConstants.maxFieldSize))),
-]

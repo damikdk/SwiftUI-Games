@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		971D8B41267D495B00F0A193 /* View+Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971D8B40267D495B00F0A193 /* View+Extenstions.swift */; };
 		978C1026267379B100E23D85 /* StupidDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978C1025267379B100E23D85 /* StupidDelegate.swift */; };
 		978C102826737CA100E23D85 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978C102726737CA100E23D85 /* Entity.swift */; };
 		978C102B26737E3B00E23D85 /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978C102A26737E3B00E23D85 /* Hero.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		971D8B40267D495B00F0A193 /* View+Extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extenstions.swift"; sourceTree = "<group>"; };
 		978C1025267379B100E23D85 /* StupidDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StupidDelegate.swift; sourceTree = "<group>"; };
 		978C102726737CA100E23D85 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		978C102A26737E3B00E23D85 /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			children = (
 				EDE3A162266F83E300362308 /* Menu */,
 				EDC4F3B32670FAFA0048E885 /* Buttons */,
+				971D8B40267D495B00F0A193 /* View+Extenstions.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				978C102B26737E3B00E23D85 /* Hero.swift in Sources */,
 				978C102F2673846800E23D85 /* Shield.swift in Sources */,
 				EDE3A176266F83E300362308 /* Field.swift in Sources */,
+				971D8B41267D495B00F0A193 /* View+Extenstions.swift in Sources */,
 				ED63086D2670C91C003FD347 /* MaterialButtonStyle.swift in Sources */,
 				EDE3A175266F83E300362308 /* TBSGame.swift in Sources */,
 				EDE3A173266F83E300362308 /* Samples.swift in Sources */,
