@@ -15,7 +15,7 @@ class TBSGame: Game, ObservableObject {
   var scene: SCNScene = SCNScene()
   var field: Field
   
-  private let cameraHeight: Float = 35
+  private let cameraHeight: Float = 40
   
   init(
     name: String,
@@ -40,33 +40,41 @@ class TBSGame: Game, ObservableObject {
   var onFieldPress: ((TBSGame, FieldCell) -> Void) = defaultOnFieldPress
   
   func prepare() {
-    scene.rootNode.addChildNode(field.node)
     scene.background.contents = Color.DarkTheme.Violet.background.cgColor
             
     let cameraNode = SCNNode()
-    cameraNode.name = "Camera"
+    cameraNode.name = "CameraHuyamera"
     cameraNode.camera = SCNCamera()
-    cameraNode.eulerAngles = SCNVector3Make(Float.pi / -3, 0, 0)
-    cameraNode.camera?.fieldOfView = 50
+    cameraNode.eulerAngles = SCNVector3(Float.pi / -3, 0, 0)
+    cameraNode.camera?.fieldOfView = 55
+    cameraNode.camera?.automaticallyAdjustsZRange = true
     
     let fieldCenter = field.center()
-    cameraNode.position = fieldCenter + SCNVector3(0, cameraHeight, cameraHeight)
+    cameraNode.position = fieldCenter + SCNVector3(0, cameraHeight, cameraHeight / 2)
     cameraNode.look(at: fieldCenter)
     
-    let centerConstraint = SCNLookAtConstraint(target: field.centerCell().node)
-    cameraNode.constraints = [centerConstraint]
+//    let centerConstraint = SCNLookAtConstraint(target: field.centerCell().node)
+//    cameraNode.constraints = [centerConstraint]
     
     // Debug sphere
-    let sphereGeometry = SCNSphere(radius: 1)
+    let sphereGeometry = SCNSphere(radius: 0.5)
     sphereGeometry.firstMaterial?.diffuse.contents = Color.darkRed.cgColor
-    sphereGeometry.segmentCount = 20
     let sphereNode = SCNNode(geometry: sphereGeometry)
     sphereNode.position = fieldCenter
 
+    scene.rootNode.addChildNode(field.node)
     scene.rootNode.addChildNode(sphereNode)
     scene.rootNode.addChildNode(cameraNode)
     
-    // Left side heroes
+    // Light
+    let spotlight = defaultLightNode(mode: .spot)
+    spotlight.position = fieldCenter + SCNVector3(0, cameraHeight, 20)
+    spotlight.look(at: fieldCenter)
+
+    scene.rootNode.addChildNode(spotlight)
+    scene.rootNode.addChildNode(defaultLightNode(mode: .ambient))
+    
+    // Add random Hero on each cell except edges
     for row in 1..<(field.size - 1) {
       for column in 1..<(field.size - 1) {
         let hero = Heroes.all().randomElement()!

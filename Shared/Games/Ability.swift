@@ -9,7 +9,7 @@
 import SceneKit
 import SwiftUI
 
-let defaultAbilityAction: ((TBSGame, Character) -> Void) = { gameVC, charater in
+let defaultAbilityAction: ((TBSGame, Character) -> Void) = { game, charater in
   print("defaultAbilityAction")
 }
 

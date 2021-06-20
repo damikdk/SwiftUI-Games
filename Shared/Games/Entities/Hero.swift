@@ -64,7 +64,7 @@ struct Heroes {
       
     let hero = Hero(
       gameID: uuid,
-      node: regularCubeNode(.lightGrayFancy),
+      node: regularCubeNode(.darkViolet),
       name: "Muhammad",
       abilities: [Abilities.HealUp],
       image: Image(systemName: "hand.point.up"))
@@ -79,7 +79,7 @@ struct Heroes {
 
     let hero = Hero(
       gameID: uuid,
-      node: bigCubeNode(.darkRed),
+      node: bigCubeNode(.darkGreen),
       name: "Lexa",
       abilities: [Abilities.ShieldUp],
       image: Image(systemName: "person"))

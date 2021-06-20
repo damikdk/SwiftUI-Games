@@ -63,12 +63,16 @@ let bigCubeNode = { (color: Color) -> MaterialNode in
   let cellSize: CGFloat = FieldConstants.defaultCellSize
   var uuid = UUID.short()
   
-  box = SCNBox(width: cellSize * 0.4, height: cellSize, length: cellSize * 0.4, chamferRadius: 0)
+  box = SCNBox(
+    width: cellSize * 0.4,
+    height: cellSize,
+    length: cellSize * 0.4,
+    chamferRadius: 0)
   uuid.append("-big")
   
   for material in box.materials {
     material.diffuse.contents = color.cgColor
-    material.emission.contents = color.cgColor
+    //material.emission.contents = color.cgColor
     //material.isDoubleSided = true
   }
   
@@ -84,12 +88,20 @@ let regularCubeNode = { (color: Color) -> MaterialNode in
   let cellSize: CGFloat = FieldConstants.defaultCellSize
   var uuid = UUID.short()
   
-  box = SCNBox(width: cellSize * 0.4, height: cellSize * 0.9, length: cellSize * 0.4, chamferRadius: 0)
+  box = SCNBox(
+    width: cellSize * 0.4,
+    height: cellSize * 0.9,
+    length: cellSize * 0.4,
+    chamferRadius: 0)
+  
   uuid.append("-regular")
   
-  box.firstMaterial?.diffuse.contents = color.cgColor
-  box.firstMaterial?.isDoubleSided = true
-  
+  for material in box.materials {
+    material.diffuse.contents = color.cgColor
+    //material.emission.contents = color.cgColor
+    //material.isDoubleSided = true
+  }
+
   let node = defaultHeroNode()
   node.gameID = uuid
   node.geometry = box
@@ -102,12 +114,20 @@ let smallCubeNode = { (color: Color) -> MaterialNode in
   let cellSize: CGFloat = FieldConstants.defaultCellSize
   var uuid = UUID.short()
   
-  box = SCNBox(width: cellSize * 0.2, height: cellSize * 0.8, length: cellSize * 0.2, chamferRadius: 0)
+  box = SCNBox(
+    width: cellSize * 0.2,
+    height: cellSize * 0.8,
+    length: cellSize * 0.2,
+    chamferRadius: 0)
+  
   uuid.append("-small")
   
-  box.firstMaterial?.diffuse.contents = color.cgColor
-  box.firstMaterial?.isDoubleSided = true
-  
+  for material in box.materials {
+    material.diffuse.contents = color.cgColor
+    //material.emission.contents = color.cgColor
+    //material.isDoubleSided = true
+  }
+
   let node = defaultHeroNode()
   node.gameID = uuid
   node.geometry = box
@@ -124,7 +144,7 @@ let defaultHeroNode = { () -> MaterialNode in
   node.physicsBody?.categoryBitMask = EntityType.hero.rawValue
   node.physicsBody?.collisionBitMask = EntityType.hero.rawValue | EntityType.field.rawValue
   node.physicsBody?.contactTestBitMask = EntityType.hero.rawValue
-  
+
   return node
 }
 

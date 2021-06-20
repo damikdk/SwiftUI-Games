@@ -14,26 +14,41 @@ struct TBSGameView: GameView {
   @ObservedObject var game: TBSGame
   
   var sceneRendererDelegate = StupidDelegate()
-    
+  @State var lastCameraOffset = SCNVector3()
+  
   var body: some View {
     // We can't get touch location with TapGesture, so hack:
     // (https://stackoverflow.com/a/56567649/7996650)
     let tap = DragGesture(minimumDistance: 0, coordinateSpace: .global)
-      .onEnded { value in
-        let translation = value.translation
+      .onChanged({ gesture in
+        if let camera = sceneRendererDelegate.renderer?.pointOfView {
+          let translation = gesture.translation
+          let translationVector = SCNVector3(translation.width * 0.05,
+                                             0,
+                                             translation.height * 0.05)
+          let dVector = lastCameraOffset - translationVector
+          
+          let action = SCNAction.move(by: dVector, duration: 0.1)
+          camera.runAction(action)
+          
+          lastCameraOffset = translationVector
+        }
+      })
+      .onEnded { gesture in
+        let translation = gesture.translation
         
         if abs(translation.height) < 20,
            abs(translation.width) < 20 {
           
-          pick(atPoint: value.location)
+          pick(atPoint: gesture.location)
         }
+        lastCameraOffset = SCNVector3()
       }
         
     ZStack {
       SceneView(
         scene: game.scene,
         options: [
-          .allowsCameraControl,
           .temporalAntialiasingEnabled
         ],
         delegate: sceneRendererDelegate)

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		971D8B41267D495B00F0A193 /* View+Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971D8B40267D495B00F0A193 /* View+Extenstions.swift */; };
+		975D4D9F267F98C4007CC8A0 /* LightHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975D4D9E267F98C4007CC8A0 /* LightHelpers.swift */; };
 		978C1026267379B100E23D85 /* StupidDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978C1025267379B100E23D85 /* StupidDelegate.swift */; };
 		978C102826737CA100E23D85 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978C102726737CA100E23D85 /* Entity.swift */; };
 		978C102B26737E3B00E23D85 /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978C102A26737E3B00E23D85 /* Hero.swift */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		971D8B40267D495B00F0A193 /* View+Extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extenstions.swift"; sourceTree = "<group>"; };
+		975D4D9E267F98C4007CC8A0 /* LightHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightHelpers.swift; sourceTree = "<group>"; };
 		978C1025267379B100E23D85 /* StupidDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StupidDelegate.swift; sourceTree = "<group>"; };
 		978C102726737CA100E23D85 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		978C102A26737E3B00E23D85 /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				EDE3A166266F83E300362308 /* Themes.swift */,
 				EDE3A167266F83E300362308 /* DebugHelpers.swift */,
 				EDE3A168266F83E300362308 /* Samples.swift */,
+				975D4D9E267F98C4007CC8A0 /* LightHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				97CACB17267A905500A13A02 /* GameView.swift in Sources */,
 				978C1026267379B100E23D85 /* StupidDelegate.swift in Sources */,
 				EDE3A171266F83E300362308 /* Themes.swift in Sources */,
+				975D4D9F267F98C4007CC8A0 /* LightHelpers.swift in Sources */,
 				EDE3A174266F83E300362308 /* TBSGameView.swift in Sources */,
 				ED63086F2670CB73003FD347 /* ScaleButtonStyle.swift in Sources */,
 				EDE3A154266F803A00362308 /* SwiftUIGamesApp.swift in Sources */,

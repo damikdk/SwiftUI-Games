@@ -13,20 +13,23 @@ import SwiftUI
 
 extension Color {
   static var darkDeepBlue = Color(hex:"061A40")
-  static var darkGrayFancy = Color(hex:"424B54")
-  static var darkGreen = Color(hex:"6B818C")
-  static var darkViolet = Color(hex:"061A40")
-  static var darkRed = Color(hex: "ED2939")
+  static var darkGray = Color(hex:"2a2a2a")
+  static var darkGreen = Color(hex:"1E453E")
+  static var darkViolet = Color(hex:"7600A9")
+  static var darkRed = Color(hex: "9D0B28")
+
+  static var grayFancy = Color(hex:"424B54")
 
   static var lightViolet = Color(hex:"6F73D2")
-  static var lightGrayFancy = Color(hex:"D9F0FF")
+  static var lightGrayFancy = Color(hex:"6B818C")
   static var lightBlue = Color(hex:"83C9F4")
+  static var lightRed = Color(hex: "ED2939")
 
   static var plum = Color(hex:"0353A4")
 
   // Hack for stupid Color.
   // In SwiftUI Color.red.cgColor == nil, but I need CGColor for textures
-  static var red = Color(hex:"FF0000")
+  static var red = Color(hex:"AF0404")
   static var green = Color(hex:"00FF00")
   static var blue = Color(hex:"0000FF")
 }
@@ -34,7 +37,7 @@ extension Color {
 extension Color {
   static let darkColors = [
     darkDeepBlue,
-    darkGrayFancy,
+    grayFancy,
     darkGreen,
     darkViolet,
     darkRed
@@ -44,11 +47,11 @@ extension Color {
 extension Color {
   struct DarkTheme {
     struct Violet {
-      static var fieldColor = Color.darkGrayFancy
+      static var fieldColor = Color.grayFancy
       static var primary = Color.plum
       static var accent = Color.darkViolet
       static var minor = Color.lightBlue
-      static var background = Color.darkViolet
+      static var background = Color.darkGray
     }
   }
 }
