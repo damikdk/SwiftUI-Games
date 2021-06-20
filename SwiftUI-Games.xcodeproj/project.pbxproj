@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		971D8B41267D495B00F0A193 /* View+Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971D8B40267D495B00F0A193 /* View+Extenstions.swift */; };
 		975D4D9F267F98C4007CC8A0 /* LightHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975D4D9E267F98C4007CC8A0 /* LightHelpers.swift */; };
+		975D4DA1267FBEB0007CC8A0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 975D4DA0267FBEB0007CC8A0 /* README.md */; };
 		978C1026267379B100E23D85 /* StupidDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978C1025267379B100E23D85 /* StupidDelegate.swift */; };
 		978C102826737CA100E23D85 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978C102726737CA100E23D85 /* Entity.swift */; };
 		978C102B26737E3B00E23D85 /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978C102A26737E3B00E23D85 /* Hero.swift */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		971D8B40267D495B00F0A193 /* View+Extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extenstions.swift"; sourceTree = "<group>"; };
 		975D4D9E267F98C4007CC8A0 /* LightHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightHelpers.swift; sourceTree = "<group>"; };
+		975D4DA0267FBEB0007CC8A0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		978C1025267379B100E23D85 /* StupidDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StupidDelegate.swift; sourceTree = "<group>"; };
 		978C102726737CA100E23D85 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		978C102A26737E3B00E23D85 /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				EDE3A145266F803900362308 /* Shared */,
+				975D4DA0267FBEB0007CC8A0 /* README.md */,
 				EDE3A14E266F803A00362308 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -178,11 +181,11 @@
 				97CACB18267AAE2E00A13A02 /* Minimal Demo */,
 				97CACB15267A8DE100A13A02 /* TBS */,
 				978C102926737CB100E23D85 /* Entities */,
+				EDE3A16C266F83E300362308 /* Scene */,
 				97CACB13267A8D6D00A13A02 /* Game.swift */,
 				97CACB16267A905500A13A02 /* GameView.swift */,
 				978C102C267383A000E23D85 /* Ability.swift */,
 				EDD3DBCD26701B97001E7373 /* Hitscan.swift */,
-				EDE3A16C266F83E300362308 /* Scene */,
 			);
 			path = Games;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				975D4DA1267FBEB0007CC8A0 /* README.md in Resources */,
 				EDE3A158266F803A00362308 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
