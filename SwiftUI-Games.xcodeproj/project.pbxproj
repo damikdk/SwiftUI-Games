@@ -167,8 +167,8 @@
 		EDE3A165266F83E300362308 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				EDE3A16C266F83E300362308 /* Scene */,
 				EDE3A166266F83E300362308 /* Themes.swift */,
-				EDE3A167266F83E300362308 /* DebugHelpers.swift */,
 				EDE3A168266F83E300362308 /* Samples.swift */,
 				975D4D9E267F98C4007CC8A0 /* LightHelpers.swift */,
 			);
@@ -181,9 +181,9 @@
 				97CACB18267AAE2E00A13A02 /* Minimal Demo */,
 				97CACB15267A8DE100A13A02 /* TBS */,
 				978C102926737CB100E23D85 /* Entities */,
-				EDE3A16C266F83E300362308 /* Scene */,
 				97CACB13267A8D6D00A13A02 /* Game.swift */,
 				97CACB16267A905500A13A02 /* GameView.swift */,
+				EDE3A16E266F83E300362308 /* MaterialNode.swift */,
 				978C102C267383A000E23D85 /* Ability.swift */,
 				EDD3DBCD26701B97001E7373 /* Hitscan.swift */,
 			);
@@ -193,8 +193,8 @@
 		EDE3A16C266F83E300362308 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				EDE3A167266F83E300362308 /* DebugHelpers.swift */,
 				EDD3DBCB26700EF1001E7373 /* SCNVector3+Extensions.swift */,
-				EDE3A16E266F83E300362308 /* MaterialNode.swift */,
 				978C1025267379B100E23D85 /* StupidDelegate.swift */,
 			);
 			path = Scene;
@@ -440,7 +440,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.damirka.SwiftUI-Games";
 				PRODUCT_NAME = "SwiftUI-Games";
 				SDKROOT = iphoneos;
@@ -474,7 +474,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.damirka.SwiftUI-Games";
 				PRODUCT_NAME = "SwiftUI-Games";
 				SDKROOT = iphoneos;
