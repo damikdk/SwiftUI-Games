@@ -14,7 +14,8 @@ extension SCNNode {
   func addDebugLine(
     from vector1: SCNVector3,
     to vector2: SCNVector3,
-    with color: Color = .lightViolet
+    with color: Color = .lightViolet,
+    time: Double = 2
   ) -> SCNNode {
     
     let lineGeometry = SCNGeometry.line(from: vector1, to: vector2)
@@ -24,6 +25,14 @@ extension SCNNode {
     debugLineNode.name = "debug-line"
     
     self.addChildNode(debugLineNode)
+    
+    if time > 0 {
+      debugLineNode.runAction(
+        SCNAction.sequence([
+          SCNAction.wait(duration: time),
+          SCNAction.removeFromParentNode()
+        ]))
+    }
     
     return debugLineNode
   }

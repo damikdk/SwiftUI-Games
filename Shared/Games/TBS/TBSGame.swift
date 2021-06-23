@@ -16,6 +16,17 @@ class TBSGame: Game, ObservableObject {
   var field: Field
   
   private let cameraHeight: Float = 40
+    
+  @Published var teamManager = TeamManager()
+  @Published var currentHero: Hero?
+  @Published var currentFieldCell: FieldCell? {
+    didSet {
+      print("New currentFieldCell is \(currentFieldCell?.gameID ?? "ERROR")")
+    }
+  }
+  
+  var onHeroPress: ((TBSGame, Hero) -> Void) = defaultOnHeroPress
+  var onFieldPress: ((TBSGame, FieldCell) -> Void) = defaultOnFieldPress
   
   init(
     name: String,
@@ -28,16 +39,6 @@ class TBSGame: Game, ObservableObject {
     
     prepare()
   }
-  
-  @Published var currentHero: Hero?
-  @Published var currentFieldCell: FieldCell? {
-    didSet {
-      print("New currentFieldCell is \(currentFieldCell?.gameID ?? "ERROR")")
-    }
-  }
-  
-  var onHeroPress: ((TBSGame, Hero) -> Void) = defaultOnHeroPress
-  var onFieldPress: ((TBSGame, FieldCell) -> Void) = defaultOnFieldPress
   
   func prepare() {
     scene.background.contents = Color.DarkTheme.Violet.background.cgColor
@@ -57,7 +58,7 @@ class TBSGame: Game, ObservableObject {
 //    cameraNode.constraints = [centerConstraint]
     
     // Debug sphere
-    let sphereGeometry = SCNSphere(radius: 0.5)
+    let sphereGeometry = SCNSphere(radius: 0.3)
     sphereGeometry.firstMaterial?.diffuse.contents = Color.darkRed.cgColor
     let sphereNode = SCNNode(geometry: sphereGeometry)
     sphereNode.position = fieldCenter
@@ -74,12 +75,22 @@ class TBSGame: Game, ObservableObject {
     scene.rootNode.addChildNode(spotlight)
     scene.rootNode.addChildNode(defaultLightNode(mode: .ambient))
     
+    let team1 = Team()
+    let team2 = Team()
+    let team3 = Team()
+    
+    teamManager.teams = [team1, team2, team3]
+    teamManager.currentTeam = team1
+    
     // Add random Hero on each cell except edges
     for row in 1..<(field.size - 1) {
       for column in 1..<(field.size - 1) {
         let hero = Heroes.all().randomElement()!
         let fieldCell = field.cells[row + field.size * column]
         field.put(object: hero.node, to: fieldCell)
+        
+        let randomTeam = teamManager.teams.randomElement()!
+        randomTeam.heroes.append(hero)
       }
     }
   }

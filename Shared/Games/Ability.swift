@@ -58,6 +58,12 @@ struct Abilities {
         return
       }
       
+      if let teamMate = game.teamManager.currentTeam?.heroes.first(where: { $0 == hero }) {
+        // Pressed hero is Teammate
+        print("Frozen Arrow on teammate: \(teamMate.gameID)!")
+        return
+      }
+      
       // Add debug line showing direction
       game.scene.rootNode.addDebugLine(
         from: hostCharacter.node.worldPosition,
@@ -99,6 +105,7 @@ struct Abilities {
       
       game.onFieldPress = defaultOnFieldPress
       game.onHeroPress = defaultOnHeroPress
+      game.teamManager.nextTeam()
     }
   })
   

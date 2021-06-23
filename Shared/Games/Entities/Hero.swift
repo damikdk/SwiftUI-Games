@@ -9,11 +9,11 @@ import SwiftUI
 import SceneKit
 
 // TODO: Make it class, ObservableObject to avoid all of this 'mutating' things
-struct Hero: Entity, Identifiable {
+struct Hero: Entity, Identifiable, Equatable {
   let id = UUID()
 
   static func == (lhs: Hero, rhs: Hero) -> Bool {
-    return lhs.gameID != rhs.gameID
+    return lhs.gameID == rhs.gameID
   }
 
   var gameID: String
