@@ -36,10 +36,12 @@ struct MenuView: View {
     .listStyle(.plain)
     .fullScreenCover(isPresented: $showingGame) {
       if let game = currentGame {
-        if let tbsGame = game as? TBSGame {
-          TBSGameView(showing: $showingGame, game: tbsGame)
-        } else if let minimalGame = game as? MinimalDemo {
+        if let minimalGame = game as? MinimalDemo {
           MinimalDemoView(showing: $showingGame, game: minimalGame)
+        } else if let tbsGame = game as? TBSGame {
+          TBSGameView(showing: $showingGame, game: tbsGame)
+        } else if let togetherGame = game as? TogetherGame {
+          TogetherGameView(showing: $showingGame, game: togetherGame)
         }
       }
     }

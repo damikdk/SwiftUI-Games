@@ -20,7 +20,12 @@ let Games: [Game] = [
     description: "Just SceneKit and SwiftUI overlay"),
   
   TBSGame(
-    name: "Default TBS",
+    name: "Default TBSGame [WIP]",
     description: "7x7 field with default set of Heroes",
     field: Field(size: 7)),
+
+  TogetherGame(
+    name: "TogetherGame [WIP]",
+    description: "Simple game with virtual gamepad",
+    field: Field(size: 7))
 ]

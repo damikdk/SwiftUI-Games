@@ -8,7 +8,6 @@
 import SwiftUI
 import SceneKit
 
-
 struct TBSGameView: GameView {
   @Binding var showing: Bool
   @ObservedObject var game: TBSGame

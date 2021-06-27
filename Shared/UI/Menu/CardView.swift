@@ -33,7 +33,7 @@ struct CardView: View {
         
         cardInfo.color
           .scaledToFill()
-          .frame(maxHeight: 300, alignment: .center)
+          .frame(maxHeight: 200, alignment: .center)
         
         VStack {
           Spacer()
