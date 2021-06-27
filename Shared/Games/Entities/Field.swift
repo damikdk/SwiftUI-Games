@@ -16,6 +16,11 @@ struct FieldConstants {
   static let maxFieldSize = 15
 }
 
+struct FieldCell: Entity {
+  var gameID: String
+  var node: MaterialNode
+}
+
 class Field {
   let node: SCNNode!
   let size: Int
@@ -53,7 +58,7 @@ class Field {
         cell.physicsBody?.collisionBitMask = EntityType.hero.rawValue | EntityType.field.rawValue
         
         node.pivot = SCNMatrix4MakeTranslation(0, 0, 0);
-
+        
         cells.append(FieldCell(gameID: stringIndex, node: cell))
         node.addChildNode(cell)
       }
@@ -74,14 +79,14 @@ class Field {
   func put(object: SCNNode, to cell: FieldCell) {
     let objectHeight = object.height()
     let cellPosition = cell.node.position
-
+    
     let position = SCNVector3(
       cellPosition.x,
       FieldConstants.defaultPlacementExtraHeight.float() + objectHeight.float() / 2,
       cellPosition.z)
     
     print("Put node to FieldCell \(cell.gameID)")
-
+    
     object.position = position
     node.addChildNode(object)
   }
@@ -101,11 +106,11 @@ class Field {
     print("Move node to FieldCell \(cell.gameID)")
     node.runAction(moveAction)
   }
-}
 
-struct FieldCell: Entity {
-  var gameID: String
-  var node: MaterialNode
+  func fieldCell(in row: Int, column: Int) -> FieldCell? {
+    let fieldCell = cells[row + column * size]
+    return fieldCell
+  }
 }
 
 extension CGFloat {

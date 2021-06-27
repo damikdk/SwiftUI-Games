@@ -18,13 +18,13 @@ func defaultLightNode(mode: SCNLight.LightType) -> SCNNode{
     directionalLight.castsShadow = true
     
     directionalLight.orthographicScale = 1000
-
+    
     directionalLight.shadowMapSize = CGSize(width: 2048, height: 2048)
     directionalLight.shadowMode = .forward
     directionalLight.shadowSampleCount = 128
     directionalLight.shadowRadius = 3
     directionalLight.shadowBias  = 32
-
+    
     let directionalLightNode = SCNNode()
     directionalLightNode.light = directionalLight
     directionalLightNode.eulerAngles = SCNVector3(-Float.pi / 4, -Float.pi / 4, 0)
@@ -55,7 +55,7 @@ func defaultLightNode(mode: SCNLight.LightType) -> SCNNode{
     let lightNode = SCNNode()
     lightNode.name = "Light"
     lightNode.light = light
-
+    
     return lightNode
   default:
     let defaultLight = SCNLight()

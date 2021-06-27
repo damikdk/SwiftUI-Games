@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct MaterialButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-        .foregroundColor(.primary)
-        .padding()
-        .background(.ultraThinMaterial)
-        .cornerRadius(25)
-        .scaleEffect(configuration.isPressed ? 0.9 : 1)
-    }
+  func makeBody(configuration: Configuration) -> some View {
+    configuration.label
+      .foregroundColor(.primary)
+      .padding()
+      .background(.ultraThinMaterial)
+      .cornerRadius(25)
+      .scaleEffect(configuration.isPressed ? 0.9 : 1)
+  }
 }

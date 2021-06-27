@@ -11,9 +11,9 @@ import SwiftUI
 class MinimalDemo: Game, ObservableObject {
   let name: String
   let description: String
-
+  
   var scene: SCNScene = SCNScene()
-
+  
   init(
     name: String,
     description: String
@@ -22,7 +22,7 @@ class MinimalDemo: Game, ObservableObject {
     self.description = description
     
     scene.background.contents = Color.DarkTheme.Violet.background.cgColor
-
+    
     let sphereGeometry = SCNSphere(radius: 2)
     sphereGeometry.firstMaterial?.diffuse.contents = Color.darkRed.cgColor
     sphereGeometry.segmentCount = 20
@@ -37,7 +37,7 @@ class MinimalDemo: Game, ObservableObject {
     scaleAnimation.repeatCount = .greatestFiniteMagnitude
     scaleAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
     sphereGeometry.addAnimation(scaleAnimation, forKey: nil)
-
+    
     // Create directional light
     let directionalLight = SCNNode()
     directionalLight.light = SCNLight()
@@ -49,13 +49,13 @@ class MinimalDemo: Game, ObservableObject {
     myAmbientLight.intensity = 100
     let myAmbientLightNode = SCNNode()
     myAmbientLightNode.light = myAmbientLight
-
+    
     let cameraNode = SCNNode()
     cameraNode.camera = SCNCamera()
     cameraNode.position = SCNVector3(x: 10, y: 10, z: 10)
     let centerConstraint = SCNLookAtConstraint(target: sphereNode)
     cameraNode.constraints = [centerConstraint]
-
+    
     scene.rootNode.addChildNode(cameraNode)
     scene.rootNode.addChildNode(directionalLight)
     scene.rootNode.addChildNode(myAmbientLightNode)

@@ -9,9 +9,9 @@ import SwiftUI
 
 @main
 struct SwiftUIGamesApp: App {
-    var body: some Scene {
-        WindowGroup {
-            MenuView()
-        }
+  var body: some Scene {
+    WindowGroup {
+      MenuView()
     }
+  }
 }

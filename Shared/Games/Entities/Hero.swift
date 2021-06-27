@@ -11,24 +11,24 @@ import SceneKit
 // TODO: Make it class, ObservableObject to avoid all of this 'mutating' things
 struct Hero: Entity, Identifiable, Equatable {
   let id = UUID()
-
+  
   static func == (lhs: Hero, rhs: Hero) -> Bool {
     return lhs.gameID == rhs.gameID
   }
-
+  
   var gameID: String
   
   var node: MaterialNode
-    
+  
   let name: String
   
   var HP: Int = 10
   let abilities: [Ability]
   let image: Image
-
+  
   mutating func damage(amount: Int) {
     self.HP = self.HP - amount
-
+    
     print("Damage \(amount) dealed to \(self.name). Current HP: \(self.HP)")
     
     if self.HP <= 0 {
@@ -58,10 +58,10 @@ struct Heroes {
       Heroes.Sofia()
     ]
   }
-
+  
   static let Muhammad = { () -> Hero in
     var uuid = UUID.short() + "-Hero-Muhammad"
-      
+    
     let hero = Hero(
       gameID: uuid,
       node: regularCubeNode(.darkViolet),
@@ -70,52 +70,52 @@ struct Heroes {
       image: Image(systemName: "hand.point.up"))
     
     hero.node.host = hero
-
+    
     return hero
   }
-
+  
   static let Lexa = { () -> Hero in
     var uuid = UUID.short() + "-Hero-Lexa"
-
+    
     let hero = Hero(
       gameID: uuid,
       node: bigCubeNode(.darkGreen),
       name: "Lexa",
       abilities: [Abilities.TBS.ShieldUp],
       image: Image(systemName: "person"))
-
+    
     hero.node.host = hero
-
+    
     return hero
   }
-
+  
   static let Arina = { () -> Hero in
     var uuid = UUID.short() + "-Hero-Arina"
-
+    
     let hero = Hero(
       gameID: uuid,
       node: smallCubeNode(.plum),
       name: "Arina",
       abilities: Abilities.TBS.all,
       image: Image(systemName: "person.3"))
-
+    
     hero.node.host = hero
-
+    
     return hero
   }
-
+  
   static let Sofia = { () -> Hero in
     var uuid = UUID.short() + "-Hero-Sofia"
-
+    
     let hero = Hero(
       gameID: uuid,
       node: regularCubeNode(.darkDeepBlue),
       name: "Sofia",
       abilities: [Abilities.TBS.FrozenArrow],
       image: Image(systemName: "snow"))
-
+    
     hero.node.host = hero
-
+    
     return hero
   }
 }

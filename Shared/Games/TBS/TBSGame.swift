@@ -114,7 +114,7 @@ private extension TBSGame {
     scene.rootNode.addChildNode(cameraNode)
   }
   
-  func prepareTeams() {
+  func prepareRandomTeams() {
     let team1 = Team()
     let team2 = Team()
     let team3 = Team()
@@ -135,9 +135,37 @@ private extension TBSGame {
     }
   }
   
+  func prepareTeams() {
+    let team1 = Team()
+    let team2 = Team()
+    
+    teams = [team1, team2]
+    currentTeam = team1
+
+    // First team (close to camera)
+    // Random Heroes
+    for row in 1..<(field.size - 1) {
+      let hero = Heroes.all().randomElement()!
+      let fieldCell = field.fieldCell(in: row, column: 1)!
+      field.put(object: hero.node, to: fieldCell)
+
+      teams[0].heroes.append(hero)
+    }
+
+    // Second team (far from camera)
+    // Random Heroes
+    for row in 1..<(field.size - 1) {
+      let hero = Heroes.all().randomElement()!
+      let fieldCell = field.fieldCell(in: row, column: field.size - 2)!
+      field.put(object: hero.node, to: fieldCell)
+
+      teams[1].heroes.append(hero)
+    }
+  }
+  
   func prepareDebugStuff() {
     // Debug sphere in the center of the Field
-    let sphereGeometry = SCNSphere(radius: 0.3)
+    let sphereGeometry = SCNSphere(radius: 0.2)
     sphereGeometry.firstMaterial?.diffuse.contents = Color.darkRed.cgColor
     let sphereNode = SCNNode(geometry: sphereGeometry)
     sphereNode.position = field.center()

@@ -101,7 +101,7 @@ let regularCubeNode = { (color: Color) -> MaterialNode in
     //material.emission.contents = color.cgColor
     //material.isDoubleSided = true
   }
-
+  
   let node = defaultHeroNode()
   node.gameID = uuid
   node.geometry = box
@@ -127,7 +127,7 @@ let smallCubeNode = { (color: Color) -> MaterialNode in
     //material.emission.contents = color.cgColor
     //material.isDoubleSided = true
   }
-
+  
   let node = defaultHeroNode()
   node.gameID = uuid
   node.geometry = box
@@ -144,7 +144,7 @@ let defaultHeroNode = { () -> MaterialNode in
   node.physicsBody?.categoryBitMask = EntityType.hero.rawValue
   node.physicsBody?.collisionBitMask = EntityType.hero.rawValue | EntityType.field.rawValue
   node.physicsBody?.contactTestBitMask = EntityType.hero.rawValue
-
+  
   return node
 }
 

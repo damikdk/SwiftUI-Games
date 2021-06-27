@@ -45,7 +45,7 @@ struct TBSGameView: GameView {
         
         lastCameraOffset = SCNVector3()
       }
-        
+    
     ZStack {
       SceneView(
         scene: game.scene,

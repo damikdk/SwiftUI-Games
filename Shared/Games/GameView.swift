@@ -10,7 +10,7 @@ import SwiftUI
 
 protocol GameView: View {
   associatedtype Game
-
+  
   var showing: Bool { get }
   var game: Game { get }
 }

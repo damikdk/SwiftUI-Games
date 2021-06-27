@@ -28,7 +28,7 @@ extension Abilities.TBS {
     Abilities.TBS.FrozenArrow,
     Abilities.TBS.HealUp,
   ]
-
+  
   static let ShieldUp = Ability(
     name: "Shield",
     icon: Image(systemName: "shield"),

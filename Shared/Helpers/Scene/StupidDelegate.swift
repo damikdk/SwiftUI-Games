@@ -12,11 +12,13 @@ import SceneKit
 // but SwiftUI's SceneView don't provide it.
 class StupidDelegate: NSObject, SCNSceneRendererDelegate {
   var renderer: SCNSceneRenderer?
-
+  
   func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
     if self.renderer == nil {
       self.renderer = renderer
-      print(renderer, "HAHA GOT 'EM STUPID MACHINE")
+      let type = type(of: renderer)
+
+      print("HAHA GOT 'EM STUPID MACHINE! We got SceneRenderer: \(type)")
     }
   }
 }

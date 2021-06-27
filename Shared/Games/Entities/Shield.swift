@@ -25,7 +25,7 @@ class Shield: Entity {
   var gameID: String
   
   var node: MaterialNode
-    
+  
   var type: ShieldType
   var form: ShieldForm
   var host: Hero?
@@ -42,7 +42,7 @@ class Shield: Entity {
     let color: Color
     let cellSize: CGFloat = FieldConstants.defaultCellSize
     var uuid = UUID.short()
-
+    
     switch form {
     case .circle:
       geometry = SCNCylinder(radius: cellSize / 2, height: cellSize)
@@ -72,13 +72,13 @@ class Shield: Entity {
     
     gameID = uuid.appending("-shield")
     self.host = host
-
+    
     geometry.firstMaterial?.diffuse.contents = color.opacity(0.4).cgColor
     
     node = MaterialNode(type: .shield, id: uuid)
     node.geometry = geometry
     node.host = host
-
+    
     node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
     node.physicsBody?.restitution = 0
     node.physicsBody?.categoryBitMask = EntityType.shield.rawValue
