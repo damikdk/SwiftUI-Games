@@ -211,8 +211,15 @@ extension TBSGame {
   
   static let defaultOnHeroPress: ((TBSGame, Hero) -> Void) = { game, hero in
     var game = game
-    game.currentHero = hero
-    hero.node.highlight()
+
+    if let inCurrentTeamHero = game.currentTeam?.heroes.first(where: { $0 == hero }) {
+      // Pressed hero is in current team
+      game.currentHero = hero
+      hero.node.highlight()
+    } else {
+      // Hero is not allowed to be picked, it's another team's turn
+      hero.node.highlight(with: .red, for: 0.1)
+    }
   }
   
   static let defaultOnFieldPress: ((TBSGame, FieldCell) -> Void) = { game, cell in
