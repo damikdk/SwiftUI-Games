@@ -2,3 +2,7 @@
 *.xcbkptlist
 
 .DS_Store
+
+xcuserdata/
+*.xcuserdata
+SwiftUI-Games.xcodeproj/project.xcworkspace/xcuserdata
