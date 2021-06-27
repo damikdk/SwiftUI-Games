@@ -19,23 +19,27 @@ struct MenuView: View {
     Text(currentGame?.name ?? "")
       .frame(width: 0, height: 0)
       .hidden()
-    
-    List(Games, id: \.name) { game in
-      let cardInfo = CardInfo(
-        title: game.name,
-        details: game.description)
-      
-      CardView(cardInfo: cardInfo) {
-        withAnimation {
-          currentGame = game
-          showingGame.toggle()
+
+    // ZStack it is just a bad workaround for GCVirtualController.
+    // Earlier I used `fullScreenCover`, but GCVirtualController appears BELOW it.
+    // So keep GCVirtualController in View, not Overlay/Modal/Sheet containers
+    ZStack {
+      List(Games, id: \.name) { game in
+        let cardInfo = CardInfo(
+          title: game.name,
+          details: game.description)
+
+        CardView(cardInfo: cardInfo) {
+          withAnimation {
+            currentGame = game
+            showingGame.toggle()
+          }
         }
+        .padding(.horizontal, -5)
       }
-      .padding(.horizontal, -5)
-    }
-    .listStyle(.plain)
-    .fullScreenCover(isPresented: $showingGame) {
-      if let game = currentGame {
+      .listStyle(.plain)
+
+      if let game = currentGame, showingGame {
         if let minimalGame = game as? MinimalDemo {
           MinimalDemoView(showing: $showingGame, game: minimalGame)
         } else if let tbsGame = game as? TBSGame {

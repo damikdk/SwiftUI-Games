@@ -24,8 +24,6 @@ struct TogetherGameView: GameView {
                                      GCInputRightThumbstick]
 
     let virtualController = GCVirtualController(configuration: virtualConfiguration)
-    virtualController.connect()
-
     return virtualController
   }()
 
@@ -36,7 +34,6 @@ struct TogetherGameView: GameView {
         options: [
           .temporalAntialiasingEnabled
         ])
-        .ignoresSafeArea()
 
       VStack {
         // Top HUD
@@ -56,6 +53,12 @@ struct TogetherGameView: GameView {
         Spacer()
       }
     }
+    .onDisappear(perform: {
+      virtualController.disconnect()
+    })
+    .onAppear(perform: {
+      virtualController.connect()
+    })
     .font(.largeTitle)
     .padding(5)
   }

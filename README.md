@@ -34,12 +34,12 @@ Setup for turn based strategy with Field and Heroes with unique Abilities.
 <img src="https://i.imgur.com/Cic7cEa.png" alt="MinimalDemo" height="300">
 </p>
 
+## TogetherGame (WIP)
+Simple arcade with GCVirtualController
+
 ## Roadmap
 - Temple Run clone
-- Simple virtual GameController implementation (GCVirtualController)
 - Clash of Clans/Warcraft simple clone with some buildings
 - Heroes Editor
-- Teams logic
-- Step-logic for TBSGame
 - Some Battle Royal
 - Simple dialog system
