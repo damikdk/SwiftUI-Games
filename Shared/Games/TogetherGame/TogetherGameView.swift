@@ -15,13 +15,13 @@ struct TogetherGameView: GameView {
 
   let virtualController = { () -> GCVirtualController in
 
-    // Controller shows up behind this View and crashes on dismiss
-    // I think, because this View is actually content of sheet
+    // Earlier I used `fullScreenCover` for games in MenuScreen,
+    // but GCVirtualController was BELOW it.
+    // So keep GCVirtualController in View, not Overlay/Modal/Sheet containers
     // https://developer.apple.com/forums/thread/682138
 
     let virtualConfiguration = GCVirtualControllerConfiguration()
-    virtualConfiguration.elements = [GCInputLeftThumbstick,
-                                     GCInputRightThumbstick]
+    virtualConfiguration.elements = [GCInputLeftThumbstick, GCInputRightThumbstick]
 
     let virtualController = GCVirtualController(configuration: virtualConfiguration)
     return virtualController
@@ -51,6 +51,21 @@ struct TogetherGameView: GameView {
         }
 
         Spacer()
+      }
+
+      GeometryReader { (geometry) in
+        VStack(alignment: .center) {
+          Spacer()
+
+          if geometry.size.width < 400 {
+            Button("GCVirtualController requires more horizontal space") {
+              showing.toggle()
+            }
+            .buttonStyle(MaterialButtonStyle())
+          }
+
+          Spacer()
+        }
       }
     }
     .onDisappear(perform: {
