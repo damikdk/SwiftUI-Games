@@ -66,7 +66,7 @@ struct Heroes {
       gameID: uuid,
       node: regularCubeNode(.darkViolet),
       name: "Muhammad",
-      abilities: [Abilities.HealUp],
+      abilities: [Abilities.TBS.HealUp],
       image: Image(systemName: "hand.point.up"))
     
     hero.node.host = hero
@@ -81,7 +81,7 @@ struct Heroes {
       gameID: uuid,
       node: bigCubeNode(.darkGreen),
       name: "Lexa",
-      abilities: [Abilities.ShieldUp],
+      abilities: [Abilities.TBS.ShieldUp],
       image: Image(systemName: "person"))
 
     hero.node.host = hero
@@ -96,7 +96,7 @@ struct Heroes {
       gameID: uuid,
       node: smallCubeNode(.plum),
       name: "Arina",
-      abilities: Abilities.all,
+      abilities: Abilities.TBS.all,
       image: Image(systemName: "person.3"))
 
     hero.node.host = hero
@@ -111,7 +111,7 @@ struct Heroes {
       gameID: uuid,
       node: regularCubeNode(.darkDeepBlue),
       name: "Sofia",
-      abilities: [Abilities.FrozenArrow],
+      abilities: [Abilities.TBS.FrozenArrow],
       image: Image(systemName: "snow"))
 
     hero.node.host = hero

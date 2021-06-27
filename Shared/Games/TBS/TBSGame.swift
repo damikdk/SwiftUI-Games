@@ -11,19 +11,17 @@ import SwiftUI
 class TBSGame: Game, ObservableObject {
   let name: String
   let description: String
-
+  
   var scene: SCNScene = SCNScene()
   var field: Field
   
   private let cameraHeight: Float = 40
-    
-  @Published var teamManager = TeamManager()
+  
+  @Published var currentTeam: Team? = nil
+  @Published var teams: [Team] = []
+  
   @Published var currentHero: Hero?
-  @Published var currentFieldCell: FieldCell? {
-    didSet {
-      print("New currentFieldCell is \(currentFieldCell?.gameID ?? "ERROR")")
-    }
-  }
+  @Published var currentFieldCell: FieldCell?
   
   var onHeroPress: ((TBSGame, Hero) -> Void) = defaultOnHeroPress
   var onFieldPress: ((TBSGame, FieldCell) -> Void) = defaultOnFieldPress
@@ -37,64 +35,20 @@ class TBSGame: Game, ObservableObject {
     self.description = description
     self.field = field
     
-    prepare()
+    // Add Field node
+    scene.rootNode.addChildNode(field.node)
+    
+    // Set backround for Scene
+    scene.background.contents = Color.DarkTheme.Violet.background.cgColor
+    
+    prepareCamera()
+    prepareLight()
+    prepareTeams()
+    prepareDebugStuff()
   }
   
-  func prepare() {
-    scene.background.contents = Color.DarkTheme.Violet.background.cgColor
-            
-    let cameraNode = SCNNode()
-    cameraNode.name = "CameraHuyamera"
-    cameraNode.camera = SCNCamera()
-    cameraNode.eulerAngles = SCNVector3(Float.pi / -3, 0, 0)
-    cameraNode.camera?.fieldOfView = 55
-    cameraNode.camera?.automaticallyAdjustsZRange = true
-    
-    let fieldCenter = field.center()
-    cameraNode.position = fieldCenter + SCNVector3(0, cameraHeight, cameraHeight / 2)
-    cameraNode.look(at: fieldCenter)
-    
-//    let centerConstraint = SCNLookAtConstraint(target: field.centerCell().node)
-//    cameraNode.constraints = [centerConstraint]
-    
-    // Debug sphere
-    let sphereGeometry = SCNSphere(radius: 0.3)
-    sphereGeometry.firstMaterial?.diffuse.contents = Color.darkRed.cgColor
-    let sphereNode = SCNNode(geometry: sphereGeometry)
-    sphereNode.position = fieldCenter
-
-    scene.rootNode.addChildNode(field.node)
-    scene.rootNode.addChildNode(sphereNode)
-    scene.rootNode.addChildNode(cameraNode)
-    
-    // Light
-    let spotlight = defaultLightNode(mode: .spot)
-    spotlight.position = fieldCenter + SCNVector3(0, cameraHeight, 20)
-    spotlight.look(at: fieldCenter)
-
-    scene.rootNode.addChildNode(spotlight)
-    scene.rootNode.addChildNode(defaultLightNode(mode: .ambient))
-    
-    let team1 = Team()
-    let team2 = Team()
-    let team3 = Team()
-    
-    teamManager.teams = [team1, team2, team3]
-    teamManager.currentTeam = team1
-    
-    // Add random Hero on each cell except edges
-    for row in 1..<(field.size - 1) {
-      for column in 1..<(field.size - 1) {
-        let hero = Heroes.all().randomElement()!
-        let fieldCell = field.cells[row + field.size * column]
-        field.put(object: hero.node, to: fieldCell)
-        
-        let randomTeam = teamManager.teams.randomElement()!
-        randomTeam.heroes.append(hero)
-      }
-    }
-  }
-    
+  // - MARK: Touch / Pick node
+  
   func pick(_ materialNode: MaterialNode) {
     switch materialNode.type {
     case .field:
@@ -123,21 +77,130 @@ class TBSGame: Game, ObservableObject {
       break;
     }
   }
+  
 }
 
-let defaultOnHeroPress: ((TBSGame, Hero) -> Void) = { game, hero in
-  var game = game
-  game.currentHero = hero
-  hero.node.highlight()
-}
+// MARK: Preparing
 
-let defaultOnFieldPress: ((TBSGame, FieldCell) -> Void) = { game, cell in
-  var game = game
+private extension TBSGame {
   
-  cell.node.highlight()
-  game.currentFieldCell = cell
-  
-  if let hero = game.currentHero {
-    game.field.move(node: hero.node, to: cell)
+  func prepareLight() {
+    let fieldCenter = field.center()
+    let spotlight = defaultLightNode(mode: .spot)
+    spotlight.position = fieldCenter + SCNVector3(0, cameraHeight, 20)
+    spotlight.look(at: fieldCenter)
+    
+    scene.rootNode.addChildNode(spotlight)
+    scene.rootNode.addChildNode(defaultLightNode(mode: .ambient))
   }
+  
+  func prepareCamera() {
+    // Setup camera
+    let cameraNode = SCNNode()
+    cameraNode.name = "CameraHuyamera"
+    cameraNode.camera = SCNCamera()
+    cameraNode.eulerAngles = SCNVector3(Float.pi / -3, 0, 0)
+    cameraNode.camera?.fieldOfView = 55
+    cameraNode.camera?.automaticallyAdjustsZRange = true
+    
+    // Place camera
+    let fieldCenter = field.center()
+    cameraNode.position = fieldCenter + SCNVector3(0, cameraHeight, cameraHeight / 2)
+    cameraNode.look(at: fieldCenter)
+    
+    //    let centerConstraint = SCNLookAtConstraint(target: field.centerCell().node)
+    //    cameraNode.constraints = [centerConstraint]
+    
+    scene.rootNode.addChildNode(cameraNode)
+  }
+  
+  func prepareTeams() {
+    let team1 = Team()
+    let team2 = Team()
+    let team3 = Team()
+    
+    teams = [team1, team2, team3]
+    currentTeam = team1
+    
+    // Add random Hero on each cell except edges
+    for row in 1..<(field.size - 1) {
+      for column in 1..<(field.size - 1) {
+        let hero = Heroes.all().randomElement()!
+        let fieldCell = field.cells[row + field.size * column]
+        field.put(object: hero.node, to: fieldCell)
+        
+        let randomTeam = teams.randomElement()!
+        randomTeam.heroes.append(hero)
+      }
+    }
+  }
+  
+  func prepareDebugStuff() {
+    // Debug sphere in the center of the Field
+    let sphereGeometry = SCNSphere(radius: 0.3)
+    sphereGeometry.firstMaterial?.diffuse.contents = Color.darkRed.cgColor
+    let sphereNode = SCNNode(geometry: sphereGeometry)
+    sphereNode.position = field.center()
+    
+    scene.rootNode.addChildNode(sphereNode)
+  }
+  
 }
+
+// - MARK: Teams managament
+
+extension TBSGame {
+  
+  func switchTeam() {
+    let currentTeamIndex = teams.firstIndex(where: { $0 == currentTeam })
+    
+    if let currentTeamIndex = currentTeamIndex {
+      let nextIndex = currentTeamIndex + 1
+      
+      if nextIndex < teams.count {
+        currentTeam = teams[nextIndex]
+      } else {
+        currentTeam = teams.first
+      }
+    } else {
+      print("Strange, there is no current team. Or it's not in TeamManager array: \(currentTeam?.id ?? "<NIL>")")
+      currentTeam = teams.first
+    }
+  }
+  
+  func highlight(team: Team?) {
+    // Highlight all Heroes of Team
+    if let team = team {
+      for hero in team.heroes {
+        hero.node.highlight()
+      }
+    }
+  }
+  
+}
+
+extension TBSGame {
+  
+  static let defaultOnHeroPress: ((TBSGame, Hero) -> Void) = { game, hero in
+    var game = game
+    game.currentHero = hero
+    hero.node.highlight()
+  }
+  
+  static let defaultOnFieldPress: ((TBSGame, FieldCell) -> Void) = { game, cell in
+    var game = game
+    
+    cell.node.highlight()
+    game.currentFieldCell = cell
+    
+    if let hero = game.currentHero {
+      game.field.move(node: hero.node, to: cell)
+    }
+  }
+  
+  static let defaultAbilityAction: ((TBSGame, Character) -> Void) = { game, charater in
+    print("defaultAbilityAction")
+  }
+  
+}
+

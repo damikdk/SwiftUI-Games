@@ -59,7 +59,7 @@ struct TBSGameView: GameView {
       VStack {
         // Top HUD
         
-        HStack() {
+        HStack {
           // Top left botton
           Button {
             showing.toggle()
@@ -71,9 +71,9 @@ struct TBSGameView: GameView {
           Spacer()
           
           HStack {
-            ForEach(game.teamManager.teams) { team in
+            ForEach(game.teams) { team in
               Text(team.id)
-                .font(team == game.teamManager.currentTeam ? .title3 : .caption)
+                .font(team == game.currentTeam ? .title3 : .caption)
                 .onTapGesture {
                   for hero in team.heroes {
                     hero.node.highlight()

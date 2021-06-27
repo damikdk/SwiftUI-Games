@@ -9,10 +9,6 @@
 import SceneKit
 import SwiftUI
 
-let defaultAbilityAction: ((TBSGame, Character) -> Void) = { game, charater in
-  print("defaultAbilityAction")
-}
-
 struct Ability {
   let name: String
   let icon: Image
@@ -20,12 +16,19 @@ struct Ability {
 }
 
 struct Abilities {
-  static let all = [
-    Abilities.ShieldUp,
-    Abilities.FrozenArrow,
-    Abilities.HealUp,
-  ]
+  struct TBS {
+    // Extenstion for TBSGame Abilities
+  }
+}
+
+extension Abilities.TBS {
   
+  static let all = [
+    Abilities.TBS.ShieldUp,
+    Abilities.TBS.FrozenArrow,
+    Abilities.TBS.HealUp,
+  ]
+
   static let ShieldUp = Ability(
     name: "Shield",
     icon: Image(systemName: "shield"),
@@ -38,6 +41,10 @@ struct Abilities {
       for: hero)
     
     hero.node.addChildNode(newShield.node)
+    
+    withAnimation {
+      game.switchTeam()
+    }
   })
   
   static let FrozenArrow = Ability(
@@ -54,11 +61,11 @@ struct Abilities {
       
       guard let hostCharacter = game.currentHero else {
         print("Can't fire Frozen Arrow action because there is no currentHero")
-        game.onHeroPress = defaultOnHeroPress
+        game.onHeroPress = TBSGame.defaultOnHeroPress
         return
       }
       
-      if let teamMate = game.teamManager.currentTeam?.heroes.first(where: { $0 == hero }) {
+      if let teamMate = game.currentTeam?.heroes.first(where: { $0 == hero }) {
         // Pressed hero is Teammate
         print("Frozen Arrow on teammate: \(teamMate.gameID)!")
         return
@@ -103,9 +110,12 @@ struct Abilities {
         }
       }
       
-      game.onFieldPress = defaultOnFieldPress
-      game.onHeroPress = defaultOnHeroPress
-      game.teamManager.nextTeam()
+      game.onFieldPress = TBSGame.defaultOnFieldPress
+      game.onHeroPress = TBSGame.defaultOnHeroPress
+      
+      withAnimation {
+        game.switchTeam()
+      }
     }
   })
   
@@ -124,7 +134,7 @@ struct Abilities {
       hero.heal(amount: heal)
       
       let healPopUpNode = hero.node.addPopup(with: "\(heal)", color: .yellow)
-    
+      
       healPopUpNode.runAction(
         SCNAction.sequence([
           SCNAction.moveBy(x: 0, y: 0.6, z: 0, duration: 3),
@@ -132,7 +142,11 @@ struct Abilities {
         ]))
       
       var game = game
-      game.onHeroPress = defaultOnHeroPress
+      game.onHeroPress = TBSGame.defaultOnHeroPress
+      
+      withAnimation {
+        game.switchTeam()
+      }
     }
   })
 }
