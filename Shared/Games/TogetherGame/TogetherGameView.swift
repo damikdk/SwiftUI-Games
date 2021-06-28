@@ -34,6 +34,7 @@ struct TogetherGameView: GameView {
         options: [
           .temporalAntialiasingEnabled
         ])
+        .ignoresSafeArea()
 
       VStack {
         // Top HUD
@@ -57,7 +58,7 @@ struct TogetherGameView: GameView {
         VStack(alignment: .center) {
           Spacer()
 
-          if geometry.size.width < 400 {
+          if geometry.size.width < 500 {
             Button("GCVirtualController requires more horizontal space") {
               showing.toggle()
             }
@@ -89,6 +90,7 @@ struct TogetherGameView: GameView {
     })
     .font(.largeTitle)
     .padding(5)
+    .ignoresSafeArea()
   }
 
 }

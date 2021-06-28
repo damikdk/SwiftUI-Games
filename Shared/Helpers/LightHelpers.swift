@@ -48,7 +48,7 @@ func defaultLightNode(mode: SCNLight.LightType) -> SCNNode{
     light.castsShadow = true
     light.spotOuterAngle = 100
     light.shadowMode = .deferred
-    light.shadowSampleCount = 32
+    light.shadowSampleCount = 4
     light.shadowRadius = 3
     light.maximumShadowDistance = 20
     

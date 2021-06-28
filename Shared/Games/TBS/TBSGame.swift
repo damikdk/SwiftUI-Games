@@ -100,7 +100,7 @@ private extension TBSGame {
     cameraNode.name = "CameraHuyamera"
     cameraNode.camera = SCNCamera()
     cameraNode.eulerAngles = SCNVector3(Float.pi / -3, 0, 0)
-    cameraNode.camera?.fieldOfView = 55
+    cameraNode.camera?.fieldOfView = 40
     cameraNode.camera?.automaticallyAdjustsZRange = true
     
     // Place camera

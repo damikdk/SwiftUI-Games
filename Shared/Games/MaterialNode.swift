@@ -58,6 +58,25 @@ extension SCNNode {
   }
 }
 
+let bigBallNode = { (color: Color) -> MaterialNode in
+  let sphereGeometry = SCNSphere(radius: 1)
+  sphereGeometry.segmentCount = 10
+  var uuid = UUID.short() + "-big-ball"
+
+  for material in sphereGeometry.materials {
+    material.diffuse.contents = color.cgColor
+    //material.emission.contents = color.cgColor
+    //material.isDoubleSided = true
+  }
+
+  let node = defaultHeroNode()
+  node.gameID = uuid
+  node.geometry = sphereGeometry
+
+  return node
+}
+
+
 let bigCubeNode = { (color: Color) -> MaterialNode in
   var box = SCNBox()
   let cellSize: CGFloat = FieldConstants.defaultCellSize

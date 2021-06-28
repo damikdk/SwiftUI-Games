@@ -16,7 +16,7 @@ class TogetherGame: Game, ObservableObject {
 
   var firstHero: Hero?
   var secondHero: Hero?
-  let speed: Float = 10
+  let speed: Float = 20
   private let cameraHeight: Float = 40
 
   var scene: SCNScene = SCNScene()
@@ -42,13 +42,31 @@ class TogetherGame: Game, ObservableObject {
   }
 
   func handleLeftPad(xAxis: Float, yAxis: Float) {
+    if xAxis == yAxis, xAxis == 0 {
+      firstHero?.node.physicsBody?.angularVelocity = SCNVector4()
+      firstHero?.node.physicsBody?.velocity = SCNVector3()
+      firstHero?.node.physicsBody?.mass = 0
+
+      return
+    }
+
     let velocity = SCNVector3(xAxis, 0, -yAxis) * speed
     firstHero?.node.physicsBody?.velocity = velocity
+    firstHero?.node.physicsBody?.mass = 1
   }
 
   func handleRightPad(xAxis: Float, yAxis: Float) {
+    if xAxis == yAxis, xAxis == 0 {
+      secondHero?.node.physicsBody?.angularVelocity = SCNVector4()
+      secondHero?.node.physicsBody?.velocity = SCNVector3()
+      secondHero?.node.physicsBody?.mass = 0
+
+      return
+    }
+
     let velocity = SCNVector3(xAxis, 0, -yAxis) * speed
     secondHero?.node.physicsBody?.velocity = velocity
+    secondHero?.node.physicsBody?.mass = 1
   }
 }
 
@@ -72,7 +90,7 @@ private extension TogetherGame {
     cameraNode.name = "CameraHuyamera"
     cameraNode.camera = SCNCamera()
     cameraNode.eulerAngles = SCNVector3(Float.pi / -3, 0, 0)
-    cameraNode.camera?.fieldOfView = 55
+    cameraNode.camera?.fieldOfView = 40
     cameraNode.camera?.automaticallyAdjustsZRange = true
 
     // Place camera
@@ -84,13 +102,13 @@ private extension TogetherGame {
   }
 
   func preparePlayers() {
-    firstHero = Heroes.Arina()
+    firstHero = Heroes.Eric()
 
-    let fieldCellForFirstHero = field.fieldCell(in: field.size - 1, column: 1)!
+    let fieldCellForFirstHero = field.fieldCell(in: field.size - 2, column: 1)!
     field.put(object: firstHero!.node, to: fieldCellForFirstHero)
 
-    secondHero = Heroes.Lexa()
-    let fieldCellForSecondHero = field.fieldCell(in: field.size - 1, column: field.size - 2)!
+    secondHero = Heroes.Eric()
+    let fieldCellForSecondHero = field.fieldCell(in: field.size - 2, column: field.size - 2)!
     field.put(object: secondHero!.node, to: fieldCellForSecondHero)
   }
 }

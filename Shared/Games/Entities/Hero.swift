@@ -118,5 +118,20 @@ struct Heroes {
     
     return hero
   }
+
+  static let Eric = { () -> Hero in
+    var uuid = UUID.short() + "-Hero-Eric"
+
+    let hero = Hero(
+      gameID: uuid,
+      node: bigBallNode(.lightGrayFancy),
+      name: "Eric",
+      abilities: [],
+      image: Image(systemName: "circle.dashed.inset.fill"))
+
+    hero.node.host = hero
+    return hero
+  }
+
 }
 
