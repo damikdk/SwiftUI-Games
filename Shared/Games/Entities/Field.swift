@@ -108,7 +108,7 @@ class Field {
   }
 
   func fieldCell(in row: Int, column: Int) -> FieldCell? {
-    let fieldCell = cells[row + column * size]
+    let fieldCell = cells[row * size + column]
     return fieldCell
   }
 }

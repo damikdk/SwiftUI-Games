@@ -7,12 +7,16 @@
 
 import SceneKit
 import SwiftUI
+import GameController
 
 class TogetherGame: Game, ObservableObject {
   let name: String
   let description: String
   var field: Field
 
+  var firstHero: Hero?
+  var secondHero: Hero?
+  let speed: Float = 10
   private let cameraHeight: Float = 40
 
   var scene: SCNScene = SCNScene()
@@ -34,6 +38,17 @@ class TogetherGame: Game, ObservableObject {
 
     prepareCamera()
     prepareLight()
+    preparePlayers()
+  }
+
+  func handleLeftPad(xAxis: Float, yAxis: Float) {
+    let velocity = SCNVector3(xAxis, 0, -yAxis) * speed
+    firstHero?.node.physicsBody?.velocity = velocity
+  }
+
+  func handleRightPad(xAxis: Float, yAxis: Float) {
+    let velocity = SCNVector3(xAxis, 0, -yAxis) * speed
+    secondHero?.node.physicsBody?.velocity = velocity
   }
 }
 
@@ -68,4 +83,14 @@ private extension TogetherGame {
     scene.rootNode.addChildNode(cameraNode)
   }
 
+  func preparePlayers() {
+    firstHero = Heroes.Arina()
+
+    let fieldCellForFirstHero = field.fieldCell(in: field.size - 1, column: 1)!
+    field.put(object: firstHero!.node, to: fieldCellForFirstHero)
+
+    secondHero = Heroes.Lexa()
+    let fieldCellForSecondHero = field.fieldCell(in: field.size - 1, column: field.size - 2)!
+    field.put(object: secondHero!.node, to: fieldCellForSecondHero)
+  }
 }

@@ -144,9 +144,9 @@ private extension TBSGame {
 
     // First team (close to camera)
     // Random Heroes
-    for row in 1..<(field.size - 1) {
+    for column in 1..<(field.size - 1) {
       let hero = Heroes.all().randomElement()!
-      let fieldCell = field.fieldCell(in: row, column: 1)!
+      let fieldCell = field.fieldCell(in: 1, column: column)!
       field.put(object: hero.node, to: fieldCell)
 
       teams[0].heroes.append(hero)
@@ -154,9 +154,9 @@ private extension TBSGame {
 
     // Second team (far from camera)
     // Random Heroes
-    for row in 1..<(field.size - 1) {
+    for column in 1..<(field.size - 1) {
       let hero = Heroes.all().randomElement()!
-      let fieldCell = field.fieldCell(in: row, column: field.size - 2)!
+      let fieldCell = field.fieldCell(in: field.size - 2, column: column)!
       field.put(object: hero.node, to: fieldCell)
 
       teams[1].heroes.append(hero)

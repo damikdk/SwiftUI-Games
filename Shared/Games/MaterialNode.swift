@@ -144,7 +144,7 @@ let defaultHeroNode = { () -> MaterialNode in
   node.physicsBody?.categoryBitMask = EntityType.hero.rawValue
   node.physicsBody?.collisionBitMask = EntityType.hero.rawValue | EntityType.field.rawValue
   node.physicsBody?.contactTestBitMask = EntityType.hero.rawValue
-  
+
   return node
 }
 

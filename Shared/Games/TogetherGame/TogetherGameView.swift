@@ -73,6 +73,19 @@ struct TogetherGameView: GameView {
     })
     .onAppear(perform: {
       virtualController.connect()
+
+      if let leftPad = virtualController.controller?.extendedGamepad?.leftThumbstick {
+        leftPad.valueChangedHandler = { (dpad, xValue, yValue) in
+          game.handleLeftPad(xAxis: xValue, yAxis: yValue)
+        }
+      }
+
+      if let rightPad = virtualController.controller?.extendedGamepad?.rightThumbstick {
+        rightPad.valueChangedHandler = { (dpad, xValue, yValue) in
+          game.handleRightPad(xAxis: xValue, yAxis: yValue)
+        }
+      }
+
     })
     .font(.largeTitle)
     .padding(5)
