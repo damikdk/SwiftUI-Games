@@ -11,7 +11,9 @@ import SwiftUI
 class MinimalDemo: Game, ObservableObject {
   let name: String
   let description: String
-  
+
+  let iconName = "circlebadge"
+
   var scene: SCNScene = SCNScene()
   
   init(

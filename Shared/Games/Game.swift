@@ -10,18 +10,19 @@ import SceneKit
 protocol Game {
   var name: String { get }
   var description: String { get }
-  
+
+  var iconName: String { get }
   var scene: SCNScene { get }
 }
 
 let Games: [Game] = [
   MinimalDemo(
     name: "Minimal Demo",
-    description: "Just SceneKit and SwiftUI overlay"),
+    description: "Simple SceneKit and SwiftUI overlay"),
   
   TBSGame(
-    name: "Default TBSGame [WIP]",
-    description: "7x7 field with default set of Heroes",
+    name: "TBSGame [WIP]",
+    description: "Turn based strategy with 2 random teams on 7x7 Field",
     field: Field(size: 7)),
 
   TogetherGame(

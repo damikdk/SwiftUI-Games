@@ -25,14 +25,28 @@ struct MenuView: View {
     // So keep GCVirtualController in View, not Overlay/Modal/Sheet containers
     ZStack {
       List(Games, id: \.name) { game in
-        let cardInfo = CardInfo(
-          title: game.name,
-          details: game.description)
-
-        CardView(cardInfo: cardInfo) {
+        Button {
           withAnimation {
             currentGame = game
             showingGame.toggle()
+          }
+        } label: {
+          HStack {
+            Image(systemName: game.iconName)
+              .resizable()
+              .scaledToFit()
+              .frame(width: 100, height: 100)
+              .padding()
+
+            VStack(alignment: .leading) {
+              Text(game.name)
+                .font(.title2.weight(.heavy))
+                .foregroundColor(.primary)
+
+              Text(game.description)
+                .font(.body.weight(.bold))
+                .foregroundColor(.secondary)
+            }
           }
         }
         .padding(.horizontal, -5)

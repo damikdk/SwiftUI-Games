@@ -12,6 +12,7 @@ struct CardInfo: Hashable {
   var title: String
   var details: String = ""
   var color: Color = .darkDeepBlue
+  var iconName: String
 }
 
 struct CardView: View {
@@ -22,22 +23,10 @@ struct CardView: View {
     Button {
       action()
     } label: {
-      ZStack(alignment: .topLeading) {
-        // Preparing for future preview
-        //        images.randomElement()!
-        //          .resizable()
-        //          .scaledToFill()
-        //          .frame(maxHeight: 300, alignment: .center)
-        //          .clipped()
-        //          .foregroundColor(cardInfo.color)
-        
-        cardInfo.color
-          .scaledToFill()
-          .frame(maxHeight: 200, alignment: .center)
-        
         VStack {
-          Spacer()
-          
+          Image(systemName: cardInfo.iconName)
+            .resizable(resizingMode: .tile)
+
           ZStack {
             HStack(alignment: .bottom) {
               Text(cardInfo.title)
@@ -56,19 +45,11 @@ struct CardView: View {
             alignment: .leading)
           .padding()
           .background(.thickMaterial)
-        }
+
       }
       .cornerRadius(20)
+      .frame(minHeight: 200, maxHeight: 300)
     }
     .buttonStyle(ScaleButtonStyle())
-  }
-}
-
-struct CardView_Previews: PreviewProvider {
-  static var cardInfo = CardInfo(title: "First Try")
-  
-  static var previews: some View {
-    CardView(cardInfo: cardInfo) {}
-    .previewLayout(.fixed(width: 800, height: 400))
   }
 }

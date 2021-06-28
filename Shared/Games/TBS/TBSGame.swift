@@ -11,6 +11,8 @@ import SwiftUI
 class TBSGame: Game, ObservableObject {
   let name: String
   let description: String
+
+  let iconName = "checkerboard.rectangle"
   
   var scene: SCNScene = SCNScene()
   var field: Field
@@ -149,7 +151,7 @@ private extension TBSGame {
       let fieldCell = field.fieldCell(in: 1, column: column)!
       field.put(object: hero.node, to: fieldCell)
 
-      teams[0].heroes.append(hero)
+      teams[1].heroes.append(hero)
     }
 
     // Second team (far from camera)
@@ -159,7 +161,7 @@ private extension TBSGame {
       let fieldCell = field.fieldCell(in: field.size - 2, column: column)!
       field.put(object: hero.node, to: fieldCell)
 
-      teams[1].heroes.append(hero)
+      teams[0].heroes.append(hero)
     }
   }
   

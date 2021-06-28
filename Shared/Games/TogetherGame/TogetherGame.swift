@@ -12,6 +12,8 @@ import GameController
 class TogetherGame: Game, ObservableObject {
   let name: String
   let description: String
+  let iconName = "circlebadge.2"
+
   var field: Field
 
   var firstHero: Hero?
