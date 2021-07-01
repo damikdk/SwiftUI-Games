@@ -13,6 +13,8 @@ struct TogetherGameView: GameView {
   @Binding var showing: Bool
   @ObservedObject var game: TogetherGame
 
+  var sceneRendererDelegate = StupidDelegate()
+
   let virtualController = { () -> GCVirtualController in
 
     // Earlier I used `fullScreenCover` for games in MenuScreen,
@@ -33,7 +35,8 @@ struct TogetherGameView: GameView {
         scene: game.scene,
         options: [
           .temporalAntialiasingEnabled
-        ])
+        ],
+        delegate: sceneRendererDelegate)
         .ignoresSafeArea()
 
       VStack {
@@ -71,6 +74,8 @@ struct TogetherGameView: GameView {
     }
     .onDisappear(perform: {
       virtualController.disconnect()
+
+      sceneRendererDelegate.onEachFrame = nil
     })
     .onAppear(perform: {
       virtualController.connect()
@@ -87,6 +92,9 @@ struct TogetherGameView: GameView {
         }
       }
 
+      sceneRendererDelegate.onEachFrame = {
+        game.onEachFrame()
+      }
     })
     .font(.largeTitle)
     .padding(5)

@@ -15,13 +15,15 @@ class TogetherGame: Game, ObservableObject {
   let iconName = "circlebadge.2"
 
   var field: Field
+  var scene: SCNScene = SCNScene()
 
   var firstHero: Hero?
   var secondHero: Hero?
   let speed: Float = 20
-  private let cameraHeight: Float = 40
 
-  var scene: SCNScene = SCNScene()
+  var onEachFrame = {}
+
+  private let cameraHeight: Float = 40
 
   init(
     name: String,
@@ -41,6 +43,7 @@ class TogetherGame: Game, ObservableObject {
     prepareCamera()
     prepareLight()
     preparePlayers()
+    prepareLine()
   }
 
   func handleLeftPad(xAxis: Float, yAxis: Float) {
@@ -112,5 +115,20 @@ private extension TogetherGame {
     secondHero = Heroes.Eric()
     let fieldCellForSecondHero = field.fieldCell(in: field.size - 2, column: field.size - 2)!
     field.put(object: secondHero!.node, to: fieldCellForSecondHero)
+  }
+
+  func prepareLine() {
+    onEachFrame = {
+      guard let firstHero = self.firstHero,
+            let secondHero = self.secondHero else {
+        print("WOWOWO There is no Heroes on TogetherGame")
+        return
+      }
+
+      self.scene.rootNode.addDebugLine(
+        from: firstHero.node.position,
+        to: secondHero.node.position,
+        time: 0.1)
+    }
   }
 }

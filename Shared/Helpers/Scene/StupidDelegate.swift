@@ -12,7 +12,8 @@ import SceneKit
 // but SwiftUI's SceneView don't provide it.
 class StupidDelegate: NSObject, SCNSceneRendererDelegate {
   var renderer: SCNSceneRenderer?
-  
+  var onEachFrame: (() -> ())? = nil
+
   func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
     if self.renderer == nil {
       self.renderer = renderer
@@ -20,5 +21,7 @@ class StupidDelegate: NSObject, SCNSceneRendererDelegate {
 
       print("HAHA GOT 'EM STUPID MACHINE! We got SceneRenderer: \(type)")
     }
+
+    onEachFrame?()
   }
 }
