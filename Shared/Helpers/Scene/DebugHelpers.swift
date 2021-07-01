@@ -20,10 +20,11 @@ extension SCNNode {
     
     let lineGeometry = SCNGeometry.line(from: vector1, to: vector2)
     lineGeometry.firstMaterial?.emission.contents = color.cgColor
-    
+
     let debugLineNode = SCNNode(geometry: lineGeometry)
     debugLineNode.name = "debug-line"
-    
+
+    debugLineNode.castsShadow = false
     self.addChildNode(debugLineNode)
     
     if time > 0 {
@@ -70,7 +71,9 @@ extension SCNNode {
     let dy = min.y + 0.5 * (max.y - min.y)
     let dz = min.z + 0.5 * (max.z - min.z)
     popupNode.pivot = SCNMatrix4MakeTranslation(dx, dy, dz)
-    
+
+    popupNode.castsShadow = false
+
     self.addChildNode(popupNode)
     
     if time > 0 {
