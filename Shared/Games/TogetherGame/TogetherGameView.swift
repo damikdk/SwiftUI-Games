@@ -92,9 +92,7 @@ struct TogetherGameView: GameView {
         }
       }
 
-      sceneRendererDelegate.onEachFrame = {
-        game.onEachFrame()
-      }
+      sceneRendererDelegate.onEachFrame = { game.onEachFrame() }
     })
     .font(.largeTitle)
     .padding(5)

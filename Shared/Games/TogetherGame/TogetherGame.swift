@@ -17,11 +17,10 @@ class TogetherGame: Game, ObservableObject {
   var field: Field
   var scene: SCNScene = SCNScene()
 
-  var firstHero: Hero?
-  var secondHero: Hero?
+  var firstHero: Hero!
+  var secondHero: Hero!
   let speed: Float = 20
-
-  var onEachFrame = {}
+  var lineBetweenHeroes: SCNNode!
 
   private let cameraHeight: Float = 40
 
@@ -41,37 +40,49 @@ class TogetherGame: Game, ObservableObject {
     scene.background.contents = Color.DarkTheme.Violet.background.cgColor
 
     prepareCamera()
-    prepareLight()
+    // prepareLight()
     preparePlayers()
-    prepareLine()
   }
 
   func handleLeftPad(xAxis: Float, yAxis: Float) {
     if xAxis == yAxis, xAxis == 0 {
-      firstHero?.node.physicsBody?.angularVelocity = SCNVector4()
-      firstHero?.node.physicsBody?.velocity = SCNVector3()
-      firstHero?.node.physicsBody?.mass = 0
+      firstHero.node.physicsBody?.angularVelocity = SCNVector4()
+      firstHero.node.physicsBody?.velocity = SCNVector3()
+      firstHero.node.physicsBody?.mass = 0
 
       return
     }
 
     let velocity = SCNVector3(xAxis, 0, -yAxis) * speed
-    firstHero?.node.physicsBody?.velocity = velocity
-    firstHero?.node.physicsBody?.mass = 1
+    firstHero.node.physicsBody?.velocity = velocity
+    firstHero.node.physicsBody?.mass = 1
   }
 
   func handleRightPad(xAxis: Float, yAxis: Float) {
     if xAxis == yAxis, xAxis == 0 {
-      secondHero?.node.physicsBody?.angularVelocity = SCNVector4()
-      secondHero?.node.physicsBody?.velocity = SCNVector3()
-      secondHero?.node.physicsBody?.mass = 0
+      secondHero.node.physicsBody?.angularVelocity = SCNVector4()
+      secondHero.node.physicsBody?.velocity = SCNVector3()
+      secondHero.node.physicsBody?.mass = 0
 
       return
     }
 
     let velocity = SCNVector3(xAxis, 0, -yAxis) * speed
-    secondHero?.node.physicsBody?.velocity = velocity
-    secondHero?.node.physicsBody?.mass = 1
+    secondHero.node.physicsBody?.velocity = velocity
+    secondHero.node.physicsBody?.mass = 1
+  }
+
+  func onEachFrame() {
+    if lineBetweenHeroes != nil {
+      lineBetweenHeroes.removeFromParentNode()
+      lineBetweenHeroes = nil
+    }
+
+    lineBetweenHeroes = scene.rootNode.addDebugLine(
+      from: firstHero.node.presentation.position,
+      to: secondHero.node.presentation.position,
+      with: .white,
+      time: 0.1)
   }
 }
 
@@ -110,25 +121,11 @@ private extension TogetherGame {
     firstHero = Heroes.Eric()
 
     let fieldCellForFirstHero = field.fieldCell(in: field.size - 2, column: 1)!
-    field.put(object: firstHero!.node, to: fieldCellForFirstHero)
+    field.put(object: firstHero.node, to: fieldCellForFirstHero)
 
     secondHero = Heroes.Eric()
     let fieldCellForSecondHero = field.fieldCell(in: field.size - 2, column: field.size - 2)!
-    field.put(object: secondHero!.node, to: fieldCellForSecondHero)
+    field.put(object: secondHero.node, to: fieldCellForSecondHero)
   }
 
-  func prepareLine() {
-    onEachFrame = {
-      guard let firstHero = self.firstHero,
-            let secondHero = self.secondHero else {
-        print("WOWOWO There is no Heroes on TogetherGame")
-        return
-      }
-
-      self.scene.rootNode.addDebugLine(
-        from: firstHero.node.position,
-        to: secondHero.node.position,
-        time: 0.1)
-    }
-  }
 }
