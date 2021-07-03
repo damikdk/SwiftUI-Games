@@ -7,6 +7,15 @@
 
 import SceneKit
 
+extension SCNVector3 {
+  /**
+   * Returns the length (magnitude) of the vector described by the SCNVector3
+   */
+  func length() -> Float {
+      return sqrt(x*x + y*y + z*z)
+  }
+}
+
 /**
  * Adds two SCNVector3 vectors and returns the result as a new SCNVector3.
  */

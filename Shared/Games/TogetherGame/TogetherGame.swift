@@ -73,16 +73,17 @@ class TogetherGame: Game, ObservableObject {
   }
 
   func onEachFrame() {
-    if lineBetweenHeroes != nil {
-      lineBetweenHeroes.removeFromParentNode()
-      lineBetweenHeroes = nil
-    }
+    //    if lineBetweenHeroes != nil {
+    //      lineBetweenHeroes.removeFromParentNode()
+    //      lineBetweenHeroes = nil
+    //    }
 
-    lineBetweenHeroes = scene.rootNode.addDebugLine(
+    lineBetweenHeroes = scene.rootNode.addDebugLine2(
       from: firstHero.node.presentation.position,
       to: secondHero.node.presentation.position,
-      with: .white,
-      time: 0.1)
+      color: .white,
+      width: 0.08,
+      time: 0.01)
   }
 }
 
