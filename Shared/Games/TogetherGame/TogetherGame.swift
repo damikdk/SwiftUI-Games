@@ -20,8 +20,8 @@ class TogetherGame: Game, ObservableObject {
   var firstHero: Hero!
   var secondHero: Hero!
   let speed: Float = 20
-  var lineBetweenHeroes: SCNNode!
 
+  private let cameraNode: SCNNode = SCNNode()
   private let cameraHeight: Float = 40
 
   init(
@@ -78,12 +78,14 @@ class TogetherGame: Game, ObservableObject {
     //      lineBetweenHeroes = nil
     //    }
 
-    lineBetweenHeroes = scene.rootNode.addDebugLine2(
+    let lineNode = scene.rootNode.addDebugLine2(
       from: firstHero.node.presentation.position,
       to: secondHero.node.presentation.position,
-      color: .white,
-      width: 0.08,
+      color: .lightRed,
+      width: 0.1,
       time: 0.01)
+
+    cameraNode.position = lineNode.position + SCNVector3(0, cameraHeight, cameraHeight / 2)
   }
 }
 
@@ -103,17 +105,11 @@ private extension TogetherGame {
 
   func prepareCamera() {
     // Setup camera
-    let cameraNode = SCNNode()
     cameraNode.name = "CameraHuyamera"
     cameraNode.camera = SCNCamera()
     cameraNode.eulerAngles = SCNVector3(Float.pi / -3, 0, 0)
     cameraNode.camera?.fieldOfView = 40
     cameraNode.camera?.automaticallyAdjustsZRange = true
-
-    // Place camera
-    let fieldCenter = field.center()
-    cameraNode.position = fieldCenter + SCNVector3(0, cameraHeight, cameraHeight / 2)
-    cameraNode.look(at: fieldCenter)
 
     scene.rootNode.addChildNode(cameraNode)
   }

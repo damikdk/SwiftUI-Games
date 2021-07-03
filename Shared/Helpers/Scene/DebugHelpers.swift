@@ -140,7 +140,7 @@ extension SCNNode {
 
     let cylinder = SCNCylinder(radius: width, height: CGFloat(length))
     cylinder.radialSegmentCount = 3
-    cylinder.firstMaterial?.diffuse.contents = color
+    cylinder.firstMaterial?.diffuse.contents = color.cgColor
 
     let node = SCNNode(geometry: cylinder)
 

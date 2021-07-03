@@ -31,11 +31,15 @@ Setup for turn based strategy with Field and Heroes with unique Abilities.
 
 <p float="left">
 <img src="https://i.imgur.com/EmsgJld.png" alt="TBSGame" height="300">
-<img src="https://i.imgur.com/Cic7cEa.png" alt="MinimalDemo" height="300">
+<img src="https://i.imgur.com/Cic7cEa.png" alt="TBSGame" height="300">
 </p>
 
 ## TogetherGame (WIP)
-Simple arcade with GCVirtualController
+Simple arcade with GCVirtualController. Control two nice balls, capture all bad cubes
+
+<p float="left">
+<img src="https://i.imgur.com/XEwC2ZD.png" alt="TogetherGame" height="300">
+</p>
 
 ## Roadmap
 - Temple Run clone
@@ -43,3 +47,7 @@ Simple arcade with GCVirtualController
 - Heroes Editor
 - Some Battle Royal
 - Simple dialog system
+
+## Broken things (by Apple or me)
+- Safe Area Insets. And some in-game Taps because of it
+- Some transitions and animations
