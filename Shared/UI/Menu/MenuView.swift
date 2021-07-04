@@ -59,7 +59,7 @@ struct MenuView: View {
         } else if let tbsGame = game as? TBSGame {
           TBSGameView(showing: $showingGame, game: tbsGame)
         } else if let togetherGame = game as? TogetherGame {
-          TogetherGameView(showing: $showingGame, game: togetherGame)
+          TogetherGameView(game: togetherGame, showing: $showingGame)
         }
       }
     }

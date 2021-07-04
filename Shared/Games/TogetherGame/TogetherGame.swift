@@ -16,6 +16,7 @@ class TogetherGame: Game, ObservableObject {
 
   var field: Field
   var scene: SCNScene = SCNScene()
+  var enemies: [Hero] = []
 
   var firstHero: Hero!
   var secondHero: Hero!
@@ -42,6 +43,7 @@ class TogetherGame: Game, ObservableObject {
     prepareCamera()
     // prepareLight()
     preparePlayers()
+    addEnemies()
   }
 
   func handleLeftPad(xAxis: Float, yAxis: Float) {
@@ -73,19 +75,38 @@ class TogetherGame: Game, ObservableObject {
   }
 
   func onEachFrame() {
-    //    if lineBetweenHeroes != nil {
-    //      lineBetweenHeroes.removeFromParentNode()
-    //      lineBetweenHeroes = nil
-    //    }
+
+    let firstHeroPosition = firstHero.node.presentation.position
+    let secondHeroPosition = secondHero.node.presentation.position
 
     let lineNode = scene.rootNode.addDebugLine2(
-      from: firstHero.node.presentation.position,
-      to: secondHero.node.presentation.position,
+      from: firstHeroPosition,
+      to: secondHeroPosition,
       color: .lightRed,
       width: 0.1,
       time: 0.01)
 
-    cameraNode.position = lineNode.position + SCNVector3(0, cameraHeight, cameraHeight / 2)
+    let distanceBetweenHeroes = SCNVector3.distanceBetween(
+      vector1: firstHeroPosition,
+      vector2: secondHeroPosition)
+
+    let cameraOffset = SCNVector3(
+      0,
+      cameraHeight + Float(distanceBetweenHeroes / 2),
+      cameraHeight / 2)
+
+    cameraNode.position = lineNode.position + cameraOffset
+    cameraNode.look(at: lineNode.position)
+
+//    let newCameraFOV: Double = 40
+//    cameraNode.camera?.fieldOfView = max(newCameraFOV, distanceBetweenHeroes + 10)
+
+    for enemy in enemies {
+      let closestHero = closestHero(for: enemy.node)
+      let someVector = closestHero.node.presentation.position - enemy.node.presentation.position
+
+      enemy.node.physicsBody?.velocity = someVector
+    }
   }
 }
 
@@ -123,6 +144,38 @@ private extension TogetherGame {
     secondHero = Heroes.Eric()
     let fieldCellForSecondHero = field.fieldCell(in: field.size - 2, column: field.size - 2)!
     field.put(object: secondHero.node, to: fieldCellForSecondHero)
+  }
+
+}
+
+// MARK: Enemies
+
+private extension TogetherGame {
+
+  func addEnemies() {
+    let newEnemies = [Heroes.Eric(), Heroes.Eric(), Heroes.Eric()]
+
+    for enemy in newEnemies {
+      field.put(object: enemy.node, to: field.cells.randomElement()!)
+    }
+
+    enemies.append(contentsOf: newEnemies)
+  }
+
+  func closestHero(for node: SCNNode) -> Hero {
+    let distanceToFirstHero = SCNVector3.distanceBetween(
+      vector1: node.presentation.position,
+      vector2: firstHero.node.presentation.position)
+
+    let distanceToSecondHero = SCNVector3.distanceBetween(
+      vector1: node.presentation.position,
+      vector2: secondHero.node.presentation.position)
+
+    if distanceToFirstHero < distanceToSecondHero {
+      return firstHero
+    } else {
+      return secondHero
+    }
   }
 
 }

@@ -145,10 +145,10 @@ extension SCNNode {
     let node = SCNNode(geometry: cylinder)
 
     node.position = (to + from) / 2
-    node.eulerAngles = SCNVector3Make(
-      Float(Double.pi / 2),
-      acos((to.z - from.z) / length),
-      atan2((to.y - from.y), (to.x - from.x)))
+    node.eulerAngles = SCNVector3(
+      Double.pi / 2,
+      acos(Double(to.z - from.z) / length),
+      Double(atan2((to.y - from.y), (to.x - from.x))))
 
     return node
   }

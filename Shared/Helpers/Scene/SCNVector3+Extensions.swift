@@ -8,11 +8,17 @@
 import SceneKit
 
 extension SCNVector3 {
+  static func distanceBetween(vector1: SCNVector3, vector2: SCNVector3) -> Double {
+    let vectorBetween = vector1 - vector2
+    let length = vectorBetween.length()
+    return length
+  }
+
   /**
    * Returns the length (magnitude) of the vector described by the SCNVector3
    */
-  func length() -> Float {
-      return sqrt(x*x + y*y + z*z)
+  func length() -> Double {
+    return Double(sqrt(x * x + y * y + z * z))
   }
 }
 

@@ -10,8 +10,11 @@ import SceneKit
 import GameController
 
 struct TogetherGameView: GameView {
-  @Binding var showing: Bool
   @ObservedObject var game: TogetherGame
+
+  @Binding var showing: Bool {
+    didSet { game.scene.isPaused = showing }
+  }
 
   var sceneRendererDelegate = StupidDelegate()
 
