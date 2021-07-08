@@ -12,7 +12,7 @@ struct TBSGameView: GameView {
   @Binding var showing: Bool
   @ObservedObject var game: TBSGame
   
-  var sceneRendererDelegate = StupidDelegate()
+  var sceneRendererDelegate = SceneRendererDelegate()
   @State var lastCameraOffset = SCNVector3()
   
   var body: some View {

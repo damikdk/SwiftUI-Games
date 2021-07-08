@@ -17,12 +17,12 @@ class MaterialNode: SCNNode {
   init(type: EntityType, id: String? = nil) {
     self.type = type
     
-    if (id != nil) {
+    if id != nil {
       self.gameID = id
     }
     
     super.init()
-    name = "Material Node (\(type), \(gameID ?? ""))"
+    name = "Material Node (\(type)\(self.gameID ?? ""))"
   }
   
   required init?(coder aDecoder: NSCoder) {

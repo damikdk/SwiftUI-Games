@@ -84,9 +84,7 @@ class Field {
       cellPosition.x,
       FieldConstants.defaultPlacementExtraHeight.float() + objectHeight.float() / 2,
       cellPosition.z)
-    
-    print("Put node to FieldCell \(cell.gameID)")
-    
+        
     object.position = position
     node.addChildNode(object)
   }

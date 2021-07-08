@@ -18,6 +18,8 @@ class TogetherGame: Game, ObservableObject {
   var scene: SCNScene = SCNScene()
   var enemies: [Hero] = []
 
+  let contactDelegate = ContactDelegate()
+
   var firstHero: Hero!
   var secondHero: Hero!
   let speed: Float = 20
@@ -36,6 +38,9 @@ class TogetherGame: Game, ObservableObject {
 
     // Add Field node
     scene.rootNode.addChildNode(field.node)
+
+    scene.physicsWorld.contactDelegate = contactDelegate
+    contactDelegate.onBegin = onContactBegin(contact:)
 
     // Set backround for Scene
     scene.background.contents = Color.DarkTheme.Violet.background.cgColor
@@ -86,6 +91,9 @@ class TogetherGame: Game, ObservableObject {
       width: 0.1,
       time: 0.01)
 
+    lineNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+    lineNode.physicsBody?.contactTestBitMask = EntityType.hero.rawValue
+
     let distanceBetweenHeroes = SCNVector3.distanceBetween(
       vector1: firstHeroPosition,
       vector2: secondHeroPosition)
@@ -98,9 +106,6 @@ class TogetherGame: Game, ObservableObject {
     cameraNode.position = lineNode.position + cameraOffset
     cameraNode.look(at: lineNode.position)
 
-//    let newCameraFOV: Double = 40
-//    cameraNode.camera?.fieldOfView = max(newCameraFOV, distanceBetweenHeroes + 10)
-
     for enemy in enemies {
       let closestHero = closestHero(for: enemy.node)
       let someVector = closestHero.node.presentation.position - enemy.node.presentation.position
@@ -110,7 +115,7 @@ class TogetherGame: Game, ObservableObject {
   }
 }
 
-// MARK: Preparing
+// MARK: - Preparing
 
 private extension TogetherGame {
 
@@ -148,7 +153,7 @@ private extension TogetherGame {
 
 }
 
-// MARK: Enemies
+// MARK: - Enemies
 
 private extension TogetherGame {
 
@@ -175,6 +180,51 @@ private extension TogetherGame {
       return firstHero
     } else {
       return secondHero
+    }
+  }
+
+}
+
+// MARK: - SCNPhysicsContact
+
+private extension TogetherGame {
+
+  func onContactBegin(contact: SCNPhysicsContact) {
+    let nodeA = contact.nodeA
+    let nodeB = contact.nodeB
+
+    let enemyNodes = enemies.map { hero in
+      return hero.node as SCNNode
+    }
+
+    let heroNodes = [firstHero.node as SCNNode, secondHero.node as SCNNode]
+
+    // Ignore enemy balls collisions
+    if enemyNodes.contains(nodeA) &&
+        enemyNodes.contains(nodeB) {
+      return
+    }
+    
+    // Remove enemies touched by Line
+    if nodeA.name == "debug-line2" {
+      nodeB.removeFromParentNode()
+      return
+    }
+    
+    if nodeB.name == "debug-line2" {
+      nodeA.removeFromParentNode()
+      return
+    }
+
+    // Game over if enemy touched Heroes
+    if enemyNodes.contains(nodeA) && heroNodes.contains(nodeB) {
+      nodeB.highlight(with: .red, for: 2)
+      return
+    }
+
+    if enemyNodes.contains(nodeB) && heroNodes.contains(nodeA) {
+      nodeA.highlight(with: .red, for: 2)
+      return
     }
   }
 

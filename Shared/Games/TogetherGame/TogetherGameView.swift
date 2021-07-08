@@ -16,7 +16,7 @@ struct TogetherGameView: GameView {
     didSet { game.scene.isPaused = showing }
   }
 
-  var sceneRendererDelegate = StupidDelegate()
+  var sceneRendererDelegate = SceneRendererDelegate()
 
   let virtualController = { () -> GCVirtualController in
 

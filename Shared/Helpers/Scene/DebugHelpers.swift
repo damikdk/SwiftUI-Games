@@ -52,8 +52,8 @@ extension SCNNode {
                                      color: color)
 
     debugLineNode.name = "debug-line2"
-
     debugLineNode.castsShadow = false
+    
     self.addChildNode(debugLineNode)
 
     if time > 0 {
@@ -138,7 +138,7 @@ extension SCNNode {
     let vector = to - from,
         length = vector.length()
 
-    let cylinder = SCNCylinder(radius: width, height: CGFloat(length))
+    let cylinder = SCNCylinder(radius: width, height: CGFloat(length - 3))
     cylinder.radialSegmentCount = 3
     cylinder.firstMaterial?.diffuse.contents = color.cgColor
 

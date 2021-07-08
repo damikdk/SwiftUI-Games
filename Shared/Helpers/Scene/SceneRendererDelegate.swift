@@ -10,7 +10,7 @@ import SceneKit
 // Hackest hack ever. And stupidest one!
 // For handling touches in SceneView we need SCNSceneRenderer,
 // but SwiftUI's SceneView don't provide it.
-class StupidDelegate: NSObject, SCNSceneRendererDelegate {
+class SceneRendererDelegate: NSObject, SCNSceneRendererDelegate {
   var renderer: SCNSceneRenderer?
   var onEachFrame: (() -> ())? = nil
 
