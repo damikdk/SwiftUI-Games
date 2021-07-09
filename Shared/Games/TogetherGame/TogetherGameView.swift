@@ -17,6 +17,7 @@ struct TogetherGameView: GameView {
   }
 
   var sceneRendererDelegate = SceneRendererDelegate()
+  let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
 
   let virtualController = { () -> GCVirtualController in
 
@@ -97,6 +98,9 @@ struct TogetherGameView: GameView {
 
       sceneRendererDelegate.onEachFrame = { game.onEachFrame() }
     })
+    .onReceive(timer) { input in
+      game.onTimer()
+    }
     .font(.largeTitle)
     .padding(5)
     .ignoresSafeArea()

@@ -452,7 +452,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleExecutable = "SwiftUI-Games";
 				INFOPLIST_KEY_CFBundleName = "SwiftUI-Games";
-				INFOPLIST_KEY_CFBundleVersion = 5;
+				INFOPLIST_KEY_CFBundleVersion = 6;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -486,7 +486,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleExecutable = "SwiftUI-Games";
 				INFOPLIST_KEY_CFBundleName = "SwiftUI-Games";
-				INFOPLIST_KEY_CFBundleVersion = 5;
+				INFOPLIST_KEY_CFBundleVersion = 6;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

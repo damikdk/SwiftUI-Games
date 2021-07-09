@@ -107,12 +107,25 @@ class TogetherGame: Game, ObservableObject {
     cameraNode.look(at: lineNode.position)
 
     for enemy in enemies {
+      if enemy.node.parent == nil { continue }
+      
       let closestHero = closestHero(for: enemy.node)
       let someVector = closestHero.node.presentation.position - enemy.node.presentation.position
 
       enemy.node.physicsBody?.velocity = someVector
     }
   }
+
+  // Called from SwiftUI
+  // Timers needs runloop
+  func onTimer() {
+    if scene.isPaused {
+      return
+    }
+    
+    addEnemies()
+  }
+  
 }
 
 // MARK: - Preparing
