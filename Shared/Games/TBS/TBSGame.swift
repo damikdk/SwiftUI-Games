@@ -49,7 +49,7 @@ class TBSGame: Game, ObservableObject {
     prepareDebugStuff()
   }
   
-  // - MARK: Touch / Pick node
+  // MARK: - Touch / Pick node
   
   func pick(_ materialNode: MaterialNode) {
     switch materialNode.type {
@@ -82,7 +82,7 @@ class TBSGame: Game, ObservableObject {
   
 }
 
-// MARK: Preparing
+// MARK: - Preparing
 
 private extension TBSGame {
   
@@ -177,7 +177,7 @@ private extension TBSGame {
   
 }
 
-// - MARK: Teams managament
+// MARK: - Teams managament
 
 extension TBSGame {
   

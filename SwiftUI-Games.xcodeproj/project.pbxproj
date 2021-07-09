@@ -198,13 +198,13 @@
 				97CACB18267AAE2E00A13A02 /* Minimal Demo */,
 				97CACB15267A8DE100A13A02 /* TBS */,
 				9728694A2688FD3200FF1BB1 /* TogetherGame */,
-				978C102926737CB100E23D85 /* Entities */,
 				97CACB13267A8D6D00A13A02 /* Game.swift */,
 				97CACB16267A905500A13A02 /* GameView.swift */,
 				EDE3A16E266F83E300362308 /* MaterialNode.swift */,
 				97BDFA402683EDC70016CE77 /* Team.swift */,
 				978C102C267383A000E23D85 /* Ability.swift */,
 				EDD3DBCD26701B97001E7373 /* Hitscan.swift */,
+				978C102926737CB100E23D85 /* Entities */,
 			);
 			path = Games;
 			sourceTree = "<group>";

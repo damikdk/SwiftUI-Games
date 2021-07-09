@@ -2,6 +2,8 @@
 
 Collection of simple demos of SwiftUI + SceneKit games
 
+[TestFlight Beta](https://testflight.apple.com/join/52wVoy8Z "TestFlight Beta")
+
 ### Design
 - Pure Swift
 - Pure SwiftUI at all cost. Zero UIKit imports and OS-specific code
@@ -51,3 +53,4 @@ Simple arcade with GCVirtualController. Control two nice balls, capture all bad 
 ## Broken things (by Apple or me)
 - Safe Area Insets. And some in-game Taps because of it
 - Some transitions and animations
+
