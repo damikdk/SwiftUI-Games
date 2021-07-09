@@ -220,22 +220,30 @@ private extension TogetherGame {
     
     // Remove enemies touched by Line
     if nodeA.name == "debug-line2" {
+      UIImpactFeedbackGenerator(style: .light).impactOccurred()
+
       nodeB.removeFromParentNode()
       return
     }
     
     if nodeB.name == "debug-line2" {
+      UIImpactFeedbackGenerator(style: .light).impactOccurred()
+
       nodeA.removeFromParentNode()
       return
     }
 
     // Game over if enemy touched Heroes
     if enemyNodes.contains(nodeA) && heroNodes.contains(nodeB) {
+      UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+
       nodeB.highlight(with: .red, for: 2)
       return
     }
 
     if enemyNodes.contains(nodeB) && heroNodes.contains(nodeA) {
+      UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+      
       nodeA.highlight(with: .red, for: 2)
       return
     }
