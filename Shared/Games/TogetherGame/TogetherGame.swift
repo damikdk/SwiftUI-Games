@@ -243,7 +243,7 @@ private extension TogetherGame {
 
     if enemyNodes.contains(nodeB) && heroNodes.contains(nodeA) {
       UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-      
+
       nodeA.highlight(with: .red, for: 2)
       return
     }

@@ -11,6 +11,8 @@
 		9727F47C26966D54006C7911 /* ContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9727F47B26966D54006C7911 /* ContactDelegate.swift */; };
 		9728694C2688FD5B00FF1BB1 /* TogetherGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9728694B2688FD5B00FF1BB1 /* TogetherGame.swift */; };
 		9728694E2688FEFD00FF1BB1 /* TogetherGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9728694D2688FEFD00FF1BB1 /* TogetherGameView.swift */; };
+		975A04EF26990AE7003FF4AD /* StoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975A04EE26990AE7003FF4AD /* StoryGameView.swift */; };
+		975A04F126990AF5003FF4AD /* StoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975A04F026990AF5003FF4AD /* StoryGame.swift */; };
 		975D4D9F267F98C4007CC8A0 /* LightHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975D4D9E267F98C4007CC8A0 /* LightHelpers.swift */; };
 		975D4DA1267FBEB0007CC8A0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 975D4DA0267FBEB0007CC8A0 /* README.md */; };
 		978C1026267379B100E23D85 /* SceneRendererDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978C1025267379B100E23D85 /* SceneRendererDelegate.swift */; };
@@ -45,6 +47,8 @@
 		9727F47B26966D54006C7911 /* ContactDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDelegate.swift; sourceTree = "<group>"; };
 		9728694B2688FD5B00FF1BB1 /* TogetherGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherGame.swift; sourceTree = "<group>"; };
 		9728694D2688FEFD00FF1BB1 /* TogetherGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherGameView.swift; sourceTree = "<group>"; };
+		975A04EE26990AE7003FF4AD /* StoryGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryGameView.swift; sourceTree = "<group>"; };
+		975A04F026990AF5003FF4AD /* StoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryGame.swift; sourceTree = "<group>"; };
 		975D4D9E267F98C4007CC8A0 /* LightHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightHelpers.swift; sourceTree = "<group>"; };
 		975D4DA0267FBEB0007CC8A0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		978C1025267379B100E23D85 /* SceneRendererDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneRendererDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +99,15 @@
 			path = TogetherGame;
 			sourceTree = "<group>";
 		};
+		975A04ED26990A90003FF4AD /* StoryGame */ = {
+			isa = PBXGroup;
+			children = (
+				975A04EE26990AE7003FF4AD /* StoryGameView.swift */,
+				975A04F026990AF5003FF4AD /* StoryGame.swift */,
+			);
+			path = StoryGame;
+			sourceTree = "<group>";
+		};
 		978C102926737CB100E23D85 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,13 +119,13 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
-		97CACB15267A8DE100A13A02 /* TBS */ = {
+		97CACB15267A8DE100A13A02 /* TBSGame */ = {
 			isa = PBXGroup;
 			children = (
 				EDE3A16B266F83E300362308 /* TBSGame.swift */,
 				EDE3A16A266F83E300362308 /* TBSGameView.swift */,
 			);
-			path = TBS;
+			path = TBSGame;
 			sourceTree = "<group>";
 		};
 		97CACB18267AAE2E00A13A02 /* Minimal Demo */ = {
@@ -195,8 +208,9 @@
 		EDE3A169266F83E300362308 /* Games */ = {
 			isa = PBXGroup;
 			children = (
+				975A04ED26990A90003FF4AD /* StoryGame */,
 				97CACB18267AAE2E00A13A02 /* Minimal Demo */,
-				97CACB15267A8DE100A13A02 /* TBS */,
+				97CACB15267A8DE100A13A02 /* TBSGame */,
 				9728694A2688FD3200FF1BB1 /* TogetherGame */,
 				97CACB13267A8D6D00A13A02 /* Game.swift */,
 				97CACB16267A905500A13A02 /* GameView.swift */,
@@ -292,6 +306,7 @@
 			files = (
 				97BDFA412683EDC70016CE77 /* Team.swift in Sources */,
 				978C102B26737E3B00E23D85 /* Hero.swift in Sources */,
+				975A04EF26990AE7003FF4AD /* StoryGameView.swift in Sources */,
 				978C102F2673846800E23D85 /* Shield.swift in Sources */,
 				EDE3A176266F83E300362308 /* Field.swift in Sources */,
 				971D8B41267D495B00F0A193 /* View+Extenstions.swift in Sources */,
@@ -318,6 +333,7 @@
 				9728694C2688FD5B00FF1BB1 /* TogetherGame.swift in Sources */,
 				97CACB1A267AAE5D00A13A02 /* MinimalDemo.swift in Sources */,
 				EDD3DBCE26701B97001E7373 /* Hitscan.swift in Sources */,
+				975A04F126990AF5003FF4AD /* StoryGame.swift in Sources */,
 				EDD3DBCC26700EF1001E7373 /* SCNVector3+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

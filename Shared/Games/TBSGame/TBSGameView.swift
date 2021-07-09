@@ -9,9 +9,9 @@ import SwiftUI
 import SceneKit
 
 struct TBSGameView: GameView {
-  @Binding var showing: Bool
   @ObservedObject var game: TBSGame
-  
+  @Binding var showing: Bool
+
   var sceneRendererDelegate = SceneRendererDelegate()
   @State var lastCameraOffset = SCNVector3()
   

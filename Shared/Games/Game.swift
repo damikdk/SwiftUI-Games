@@ -28,5 +28,7 @@ let Games: [Game] = [
   TogetherGame(
     name: "TogetherGame [WIP]",
     description: "Simple game with virtual gamepad",
-    field: Field(size: 15))
+    field: Field(size: 15)),
+
+  StoryGame(name: "StoryGame [WIP]", description: "Adventure with map and dialogs")
 ]
