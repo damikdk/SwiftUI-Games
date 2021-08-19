@@ -1,23 +1,18 @@
 //
-//  TogetherGameView.swift
+//  DarkGameView.swift
 //  SwiftUI-Games (iOS)
 //
-//  Created by Damir Minnegalimov on 27.06.2021.
+//  Created by Damir Minnegalimov on 09.08.2021.
 //
-
 import SwiftUI
 import SceneKit
 import GameController
 
-struct TogetherGameView: GameView {
-  @ObservedObject var game: TogetherGame
-
-  @Binding var showing: Bool {
-    didSet { game.scene.isPaused = showing }
-  }
+struct DarkGameView: GameView {
+  @Binding var showing: Bool
+  @ObservedObject var game: DarkGame
 
   var sceneRendererDelegate = SceneRendererDelegate()
-  let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
 
   let virtualController = { () -> GCVirtualController in
 
@@ -26,8 +21,8 @@ struct TogetherGameView: GameView {
     // So keep GCVirtualController in View, not Overlay/Modal/Sheet containers
     // https://developer.apple.com/forums/thread/682138
 
-    let virtualConfiguration = GCVirtualControllerConfiguration()
-    virtualConfiguration.elements = [GCInputLeftThumbstick, GCInputRightThumbstick]
+    let virtualConfiguration = GCVirtualController.Configuration()
+    virtualConfiguration.elements = [GCInputRightThumbstick]
 
     let virtualController = GCVirtualController(configuration: virtualConfiguration)
     return virtualController
@@ -35,6 +30,8 @@ struct TogetherGameView: GameView {
 
   var body: some View {
     ZStack {
+
+      // Scene itself
       SceneView(
         scene: game.scene,
         options: [
@@ -43,16 +40,17 @@ struct TogetherGameView: GameView {
         delegate: sceneRendererDelegate)
         .ignoresSafeArea()
 
+      // Overlay
       VStack {
-        // Top HUD
 
-        HStack {
-          // Top left botton
+        // Top left botton
+        HStack(alignment: .top) {
           Button {
             showing.toggle()
           } label: {
             Image(systemName: "xmark")
           }
+          .font(.largeTitle)
           .buttonStyle(MaterialButtonStyle())
 
           Spacer()
@@ -60,50 +58,22 @@ struct TogetherGameView: GameView {
 
         Spacer()
       }
-
-      GeometryReader { (geometry) in
-        VStack(alignment: .center) {
-          Spacer()
-
-          if geometry.size.width < 500 {
-            Button("GCVirtualController requires more horizontal space") {
-              showing.toggle()
-            }
-            .buttonStyle(MaterialButtonStyle())
-          }
-
-          Spacer()
-        }
-      }
+      .padding()
     }
     .onDisappear(perform: {
       virtualController.disconnect()
-
       sceneRendererDelegate.onEachFrame = nil
     })
     .onAppear(perform: {
       virtualController.connect()
-
-      if let leftPad = virtualController.controller?.extendedGamepad?.leftThumbstick {
-        leftPad.valueChangedHandler = { (dpad, xValue, yValue) in
-          game.handleLeftPad(xAxis: xValue, yAxis: yValue)
-        }
-      }
+      sceneRendererDelegate.onEachFrame = { game.onEachFrame() }
 
       if let rightPad = virtualController.controller?.extendedGamepad?.rightThumbstick {
         rightPad.valueChangedHandler = { (dpad, xValue, yValue) in
           game.handleRightPad(xAxis: xValue, yAxis: yValue)
         }
       }
-
-      sceneRendererDelegate.onEachFrame = { game.onEachFrame() }
     })
-    .onReceive(timer) { input in
-      game.onTimer()
-    }
-    .font(.largeTitle)
-    .padding(5)
-    .ignoresSafeArea()
-  }
 
+  }
 }

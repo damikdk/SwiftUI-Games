@@ -60,6 +60,8 @@ struct MenuView: View {
           TBSGameView(showing: $showingGame, game: tbsGame)
         } else if let togetherGame = game as? TogetherGame {
           TogetherGameView(game: togetherGame, showing: $showingGame)
+        } else if let darkGame = game as? DarkGame {
+          DarkGameView(showing: $showingGame, game: darkGame)
         }
       }
     }

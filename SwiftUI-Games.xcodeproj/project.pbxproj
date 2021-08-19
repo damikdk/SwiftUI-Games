@@ -18,6 +18,8 @@
 		978C102B26737E3B00E23D85 /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978C102A26737E3B00E23D85 /* Hero.swift */; };
 		978C102D267383A000E23D85 /* Ability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978C102C267383A000E23D85 /* Ability.swift */; };
 		978C102F2673846800E23D85 /* Shield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978C102E2673846800E23D85 /* Shield.swift */; };
+		979AA3EB26C1C2150014BBD6 /* DarkGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979AA3EA26C1C2150014BBD6 /* DarkGame.swift */; };
+		979AA3ED26C1C2240014BBD6 /* DarkGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979AA3EC26C1C2240014BBD6 /* DarkGameView.swift */; };
 		97BDFA412683EDC70016CE77 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BDFA402683EDC70016CE77 /* Team.swift */; };
 		97CACB14267A8D6D00A13A02 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CACB13267A8D6D00A13A02 /* Game.swift */; };
 		97CACB17267A905500A13A02 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CACB16267A905500A13A02 /* GameView.swift */; };
@@ -52,6 +54,8 @@
 		978C102A26737E3B00E23D85 /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
 		978C102C267383A000E23D85 /* Ability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ability.swift; sourceTree = "<group>"; };
 		978C102E2673846800E23D85 /* Shield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shield.swift; sourceTree = "<group>"; };
+		979AA3EA26C1C2150014BBD6 /* DarkGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkGame.swift; sourceTree = "<group>"; };
+		979AA3EC26C1C2240014BBD6 /* DarkGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkGameView.swift; sourceTree = "<group>"; };
 		97BDFA402683EDC70016CE77 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		97CACB13267A8D6D00A13A02 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		97CACB16267A905500A13A02 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
@@ -86,13 +90,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9728694A2688FD3200FF1BB1 /* TogetherGame */ = {
+		9728694A2688FD3200FF1BB1 /* Together */ = {
 			isa = PBXGroup;
 			children = (
 				9728694B2688FD5B00FF1BB1 /* TogetherGame.swift */,
 				9728694D2688FEFD00FF1BB1 /* TogetherGameView.swift */,
 			);
-			path = TogetherGame;
+			path = Together;
 			sourceTree = "<group>";
 		};
 		978C102926737CB100E23D85 /* Entities */ = {
@@ -104,6 +108,15 @@
 				EDE3A16D266F83E300362308 /* Field.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		979AA3E926C1C1BE0014BBD6 /* Dark */ = {
+			isa = PBXGroup;
+			children = (
+				979AA3EA26C1C2150014BBD6 /* DarkGame.swift */,
+				979AA3EC26C1C2240014BBD6 /* DarkGameView.swift */,
+			);
+			path = Dark;
 			sourceTree = "<group>";
 		};
 		97CACB15267A8DE100A13A02 /* TBS */ = {
@@ -195,9 +208,10 @@
 		EDE3A169266F83E300362308 /* Games */ = {
 			isa = PBXGroup;
 			children = (
+				979AA3E926C1C1BE0014BBD6 /* Dark */,
 				97CACB18267AAE2E00A13A02 /* Minimal Demo */,
 				97CACB15267A8DE100A13A02 /* TBS */,
-				9728694A2688FD3200FF1BB1 /* TogetherGame */,
+				9728694A2688FD3200FF1BB1 /* Together */,
 				97CACB13267A8D6D00A13A02 /* Game.swift */,
 				97CACB16267A905500A13A02 /* GameView.swift */,
 				EDE3A16E266F83E300362308 /* MaterialNode.swift */,
@@ -296,6 +310,7 @@
 				EDE3A176266F83E300362308 /* Field.swift in Sources */,
 				971D8B41267D495B00F0A193 /* View+Extenstions.swift in Sources */,
 				ED63086D2670C91C003FD347 /* MaterialButtonStyle.swift in Sources */,
+				979AA3ED26C1C2240014BBD6 /* DarkGameView.swift in Sources */,
 				9727F47C26966D54006C7911 /* ContactDelegate.swift in Sources */,
 				EDE3A175266F83E300362308 /* TBSGame.swift in Sources */,
 				EDE3A173266F83E300362308 /* Samples.swift in Sources */,
@@ -305,6 +320,7 @@
 				EDE3A170266F83E300362308 /* MenuView.swift in Sources */,
 				EDE3A16F266F83E300362308 /* CardView.swift in Sources */,
 				EDE3A177266F83E300362308 /* MaterialNode.swift in Sources */,
+				979AA3EB26C1C2150014BBD6 /* DarkGame.swift in Sources */,
 				97CACB14267A8D6D00A13A02 /* Game.swift in Sources */,
 				978C102D267383A000E23D85 /* Ability.swift in Sources */,
 				9728694E2688FEFD00FF1BB1 /* TogetherGameView.swift in Sources */,
