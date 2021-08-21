@@ -21,7 +21,7 @@ class DarkGame: Game, ObservableObject {
   private let cameraHeight: Float = 6
   private let lightOffset = SCNVector3(0, 5, 0)
 
-  var firstHero: Hero!
+  var hero: Hero!
   var enemies: [Hero] = []
   var lightNode: SCNNode?
   let heroSpeed: Float = 5
@@ -48,48 +48,50 @@ class DarkGame: Game, ObservableObject {
     prepareLight()
     prepareCamera()
     prepareDebugStuff()
+
+    addEnemies()
   }
 
   func handleRightPad(xAxis: Float, yAxis: Float) {
     if xAxis == yAxis, xAxis == 0 {
-      firstHero.node.physicsBody?.angularVelocity = SCNVector4()
-      firstHero.node.physicsBody?.velocity = SCNVector3()
-      firstHero.node.physicsBody?.mass = 0
+      hero.node.physicsBody?.angularVelocity = SCNVector4()
+      hero.node.physicsBody?.velocity = SCNVector3()
+      hero.node.physicsBody?.mass = 0
 
       return
     }
 
     let velocity = SCNVector3(xAxis, 0, -yAxis) * heroSpeed
-    firstHero.node.physicsBody?.velocity = velocity
-    firstHero.node.physicsBody?.mass = 1
+    hero.node.physicsBody?.velocity = velocity
+    hero.node.physicsBody?.mass = 1
   }
 
   func onEachFrame() {
 
-    let firstHeroPosition = firstHero.node.presentation.position
+    let heroPosition = hero.node.presentation.position
 
-    let cameraOffset = SCNVector3(
-      0,
-      cameraHeight,
-      cameraHeight)
-
-    cameraNode.position = firstHeroPosition + cameraOffset
-    cameraNode.look(at: firstHeroPosition)
+    // Move camera to the player
+    let cameraOffset = SCNVector3(0, cameraHeight, cameraHeight)
+    cameraNode.position = heroPosition + cameraOffset
+    cameraNode.look(at: heroPosition)
 
     // Make enemies closer
     for enemy in enemies {
       if enemy.node.parent == nil { continue }
 
-      let someVector = firstHeroPosition - enemy.node.presentation.position
-      enemy.node.physicsBody?.velocity = someVector
+      // The further the hero is, the faster the enemy moves in his direction
+      let vectorBetween = heroPosition - enemy.node.presentation.position
+      enemy.node.physicsBody?.velocity = vectorBetween * 0.5
     }
 
     // Keep light close to player
-    let moveAction = SCNAction.move(to: firstHeroPosition + lightOffset, duration: 0.2)
+    // (it's strange way to do it, but I want the node to move smoothly to the hero.
+    // I preferr to just add velocity to light node, but LightNode doesn't have physicsBody)
+    let moveAction = SCNAction.move(to: heroPosition + lightOffset, duration: 0.2)
     moveAction.timingMode = .easeInEaseOut
     lightNode?.runAction(moveAction)
 
-    lightNode?.look(at: firstHeroPosition)
+    lightNode?.look(at: heroPosition)
   }
 
 }
@@ -100,16 +102,16 @@ class DarkGame: Game, ObservableObject {
 private extension DarkGame {
 
   func preparePlayers() {
-    firstHero = Heroes.Eric()
+    hero = Heroes.Eric()
 
-    let fieldCellForFirstHero = field.fieldCell(in: 10, column: 10)!
-    field.put(object: firstHero.node, to: fieldCellForFirstHero)
+    let fieldCellForFirstHero = field.fieldCell(in: 45, column: 24)!
+    field.put(object: hero.node, to: fieldCellForFirstHero)
   }
 
   func prepareLight() {
     lightNode = defaultLightNode(mode: .spot)
-    lightNode?.position = firstHero.node.position + lightOffset
-    lightNode?.look(at: firstHero.node.position)
+    lightNode?.position = hero.node.position + lightOffset
+    lightNode?.look(at: hero.node.position)
 
     scene.rootNode.addChildNode(lightNode!)
   }
@@ -142,6 +144,24 @@ private extension DarkGame {
 
 }
 
+
+// MARK: - Enemies
+
+private extension DarkGame {
+
+  func addEnemies() {
+    let newEnemies = [Heroes.Eric(), Heroes.Eric(), Heroes.Eric(), Heroes.Eric(), Heroes.Eric()]
+
+    for enemy in newEnemies {
+      field.put(object: enemy.node, to: field.cells.randomElement()!)
+    }
+
+    enemies.append(contentsOf: newEnemies)
+  }
+
+}
+
+
 // MARK: - SCNPhysicsContact
 
 private extension DarkGame {
@@ -161,14 +181,14 @@ private extension DarkGame {
     }
 
     // Game over if enemy touched Heroes
-    if enemyNodes.contains(nodeA) && firstHero.node === nodeB {
+    if enemyNodes.contains(nodeA) && hero.node === nodeB {
       UIImpactFeedbackGenerator(style: .medium).impactOccurred()
 
       nodeB.highlight(with: .red, for: 2)
       return
     }
 
-    if enemyNodes.contains(nodeB) && firstHero.node === nodeA {
+    if enemyNodes.contains(nodeB) && hero.node === nodeA {
       UIImpactFeedbackGenerator(style: .medium).impactOccurred()
 
       nodeA.highlight(with: .red, for: 2)

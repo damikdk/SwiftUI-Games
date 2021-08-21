@@ -110,9 +110,9 @@ class TogetherGame: Game, ObservableObject {
       if enemy.node.parent == nil { continue }
       
       let closestHero = closestHero(for: enemy.node)
-      let someVector = closestHero.node.presentation.position - enemy.node.presentation.position
+      let vectorBetween = closestHero.node.presentation.position - enemy.node.presentation.position
 
-      enemy.node.physicsBody?.velocity = someVector
+      enemy.node.physicsBody?.velocity = vectorBetween
     }
   }
 
