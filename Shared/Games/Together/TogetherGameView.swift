@@ -49,7 +49,7 @@ struct TogetherGameView: GameView {
         Spacer()
       }
 
-      GeometryReader { (geometry) in
+      GeometryReader { geometry in
         VStack(alignment: .center) {
           Spacer()
 

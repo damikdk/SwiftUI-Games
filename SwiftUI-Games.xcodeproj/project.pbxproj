@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		13CA797126D53E450052FE5D /* VirtualController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CA797026D53E450052FE5D /* VirtualController.swift */; };
+		13CA797126D53E450052FE5D /* SuperController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CA797026D53E450052FE5D /* SuperController.swift */; };
 		971D8B41267D495B00F0A193 /* View+Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971D8B40267D495B00F0A193 /* View+Extenstions.swift */; };
 		9727F47C26966D54006C7911 /* ContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9727F47B26966D54006C7911 /* ContactDelegate.swift */; };
 		9728694C2688FD5B00FF1BB1 /* TogetherGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9728694B2688FD5B00FF1BB1 /* TogetherGame.swift */; };
@@ -44,7 +44,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		13CA797026D53E450052FE5D /* VirtualController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualController.swift; sourceTree = "<group>"; };
+		13CA797026D53E450052FE5D /* SuperController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperController.swift; sourceTree = "<group>"; };
 		971D8B40267D495B00F0A193 /* View+Extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extenstions.swift"; sourceTree = "<group>"; };
 		9727F47B26966D54006C7911 /* ContactDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDelegate.swift; sourceTree = "<group>"; };
 		9728694B2688FD5B00FF1BB1 /* TogetherGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherGame.swift; sourceTree = "<group>"; };
@@ -96,7 +96,7 @@
 		13CA796F26D53E1F0052FE5D /* Control */ = {
 			isa = PBXGroup;
 			children = (
-				13CA797026D53E450052FE5D /* VirtualController.swift */,
+				13CA797026D53E450052FE5D /* SuperController.swift */,
 			);
 			path = Control;
 			sourceTree = "<group>";
@@ -346,7 +346,7 @@
 				EDE3A154266F803A00362308 /* SwiftUIGamesApp.swift in Sources */,
 				9728694C2688FD5B00FF1BB1 /* TogetherGame.swift in Sources */,
 				97CACB1A267AAE5D00A13A02 /* MinimalDemo.swift in Sources */,
-				13CA797126D53E450052FE5D /* VirtualController.swift in Sources */,
+				13CA797126D53E450052FE5D /* SuperController.swift in Sources */,
 				EDD3DBCE26701B97001E7373 /* Hitscan.swift in Sources */,
 				EDD3DBCC26700EF1001E7373 /* SCNVector3+Extensions.swift in Sources */,
 			);

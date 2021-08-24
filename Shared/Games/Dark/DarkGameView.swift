@@ -14,7 +14,7 @@ struct DarkGameView: GameView {
 
   var sceneRendererDelegate = SceneRendererDelegate()
 
-  let virtualController = createVirtualController([GCInputRightThumbstick])
+  var superController = SuperController(elements: [GCInputRightThumbstick])
 
   var body: some View {
     ZStack {
@@ -49,18 +49,14 @@ struct DarkGameView: GameView {
       .padding()
     }
     .onDisappear(perform: {
-      virtualController.disconnect()
+      superController.disconnect()
       sceneRendererDelegate.onEachFrame = nil
     })
     .onAppear(perform: {
-      virtualController.connect()
+      superController.connect()
       sceneRendererDelegate.onEachFrame = { game.onEachFrame() }
-
-      if let rightPad = virtualController.controller?.extendedGamepad?.rightThumbstick {
-        rightPad.valueChangedHandler = { (dpad, xValue, yValue) in
-          game.handleRightPad(xAxis: xValue, yAxis: yValue)
-        }
-      }
+      
+      superController.handleRightPad = game.handleRightPad
     })
 
   }

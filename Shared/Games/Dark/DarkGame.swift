@@ -7,6 +7,7 @@
 
 import SceneKit
 import SwiftUI
+import GameController
 
 class DarkGame: Game, ObservableObject {
   let name: String
@@ -52,7 +53,7 @@ class DarkGame: Game, ObservableObject {
     addEnemies()
   }
 
-  func handleRightPad(xAxis: Float, yAxis: Float) {
+  func handleRightPad(dPad: GCControllerDirectionPad, xAxis: Float, yAxis: Float) {
     if xAxis == yAxis, xAxis == 0 {
       hero.node.physicsBody?.angularVelocity = SCNVector4()
       hero.node.physicsBody?.velocity = SCNVector3()
