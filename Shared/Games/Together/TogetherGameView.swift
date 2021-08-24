@@ -70,7 +70,6 @@ struct TogetherGameView: GameView {
     })
     .onAppear(perform: {
       virtualController.connect()
-      sceneRendererDelegate.onEachFrame = { game.onEachFrame() }
 
       if let leftPad = virtualController.controller?.extendedGamepad?.leftThumbstick {
         leftPad.valueChangedHandler = { (dpad, xValue, yValue) in
@@ -83,6 +82,8 @@ struct TogetherGameView: GameView {
           game.handleRightPad(xAxis: xValue, yAxis: yValue)
         }
       }
+      
+      sceneRendererDelegate.onEachFrame = { game.onEachFrame() }
     })
     .onReceive(timer) { input in
       game.onTimer()

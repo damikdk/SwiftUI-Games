@@ -45,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		13CA797026D53E450052FE5D /* SuperController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperController.swift; sourceTree = "<group>"; };
+		13CA797226D569F80052FE5D /* SwiftUI-Games--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SwiftUI-Games--iOS--Info.plist"; sourceTree = "<group>"; };
 		971D8B40267D495B00F0A193 /* View+Extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extenstions.swift"; sourceTree = "<group>"; };
 		9727F47B26966D54006C7911 /* ContactDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDelegate.swift; sourceTree = "<group>"; };
 		9728694B2688FD5B00FF1BB1 /* TogetherGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherGame.swift; sourceTree = "<group>"; };
@@ -170,6 +171,7 @@
 		EDE3A140266F803800362308 = {
 			isa = PBXGroup;
 			children = (
+				13CA797226D569F80052FE5D /* SwiftUI-Games--iOS--Info.plist */,
 				9777F67826D25FA600A0F986 /* SwiftUI-Games (iOS).entitlements */,
 				EDE3A145266F803900362308 /* Shared */,
 				975D4DA0267FBEB0007CC8A0 /* README.md */,
@@ -481,6 +483,7 @@
 				DEVELOPMENT_TEAM = BZ82DRDZY8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SwiftUI-Games--iOS--Info.plist";
 				INFOPLIST_KEY_CFBundleExecutable = "SwiftUI-Games";
 				INFOPLIST_KEY_CFBundleName = "SwiftUI-Games";
 				INFOPLIST_KEY_CFBundleVersion = 6;
@@ -497,7 +500,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1;
+				MARKETING_VERSION = 0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.damirka.SwiftUI-Games";
 				PRODUCT_NAME = "SwiftUI-Games";
 				SDKROOT = iphoneos;
@@ -519,6 +522,7 @@
 				DEVELOPMENT_TEAM = BZ82DRDZY8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SwiftUI-Games--iOS--Info.plist";
 				INFOPLIST_KEY_CFBundleExecutable = "SwiftUI-Games";
 				INFOPLIST_KEY_CFBundleName = "SwiftUI-Games";
 				INFOPLIST_KEY_CFBundleVersion = 6;
@@ -535,7 +539,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1;
+				MARKETING_VERSION = 0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.damirka.SwiftUI-Games";
 				PRODUCT_NAME = "SwiftUI-Games";
 				SDKROOT = iphoneos;

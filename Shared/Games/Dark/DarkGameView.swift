@@ -54,9 +54,9 @@ struct DarkGameView: GameView {
     })
     .onAppear(perform: {
       superController.connect()
-      sceneRendererDelegate.onEachFrame = { game.onEachFrame() }
-      
       superController.handleRightPad = game.handleRightPad
+      
+      sceneRendererDelegate.onEachFrame = game.onEachFrame
     })
 
   }
