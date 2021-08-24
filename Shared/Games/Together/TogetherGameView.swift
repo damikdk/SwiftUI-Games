@@ -19,19 +19,7 @@ struct TogetherGameView: GameView {
   var sceneRendererDelegate = SceneRendererDelegate()
   let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
 
-  let virtualController = { () -> GCVirtualController in
-
-    // Earlier I used `fullScreenCover` for games in MenuScreen,
-    // but GCVirtualController was BELOW it.
-    // So keep GCVirtualController in View, not Overlay/Modal/Sheet containers
-    // https://developer.apple.com/forums/thread/682138
-
-    let virtualConfiguration = GCVirtualController.Configuration()
-    virtualConfiguration.elements = [GCInputLeftThumbstick, GCInputRightThumbstick]
-
-    let virtualController = GCVirtualController(configuration: virtualConfiguration)
-    return virtualController
-  }()
+  let virtualController = createVirtualController([GCInputLeftThumbstick, GCInputRightThumbstick])
 
   var body: some View {
     ZStack {
