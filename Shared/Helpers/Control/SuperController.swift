@@ -34,8 +34,20 @@ class SuperController {
   
   init(elements: Set<String>) {
     // TODO: Handle cases when keyboard or gamepad is available
-    
-    let isKeyboardConnected = GCKeyboard.coalesced != nil
+
+    // Unfortunally, there is no good API for it.
+    // This is the only way to make sure you are on Mac
+    var isMacCatalyst = false
+
+#if targetEnvironment(macCatalyst)
+    print("App running on macOS with Catalyst")
+    isMacCatalyst = true
+#else
+    print("App running without Catalyst")
+#endif
+
+    // Convention: if app is on Mac, there is a keyboard available
+    let isKeyboardConnected = GCKeyboard.coalesced != nil || isMacCatalyst
     
     if isKeyboardConnected {
       print("Keyboard is connected")
