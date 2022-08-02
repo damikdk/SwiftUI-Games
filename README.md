@@ -46,7 +46,7 @@ Simple arcade. Control two nice balls, catch all of bad ones
 - `SceneRendererDelegate` hack without `UIKit` for `renderer(renderer, updateAtTime)` (`SceneKit` each-frame-callback similar to `update()` from Unity)
 - `SCNPhysicsContactDelegate` hack without `UIKit`
 - In-game `Timer` hack
-- `GCVirtualController`, each stick moves one ball. Simpliest implementation, check `DarkGame` for cool cross-platform `SuperController` code
+- `GCVirtualController`, each stick moves one ball. Simpliest implementation, check `DarkGame` for cool cross-platform `SuperController` code (WIP)
 
 <p float="left">
 <img src="https://i.imgur.com/XEwC2ZD.png" alt="TogetherGame" height="300">
@@ -57,7 +57,7 @@ Simple arcade. Control ball, loot and run. The Spirit will light your way
 
 - `SceneRendererDelegate` hack without `UIKit` for `renderer(renderer, updateAtTime)` (`SceneKit` each-frame-callback similar to `update()` from Unity)
 - `SCNPhysicsContactDelegate` hack without `UIKit`
-- Keyboard, real gamepad or `GCVirtualController` control in one place called `SuperController` (WIP)
+- Keyboard, real gamepad or `GCVirtualController` control in one place called `SuperController` (WIP, not working)
 
 <p float="left">
 <img src="https://i.imgur.com/lRe8b1h.png" alt="DarkGame" height="400">
@@ -74,5 +74,4 @@ Current tasks are [here](https://github.com/damikdk/SwiftUI-Games/projects/1)
 - Simple dialog system
 
 ## Broken things (by Apple or me)
-- Safe Area Insets. And some in-game Taps because of it
 - Some transitions and animations
