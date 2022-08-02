@@ -44,6 +44,13 @@ struct TogetherGameView: GameView {
           .buttonStyle(MaterialButtonStyle())
 
           Spacer()
+          
+          Button {
+          } label: {
+            Text("Score \(game.score)")
+          }
+          .buttonStyle(MaterialButtonStyle())
+          .disabled(true)
         }
 
         Spacer()

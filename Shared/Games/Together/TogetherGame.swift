@@ -23,6 +23,8 @@ class TogetherGame: Game, ObservableObject {
   var firstHero: Hero!
   var secondHero: Hero!
   let speed: Float = 20
+  
+  @Published var score: Int = 0
 
   private let cameraNode: SCNNode = SCNNode()
   private let cameraHeight: Float = 40
@@ -221,6 +223,10 @@ private extension TogetherGame {
     // Remove enemies touched by Line
     if nodeA.name == "debug-line2" {
       UIImpactFeedbackGenerator(style: .light).impactOccurred()
+      
+      DispatchQueue.main.async {
+        self.score = self.score + 1
+      }
 
       nodeB.removeFromParentNode()
       return
@@ -229,6 +235,10 @@ private extension TogetherGame {
     if nodeB.name == "debug-line2" {
       UIImpactFeedbackGenerator(style: .light).impactOccurred()
 
+      DispatchQueue.main.async {
+        self.score = self.score + 1
+      }
+      
       nodeA.removeFromParentNode()
       return
     }
