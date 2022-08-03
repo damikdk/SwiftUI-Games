@@ -222,41 +222,55 @@ private extension TogetherGame {
     
     // Remove enemies touched by Line
     if nodeA.name == "debug-line2" {
+      changeScore(value: +1)
+
       UIImpactFeedbackGenerator(style: .light).impactOccurred()
       
-      DispatchQueue.main.async {
-        self.score = self.score + 1
-      }
-
       nodeB.removeFromParentNode()
       return
     }
     
     if nodeB.name == "debug-line2" {
+      changeScore(value: +1)
+
       UIImpactFeedbackGenerator(style: .light).impactOccurred()
 
-      DispatchQueue.main.async {
-        self.score = self.score + 1
-      }
-      
       nodeA.removeFromParentNode()
       return
     }
 
-    // Game over if enemy touched Heroes
+    // Punish gamer if enemy touched Heroes
     if enemyNodes.contains(nodeA) && heroNodes.contains(nodeB) {
+      changeScore(value: -1)
+
       UIImpactFeedbackGenerator(style: .medium).impactOccurred()
 
       nodeB.highlight(with: .red, for: 2)
+      
       return
     }
 
     if enemyNodes.contains(nodeB) && heroNodes.contains(nodeA) {
+      changeScore(value: -1)
+
       UIImpactFeedbackGenerator(style: .medium).impactOccurred()
       
       nodeA.highlight(with: .red, for: 2)
+         
       return
     }
   }
 
+}
+
+// MARK: - Scoring
+
+private extension TogetherGame {
+  
+  func changeScore(value: Int) {
+    DispatchQueue.main.async {
+      self.score = self.score + value
+    }
+  }
+  
 }

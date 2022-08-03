@@ -23,6 +23,8 @@ struct TogetherGameView: GameView {
 
   var body: some View {
     ZStack {
+
+      // Scene itself
       SceneView(
         scene: game.scene,
         options: [
@@ -55,6 +57,8 @@ struct TogetherGameView: GameView {
 
         Spacer()
       }
+      .font(.largeTitle)
+      .padding()
 
       GeometryReader { geometry in
         VStack(alignment: .center) {
@@ -95,9 +99,7 @@ struct TogetherGameView: GameView {
     .onReceive(timer) { input in
       game.onTimer()
     }
-    .font(.largeTitle)
-    .padding(5)
-    .ignoresSafeArea()
+    
   }
 
 }
