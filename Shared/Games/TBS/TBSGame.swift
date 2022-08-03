@@ -198,6 +198,8 @@ extension TBSGame {
       print("Strange, there is no current team. Or it's not in TeamManager array: \(currentTeam?.id ?? "<NIL>")")
       currentTeam = teams.first
     }
+    
+    currentHero = nil
   }
   
   func highlight(team: Team?) {

@@ -2,12 +2,12 @@
 # SwiftUI-Games (WIP)
 Collection of simple demos of SwiftUI + SceneKit games
 
-[TestFlight Beta](https://testflight.apple.com/join/52wVoy8Z "TestFlight Beta")
+[TestFlight Beta](https://testflight.apple.com/join/52wVoy8Z "TestFlight Beta") (iOS 16+)
 
 ### Design
 - Pure `SwiftUI` at any cost. Zero `UIKit` imports
 - Full Apple-crossplatform. Playable on `iOS`, `macOS`. (`tvOS` later)
-- Only modern APIs, zero legacy support. `iOS 15+` since day one
+- Only modern APIs, zero legacy support. `iOS 16+`
 - Zero dependencies
 - Zero projectiles. I hate projectiles
 

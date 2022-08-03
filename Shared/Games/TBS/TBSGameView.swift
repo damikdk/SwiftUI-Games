@@ -16,9 +16,9 @@ struct TBSGameView: GameView {
   @State var lastCameraOffset = SCNVector3()
   
   var body: some View {
-    // We can't get touch location with TapGesture, so hack:
-    // (https://stackoverflow.com/a/56567649/7996650)
-    let tap = DragGesture(minimumDistance: 0, coordinateSpace: .global)
+
+    // Camera drag
+    let drag = DragGesture(coordinateSpace: .global)
       .onChanged({ gesture in
         if let camera = sceneRendererDelegate.renderer?.pointOfView {
           let translation = gesture.translation
@@ -34,14 +34,6 @@ struct TBSGameView: GameView {
         }
       })
       .onEnded { gesture in
-        let translation = gesture.translation
-        
-        if abs(translation.height) < 20,
-           abs(translation.width) < 20 {
-          
-          pick(atPoint: gesture.location)
-        }
-        
         lastCameraOffset = SCNVector3()
       }
     
@@ -53,7 +45,10 @@ struct TBSGameView: GameView {
         ],
         delegate: sceneRendererDelegate)
         .ignoresSafeArea()
-        .gesture(tap)
+        .onTapGesture { location in
+          pick(atPoint: location)
+        }
+        .gesture(drag)
       
       VStack {
         // Top HUD
