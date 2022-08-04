@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		130EFA10289BD999001EDF6F /* Swift+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130EFA0F289BD999001EDF6F /* Swift+Helpers.swift */; };
+		13A05AC8289BB200009BC1D1 /* JumpGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A05AC7289BB200009BC1D1 /* JumpGame.swift */; };
+		13A05ACA289BB503009BC1D1 /* JumpGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A05AC9289BB503009BC1D1 /* JumpGameView.swift */; };
 		13A05ACD289BC23C009BC1D1 /* SCNNode+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A05ACC289BC23C009BC1D1 /* SCNNode+Helpers.swift */; };
 		13CA797126D53E450052FE5D /* SuperController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CA797026D53E450052FE5D /* SuperController.swift */; };
 		9727F47C26966D54006C7911 /* ContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9727F47B26966D54006C7911 /* ContactDelegate.swift */; };
@@ -43,6 +46,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		130EFA0F289BD999001EDF6F /* Swift+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swift+Helpers.swift"; sourceTree = "<group>"; };
+		13A05AC7289BB200009BC1D1 /* JumpGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpGame.swift; sourceTree = "<group>"; };
+		13A05AC9289BB503009BC1D1 /* JumpGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpGameView.swift; sourceTree = "<group>"; };
 		13A05ACC289BC23C009BC1D1 /* SCNNode+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNNode+Helpers.swift"; sourceTree = "<group>"; };
 		13CA797026D53E450052FE5D /* SuperController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperController.swift; sourceTree = "<group>"; };
 		13CA797226D569F80052FE5D /* SwiftUI-Games--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SwiftUI-Games--iOS--Info.plist"; sourceTree = "<group>"; };
@@ -100,6 +106,15 @@
 				EDD3DBCD26701B97001E7373 /* Hitscan.swift */,
 			);
 			path = Logic;
+			sourceTree = "<group>";
+		};
+		13A05ACB289BB509009BC1D1 /* Jump */ = {
+			isa = PBXGroup;
+			children = (
+				13A05AC7289BB200009BC1D1 /* JumpGame.swift */,
+				13A05AC9289BB503009BC1D1 /* JumpGameView.swift */,
+			);
+			path = Jump;
 			sourceTree = "<group>";
 		};
 		13A05ACE289BC38D009BC1D1 /* Hacks */ = {
@@ -239,6 +254,7 @@
 				EDE3A16C266F83E300362308 /* Scene */,
 				13CA796F26D53E1F0052FE5D /* Control */,
 				13A05ACF289BC3B0009BC1D1 /* Mocks */,
+				130EFA0F289BD999001EDF6F /* Swift+Helpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -246,10 +262,11 @@
 		EDE3A169266F83E300362308 /* Games */ = {
 			isa = PBXGroup;
 			children = (
-				979AA3E926C1C1BE0014BBD6 /* Dark */,
 				97CACB18267AAE2E00A13A02 /* Minimal Demo */,
 				97CACB15267A8DE100A13A02 /* TBS */,
 				9728694A2688FD3200FF1BB1 /* Together */,
+				979AA3E926C1C1BE0014BBD6 /* Dark */,
+				13A05ACB289BB509009BC1D1 /* Jump */,
 				97CACB13267A8D6D00A13A02 /* Game.swift */,
 				97CACB16267A905500A13A02 /* GameView.swift */,
 				1363DFD4289B21F30008971F /* Logic */,
@@ -357,6 +374,7 @@
 				EDE3A177266F83E300362308 /* MaterialNode.swift in Sources */,
 				979AA3EB26C1C2150014BBD6 /* DarkGame.swift in Sources */,
 				97CACB14267A8D6D00A13A02 /* Game.swift in Sources */,
+				13A05AC8289BB200009BC1D1 /* JumpGame.swift in Sources */,
 				978C102D267383A000E23D85 /* Ability.swift in Sources */,
 				9728694E2688FEFD00FF1BB1 /* TogetherGameView.swift in Sources */,
 				97CACB17267A905500A13A02 /* GameView.swift in Sources */,
@@ -369,8 +387,10 @@
 				97CACB1A267AAE5D00A13A02 /* MinimalDemo.swift in Sources */,
 				13CA797126D53E450052FE5D /* SuperController.swift in Sources */,
 				EDD3DBCE26701B97001E7373 /* Hitscan.swift in Sources */,
+				13A05ACA289BB503009BC1D1 /* JumpGameView.swift in Sources */,
 				EDD3DBCC26700EF1001E7373 /* SCNVector3+Extensions.swift in Sources */,
 				13A05ACD289BC23C009BC1D1 /* SCNNode+Helpers.swift in Sources */,
+				130EFA10289BD999001EDF6F /* Swift+Helpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,7 +542,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.damirka.SwiftUI-Games";
 				PRODUCT_NAME = "SwiftUI-Games";
 				SDKROOT = iphoneos;
@@ -561,7 +581,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.damirka.SwiftUI-Games";
 				PRODUCT_NAME = "SwiftUI-Games";
 				SDKROOT = iphoneos;

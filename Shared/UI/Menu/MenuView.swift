@@ -57,6 +57,8 @@ struct MenuView: View {
           TogetherGameView(game: currentGame, showing: $showingGame)
         case let currentGame as DarkGame:
           DarkGameView(game: currentGame, showing: $showingGame)
+        case let currentGame as JumpGame:
+          JumpGameView(game: currentGame, showing: $showingGame)
         default:
           EmptyView()
         }

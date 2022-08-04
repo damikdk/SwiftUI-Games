@@ -33,5 +33,9 @@ let Games: [Game] = [
   DarkGame(
     name: "DarkGame [WIP]",
     description: "Survive the darkness",
-    field: Field(size: 50))
+    field: Field(size: 50)),
+  
+  JumpGame(
+    name: "JumpGame [WIP]",
+    description: "Doodle jump, but much worse")
 ]

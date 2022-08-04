@@ -48,7 +48,6 @@ class TogetherGame: Game, ObservableObject {
     scene.background.contents = Color.DarkTheme.Violet.background.cgColor
 
     prepareCamera()
-    // prepareLight()
     preparePlayers()
     addEnemies()
   }
@@ -133,16 +132,6 @@ class TogetherGame: Game, ObservableObject {
 // MARK: - Preparing
 
 private extension TogetherGame {
-
-  func prepareLight() {
-    let fieldCenter = field.center()
-    let spotlight = defaultLightNode(mode: .spot)
-    spotlight.position = fieldCenter + SCNVector3(0, cameraHeight, 20)
-    spotlight.look(at: fieldCenter)
-
-    scene.rootNode.addChildNode(spotlight)
-    scene.rootNode.addChildNode(defaultLightNode(mode: .ambient))
-  }
 
   func prepareCamera() {
     // Setup camera

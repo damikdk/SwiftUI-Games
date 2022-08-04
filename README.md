@@ -64,6 +64,13 @@ Simple arcade. Control ball, loot and run. The Spirit will light your way
 <img src="https://i.imgur.com/AgedV7Q.png" alt="DarkGame" height="400">
 </p>
 
+## JumpGame [WIP]
+Ugly Doddle Jump clone with SceneKit and SwiftUI
+
+<p float="left">
+<img src="https://i.imgur.com/ig4FDEY.png" alt="DarkGame" height="400">
+</p>
+
 ## Roadmap
 Current tasks are [here](https://github.com/damikdk/SwiftUI-Games/projects/1)
 

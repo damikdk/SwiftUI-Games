@@ -77,6 +77,8 @@ class TBSGame: Game, ObservableObject {
         print("Shield without host was touched")
       }
       break;
+    case .platform:
+      break;
     }
   }
   
