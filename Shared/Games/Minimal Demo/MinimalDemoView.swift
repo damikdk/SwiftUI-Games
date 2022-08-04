@@ -9,8 +9,8 @@ import SwiftUI
 import SceneKit
 
 struct MinimalDemoView: GameView {
-  @Binding var showing: Bool
   @ObservedObject var game: MinimalDemo
+  @Binding var showing: Bool
 
   let text = """
   I want that ball

@@ -47,15 +47,18 @@ struct MenuView: View {
       }
       .listStyle(.plain)
 
-      if let game = currentGame, showingGame {
-        if let minimalGame = game as? MinimalDemo {
-          MinimalDemoView(showing: $showingGame, game: minimalGame)
-        } else if let tbsGame = game as? TBSGame {
-          TBSGameView(showing: $showingGame, game: tbsGame)
-        } else if let togetherGame = game as? TogetherGame {
-          TogetherGameView(game: togetherGame, showing: $showingGame)
-        } else if let darkGame = game as? DarkGame {
-          DarkGameView(showing: $showingGame, game: darkGame)
+      if showingGame {
+        switch currentGame {
+        case let currentGame as MinimalDemo:
+          MinimalDemoView(game: currentGame, showing: $showingGame)
+        case let currentGame as TBSGame:
+          TBSGameView(game: currentGame, showing: $showingGame)
+        case let currentGame as TogetherGame:
+          TogetherGameView(game: currentGame, showing: $showingGame)
+        case let currentGame as DarkGame:
+          DarkGameView(game: currentGame, showing: $showingGame)
+        default:
+          EmptyView()
         }
       }
     }

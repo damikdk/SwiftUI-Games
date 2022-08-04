@@ -9,8 +9,8 @@ import SceneKit
 import GameController
 
 struct DarkGameView: GameView {
-  @Binding var showing: Bool
   @ObservedObject var game: DarkGame
+  @Binding var showing: Bool
 
   var sceneRendererDelegate = SceneRendererDelegate()
 

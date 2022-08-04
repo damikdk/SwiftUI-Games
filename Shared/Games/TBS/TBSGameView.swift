@@ -9,8 +9,8 @@ import SwiftUI
 import SceneKit
 
 struct TBSGameView: GameView {
-  @Binding var showing: Bool
   @ObservedObject var game: TBSGame
+  @Binding var showing: Bool
   
   var sceneRendererDelegate = SceneRendererDelegate()
   @State var lastCameraOffset = SCNVector3()
@@ -18,7 +18,7 @@ struct TBSGameView: GameView {
   var body: some View {
 
     // Camera drag
-    let drag = DragGesture(coordinateSpace: .global)
+    let drag = DragGesture()
       .onChanged({ gesture in
         if let camera = sceneRendererDelegate.renderer?.pointOfView {
           let translation = gesture.translation
@@ -44,11 +44,13 @@ struct TBSGameView: GameView {
           .temporalAntialiasingEnabled
         ],
         delegate: sceneRendererDelegate)
-        .ignoresSafeArea()
         .onTapGesture { location in
           pick(atPoint: location)
         }
         .gesture(drag)
+        // Make sure ignoresSafeArea is after touch handlers
+        // Otherwise, location will be wrong
+        .ignoresSafeArea()
       
       VStack {
         // Top HUD
