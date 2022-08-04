@@ -213,6 +213,8 @@ extension TBSGame {
   
 }
 
+// MARK: - Mocks
+
 extension TBSGame {
   
   static let defaultOnHeroPress: ((TBSGame, Hero) -> Void) = { game, hero in

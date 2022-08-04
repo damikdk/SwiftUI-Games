@@ -155,6 +155,11 @@ private extension DarkGame {
 
     for enemy in newEnemies {
       field.put(object: enemy.node, to: field.cells.randomElement()!)
+      enemy.node.pulse(
+        from: Double.random(in: 0.5...1),
+        to: Double.random(in: 1...3),
+        duration: Double.random(in: 2...5)
+      )
     }
 
     enemies.append(contentsOf: newEnemies)

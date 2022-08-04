@@ -30,34 +30,6 @@ class MaterialNode: SCNNode {
   }
 }
 
-extension SCNNode {
-  func highlight(
-    with color: Color = Color.lightGrayFancy,
-    for seconds: Double = 0.4
-  ) {
-    let material = geometry!.firstMaterial!
-    
-    SCNTransaction.begin()
-    SCNTransaction.animationDuration = seconds
-    
-    // on completion - unhighlight
-    SCNTransaction.completionBlock = {
-      SCNTransaction.begin()
-      SCNTransaction.animationDuration = seconds
-      
-      material.emission.contents = Color.clear.cgColor
-      SCNTransaction.commit()
-    }
-    
-    material.emission.contents = color.cgColor
-    SCNTransaction.commit()
-  }
-  
-  func height() -> CGFloat {
-    return CGFloat(self.boundingBox.max.y - self.boundingBox.min.y)
-  }
-}
-
 let bigBallNode = { (color: Color) -> MaterialNode in
   let sphereGeometry = SCNSphere(radius: 1)
   sphereGeometry.segmentCount = 10
@@ -75,7 +47,6 @@ let bigBallNode = { (color: Color) -> MaterialNode in
 
   return node
 }
-
 
 let bigCubeNode = { (color: Color) -> MaterialNode in
   var box = SCNBox()
