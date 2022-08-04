@@ -15,6 +15,18 @@ struct JumpGameView: GameView {
   var sceneRendererDelegate = SceneRendererDelegate()
 
   var body: some View {
+    
+    // Left-right control
+    
+    let drag = DragGesture()
+      .onChanged({ gesture in
+        let horizontalTranslation = gesture.translation.width
+        game.onControlChange(newValue: horizontalTranslation)
+      })
+      .onEnded { gesture in
+        game.onControlEnd()
+      }
+
     ZStack {
       
       // Scene itself
@@ -24,6 +36,7 @@ struct JumpGameView: GameView {
           .temporalAntialiasingEnabled
         ],
         delegate: sceneRendererDelegate)
+      .gesture(drag)
       .ignoresSafeArea()
       
       // Overlay
@@ -45,6 +58,7 @@ struct JumpGameView: GameView {
           } label: {
             Text("Score \(game.score)")
           }
+          .font(.largeTitle)
           .buttonStyle(MaterialButtonStyle())
           .disabled(true)
         }
