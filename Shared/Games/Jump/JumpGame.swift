@@ -8,10 +8,12 @@
 import SceneKit
 import SwiftUI
 
-fileprivate let JUMP_FORCE: Float = 20
+fileprivate let GRAVITY: Float = 20
+fileprivate let JUMP_FORCE: Float = 25
 fileprivate let CAMERA_FOV: CGFloat = 40
 fileprivate let FIELD_SIZE: Int = 5
 fileprivate let CELL_SIZE: CGFloat = 5
+fileprivate let CAMERA_HEIGHT: Float = 30
 
 class JumpGame: Game, ObservableObject {
   let name: String
@@ -27,7 +29,6 @@ class JumpGame: Game, ObservableObject {
   var platforms: [SCNNode] = []
   
   private let cameraNode: SCNNode = SCNNode()
-  private let cameraHeight: Float = 20
   private var lastOffset: Double = 0
   
   init(
@@ -37,6 +38,7 @@ class JumpGame: Game, ObservableObject {
     self.name = name
     self.description = description
     
+    scene.physicsWorld.gravity = SCNVector3(0, -GRAVITY, 0)
     scene.background.contents = Color.DarkTheme.Violet.background.cgColor
     
     // Keep it odd
@@ -55,17 +57,14 @@ class JumpGame: Game, ObservableObject {
     
     prepareCamera()
     preparePlayers()
-    fillField()
-    
-    addField()
-    currentField.node.worldPosition.y = currentField.node.boundingBox.max.z
+    fill(field: currentField)
   }
   
   func onEachFrame() {
     let heroPosition = hero.node.presentation.position
     
     // Move camera with the player
-    let cameraOffset = SCNVector3(0, cameraHeight, cameraHeight)
+    let cameraOffset = SCNVector3(0, CAMERA_HEIGHT, CAMERA_HEIGHT)
     cameraNode.position = heroPosition + cameraOffset
     cameraNode.look(at: heroPosition)
     
@@ -73,17 +72,21 @@ class JumpGame: Game, ObservableObject {
     if let velocity = hero.node.physicsBody?.velocity {
       SCNTransaction.begin()
       SCNTransaction.animationDuration = 1
-      cameraNode.camera?.fieldOfView = CAMERA_FOV + CGFloat(velocity.y)
+      
+      let newFOV = CAMERA_FOV + CGFloat(velocity.y)
+      cameraNode.camera?.fieldOfView = newFOV
+            
       SCNTransaction.commit()
     }
     
     // Check record height
     changeScore(value: Int(hero.node.presentation.worldPosition.y))
         
-    if hero.node.presentation.worldPosition.y > currentField.centerCell().node.worldPosition.y {
-      
-      addField()
-      currentField.node.worldPosition.y = currentField.node.boundingBox.max.z
+    // Add next part after user half way to the end
+    if hero.node.presentation.worldPosition.y > currentField.centerCell().node.presentation.worldPosition.y {
+      let newField = addField(above: currentField)
+      fill(field: newField)
+      currentField = newField
     }
 
   }
@@ -92,12 +95,11 @@ class JumpGame: Game, ObservableObject {
 
   func onControlChange(newValue: Double) {
     // You want do this, but it doesn't work. IDK why
-    // hero.node.physicsBody?.velocity.x = Float(limitedValue)
+    // hero.node.physicsBody?.velocity.x = Float(newValue)
     
-    let action = SCNAction.move(by: SCNVector3(newValue / 50 - lastOffset, 0, 0), duration: 0.1)
-    hero.node.runAction(action)
+    hero.node.physicsBody?.applyForce(SCNVector3(newValue / 3 - lastOffset, 0, 0), asImpulse: true)
     
-    lastOffset = newValue / 50
+    lastOffset = newValue / 3
   }
   
   func onControlEnd() {
@@ -152,10 +154,8 @@ private extension JumpGame {
     if platforms.contains(nodeA) && heroNode.contains(nodeB) {
       changeScore(value: -1)
       
-      UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-      
-      nodeB.highlight(with: .red, for: 2)
-      
+      UIImpactFeedbackGenerator(style: .light).impactOccurred()
+          
       nodeB.physicsBody?.velocity.y = JUMP_FORCE
 
       return
@@ -164,14 +164,13 @@ private extension JumpGame {
     if platforms.contains(nodeB) && heroNode.contains(nodeA) {
       changeScore(value: -1)
       
-      UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-      
-      nodeA.highlight(with: .red, for: 2)
-      
+      UIImpactFeedbackGenerator(style: .light).impactOccurred()
+
       nodeA.physicsBody?.velocity.y = JUMP_FORCE
 
       return
     }
+    
   }
   
 }
@@ -180,22 +179,26 @@ private extension JumpGame {
 
 private extension JumpGame {
   
-  func addField() {
-    currentField = Field(size: FIELD_SIZE, cellSize: CELL_SIZE)
-    currentField.node.eulerAngles = SCNVector3(Double.pi / 2, 0, Double.pi / 2)
-    scene.rootNode.addChildNode(currentField.node)
+  func addField(above field: Field) -> Field {
+    print("Adding new field above \(field.node.name ?? "<NIL>")")
+    
+    let newField = Field(size: FIELD_SIZE, cellSize: CELL_SIZE)
+    
+    newField.node.eulerAngles = SCNVector3(Double.pi / 2, 0, Double.pi / 2)
+    newField.node.worldPosition.y = field.node.boundingBox.max.z + field.node.presentation.worldPosition.y
 
-    fillField()
+    scene.rootNode.addChildNode(newField.node)
+    return newField
   }
   
-  func fillField() {
-    (currentField.size * currentField.size / 3).times {
+  func fill(field: Field) {
+    (field.size * field.size / 4).times {
       let newPlatform = regularCubeNode(.lightGrayFancy)
       newPlatform.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
       newPlatform.physicsBody?.categoryBitMask = EntityType.platform.rawValue
       newPlatform.physicsBody?.contactTestBitMask = EntityType.platform.rawValue
 
-      currentField.put(object: newPlatform, to: currentField.cells.randomElement()!)
+      field.put(object: newPlatform, to: field.cells.randomElement()!)
       platforms.append(newPlatform)
     }
   }

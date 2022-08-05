@@ -64,7 +64,7 @@ Simple arcade. Control ball, loot and run. The Spirit will light your way
 <img src="https://i.imgur.com/AgedV7Q.png" alt="DarkGame" height="400">
 </p>
 
-## JumpGame [WIP]
+## JumpGame
 Ugly Doddle Jump clone with SceneKit and SwiftUI
 
 <p float="left">
