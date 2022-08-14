@@ -42,8 +42,12 @@ struct JumpGameView: GameView {
       // Overlay
       VStack {
         
-        // Top left botton
+        // Top panel
+        
         HStack(alignment: .top) {
+          
+          // Top left button
+          
           Button {
             showing.toggle()
           } label: {
@@ -53,6 +57,8 @@ struct JumpGameView: GameView {
           .buttonStyle(MaterialButtonStyle())
           
           Spacer()
+          
+          // Top right panel
           
           Button {
           } label: {

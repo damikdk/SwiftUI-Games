@@ -39,5 +39,15 @@ let Games: [Game] = [
     name: "JumpGame",
     description: "Doodle jump, but much worse"),
   
-  StoryGame(name: "StoryGame [WIP]", description: "Adventure with map and dialogs")
+  StoryGame(
+    name: "StoryGame [WIP]",
+    description: "Adventure with map",
+    chapters: [
+      StoryChapter(name: "Awakening", description: "You are"),
+      StoryChapter(name: "First sense", description: "How are you?"),
+      StoryChapter(name: "Try again", description: "Don't be shy"),
+      StoryChapter(name: "I need more chapters", description: "Just for layout reasons"),
+      StoryChapter(name: "Like 8 will be enough", description: "For most devices"),
+      StoryChapter(name: "Nah", description: "It's good")
+    ])
 ]
