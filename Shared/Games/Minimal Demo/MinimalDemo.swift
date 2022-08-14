@@ -28,17 +28,9 @@ class MinimalDemo: Game, ObservableObject {
     let sphereGeometry = SCNSphere(radius: 2)
     sphereGeometry.firstMaterial?.diffuse.contents = Color.darkRed.cgColor
     sphereGeometry.segmentCount = 20
+  
     let sphereNode = SCNNode(geometry: sphereGeometry)
-    
-    // EasyIn-EasyOut forever scale aniomation
-    let scaleAnimation = CABasicAnimation(keyPath: "radius")
-    scaleAnimation.fromValue = 2
-    scaleAnimation.toValue = 5
-    scaleAnimation.duration = 4
-    scaleAnimation.autoreverses = true
-    scaleAnimation.repeatCount = .greatestFiniteMagnitude
-    scaleAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-    sphereGeometry.addAnimation(scaleAnimation, forKey: nil)
+    sphereNode.pulse(from: 2, to: 5, duration: 3)
     
     // Create directional light
     let directionalLight = SCNNode()

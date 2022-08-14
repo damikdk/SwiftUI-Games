@@ -50,6 +50,5 @@ struct CardView: View {
       .cornerRadius(20)
       .frame(minHeight: 200, maxHeight: 300)
     }
-    .buttonStyle(ScaleButtonStyle())
   }
 }

@@ -9,8 +9,20 @@ import SwiftUI
 import SceneKit
 
 struct MinimalDemoView: GameView {
-  @Binding var showing: Bool
   @ObservedObject var game: MinimalDemo
+  @Binding var showing: Bool
+
+  let text = """
+  I want that ball
+  I want it now
+  I don’t care where
+  Or why or how
+
+  I want to throw it
+  In the air
+  And kick the thing
+  From here to there
+  """
   
   var body: some View {
     ZStack {
@@ -45,7 +57,7 @@ struct MinimalDemoView: GameView {
         // Bottom Center Panel
         HStack(alignment: .bottom) {
           VStack {
-            Text("I want that ball\nI want it now\nI don’t care where\nOr why or how\n\nI want to throw it\nIn the air\nAnd kick the thing\nFrom here to there")
+            Text(text)
               .font(.title3.bold())
             
             Text("“That Ball” by Jaymie Gerard")

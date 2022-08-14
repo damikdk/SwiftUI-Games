@@ -30,7 +30,7 @@ class Field {
   
   init(size: Int = 9, cellSize: CGFloat = FieldConstants.defaultCellSize) {
     node = SCNNode()
-    node.name = "Field (size: \(size))"
+    node.name = "Field (size: \(size), id: \(UUID.short())"
     
     self.size = size
     self.cellSize = cellSize

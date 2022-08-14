@@ -15,5 +15,6 @@ struct MaterialButtonStyle: ButtonStyle {
       .background(.ultraThinMaterial)
       .cornerRadius(25)
       .scaleEffect(configuration.isPressed ? 0.9 : 1)
+      .hoverEffect(.lift)
   }
 }

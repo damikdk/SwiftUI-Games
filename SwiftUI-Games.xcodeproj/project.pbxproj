@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		971D8B41267D495B00F0A193 /* View+Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971D8B40267D495B00F0A193 /* View+Extenstions.swift */; };
+		130EFA10289BD999001EDF6F /* Swift+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130EFA0F289BD999001EDF6F /* Swift+Helpers.swift */; };
+		138154F028A97BF7008235AE /* StoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975A04F026990AF5003FF4AD /* StoryGame.swift */; };
+		13A05AC8289BB200009BC1D1 /* JumpGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A05AC7289BB200009BC1D1 /* JumpGame.swift */; };
+		13A05ACA289BB503009BC1D1 /* JumpGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A05AC9289BB503009BC1D1 /* JumpGameView.swift */; };
+		13A05ACD289BC23C009BC1D1 /* SCNNode+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A05ACC289BC23C009BC1D1 /* SCNNode+Helpers.swift */; };
+		13CA797126D53E450052FE5D /* SuperController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CA797026D53E450052FE5D /* SuperController.swift */; };
 		9727F47C26966D54006C7911 /* ContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9727F47B26966D54006C7911 /* ContactDelegate.swift */; };
 		9728694C2688FD5B00FF1BB1 /* TogetherGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9728694B2688FD5B00FF1BB1 /* TogetherGame.swift */; };
 		9728694E2688FEFD00FF1BB1 /* TogetherGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9728694D2688FEFD00FF1BB1 /* TogetherGameView.swift */; };
 		975A04EF26990AE7003FF4AD /* StoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975A04EE26990AE7003FF4AD /* StoryGameView.swift */; };
-		975A04F126990AF5003FF4AD /* StoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975A04F026990AF5003FF4AD /* StoryGame.swift */; };
 		975D4D9F267F98C4007CC8A0 /* LightHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975D4D9E267F98C4007CC8A0 /* LightHelpers.swift */; };
 		975D4DA1267FBEB0007CC8A0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 975D4DA0267FBEB0007CC8A0 /* README.md */; };
 		978C1026267379B100E23D85 /* SceneRendererDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978C1025267379B100E23D85 /* SceneRendererDelegate.swift */; };
@@ -20,13 +24,14 @@
 		978C102B26737E3B00E23D85 /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978C102A26737E3B00E23D85 /* Hero.swift */; };
 		978C102D267383A000E23D85 /* Ability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978C102C267383A000E23D85 /* Ability.swift */; };
 		978C102F2673846800E23D85 /* Shield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978C102E2673846800E23D85 /* Shield.swift */; };
+		979AA3EB26C1C2150014BBD6 /* DarkGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979AA3EA26C1C2150014BBD6 /* DarkGame.swift */; };
+		979AA3ED26C1C2240014BBD6 /* DarkGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979AA3EC26C1C2240014BBD6 /* DarkGameView.swift */; };
 		97BDFA412683EDC70016CE77 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BDFA402683EDC70016CE77 /* Team.swift */; };
 		97CACB14267A8D6D00A13A02 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CACB13267A8D6D00A13A02 /* Game.swift */; };
 		97CACB17267A905500A13A02 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CACB16267A905500A13A02 /* GameView.swift */; };
 		97CACB1A267AAE5D00A13A02 /* MinimalDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CACB19267AAE5D00A13A02 /* MinimalDemo.swift */; };
 		97CACB1C267AAF3500A13A02 /* MinimalDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CACB1B267AAF3500A13A02 /* MinimalDemoView.swift */; };
 		ED63086D2670C91C003FD347 /* MaterialButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED63086C2670C91C003FD347 /* MaterialButtonStyle.swift */; };
-		ED63086F2670CB73003FD347 /* ScaleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED63086E2670CB73003FD347 /* ScaleButtonStyle.swift */; };
 		EDD3DBCC26700EF1001E7373 /* SCNVector3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3DBCB26700EF1001E7373 /* SCNVector3+Extensions.swift */; };
 		EDD3DBCE26701B97001E7373 /* Hitscan.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD3DBCD26701B97001E7373 /* Hitscan.swift */; };
 		EDE3A154266F803A00362308 /* SwiftUIGamesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE3A146266F803900362308 /* SwiftUIGamesApp.swift */; };
@@ -43,7 +48,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		971D8B40267D495B00F0A193 /* View+Extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extenstions.swift"; sourceTree = "<group>"; };
+		130EFA0F289BD999001EDF6F /* Swift+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swift+Helpers.swift"; sourceTree = "<group>"; };
+		13A05AC7289BB200009BC1D1 /* JumpGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpGame.swift; sourceTree = "<group>"; };
+		13A05AC9289BB503009BC1D1 /* JumpGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpGameView.swift; sourceTree = "<group>"; };
+		13A05ACC289BC23C009BC1D1 /* SCNNode+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNNode+Helpers.swift"; sourceTree = "<group>"; };
+		13CA797026D53E450052FE5D /* SuperController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperController.swift; sourceTree = "<group>"; };
+		13CA797226D569F80052FE5D /* SwiftUI-Games--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SwiftUI-Games--iOS--Info.plist"; sourceTree = "<group>"; };
 		9727F47B26966D54006C7911 /* ContactDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDelegate.swift; sourceTree = "<group>"; };
 		9728694B2688FD5B00FF1BB1 /* TogetherGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherGame.swift; sourceTree = "<group>"; };
 		9728694D2688FEFD00FF1BB1 /* TogetherGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherGameView.swift; sourceTree = "<group>"; };
@@ -51,18 +61,20 @@
 		975A04F026990AF5003FF4AD /* StoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryGame.swift; sourceTree = "<group>"; };
 		975D4D9E267F98C4007CC8A0 /* LightHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightHelpers.swift; sourceTree = "<group>"; };
 		975D4DA0267FBEB0007CC8A0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		9777F67826D25FA600A0F986 /* SwiftUI-Games (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SwiftUI-Games (iOS).entitlements"; sourceTree = "<group>"; };
 		978C1025267379B100E23D85 /* SceneRendererDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneRendererDelegate.swift; sourceTree = "<group>"; };
 		978C102726737CA100E23D85 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		978C102A26737E3B00E23D85 /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
 		978C102C267383A000E23D85 /* Ability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ability.swift; sourceTree = "<group>"; };
 		978C102E2673846800E23D85 /* Shield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shield.swift; sourceTree = "<group>"; };
+		979AA3EA26C1C2150014BBD6 /* DarkGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkGame.swift; sourceTree = "<group>"; };
+		979AA3EC26C1C2240014BBD6 /* DarkGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkGameView.swift; sourceTree = "<group>"; };
 		97BDFA402683EDC70016CE77 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		97CACB13267A8D6D00A13A02 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		97CACB16267A905500A13A02 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		97CACB19267AAE5D00A13A02 /* MinimalDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimalDemo.swift; sourceTree = "<group>"; };
 		97CACB1B267AAF3500A13A02 /* MinimalDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimalDemoView.swift; sourceTree = "<group>"; };
 		ED63086C2670C91C003FD347 /* MaterialButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialButtonStyle.swift; sourceTree = "<group>"; };
-		ED63086E2670CB73003FD347 /* ScaleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleButtonStyle.swift; sourceTree = "<group>"; };
 		EDD3DBCB26700EF1001E7373 /* SCNVector3+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Extensions.swift"; sourceTree = "<group>"; };
 		EDD3DBCD26701B97001E7373 /* Hitscan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hitscan.swift; sourceTree = "<group>"; };
 		EDE3A146266F803900362308 /* SwiftUIGamesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIGamesApp.swift; sourceTree = "<group>"; };
@@ -90,13 +102,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9728694A2688FD3200FF1BB1 /* TogetherGame */ = {
+		1363DFD4289B21F30008971F /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				97BDFA402683EDC70016CE77 /* Team.swift */,
+				978C102C267383A000E23D85 /* Ability.swift */,
+				EDD3DBCD26701B97001E7373 /* Hitscan.swift */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		13A05ACB289BB509009BC1D1 /* Jump */ = {
+			isa = PBXGroup;
+			children = (
+				13A05AC7289BB200009BC1D1 /* JumpGame.swift */,
+				13A05AC9289BB503009BC1D1 /* JumpGameView.swift */,
+			);
+			path = Jump;
+			sourceTree = "<group>";
+		};
+		13A05ACE289BC38D009BC1D1 /* Hacks */ = {
+			isa = PBXGroup;
+			children = (
+				978C1025267379B100E23D85 /* SceneRendererDelegate.swift */,
+				9727F47B26966D54006C7911 /* ContactDelegate.swift */,
+			);
+			path = Hacks;
+			sourceTree = "<group>";
+		};
+		13A05ACF289BC3B0009BC1D1 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				EDE3A166266F83E300362308 /* Themes.swift */,
+				EDE3A168266F83E300362308 /* Samples.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		13CA796F26D53E1F0052FE5D /* Control */ = {
+			isa = PBXGroup;
+			children = (
+				13CA797026D53E450052FE5D /* SuperController.swift */,
+			);
+			path = Control;
+			sourceTree = "<group>";
+		};
+		9728694A2688FD3200FF1BB1 /* Together */ = {
 			isa = PBXGroup;
 			children = (
 				9728694B2688FD5B00FF1BB1 /* TogetherGame.swift */,
 				9728694D2688FEFD00FF1BB1 /* TogetherGameView.swift */,
 			);
-			path = TogetherGame;
+			path = Together;
 			sourceTree = "<group>";
 		};
 		975A04ED26990A90003FF4AD /* StoryGame */ = {
@@ -111,12 +168,22 @@
 		978C102926737CB100E23D85 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				EDE3A16E266F83E300362308 /* MaterialNode.swift */,
 				978C102726737CA100E23D85 /* Entity.swift */,
 				978C102E2673846800E23D85 /* Shield.swift */,
 				978C102A26737E3B00E23D85 /* Hero.swift */,
 				EDE3A16D266F83E300362308 /* Field.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		979AA3E926C1C1BE0014BBD6 /* Dark */ = {
+			isa = PBXGroup;
+			children = (
+				979AA3EA26C1C2150014BBD6 /* DarkGame.swift */,
+				979AA3EC26C1C2240014BBD6 /* DarkGameView.swift */,
+			);
+			path = Dark;
 			sourceTree = "<group>";
 		};
 		97CACB15267A8DE100A13A02 /* TBSGame */ = {
@@ -142,7 +209,6 @@
 			children = (
 				EDE3A162266F83E300362308 /* Menu */,
 				EDC4F3B32670FAFA0048E885 /* Buttons */,
-				971D8B40267D495B00F0A193 /* View+Extenstions.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -151,7 +217,6 @@
 			isa = PBXGroup;
 			children = (
 				ED63086C2670C91C003FD347 /* MaterialButtonStyle.swift */,
-				ED63086E2670CB73003FD347 /* ScaleButtonStyle.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -161,6 +226,8 @@
 			children = (
 				EDE3A145266F803900362308 /* Shared */,
 				975D4DA0267FBEB0007CC8A0 /* README.md */,
+				13CA797226D569F80052FE5D /* SwiftUI-Games--iOS--Info.plist */,
+				9777F67826D25FA600A0F986 /* SwiftUI-Games (iOS).entitlements */,
 				EDE3A14E266F803A00362308 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -198,9 +265,9 @@
 			isa = PBXGroup;
 			children = (
 				EDE3A16C266F83E300362308 /* Scene */,
-				EDE3A166266F83E300362308 /* Themes.swift */,
-				EDE3A168266F83E300362308 /* Samples.swift */,
-				975D4D9E267F98C4007CC8A0 /* LightHelpers.swift */,
+				13CA796F26D53E1F0052FE5D /* Control */,
+				13A05ACF289BC3B0009BC1D1 /* Mocks */,
+				130EFA0F289BD999001EDF6F /* Swift+Helpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -208,16 +275,15 @@
 		EDE3A169266F83E300362308 /* Games */ = {
 			isa = PBXGroup;
 			children = (
-				975A04ED26990A90003FF4AD /* StoryGame */,
 				97CACB18267AAE2E00A13A02 /* Minimal Demo */,
 				97CACB15267A8DE100A13A02 /* TBSGame */,
-				9728694A2688FD3200FF1BB1 /* TogetherGame */,
+				9728694A2688FD3200FF1BB1 /* Together */,
+				979AA3E926C1C1BE0014BBD6 /* Dark */,
+				13A05ACB289BB509009BC1D1 /* Jump */,
+				975A04ED26990A90003FF4AD /* StoryGame */,
 				97CACB13267A8D6D00A13A02 /* Game.swift */,
 				97CACB16267A905500A13A02 /* GameView.swift */,
-				EDE3A16E266F83E300362308 /* MaterialNode.swift */,
-				97BDFA402683EDC70016CE77 /* Team.swift */,
-				978C102C267383A000E23D85 /* Ability.swift */,
-				EDD3DBCD26701B97001E7373 /* Hitscan.swift */,
+				1363DFD4289B21F30008971F /* Logic */,
 				978C102926737CB100E23D85 /* Entities */,
 			);
 			path = Games;
@@ -226,10 +292,11 @@
 		EDE3A16C266F83E300362308 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				13A05ACE289BC38D009BC1D1 /* Hacks */,
+				13A05ACC289BC23C009BC1D1 /* SCNNode+Helpers.swift */,
 				EDE3A167266F83E300362308 /* DebugHelpers.swift */,
 				EDD3DBCB26700EF1001E7373 /* SCNVector3+Extensions.swift */,
-				978C1025267379B100E23D85 /* SceneRendererDelegate.swift */,
-				9727F47B26966D54006C7911 /* ContactDelegate.swift */,
+				975D4D9E267F98C4007CC8A0 /* LightHelpers.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -262,7 +329,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1300;
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					EDE3A14C266F803A00362308 = {
 						CreatedOnToolsVersion = 13.0;
@@ -309,8 +376,8 @@
 				975A04EF26990AE7003FF4AD /* StoryGameView.swift in Sources */,
 				978C102F2673846800E23D85 /* Shield.swift in Sources */,
 				EDE3A176266F83E300362308 /* Field.swift in Sources */,
-				971D8B41267D495B00F0A193 /* View+Extenstions.swift in Sources */,
 				ED63086D2670C91C003FD347 /* MaterialButtonStyle.swift in Sources */,
+				979AA3ED26C1C2240014BBD6 /* DarkGameView.swift in Sources */,
 				9727F47C26966D54006C7911 /* ContactDelegate.swift in Sources */,
 				EDE3A175266F83E300362308 /* TBSGame.swift in Sources */,
 				EDE3A173266F83E300362308 /* Samples.swift in Sources */,
@@ -320,21 +387,26 @@
 				EDE3A170266F83E300362308 /* MenuView.swift in Sources */,
 				EDE3A16F266F83E300362308 /* CardView.swift in Sources */,
 				EDE3A177266F83E300362308 /* MaterialNode.swift in Sources */,
+				979AA3EB26C1C2150014BBD6 /* DarkGame.swift in Sources */,
 				97CACB14267A8D6D00A13A02 /* Game.swift in Sources */,
+				13A05AC8289BB200009BC1D1 /* JumpGame.swift in Sources */,
 				978C102D267383A000E23D85 /* Ability.swift in Sources */,
 				9728694E2688FEFD00FF1BB1 /* TogetherGameView.swift in Sources */,
 				97CACB17267A905500A13A02 /* GameView.swift in Sources */,
 				978C1026267379B100E23D85 /* SceneRendererDelegate.swift in Sources */,
 				EDE3A171266F83E300362308 /* Themes.swift in Sources */,
 				975D4D9F267F98C4007CC8A0 /* LightHelpers.swift in Sources */,
+				138154F028A97BF7008235AE /* StoryGame.swift in Sources */,
 				EDE3A174266F83E300362308 /* TBSGameView.swift in Sources */,
-				ED63086F2670CB73003FD347 /* ScaleButtonStyle.swift in Sources */,
 				EDE3A154266F803A00362308 /* SwiftUIGamesApp.swift in Sources */,
 				9728694C2688FD5B00FF1BB1 /* TogetherGame.swift in Sources */,
 				97CACB1A267AAE5D00A13A02 /* MinimalDemo.swift in Sources */,
+				13CA797126D53E450052FE5D /* SuperController.swift in Sources */,
 				EDD3DBCE26701B97001E7373 /* Hitscan.swift in Sources */,
-				975A04F126990AF5003FF4AD /* StoryGame.swift in Sources */,
+				13A05ACA289BB503009BC1D1 /* JumpGameView.swift in Sources */,
 				EDD3DBCC26700EF1001E7373 /* SCNVector3+Extensions.swift in Sources */,
+				13A05ACD289BC23C009BC1D1 /* SCNNode+Helpers.swift in Sources */,
+				130EFA10289BD999001EDF6F /* Swift+Helpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,6 +447,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -392,7 +465,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -436,6 +509,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -447,7 +521,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -461,29 +535,34 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "SwiftUI-Games (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BZ82DRDZY8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SwiftUI-Games--iOS--Info.plist";
 				INFOPLIST_KEY_CFBundleExecutable = "SwiftUI-Games";
 				INFOPLIST_KEY_CFBundleName = "SwiftUI-Games";
 				INFOPLIST_KEY_CFBundleVersion = 6;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeRight UIInterfaceOrientationLandscapeLeft";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1;
+				MARKETING_VERSION = 0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.damirka.SwiftUI-Games";
 				PRODUCT_NAME = "SwiftUI-Games";
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -495,29 +574,34 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "SwiftUI-Games (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BZ82DRDZY8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SwiftUI-Games--iOS--Info.plist";
 				INFOPLIST_KEY_CFBundleExecutable = "SwiftUI-Games";
 				INFOPLIST_KEY_CFBundleName = "SwiftUI-Games";
 				INFOPLIST_KEY_CFBundleVersion = 6;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeRight UIInterfaceOrientationLandscapeLeft";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1;
+				MARKETING_VERSION = 0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.damirka.SwiftUI-Games";
 				PRODUCT_NAME = "SwiftUI-Games";
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

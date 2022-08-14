@@ -8,12 +8,9 @@
 import SwiftUI
 import SceneKit
 
-struct StoryGameView: GameView {
+struct StoryGameView: GameView {  
   @ObservedObject var game: StoryGame
-
-  @Binding var showing: Bool {
-    didSet { game.scene.isPaused = showing }
-  }
+  @Binding var showing: Bool
 
   var body: some View {
     ZStack {

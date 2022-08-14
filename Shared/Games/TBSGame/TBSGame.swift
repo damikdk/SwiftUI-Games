@@ -77,6 +77,8 @@ class TBSGame: Game, ObservableObject {
         print("Shield without host was touched")
       }
       break;
+    case .platform:
+      break;
     }
   }
   
@@ -192,10 +194,14 @@ extension TBSGame {
       } else {
         currentTeam = teams.first
       }
+      
+      highlight(team: currentTeam)
     } else {
       print("Strange, there is no current team. Or it's not in TeamManager array: \(currentTeam?.id ?? "<NIL>")")
       currentTeam = teams.first
     }
+    
+    currentHero = nil
   }
   
   func highlight(team: Team?) {
@@ -208,6 +214,8 @@ extension TBSGame {
   }
   
 }
+
+// MARK: - Mocks
 
 extension TBSGame {
   

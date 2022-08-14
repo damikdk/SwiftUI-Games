@@ -30,5 +30,14 @@ let Games: [Game] = [
     description: "Simple game with virtual gamepad",
     field: Field(size: 15)),
 
+  DarkGame(
+    name: "DarkGame [WIP]",
+    description: "Survive the darkness",
+    field: Field(size: 50)),
+  
+  JumpGame(
+    name: "JumpGame",
+    description: "Doodle jump, but much worse"),
+  
   StoryGame(name: "StoryGame [WIP]", description: "Adventure with map and dialogs")
 ]

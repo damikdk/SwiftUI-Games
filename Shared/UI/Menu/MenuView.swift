@@ -14,12 +14,6 @@ struct MenuView: View {
   @State private var currentGame: Game?
   
   var body: some View {
-    // Hack since iOS 14 can't update State
-    // (https://developer.apple.com/forums/thread/652080)
-    Text(currentGame?.name ?? "")
-      .frame(width: 0, height: 0)
-      .hidden()
-
     // ZStack it is just a bad workaround for GCVirtualController.
     // Earlier I used `fullScreenCover`, but GCVirtualController appears BELOW it.
     // So keep GCVirtualController in View, not Overlay/Modal/Sheet containers
@@ -53,15 +47,22 @@ struct MenuView: View {
       }
       .listStyle(.plain)
 
-      if let game = currentGame, showingGame {
-        if let minimalGame = game as? MinimalDemo {
-          MinimalDemoView(showing: $showingGame, game: minimalGame)
-        } else if let tbsGame = game as? TBSGame {
-          TBSGameView(game: tbsGame, showing: $showingGame)
-        } else if let togetherGame = game as? TogetherGame {
-          TogetherGameView(game: togetherGame, showing: $showingGame)
-        } else if let storyGame = game as? StoryGame {
-          StoryGameView(game: storyGame, showing: $showingGame)
+      if showingGame {
+        switch currentGame {
+        case let currentGame as MinimalDemo:
+          MinimalDemoView(game: currentGame, showing: $showingGame)
+        case let currentGame as TBSGame:
+          TBSGameView(game: currentGame, showing: $showingGame)
+        case let currentGame as TogetherGame:
+          TogetherGameView(game: currentGame, showing: $showingGame)
+        case let currentGame as DarkGame:
+          DarkGameView(game: currentGame, showing: $showingGame)
+        case let currentGame as JumpGame:
+          JumpGameView(game: currentGame, showing: $showingGame)
+        case let currentGame as StoryGame:
+          StoryGameView(game: currentGame, showing: $showingGame)
+        default:
+          EmptyView()
         }
       }
     }
