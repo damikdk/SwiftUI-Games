@@ -57,6 +57,7 @@ struct TBSGameView: GameView {
         
         HStack {
           // Top left botton
+          
           Button {
             showing.toggle()
           } label: {
@@ -67,15 +68,23 @@ struct TBSGameView: GameView {
           Spacer()
           
           HStack {
-            ForEach(game.teams) { team in
-              Text(team.id)
-                .font(team == game.currentTeam ? .title3 : .caption)
-                .onTapGesture {
-                  for hero in team.heroes {
-                    hero.node.highlight()
-                  }
+            Button {
+              if let currentTeam = game.currentTeam {
+                for hero in currentTeam.heroes {
+                  hero.node.highlight()
                 }
+              }
+            } label: {
+              HStack {
+                ForEach(game.teams) { team in
+                  Text(team.id)
+                    .font(team == game.currentTeam ? .title3 : .caption)
+                    .foregroundColor(team == game.currentTeam ? .primary : .secondary)
+                }
+              }
             }
+            .buttonStyle(MaterialButtonStyle())
+
           }
           
           Spacer()
@@ -107,27 +116,26 @@ struct TBSGameView: GameView {
             })
           }
         }
-        .font(.largeTitle)
         .padding(.horizontal)
         
         Spacer()
         
         // Bottom HUD
         HStack(alignment: .bottom) {
+          
           // Bottom Left buttons
           VStack(alignment: .leading) {
             
             if let currentHero = game.currentHero {
               // Deselect Hero button
-              // TODO: Make it above (zIndex kind of) the Hero panel
               Button {
                 game.currentHero = nil
               } label: {
                 Image(systemName: "xmark")
               }
-              .font(.title3)
+              .font(.caption)
               .buttonStyle(MaterialButtonStyle())
-              .offset(y: 5)
+              .offset(y: 15)
               
               // Current Hero panel
               Button {
@@ -147,7 +155,7 @@ struct TBSGameView: GameView {
                     
                     Spacer()
                   }
-                  .padding(5)
+                  .padding(0)
                   .listRowBackground(Color.clear)
                   
                   Text(currentHero.name)
@@ -158,13 +166,15 @@ struct TBSGameView: GameView {
                     .badge(String(currentHero.HP))
                     .listRowBackground(Color.clear)
                 }
+                .disabled(true)
                 .listStyle(PlainListStyle())
-                .font(.body)
                 // Hack for stupid ListRow paddings
-                .padding(.horizontal, -12)
+                .padding(.horizontal, -20)
+                .scrollContentBackground(.hidden)
+                .font(.body)
                 .frame(
                   minWidth: 90,
-                  maxWidth: 120,
+                  maxWidth: 115,
                   maxHeight: 180,
                   alignment: .center)
               }
