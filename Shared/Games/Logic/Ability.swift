@@ -12,6 +12,7 @@ import SwiftUI
 struct Ability {
   let name: String
   let icon: Image
+  let description: String
   let action: ((TBSGame, Hero) -> Void)
 }
 
@@ -32,7 +33,9 @@ extension Abilities.TBS {
   static let ShieldUp = Ability(
     name: "Shield",
     icon: Image(systemName: "shield"),
+    description: "Creates a shield around the Hero that blocks the attacks of all heroes",
     action: { game, hero in
+      
     print("Run action for Shield ability")
     
     let newShield = Shield(
@@ -50,14 +53,12 @@ extension Abilities.TBS {
   static let FrozenArrow = Ability(
     name: "Frozen Arrow",
     icon: Image(systemName: "thermometer.snowflake"),
+    description: "Hitscan, deal 2 damage",
     action: { game, hero in
     
     print("Run action for Frozen Array ability")
-    
-    var game = game
-    
+        
     game.onHeroPress = { game, hero in
-      var game = game
       
       guard let hostCharacter = game.currentHero else {
         print("Can't fire Frozen Arrow action because there is no currentHero")
@@ -122,10 +123,10 @@ extension Abilities.TBS {
   static let HealUp = Ability(
     name: "Heal",
     icon: Image(systemName: "cross"),
+    description: "Heal any Hero",
     action: { game, charater in
     
     print("Run action for Heal ability")
-    var game = game
     
     game.onHeroPress = { game, hero in
       var hero = hero

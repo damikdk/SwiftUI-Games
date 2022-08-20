@@ -100,6 +100,8 @@ struct TBSGameView: GameView {
                   game.field.put(
                     object: hero.node,
                     to: currentCell)
+                  
+                  game.currentTeam?.heroes.append(hero)
                 } label: {
                   Label {
                     Text(hero.name)
@@ -126,10 +128,30 @@ struct TBSGameView: GameView {
           // Bottom Left buttons
           VStack(alignment: .leading) {
             
+            if game.gameLogger.messages.count > 0 {
+              List() {
+                ForEach(game.gameLogger.messages.reversed(), id: \.self) { message in
+                  Text(message)
+                    .font(.caption2)
+                    .listRowBackground(Color.clear)
+                }
+              }
+              .scrollContentBackground(.hidden)
+              // Hack for stupid ListRow paddings
+              .padding(.horizontal, -20)
+              .frame(
+                minWidth: 90,
+                maxWidth: 200,
+                maxHeight: 200,
+                alignment: .leading)
+            }
+            
             if let currentHero = game.currentHero {
               // Deselect Hero button
               Button {
-                game.currentHero = nil
+                withAnimation {
+                  game.currentHero = nil
+                }
               } label: {
                 Image(systemName: "xmark")
               }
@@ -189,6 +211,10 @@ struct TBSGameView: GameView {
             // Abilities of current Hero
             ForEach(currentHero.abilities, id: \.name) { ability in
               Button {
+                withAnimation {
+                  game.gameLogger.post(newMessage: "\(ability.name): \(ability.description)")
+                }
+
                 ability.action(game, currentHero)
               } label: {
                 ability.icon
@@ -200,6 +226,9 @@ struct TBSGameView: GameView {
                     maxHeight: 70)
               }
               .buttonStyle(MaterialButtonStyle())
+             
+              // Doesn't work
+              .help(ability.description)
             }
           }
         }
@@ -217,7 +246,9 @@ extension TBSGameView {
     // Find closest node
     if let firstNode = findFirstTouchableNode(atPoint: point) {
       if let materialNode = firstNode as? MaterialNode {
-        game.pick(materialNode)
+        withAnimation {
+          game.pick(materialNode)
+        }
       } else {
         print("Touched node is not material:", firstNode.name ?? "<NO NAME>")
         return

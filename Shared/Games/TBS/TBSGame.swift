@@ -24,7 +24,8 @@ class TBSGame: Game, ObservableObject {
   
   @Published var currentHero: Hero?
   @Published var currentFieldCell: FieldCell?
-  
+  @Published var gameLogger = GameLogger()
+
   var onHeroPress: ((TBSGame, Hero) -> Void) = defaultOnHeroPress
   var onFieldPress: ((TBSGame, FieldCell) -> Void) = defaultOnFieldPress
   
@@ -58,14 +59,16 @@ class TBSGame: Game, ObservableObject {
       
       if let fieldCell = fieldCell {
         onFieldPress(self, fieldCell)
+        gameLogger.post(newMessage: "Picked cell: \(fieldCell.gameID)")
       } else {
-        print("Can't find \(materialNode) in Field")
+        gameLogger.post(newMessage: "Can't find \(materialNode) in Field")
       }
       
       break;
     case .hero:
       if let hero = materialNode.host {
         onHeroPress(self, hero)
+        gameLogger.post(newMessage: "Picked Hero: \(hero.gameID)")
       }
       
       break;
@@ -73,8 +76,10 @@ class TBSGame: Game, ObservableObject {
       if let host = materialNode.host {
         // If shield have a host, pick it
         onHeroPress(self, host)
+        
+        gameLogger.post(newMessage: "Picked Hero: \(host)")
       } else {
-        print("Shield without host was touched")
+        gameLogger.post(newMessage: "Shield without host was touched")
       }
       break;
     case .platform:
@@ -186,7 +191,7 @@ extension TBSGame {
   func switchTeam() {
     let currentTeamIndex = teams.firstIndex(where: { $0 == currentTeam })
     
-    if let currentTeamIndex = currentTeamIndex {
+    if let currentTeamIndex {
       let nextIndex = currentTeamIndex + 1
       
       if nextIndex < teams.count {
@@ -195,9 +200,11 @@ extension TBSGame {
         currentTeam = teams.first
       }
       
+      gameLogger.post(newMessage: "\(currentTeam?.id ?? "<NIL>")'s move")
       highlight(team: currentTeam)
     } else {
-      print("Strange, there is no current team. Or it's not in TeamManager array: \(currentTeam?.id ?? "<NIL>")")
+      gameLogger.post(newMessage: "Strange, there is no current team. Or it's not in TeamManager array: \(currentTeam?.id ?? "<NIL>")")
+
       currentTeam = teams.first
     }
     

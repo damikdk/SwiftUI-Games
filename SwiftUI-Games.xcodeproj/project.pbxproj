@@ -12,6 +12,7 @@
 		13A05ACA289BB503009BC1D1 /* JumpGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A05AC9289BB503009BC1D1 /* JumpGameView.swift */; };
 		13A05ACD289BC23C009BC1D1 /* SCNNode+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A05ACC289BC23C009BC1D1 /* SCNNode+Helpers.swift */; };
 		13CA797126D53E450052FE5D /* SuperController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CA797026D53E450052FE5D /* SuperController.swift */; };
+		13DB828928B1443500888E2F /* GameLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DB828828B1443500888E2F /* GameLogger.swift */; };
 		9727F47C26966D54006C7911 /* ContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9727F47B26966D54006C7911 /* ContactDelegate.swift */; };
 		9728694C2688FD5B00FF1BB1 /* TogetherGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9728694B2688FD5B00FF1BB1 /* TogetherGame.swift */; };
 		9728694E2688FEFD00FF1BB1 /* TogetherGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9728694D2688FEFD00FF1BB1 /* TogetherGameView.swift */; };
@@ -52,6 +53,7 @@
 		13A05ACC289BC23C009BC1D1 /* SCNNode+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNNode+Helpers.swift"; sourceTree = "<group>"; };
 		13CA797026D53E450052FE5D /* SuperController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperController.swift; sourceTree = "<group>"; };
 		13CA797226D569F80052FE5D /* SwiftUI-Games--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SwiftUI-Games--iOS--Info.plist"; sourceTree = "<group>"; };
+		13DB828828B1443500888E2F /* GameLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogger.swift; sourceTree = "<group>"; };
 		9727F47B26966D54006C7911 /* ContactDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDelegate.swift; sourceTree = "<group>"; };
 		9728694B2688FD5B00FF1BB1 /* TogetherGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherGame.swift; sourceTree = "<group>"; };
 		9728694D2688FEFD00FF1BB1 /* TogetherGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherGameView.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				97BDFA402683EDC70016CE77 /* Team.swift */,
 				978C102C267383A000E23D85 /* Ability.swift */,
 				EDD3DBCD26701B97001E7373 /* Hitscan.swift */,
+				13DB828828B1443500888E2F /* GameLogger.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				979AA3EB26C1C2150014BBD6 /* DarkGame.swift in Sources */,
 				97CACB14267A8D6D00A13A02 /* Game.swift in Sources */,
 				13A05AC8289BB200009BC1D1 /* JumpGame.swift in Sources */,
+				13DB828928B1443500888E2F /* GameLogger.swift in Sources */,
 				978C102D267383A000E23D85 /* Ability.swift in Sources */,
 				9728694E2688FEFD00FF1BB1 /* TogetherGameView.swift in Sources */,
 				97CACB17267A905500A13A02 /* GameView.swift in Sources */,
