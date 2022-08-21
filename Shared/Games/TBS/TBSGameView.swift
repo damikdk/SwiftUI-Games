@@ -52,7 +52,7 @@ struct TBSGameView: GameView {
         // Otherwise, location will be wrong
         .ignoresSafeArea()
       
-      VStack {
+      VStack(alignment: .leading) {
         // Top HUD
         
         HStack {
@@ -122,31 +122,36 @@ struct TBSGameView: GameView {
         
         Spacer()
         
-        // Bottom HUD
-        HStack(alignment: .bottom) {
-          
-          // Bottom Left buttons
-          VStack(alignment: .leading) {
-            
-            if game.gameLogger.messages.count > 0 {
-              List() {
-                ForEach(game.gameLogger.messages.reversed(), id: \.self) { message in
-                  Text(message)
-                    .font(.caption2)
-                    .listRowBackground(Color.clear)
-                }
-              }
-              .scrollContentBackground(.hidden)
-              // Hack for stupid ListRow paddings
-              .padding(.horizontal, -20)
-              .frame(
-                minWidth: 90,
-                maxWidth: 200,
-                maxHeight: 200,
-                alignment: .leading)
+        // Logger above bottom panels
+        
+        if game.gameLogger.messages.count > 0 {
+          List() {
+            ForEach(game.gameLogger.messages.reversed(), id: \.self) { message in
+              Text(message)
+                .font(.caption2)
+                .listRowBackground(Color.clear)
             }
+          }
+          .scrollContentBackground(.hidden)
+          // Hack for stupid ListRow paddings
+          .padding(.horizontal, -20)
+          .frame(
+            minWidth: 90,
+            maxWidth: 200,
+            maxHeight: 200,
+            alignment: .leading)
+        }
+
+        // Bottom HUD
+        
+        if let currentHero = game.currentHero {
+
+          HStack(alignment: .bottom) {
             
-            if let currentHero = game.currentHero {
+            // Bottom Left buttons
+            
+            VStack(alignment: .leading) {
+              
               // Deselect Hero button
               Button {
                 withAnimation {
@@ -195,45 +200,65 @@ struct TBSGameView: GameView {
                 .scrollContentBackground(.hidden)
                 .font(.body)
                 .frame(
-                  minWidth: 90,
+                  minWidth: 80,
                   maxWidth: 115,
                   maxHeight: 180,
                   alignment: .center)
               }
               .buttonStyle(MaterialButtonStyle())
+              
             }
-          }
-          
-          Spacer()
-          
-          // Bottom Right buttons
-          if let currentHero = game.currentHero {
+            
             // Abilities of current Hero
+            
             ForEach(currentHero.abilities, id: \.name) { ability in
               Button {
                 withAnimation {
                   game.gameLogger.post(newMessage: "\(ability.name): \(ability.description)")
                 }
-
+                
                 ability.action(game, currentHero)
               } label: {
                 ability.icon
                   .resizable()
                   .aspectRatio(contentMode: .fit)
                   .frame(
-                    minWidth: 30,
-                    maxWidth: 70,
+                    minHeight: 70,
                     maxHeight: 70)
               }
+              .padding(3)
               .buttonStyle(MaterialButtonStyle())
-             
+              
               // Doesn't work
               .help(ability.description)
+              
+              // Works
+              .contextMenu {
+                Text(ability.description)
+                  .fixedSize(horizontal: false, vertical: true)
+                
+                Button {
+                  withAnimation {
+                    game.gameLogger.post(newMessage: "\(ability.name): \(ability.description)")
+                  }
+                  
+                  ability.action(game, currentHero)
+                } label: {
+                  Text("Choose")
+                }
+                
+                Button(role: .destructive) {
+                } label: {
+                  Text("Cancel")
+                }
+                
+              }
+              
             }
+            
+            Spacer()
           }
         }
-        .font(.largeTitle)
-        .padding(5)
       }
     }
   }

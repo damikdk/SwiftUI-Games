@@ -24,7 +24,12 @@ class TBSGame: Game, ObservableObject {
   
   @Published var currentHero: Hero?
   @Published var currentFieldCell: FieldCell?
-  @Published var gameLogger = GameLogger()
+  
+  @Published var gameLogger = GameLogger(messages: [
+    "1. Pick a Hero from closest team",
+    "2. Move him to somewhere and choose Ability",
+    "3. Pick a target. Then, move goes to the enemy team",
+  ])
 
   var onHeroPress: ((TBSGame, Hero) -> Void) = defaultOnHeroPress
   var onFieldPress: ((TBSGame, FieldCell) -> Void) = defaultOnFieldPress

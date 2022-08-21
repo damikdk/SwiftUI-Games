@@ -53,7 +53,7 @@ extension Abilities.TBS {
   static let FrozenArrow = Ability(
     name: "Frozen Arrow",
     icon: Image(systemName: "thermometer.snowflake"),
-    description: "Hitscan, deal 2 damage",
+    description: "Hitscan. Deals 2 damage",
     action: { game, hero in
     
     print("Run action for Frozen Array ability")

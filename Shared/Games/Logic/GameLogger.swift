@@ -11,6 +11,10 @@ class GameLogger: ObservableObject {
   
   @Published var messages: [String] = []
   
+  init(messages: [String] = []) {
+    self.messages = messages
+  }
+  
   func post(newMessage: String) {
     print(newMessage)
     messages.append(newMessage)
