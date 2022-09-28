@@ -88,7 +88,7 @@ let createVirtualController = { (elements: Set<String>) -> GCVirtualController i
   // https://developer.apple.com/forums/thread/682138
 
   let virtualConfiguration = GCVirtualController.Configuration()
-  virtualConfiguration.elements = [GCInputLeftThumbstick, GCInputRightThumbstick]
+  virtualConfiguration.elements = elements
 
   let virtualController = GCVirtualController(configuration: virtualConfiguration)
     
