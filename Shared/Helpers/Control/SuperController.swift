@@ -59,8 +59,8 @@ class SuperController {
       print("Gamepad is connected")
     }
     
-    if !isKeyboardConnected && !isGamepadConnected {
-      print("There is no keyboard or gamepad so just create Virtual one")
+    if !isGamepadConnected {
+      print("There is no gamepad so just create Virtual one")
       
       virtualController = createVirtualController(elements)
     }

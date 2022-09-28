@@ -52,7 +52,7 @@ class TogetherGame: Game, ObservableObject {
     addEnemies()
   }
 
-  func handleLeftPad(xAxis: Float, yAxis: Float) {
+  func handleLeftPad(dPad: GCControllerDirectionPad, xAxis: Float, yAxis: Float) {
     if xAxis == yAxis, xAxis == 0 {
       firstHero.node.physicsBody?.angularVelocity = SCNVector4()
       firstHero.node.physicsBody?.velocity = SCNVector3()
@@ -66,7 +66,7 @@ class TogetherGame: Game, ObservableObject {
     firstHero.node.physicsBody?.mass = 1
   }
 
-  func handleRightPad(xAxis: Float, yAxis: Float) {
+  func handleRightPad(dPad: GCControllerDirectionPad, xAxis: Float, yAxis: Float) {
     if xAxis == yAxis, xAxis == 0 {
       secondHero.node.physicsBody?.angularVelocity = SCNVector4()
       secondHero.node.physicsBody?.velocity = SCNVector3()

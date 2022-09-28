@@ -18,7 +18,7 @@ struct TogetherGameView: GameView {
   var sceneRendererDelegate = SceneRendererDelegate()
   let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
 
-  let virtualController = createVirtualController([GCInputLeftThumbstick, GCInputRightThumbstick])
+  var superController = SuperController(elements: [GCInputLeftThumbstick, GCInputRightThumbstick])
 
   var body: some View {
     ZStack {
@@ -75,26 +75,18 @@ struct TogetherGameView: GameView {
       }
     }
     .onDisappear(perform: {
-      virtualController.disconnect()
+      superController.disconnect()
       sceneRendererDelegate.onEachFrame = nil
     })
     .onAppear(perform: {
-      virtualController.connect()
-
-      if let leftPad = virtualController.controller?.extendedGamepad?.leftThumbstick {
-        leftPad.valueChangedHandler = { (dpad, xValue, yValue) in
-          game.handleLeftPad(xAxis: xValue, yAxis: yValue)
-        }
-      }
-
-      if let rightPad = virtualController.controller?.extendedGamepad?.rightThumbstick {
-        rightPad.valueChangedHandler = { (dpad, xValue, yValue) in
-          game.handleRightPad(xAxis: xValue, yAxis: yValue)
-        }
-      }
+      superController.connect()
       
-      sceneRendererDelegate.onEachFrame = { game.onEachFrame() }
+      superController.handleLeftPad = game.handleLeftPad
+      superController.handleRightPad = game.handleRightPad
+      
+      sceneRendererDelegate.onEachFrame = game.onEachFrame
     })
+
     .onReceive(timer) { input in
       game.onTimer()
     }
