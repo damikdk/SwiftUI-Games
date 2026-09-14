@@ -1,10 +1,16 @@
+> This repo was created many years ago to check:
+>
+> - if SwiftUI is ready for one codebase for all Apple platforms. The answer is **NO**. SwiftUI is raw and requires dozens of hacks, workarounds, and UIKit/AppKit wrappers if you want a just-working project. Forget about unified, performant code.
+> - if games are easy to make with SwiftUI as a UI framework. The answer is **YES**.
 
 # SwiftUI-Games (WIP)
+
 Collection of simple demos of SwiftUI + SceneKit games
 
 [TestFlight Beta](https://testflight.apple.com/join/52wVoy8Z "TestFlight Beta") (iOS 16+)
 
 ### Design
+
 - Pure `SwiftUI` at any cost. Zero `UIKit` imports
 - Full Apple-crossplatform. Playable on `iOS`, `macOS`. (`tvOS` later)
 - Only modern APIs, zero legacy support. `iOS 16+`
@@ -12,15 +18,18 @@ Collection of simple demos of SwiftUI + SceneKit games
 - Zero projectiles. I hate projectiles
 
 ### Goals
+
 - Formulate some clean and simple architecture for Apple-crossplatform `SwiftUI` + `SceneKit` projects
 - Collect all the bad hacks in the world
 
 ### Why it's so messy?
+
 - I made it
 - SwiftUI is young and raw
 - APIs and project itself is constantly changing
 
 ## MinimalDemo
+
 Simple SCNScene with ball and some SwiftUI overlay
 
 <p float="left">
@@ -29,6 +38,7 @@ Simple SCNScene with ball and some SwiftUI overlay
 </p>
 
 ## TBSGame (WIP)
+
 Setup for turn based strategy with Field, Teams and Heroes with unique Abilities.
 
 - In-scene tap and drag gesture hack without `UIKit`
@@ -41,6 +51,7 @@ Setup for turn based strategy with Field, Teams and Heroes with unique Abilities
 </p>
 
 ## TogetherGame (WIP)
+
 Simple arcade. Control two nice balls, catch all of bad ones
 
 - `SceneRendererDelegate` hack without `UIKit` for `renderer(renderer, updateAtTime)` (`SceneKit` each-frame-callback similar to `update()` from Unity)
@@ -53,7 +64,7 @@ Simple arcade. Control two nice balls, catch all of bad ones
 </p>
   
 ## DarkGame (WIP)
-Simple arcade. Control ball, loot and run. The Spirit will light your way 
+Simple arcade. Control ball, loot and run. The Spirit will light your way
 
 - `SceneRendererDelegate` hack without `UIKit` for `renderer(renderer, updateAtTime)` (`SceneKit` each-frame-callback similar to `update()` from Unity)
 - `SCNPhysicsContactDelegate` hack without `UIKit`
@@ -65,6 +76,7 @@ Simple arcade. Control ball, loot and run. The Spirit will light your way
 </p>
 
 ## JumpGame
+
 Ugly Doddle Jump clone with SceneKit and SwiftUI
 
 <p float="left">
@@ -72,6 +84,7 @@ Ugly Doddle Jump clone with SceneKit and SwiftUI
 </p>
 
 ## Roadmap
+
 Current tasks are [here](https://github.com/damikdk/SwiftUI-Games/projects/1)
 
 - Temple Run clone
@@ -81,6 +94,7 @@ Current tasks are [here](https://github.com/damikdk/SwiftUI-Games/projects/1)
 - Simple dialog system
 
 ## Broken things (by Apple or me)
+
 - Some transitions and animations
 
 <p float="left">
